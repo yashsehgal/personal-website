@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { Link } from "react-router-dom";
+import { saveCurrentTheme } from "../utils/LocalStorageHelpers";
 
 const HeaderOptions = [
     {
@@ -31,14 +32,16 @@ export default function Header(PageThemeProperties) {
                     if (PageThemeProperties.pageTheme === 'light') {
                         PageThemeProperties.pageThemeMethod('dark');
                         setThemeSwitcherButtonIcon('far fa-moon');
+                        saveCurrentTheme('dark')
                     } else {
                         PageThemeProperties.pageThemeMethod('light');
-                        setThemeSwitcherButtonIcon('far fa-sun')
+                        setThemeSwitcherButtonIcon('far fa-sun');
+                        saveCurrentTheme('light');
                     }
                 }}>
                     <i className={themeSwitcherButtonIconRef} />
                 </button>
-                <button className="primary-btn"></button>
+                <button className="primary-btn">Contact Me</button>
             </div>
         </div>
     )
