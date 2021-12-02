@@ -9,11 +9,11 @@ export default function App() {
   saveCurrentTheme(currentThemeRef);
   if (currentThemeRef === 'dark') {
     return (
-      <div className="app" style={{ backgroundColor: '#181818', color: 'white' }}>
+      <div className="app" style={{ backgroundColor: '#202020', color: 'white' }}>
         <BrowserRouter>
           <Header pageTheme={currentThemeRef} pageThemeMethod={setCurrentTheme} />
           <Routes>
-            <Route path="" element={<Home />} />
+            <Route path="/" element={<Home />} />
           </Routes>
         </BrowserRouter>
       </div>
@@ -24,7 +24,7 @@ export default function App() {
         <BrowserRouter>
           <Header pageTheme={currentThemeRef} pageThemeMethod={setCurrentTheme} />
           <Routes>
-            <Route path="" element={<Home />} />
+            <Route path="/" element={<Home />} />
           </Routes>
         </BrowserRouter>
       </div>
