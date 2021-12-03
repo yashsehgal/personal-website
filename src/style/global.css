@@ -32,3 +32,29 @@ button.outline-btn {
 button.primary-btn {
     background-color: var(--color-purple-900);
 }
+
+body::-webkit-scrollbar {
+  width: 8px;
+}
+ 
+body::-webkit-scrollbar-track {
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
+}
+ 
+body::-webkit-scrollbar-thumb {
+  background-color: black;
+  outline: 1px solid black;
+}
+
+.layer {
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
+  align-items: center;
+}
+
+#showwcase-btn {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}

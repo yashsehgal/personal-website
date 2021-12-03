@@ -1,10 +1,12 @@
 import { useState } from 'react';
+import Profile from '../assets/profile.jpg';
+import ShowwcaseLogo from '../assets/showwcase-logo.svg';
 
 export default function Home() {
     const [eccentricTouchPlugTextRef, setEccentricTouchPlugText] = useState('Eccentric Touch');
     return (
-        <div className="home content-center">
-            <div className="hero-section m-top-14">
+        <div className="home">
+            <div className="hero-section m-top-14 content-center">
                 <h1 style={{ fontWeight: '800', fontSize: '52px', lineHeight: '1.8' }}>
                     I know <button className="primary-btn">frontend</button> stuff 
                     <span style={{ fontWeight: '500' }}>🔥</span> <br />
@@ -18,6 +20,7 @@ export default function Home() {
                     <a href="https://eccentrictouch.thedesignsystems.com" 
                         className="link"
                         target="_blank"
+                        rel="noreferrer"
                         onMouseEnter={() => setEccentricTouchPlugText('Eccentric Touch - Check it out please!!')}
                         onMouseLeave={() => setEccentricTouchPlugText('Eccentric Touch')}
                     >
