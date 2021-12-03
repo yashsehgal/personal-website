@@ -11,16 +11,16 @@ const HeaderOptions = [
         "path": "/"
     },
     {
+        "title": "About",
+        "path": "/about"
+    },
+    {
         "title": "Projects",
         "path": "/projects",
     },
     {
         "title": "Services",
         "path": "/services"
-    },
-    {
-        "title": "About",
-        "path": "/about"
     }
 ]
 
@@ -29,6 +29,7 @@ export default function Header(PageThemeProperties) {
     const [themeSwitcherButtonIconRef, setThemeSwitcherButtonIcon] = useState('far fa-sun');
     const [contactFormModalRef, setContactFormModal] = useState(false);
     const [contactFormModalBGColorRef, setContactFormModalBGColor] = useState(getCurrentThemeBGColor(PageThemeProperties.pageTheme));
+    const [contactFormModalTextColorRef, setContactFormModalTextColor] = useState(getCurrentThemeTextColor(PageThemeProperties.pageTheme));
     return (
         <div className="header p-2 content-center">
             <div className="header-options-wrapper">
@@ -43,11 +44,13 @@ export default function Header(PageThemeProperties) {
                         setThemeSwitcherButtonIcon('far fa-moon');
                         saveCurrentTheme('dark');
                         setContactFormModalBGColor('#202020');
+                        setContactFormModalTextColor('white');
                     } else {
                         PageThemeProperties.pageThemeMethod('light');
                         setThemeSwitcherButtonIcon('far fa-sun');
                         saveCurrentTheme('light');
                         setContactFormModalBGColor('bg-color-white');
+                        setContactFormModalTextColor('#202020');
                     }
                 }}>
                     <i className={themeSwitcherButtonIconRef} />
@@ -63,18 +66,24 @@ export default function Header(PageThemeProperties) {
                 onRequestClose={() => setContactFormModal(false)}
                 style={{
                     overlay: {
-                        backgroundColor: 'rgba(0, 0, 0, 0.125)'
+                        backgroundColor: 'var(--color-purple-900)'
                     },
                     content: {
                         backgroundColor: contactFormModalBGColorRef,
                         border: 'none',
                         boxShadow: '2px 4px 80px 2px var(--neutral-gray-500)',
-                        width: 'fit-content',
-                        height: 'auto'
+                        width: '50%',
+                        height: 'fit-content',
+                        marginRight: 'auto',
+                        marginLeft: 'auto',
+                        marginTop: 'auto',
+                        marginBottom: 'auto'
                     }
                 }}
             >
-                <ContactForm />
+                <ContactForm textColor={contactFormModalTextColorRef} 
+                    modalState={setContactFormModal}
+                />
             </ReactModal>
         </div>
     )
@@ -87,5 +96,13 @@ function getCurrentThemeBGColor(themeID) {
         return '#202020'
     } else {
         return 'bg-color-white'
+    }
+}
+
+function getCurrentThemeTextColor(themeID) {
+    if (themeID === 'light') {
+        return '#202020'
+    } else if (themeID === 'dark') {
+        return 'white'
     }
 }
