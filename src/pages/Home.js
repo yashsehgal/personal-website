@@ -1,83 +1,70 @@
 import { useState } from 'react';
 import Profile from '../assets/profile.jpg';
-import ShowwcaseLogo from '../assets/showwcase-logo.svg';
+import SocialButtonsAnimated from '../components/SocialButtonsAnimated';
+
+const socialButtonsDetails = [
+    {
+        "title": "Twitter",
+        "icon": "fab fa-twitter",
+        "username": "yashsehgaldev"
+    },
+    {
+        "title": "GitHub",
+        "icon": "fab fa-github",
+        "username": "yashsehgal",
+        "url": "https://www.github.com/yashsehgal"
+    },
+    {
+        "title": "Showwcase",
+        "icon": "showwcase-logo",
+        "username": "yashsehgal",
+        "url": "https://showwcase.com/yashsehgal"
+    },
+    {
+        "title": "Instagram",
+        "icon": "fab fa-instagram",
+        "username": "sehgalyash_",
+        "url": "https://instagram.com/sehgalyash_"
+    },
+    {
+        "title": "LinkedIn",
+        "icon": "fab fa-linkedin",
+        "username": "Yash Sehgal",
+        "url": "https://linkedin.com/in/sehgalyash/"
+    }
+]
 
 export default function Home() {
-    const [eccentricTouchPlugTextRef, setEccentricTouchPlugText] = useState('Eccentric Touch');
-    const [hoverAnimationTextFontStyleRef, setHoverAnimationTextFontStyle] = useState('normal');
+    const [socialButtons] = useState(socialButtonsDetails);
     return (
         <div className="home">
-            <div className="hero-section m-top-14 content-center" style={{
-                display: 'flex',
-                alignItems: 'flex-start',
-                flexDirection: 'row',
-                justifyContent: 'space-between'
-            }}>
-                <div className="tagline-content-section">
-                <h1 style={{ fontWeight: '800', fontSize: '52px', lineHeight: '1.8' }}>
-                    I know <marquee behavior="scroll" direction="right" scrollamount="12" style={{
-                        width: 'fit-content'
-                    }}><button className="primary-btn">frontend</button></marquee> stuff 
-                    <span style={{ fontWeight: '500' }}>🔥</span> <br />
-                    and I <span style={{ fontWeight: '500' }}>💜 </span>
-                    to work with <marquee behavior="scroll" direction="left" scrollamount="12" style={{
-                        width: 'fit-content'
-                    }}><button className="outline-btn">SCSS</button></marquee><br />
-                    <span className="color-purple-900"
-                        style={{
-                            fontStyle: hoverAnimationTextFontStyleRef,
-                            cursor: 'pointer'
-                        }}
-                        onMouseEnter={() => setHoverAnimationTextFontStyle('italic')}
-                        onMouseLeave={() => setHoverAnimationTextFontStyle('normal')}
-                    >
-                        ReactJS
-                    </span> and
-                    <button className="text-btn m-right-2">Javascript</button>Also, <br />
-                    I little bit of <button className="outline-btn outline-btn__success">VueJS</button>
-                </h1>
-                <h4 className="m-top-3">And, I also love to use 
-                    <a href="https://eccentrictouch.thedesignsystems.com" 
-                        className="link"
-                        target="_blank"
-                        rel="noreferrer"
-                        onMouseEnter={() => setEccentricTouchPlugText('Eccentric Touch - Check it out please!!')}
-                        onMouseLeave={() => setEccentricTouchPlugText('Eccentric Touch')}
-                    >
-                        {eccentricTouchPlugTextRef}
-                    </a> in any project I am working on</h4>
-                </div> 
-                <div className="cta-buttons-section" style={{
-                    display: 'flex',
-                    alignItems: 'flex-end',
-                    gap: '1.4em',
-                    flexDirection: 'column',
-                    justifyContent: 'space-between'
-                }}>
-                    <button className="primary-btn"
-                        onMouseEnter={(currentButton) => {currentButton.target.className="outline-btn"}}
-                        onMouseLeave={(currentButton) => {currentButton.target.className="primary-btn"}}
-                    >
-                        Experience
+            <div className="home-content content-center">
+                <div className="hero-section m-right-64 m-left-64 m-top-20">
+                    <h1 className="font-size-42 font-weight-900">Hey, I am Yash <span className="font-weight-500">👋</span></h1>
+                    <button className="primary-btn m-top-6">
+                        Contact Me
                     </button>
-                    <button className="primary-btn"
-                        onMouseEnter={(currentButton) => {currentButton.target.className="outline-btn"}}
-                        onMouseLeave={(currentButton) => {currentButton.target.className="primary-btn"}}
-                    >
-                        Volunteer work
-                    </button>
-                    <button className="primary-btn"
-                        onMouseEnter={(currentButton) => {currentButton.target.className="outline-btn"}}
-                        onMouseLeave={(currentButton) => {currentButton.target.className="primary-btn"}}
-                    >
-                        Skills
-                    </button>
-                    <button className="primary-btn"
-                        onMouseEnter={(currentButton) => {currentButton.target.className="outline-btn"}}
-                        onMouseLeave={(currentButton) => {currentButton.target.className="primary-btn"}}
-                    >
-                        Schedule a meeting
-                    </button>
+                    <div className="m-left-8 d-inline-flex gap-6">
+                        {socialButtons.map((option, index) => {
+                            if (option.icon === "showwcase-logo") {
+                                return (
+                                    <SocialButtonsAnimated iconType="img" key={index}
+                                        title={option.title}
+                                        url={option.url}
+                                        username={option.username}
+                                    />
+                                )
+                            } else {
+                                return (
+                                    <SocialButtonsAnimated iconType="icon" icon={option.icon} key={index} 
+                                        title={option.title}
+                                        url={option.url}
+                                        username={option.username}
+                                    />
+                                )
+                            }
+                        })}
+                    </div>
                 </div>
             </div>
         </div>
