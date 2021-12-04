@@ -1,12 +1,14 @@
 import { useState } from 'react';
 import Profile from '../assets/profile.jpg';
 import SocialButtonsAnimated from '../components/SocialButtonsAnimated';
+import ExperienceSection from './sections/ExperienceSection';
 
 const socialButtonsDetails = [
     {
         "title": "Twitter",
         "icon": "fab fa-twitter",
-        "username": "yashsehgaldev"
+        "username": "yashsehgaldev",
+        "url": "https://www.twitter.com/yashsehgaldev"
     },
     {
         "title": "GitHub",
@@ -38,8 +40,8 @@ export default function Home() {
     const [socialButtons] = useState(socialButtonsDetails);
     return (
         <div className="home">
-            <div className="home-content content-center">
-                <div className="hero-section m-right-64 m-left-64 m-top-20">
+            <div className="home-content content-center m-top-20">
+                <div className="hero-section m-bottom-24">
                     <h1 className="font-size-42 font-weight-900">Hey, I am Yash <span className="font-weight-500">👋</span></h1>
                     <button className="primary-btn m-top-6">
                         Contact Me
@@ -66,6 +68,7 @@ export default function Home() {
                         })}
                     </div>
                 </div>
+                <ExperienceSection />
             </div>
         </div>
     )

@@ -7,6 +7,7 @@ export default function SocialButtonsAnimated(ButtonProperties) {
         return (
             <button className="primary-btn bg-neutral-gray-900" style={{ transition: 'all 0.2s ease-in-out' }}
                 data-tip data-for={ButtonProperties.title.toLowerCase()}
+                onClick={() => window.open(ButtonProperties.url)}
             >
                 <img src={ShowwcaseLogo} />
                 <ReactTooltip id={ButtonProperties.title.toLowerCase()} place="bottom" effect="solid">
@@ -18,6 +19,7 @@ export default function SocialButtonsAnimated(ButtonProperties) {
         return (
             <button className="primary-btn bg-neutral-gray-900" style={{ transition: 'all 0.2s ease-in-out' }}
                 data-tip data-for={ButtonProperties.title.toLowerCase()}
+                onClick={() => window.open(ButtonProperties.url)}
             >
                 <i className={ButtonProperties.icon} />
                 <ReactTooltip id={ButtonProperties.title.toLowerCase()} place="bottom" effect="solid">
