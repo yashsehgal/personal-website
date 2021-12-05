@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import ReactTooltip from 'react-tooltip';
 import ShowwcaseLogo from '../assets/showwcase-logo.svg';
 
@@ -9,7 +8,7 @@ export default function SocialButtonsAnimated(ButtonProperties) {
                 data-tip data-for={ButtonProperties.title.toLowerCase()}
                 onClick={() => window.open(ButtonProperties.url)}
             >
-                <img src={ShowwcaseLogo} />
+                <img src={ShowwcaseLogo} alt="showwcase" />
                 <ReactTooltip id={ButtonProperties.title.toLowerCase()} place="bottom" effect="solid">
                     Connect with me on {ButtonProperties.title} - @{ButtonProperties.username}
                 </ReactTooltip>

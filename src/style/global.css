@@ -58,3 +58,7 @@ body::-webkit-scrollbar-thumb {
   align-items: center;
   gap: 4px;
 }
+
+p, li {
+  line-height: 1.8;
+}

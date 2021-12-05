@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import Profile from '../assets/profile.jpg';
 import SocialButtonsAnimated from '../components/SocialButtonsAnimated';
 import ExperienceSection from './sections/ExperienceSection';
 
@@ -44,7 +43,7 @@ export default function Home() {
                 <div className="hero-section m-bottom-24">
                     <h1 className="font-size-42 font-weight-900">Hey, I am Yash <span className="font-weight-500">👋</span></h1>
                     <button className="primary-btn m-top-6">
-                        Contact Me
+                        Schedule a meeting
                     </button>
                     <div className="m-left-8 d-inline-flex gap-6">
                         {socialButtons.map((option, index) => {

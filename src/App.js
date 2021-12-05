@@ -3,6 +3,8 @@ import Home from "./pages/Home";
 import { useState } from 'react';
 import Header from './components/Header';
 import { saveCurrentTheme } from "./utils/LocalStorageHelpers";
+import About from "./pages/About";
+import Projects from "./pages/Projects";
 
 export default function App() {
   const [currentThemeRef, setCurrentTheme] = useState(getCurrentThemeRef());
@@ -14,6 +16,8 @@ export default function App() {
           <Header pageTheme={currentThemeRef} pageThemeMethod={setCurrentTheme} />
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/projects" element={<Projects />} />
           </Routes>
         </BrowserRouter>
       </div>
@@ -25,6 +29,8 @@ export default function App() {
           <Header pageTheme={currentThemeRef} pageThemeMethod={setCurrentTheme} />
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/projects" element={<Projects />} />
           </Routes>
         </BrowserRouter>
       </div>
