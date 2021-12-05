@@ -5,6 +5,7 @@ import Header from './components/Header';
 import { saveCurrentTheme } from "./utils/LocalStorageHelpers";
 import About from "./pages/About";
 import Projects from "./pages/Projects";
+import Services from './pages/Services';
 
 export default function App() {
   const [currentThemeRef, setCurrentTheme] = useState(getCurrentThemeRef());
@@ -18,6 +19,7 @@ export default function App() {
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/projects" element={<Projects />} />
+            <Route path="/services" element={<Services />} />
           </Routes>
         </BrowserRouter>
       </div>
@@ -31,6 +33,7 @@ export default function App() {
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/projects" element={<Projects />} />
+            <Route path="/services" element={<Services />} />
           </Routes>
         </BrowserRouter>
       </div>
