@@ -42,7 +42,9 @@ export default function Home() {
             <div className="home-content content-center m-top-20">
                 <div className="hero-section m-bottom-24">
                     <h1 className="font-size-42 font-weight-900">Hey, I am Yash <span className="font-weight-500">👋</span></h1>
-                    <button className="primary-btn m-top-6">
+                    <button className="primary-btn m-top-6"
+                        onClick={() => window.open('https://calendly.com/yashsehgal/15min')}
+                    >
                         Schedule a meeting
                     </button>
                     <div className="m-left-8 d-inline-flex gap-6">

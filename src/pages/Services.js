@@ -30,9 +30,11 @@ export default function Services() {
                     ))}
                 </div>
                 <h4 className="m-top-8">Interested in my work! I am currently Open for Intern roles</h4>
-                <button className="m-top-4 primary-btn bg-neutral-gray-900">
-                    Hire Me 💻💸
-                </button>
+                <a href="mailto:yashsehgal.work@gmail.com">
+                    <button className="m-top-4 primary-btn bg-neutral-gray-900">
+                        Hire Me 💻💸
+                    </button>
+                </a>
             </div>
         </div>
     )
