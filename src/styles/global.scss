@@ -82,3 +82,32 @@ a {
 		color: white;
 	}
 }
+
+// responsive page code
+
+@media screen and (max-width: 1200px) {
+	.App {
+		> .header-wrapper {
+			flex-direction: column;
+			> .title-wrapper {
+				margin-bottom: 2.4rem;
+			}
+			> .header-button-wrapper {
+				justify-content: flex-start;
+			}
+		}
+		> .content-wrapper {
+			font-size: 14px;
+			text-align: center;
+			padding: 2.4rem;
+			> .tags-wrapper {
+				width: fit-content;
+				margin-right: auto;
+				margin-left: auto;
+			}
+		}
+		> .footer-wrapper {
+			text-align: center;
+		}
+	}
+}

@@ -35,7 +35,7 @@ export default function App() {
 						</button>
 					</div>
 				</div>
-				<div style={{ marginTop: '2.4rem', color: '#989898' }}>
+				<div className="content-wrapper" style={{ marginTop: '2.4rem', color: '#989898' }}>
 					<h3>I work with product designing tools and a decent design system developer.</h3> <br />
 					<h3>I am a frontend developer learning product designing, nowadays. I know UX/UI Design, React {"&"} Vue, SCSS.</h3> <br />
 					<h3>If you want to hire me for frontend/UI developer, product designing internship roles and then mail me at <br />

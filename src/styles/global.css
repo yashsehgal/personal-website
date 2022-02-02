@@ -86,4 +86,31 @@ a {
 .tag:hover {
   background-color: #292929;
   color: white;
+}
+
+@media screen and (max-width: 1200px) {
+  .App > .header-wrapper {
+    flex-direction: column;
+  }
+  .App > .header-wrapper > .title-wrapper {
+    margin-bottom: 2.4rem;
+  }
+  .App > .header-wrapper > .header-button-wrapper {
+    justify-content: flex-start;
+  }
+  .App > .content-wrapper {
+    font-size: 14px;
+    text-align: center;
+    padding: 2.4rem;
+  }
+  .App > .content-wrapper > .tags-wrapper {
+    width: -webkit-fit-content;
+    width: -moz-fit-content;
+    width: fit-content;
+    margin-right: auto;
+    margin-left: auto;
+  }
+  .App > .footer-wrapper {
+    text-align: center;
+  }
 }/*# sourceMappingURL=global.css.map */
