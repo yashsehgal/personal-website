@@ -9,10 +9,18 @@ export default function App() {
 	return (
 		<React.Fragment>
 			<div className="App">
+				<img src="https://github.com/yashsehgal.png" alt="my-face"
+				style={{
+					width: '140px',
+					borderRadius: '50%',
+					background: 'white',
+					height: 'auto'
+				}} />
 				<div className="header-wrapper" style={{ 
 					display: 'flex',
 					alignItems: 'center',
-					justifyContent: 'space-between'
+					justifyContent: 'space-between',
+					marginTop: '1.2rem'
 				}}>
 					<div className="title-wrapper">
 						<h2>a small redirection to my notion website.</h2>
@@ -36,7 +44,7 @@ export default function App() {
 					</div>
 				</div>
 				<div className="content-wrapper" style={{ marginTop: '2.4rem', color: '#989898' }}>
-					<h3>I work with product designing tools and a decent design system developer.</h3> <br />
+					<h3>I work with product designing tools and design systems.</h3> <br />
 					<h3>I am a frontend developer learning product designing, nowadays. I know UX/UI Design, React {"&"} Vue, SCSS.</h3> <br />
 					<h3>If you want to hire me for frontend/UI developer, product designing internship roles and then mail me at <br />
 						<a href='mailto:yashsehgal.work@gmail.com'>yashsehgal.work@gmail.com</a>
@@ -51,7 +59,7 @@ export default function App() {
 					}}>
 						{tagsRef.map((tag, index) => (
 							<React.Fragment>
-								<span className='tag' key={index} data-tip='' data-for={`tag-tooltip-${tag}`}>#{tag}</span>
+								<span className='tag' key={index} data-tip='' data-effect='solid' data-for={`tag-tooltip-${tag}`} >#{tag}</span>
 								<ReactTooltip id={`tag-tooltip-${tag}`}>in love with {tag}</ReactTooltip>
 							</React.Fragment>
 						))}
@@ -60,7 +68,7 @@ export default function App() {
 				<p className='footer-wrapper'
 					style={{
 						marginTop: '6.4rem',
-						color: '#b2b2b2',
+						color: '#929292',
 						fontSize: '14px'
 					}}
 				>
