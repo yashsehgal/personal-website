@@ -23,7 +23,7 @@ export default function Home() {
           <div className='recent-updates-wrapper mt-2'>
             <div className='recent-update-item'>
               <h1 className='recent-update-title font-semibold text-black text-base'>Mentee at {" "}
-                <a href="https://github.com/asyncapi/community/discussions/284" target="_blank" className='underline font-bold'>
+                <a href="https://github.com/asyncapi/community/discussions/284" rel="noreferrer" target="_blank" className='underline font-bold'>
                   AsyncAPI Initiative's Mentorship Program 2022
                 </a>
               </h1>
