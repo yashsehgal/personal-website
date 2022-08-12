@@ -1,4 +1,3 @@
-# React TailwindCSS Configured Template
+# personal-website
 
-- Use it ,enjoy you life.
-- Build amazing and beautiful things with react and tailwindcss.
+Personal Website
