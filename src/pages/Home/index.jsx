@@ -1,10 +1,14 @@
+import Skeleton from 'react-loading-skeleton';
 import ProfileImage from '../../lib/profile.jpg';
 
 export default function Home() {
   return (
-    <div className="home page-container flex flex-row items-start justify-center gap-8">
+    <div className="home page-container flex flex-row items-center justify-center gap-12">
       <div className="profile-image-wrapper w-fit h-fit flex flex-row items-center justify-center">
-        <img src={ProfileImage} alt="profile" className='w-[360px] h-auto rounded-lg shadow-lg' />
+        {ProfileImage
+          ? <img src={ProfileImage} alt="profile" className='w-[360px] h-auto rounded-lg shadow-lg' />
+          : <Skeleton height={'480px'} width={'360px'} />
+        }
       </div>
       <div className="details-wrapper flex flex-col items-start">
         <div>
