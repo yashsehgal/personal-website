@@ -20,11 +20,22 @@ export default function Home() {
             and <span className="underline">Javascript</span> in general.
           </span>
           <span className='mt-8 uppercase text-xs text-zinc-500 tracking-wide'>Recent Updates</span>
-          <div className='recent-updates-wrapper mt-2'>
+          <div className='recent-updates-wrapper mt-2 flex flex-col items-start gap-3'>
             <div className='recent-update-item'>
               <h1 className='recent-update-title font-semibold text-black text-base'>Mentee at {" "}
                 <a href="https://github.com/asyncapi/community/discussions/284" rel="noreferrer" target="_blank" className='underline font-bold'>
                   AsyncAPI Initiative's Mentorship Program 2022
+                </a>
+              </h1>
+            </div>
+            <div className='recent-update-item'>
+              <h1 className='recent-update-title font-semibold text-black text-base'>Written a short blog on {" "}
+                <a href="https://www.notion.so/yashsehgal/Getting-started-with-Design-Systems-Engineering-00f9639dd68f4fd79701eb72ca5a1fec"
+                  target="_blank"
+                  rel="noreferrer"
+                  className='underline font-bold'
+                >
+                  Getting started with Design Systems Engineering
                 </a>
               </h1>
             </div>
