@@ -19,6 +19,16 @@ export default function Home() {
             I work with <span className="underline">React</span>, <span className="underline">Next</span>, <span className="underline">Vue</span> {" "}
             and <span className="underline">Javascript</span> in general.
           </span>
+          <span className='mt-8 uppercase text-xs text-zinc-500 tracking-wide'>Recent Updates</span>
+          <div className='recent-updates-wrapper mt-2'>
+            <div className='recent-update-item'>
+              <h1 className='recent-update-title font-semibold text-black text-base'>Mentee at {" "}
+                <a href="https://github.com/asyncapi/community/discussions/284" target="_blank" className='underline font-bold'>
+                  AsyncAPI Initiative's Mentorship Program 2022
+                </a>
+              </h1>
+            </div>
+          </div>
         </div>
       </div>
     </div>
