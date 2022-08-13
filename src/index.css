@@ -12,3 +12,26 @@ body {
 .page-container {
   @apply mt-12;
 }
+
+/* scroll-bar styling */
+/* width */
+*::-webkit-scrollbar {
+    width: 4px;
+}
+
+/* Track */
+*::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.200);
+    border-radius: 100px;
+}
+
+/* Handle */
+*::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 100px;
+}
+
+/* Handle on hover */
+*::-webkit-scrollbar-thumb:hover {
+    background: #bbb;
+}

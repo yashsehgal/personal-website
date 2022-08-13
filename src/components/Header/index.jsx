@@ -4,6 +4,7 @@ export default function Header() {
   const headerOptions = [
     { title: "Blogs", path: '/blogs' },
     { title: "Work", path: '/work' },
+    { title: "Artwork", path: '/artwork' },
     { title: "Notion", path: '/notion' },
   ]
   return (

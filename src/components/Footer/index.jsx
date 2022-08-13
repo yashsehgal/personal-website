@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { FaCompass } from 'react-icons/fa';
+import { FaCompass, FaEnvelope } from 'react-icons/fa';
 
 export default function Footer() {
   const footerOptions = {
@@ -7,6 +7,7 @@ export default function Footer() {
       { title: "Home", path: "/" },
       { title: "Blogs", path: "/blogs" },
       { title: "Work", path: "/work" },
+      { title: "Artwork", path: "/artwork" },
       { title: "Notion Portfolio", path: "/notion" }
     ],
     socials: [
@@ -42,6 +43,11 @@ export default function Footer() {
       <div className="contact-location-details-wrapper mt-6 flex flex-row items-center justify-between">
         <span className="flex flex-row items-center justify-start gap-1 w-fit h-fit text-sm text-zinc-600">
           <FaCompass /> {"Currently in Indore"}
+        </span>
+        <span className="text-sm text-zinc-600 hover:underline">
+          <a href="mailto:yashsehgal.work@gmail.com" target="_blank" rel="noreferrer" className="flex flex-row items-center justify-end gap-1 w-fit h-fit">
+            <FaEnvelope /> {"yashsehgal.work@gmail.com"}
+          </a>
         </span>
       </div>
     </div>
