@@ -10,11 +10,7 @@ export default function App() {
   return (
     <div className="app">
       <Header />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/work" element={<Work />} />
-        <Route path="/notion" element={<NotionRedirect />} />
-      </Routes>
+      <Routes></Routes>
       <Footer />
     </div>
     )
