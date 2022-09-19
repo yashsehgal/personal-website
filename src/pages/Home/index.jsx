@@ -45,10 +45,10 @@ export default function Home() {
                             ))}
                         </ul>
                     </div>
-                    <div className="recent-work-details-wrapper mt-8">
-                        <h1 className="leading-snug text-lg font-semibold text-gray-800">{"Recent work"}</h1>
+                    <div className="recent-work-details-wrapper mt-10">
+                        <h1 className="leading-snug text-sm font-semibold text-gray-400 select-none cursor-default">{"Recent experiences"}</h1>
                         <div className="recent-work-experience-list-wrapper mt-2">
-                            <ul className="recent-work-experience-list flex flex-row items-start justify-start gap-2">
+                            <ul className="recent-work-experience-list flex flex-col items-start justify-start gap-2">
                                 {recentWorkExperienceDataRef.current?.map((recentExperience, recentExperienceIndex) => (
                                     <li className="recent-work-experience-item"
                                         key={recentExperienceIndex}
@@ -56,7 +56,7 @@ export default function Home() {
                                         <button className="recent-work-experience-item-content-wrapper bg-transparent hover:bg-gray-100 hover:px-6 py-4 transition-all text-left rounded-md cursor-pointer"
                                             onClick={() => window.open(recentExperience?.link)}
                                         >
-                                            <h3 className="leading-snug text-base font-semibold text-gray-700">
+                                            <h3 className="leading-snug text-base font-semibold text-gray-700 w-[32ch]">
                                                 {recentExperience?.title}
                                             </h3>
                                             <span className="text-gray-400 font-normal text-sm">{"related to, " + recentExperience?.relatedTo}</span>

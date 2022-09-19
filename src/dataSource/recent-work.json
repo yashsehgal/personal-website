@@ -3,5 +3,15 @@
         "title": "Going to Hackcon by MLH",
         "relatedTo": "MLH",
         "link": "http://hackcon.mlh.io"
+    },
+    {
+        "title": "GitHub Field Day India (BLR)",
+        "relatedTo": "GitHub",
+        "link": "https://githubfieldday.com"
+    },
+    {
+        "title": "Contributing to AsyncAPI Initiative (Frontend + Design Contributions)",
+        "relatedTo": "AsyncAPI Initiative",
+        "link": "https://asyncapi.com"
     }
 ]
