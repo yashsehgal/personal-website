@@ -8,12 +8,12 @@ export default function WorkExperience() {
             <div className="work-experience-content-wrapper mt-20">
                 <h1 className="experience-title leading-snug text-2xl font-semibold text-gray-800">Work Experience</h1>
                 <div className="work-experience-list-wrapper mt-6">
-                    <ul className="work-experience-list flex flex-col items-start justify-start gap-3">
+                    <ul className="work-experience-list flex flex-row items-start justify-start gap-3">
                         {workExperienceDataRef.current?.map((workExperience, workExperienceIndex) => (
                             <li className="work-experience-item"
                                 key={workExperienceIndex}
                             >
-                                <button className="work-experience-item-content-wrapper bg-transparent hover:bg-gray-100 hover:px-4 py-4 transition-all text-left rounded-md cursor-pointer"
+                                <button className="work-experience-item-content-wrapper bg-transparent hover:bg-gray-100 px-4 hover:scale-105 py-4 transition-all text-left rounded-md cursor-pointer"
                                     onClick={() => window.open(workExperience?.website)}
                                 >
                                     <div className="w-fit h-fit flex flex-col items-start justify-start gap-1">
@@ -43,9 +43,9 @@ export default function WorkExperience() {
                         <p className="leading-snug text-sm font-normal text-gray-400 w-[74ch]">
                             I am open for job opportunities in roles such as Frontend Engineering, UI Engineering, Design Systems, Product Designer and anything that involves React {"💜"}
                         </p>
-                        <div className="flex flex-row items-center justify-start gap-4 mt-1">
+                        <div className="flex flex-row items-center justify-start gap-6 mt-2">
                             <a className="text-sm text-blue-500 hover:text-blue-400 cursor-pointer select-none font-normal" target="_blank" rel="noreferrer">Resume</a>
-                            <a className="text-sm text-blue-500 hover:text-blue-400 cursor-pointer select-none font-normal" target="_blank" rel="noreferrer">Notion Personal Blog</a>
+                            <a className="text-sm text-blue-500 hover:text-blue-400 cursor-pointer select-none font-normal" target="_blank" rel="noreferrer">Personal Blog on Notion</a>
                         </div>
                     </div>
                 </div>
