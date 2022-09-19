@@ -4,11 +4,13 @@ import Header from "./components/Header";
 import { useRef } from "react";
 import Home from "./pages/Home";
 import WorkExperience from "./pages/WorkExperience";
+import Skills from "./pages/Skills";
 
 export default function App() {
   const viewRouting = useRef([
     { path: "/", renderView: <Home /> },
     { path: "/work-experience", renderView: <WorkExperience /> },
+    { path: "/skills", renderView: <Skills /> },
   ]);
 
   return (
