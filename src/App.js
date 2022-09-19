@@ -3,10 +3,12 @@ import 'react-loading-skeleton/dist/skeleton.css'
 import Header from "./components/Header";
 import { useRef } from "react";
 import Home from "./pages/Home";
+import WorkExperience from "./pages/WorkExperience";
 
 export default function App() {
   const viewRouting = useRef([
-    { path: "/", renderView: <Home /> }
+    { path: "/", renderView: <Home /> },
+    { path: "/work-experience", renderView: <WorkExperience /> },
   ]);
 
   return (

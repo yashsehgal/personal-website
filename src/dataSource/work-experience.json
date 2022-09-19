@@ -1,0 +1,20 @@
+[
+    {
+        "title": "Product Design Contributor",
+        "company": "AsyncAPI Initiative",
+        "website": "https://asyncapi.com",
+        "duration": {
+            "startDate": "Jan 2022",
+            "endData": "current"
+        }
+    },
+    {
+        "title": "Frontend Software Engineer",
+        "company": "economize.cloud",
+        "website": "https://economize.cloud",
+        "duration": {
+            "startDate": "April 2021",
+            "endData": "Dec 2021"
+        }
+    }
+]
