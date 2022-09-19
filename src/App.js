@@ -1,17 +1,25 @@
 import { Route, Routes } from "react-router-dom";
-import Header from "./components/Header";
-import Home from "./pages/Home";
 import 'react-loading-skeleton/dist/skeleton.css'
-import Footer from "./components/Footer";
-import Work from "./pages/Work";
-import NotionRedirect from "./pages/NotionRedirect";
+import Header from "./components/Header";
+import { useRef } from "react";
+import Home from "./pages/Home";
 
 export default function App() {
+  const viewRouting = useRef([
+    { path: "/", renderView: <Home /> }
+  ]);
+
   return (
     <div className="app">
       <Header />
-      <Routes></Routes>
-      <Footer />
+      <Routes>
+        {viewRouting.current?.map((viewRoute, viewRouteIndex) => (
+          <Route path={viewRoute?.path} 
+            element={viewRoute?.renderView} 
+            key={viewRouteIndex} 
+          />
+        ))}
+      </Routes>
     </div>
     )
 }
