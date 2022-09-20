@@ -5,6 +5,8 @@ import { useRef } from "react";
 import Home from "./pages/Home";
 import WorkExperience from "./pages/WorkExperience";
 import Skills from "./pages/Skills";
+import JobRoleCTA from "./components/JobRoleCTA";
+import Footer from "./components/Footer";
 
 export default function App() {
   const viewRouting = useRef([
@@ -24,6 +26,7 @@ export default function App() {
           />
         ))}
       </Routes>
+      <Footer />
     </div>
     )
 }
