@@ -1,4 +1,5 @@
 import { useRef } from "react"
+import JobRoleCTA from "../../components/JobRoleCTA";
 import SkillsData from "../../dataSource/skills.json"
 
 export default function Skills() {
@@ -37,6 +38,7 @@ export default function Skills() {
                     </ul>
                 </div>
             </div>
+            <JobRoleCTA />
         </section>
     )
 }

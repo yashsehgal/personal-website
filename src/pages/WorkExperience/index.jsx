@@ -1,4 +1,5 @@
 import { useRef } from 'react';
+import JobRoleCTA from '../../components/JobRoleCTA';
 import WorkExperienceData from '../../dataSource/work-experience.json';
 
 export default function WorkExperience() {
@@ -36,6 +37,7 @@ export default function WorkExperience() {
                     </ul>
                 </div>
             </div>
+            <JobRoleCTA />
         </section>
     )
 }
