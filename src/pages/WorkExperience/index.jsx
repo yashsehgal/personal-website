@@ -44,8 +44,10 @@ export default function WorkExperience() {
                             I am open for job opportunities in roles such as Frontend Engineering, UI Engineering, Design Systems, Product Designer and anything that involves React {"💜"}
                         </p>
                         <div className="flex flex-row items-center justify-start gap-6 mt-2">
-                            <a className="text-sm text-blue-500 hover:text-blue-400 cursor-pointer select-none font-normal" target="_blank" rel="noreferrer">Resume</a>
-                            <a className="text-sm text-blue-500 hover:text-blue-400 cursor-pointer select-none font-normal" target="_blank" rel="noreferrer">Personal Blog on Notion</a>
+                            <a href='#'
+                                className="text-sm text-blue-500 hover:text-blue-400 cursor-pointer select-none font-normal" target="_blank" rel="noreferrer">Resume</a>
+                            <a href="https://yashsehgal.notion.site/yashsehgal-e408313280ad4f9aa5f5cc4b4672540f" 
+                            className="text-sm text-blue-500 hover:text-blue-400 cursor-pointer select-none font-normal" target="_blank" rel="noreferrer">Personal Blog on Notion</a>
                         </div>
                     </div>
                 </div>
