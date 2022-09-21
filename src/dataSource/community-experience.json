@@ -26,5 +26,16 @@
                 "url": "https://hackcon.mlh.io"
             }
         ]
+    },
+    {
+        "title": "My first meetup, GitHub Field Day in Bangalore",
+        "coverImage": "",
+        "description": {
+            "organization": "GitHub",
+            "time": {
+                "month": "April",
+                "year": "2022"
+            }
+        }
     }
 ]

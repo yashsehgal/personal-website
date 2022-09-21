@@ -92,7 +92,8 @@ export default function CommunityExperienceContentViewer({contentProps}) {
                     </div>
                     <div className="community-experience-content-reference-links-wrapper mt-12">
                         <h4 className="leading-snug text-base font-semibold text-gray-800">{"Reference Links"}</h4>
-                        <ul className="reference-links-list flex flex-col items-start gap-1">
+                        {contentProps?.links
+                            ? <ul className="reference-links-list flex flex-col items-start gap-1">
                             {contentProps?.links?.map((referenceLink, referenceLinkIndex) => (
                                 <li className="reference-link-item text-sm" key={referenceLinkIndex}>
                                     <a href={referenceLink?.url} target="_blank" rel="noreferrer"
@@ -103,6 +104,8 @@ export default function CommunityExperienceContentViewer({contentProps}) {
                                 </li>
                             ))}
                         </ul>
+                        : <span className="text-sm font-normal text-gray-400">No reference links</span>
+                        }
                     </div>
                 </section>
             </ReactModal>
