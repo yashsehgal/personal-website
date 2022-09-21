@@ -6,5 +6,9 @@
     {
         "title": "things I work with",
         "path": "/skills"
+    },
+    {
+        "title": "community work",
+        "path": "/community-work"
     }
 ]

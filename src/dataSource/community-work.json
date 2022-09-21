@@ -1,0 +1,30 @@
+[
+    {
+        "title": "My experience at HackCon India by MLH",
+        "coverImage": "https://github.com/yashsehgal.png",
+        "description": {
+            "organization": "MLH",
+            "time": {
+                "date": "25",
+                "month": "September",
+                "year": "2022"
+            }
+        },
+        "content": [
+            {
+                "type": "text",
+                "textContent": "This is a text content"
+            },
+            {
+                "type": "img",
+                "imageSource": "https://github.com/yashsehgal.png"
+            }
+        ],
+        "links": [
+            {
+                "name": "hackcon by mlh",
+                "url": "https://hackcon.mlh.io"
+            }
+        ]
+    }
+]
