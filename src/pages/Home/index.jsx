@@ -19,7 +19,7 @@ export default function Home() {
             <div className="hero-content-wrapper mt-20 flex flex-row items-center justify-center gap-24">
                 <div className="profile-picture-wrapper w-fit h-fit">
                     <img src={ProfilePicture} 
-                        className="w-[360px] h-auto rounded-lg shadow-md"
+                        className="w-[360px] h-auto rounded-lg shadow-2xl"
                         alt="profile"
                     />
                 </div>
