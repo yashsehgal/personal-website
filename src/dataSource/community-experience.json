@@ -13,11 +13,23 @@
         "content": [
             {
                 "type": "text",
-                "textContent": "This is a text content"
+                "textContent": "Open Source is more about collaboration than code contributions - There are people managing projects, creating developer communities around open-source projects, creating and managing updates in product documentation, and also teaching people how to contribute - All these things come under valid and really helpful contributions"
+            },
+            {
+                "type": "text",
+                "textContent": "Open Source programs provide a lot of SWAGS - Yeah that's true 💯 But that should never be the first intention of contributing to open source projects."
+            },
+            {
+                "type": "text",
+                "textContent": "It's going to take time - Contributing to a project is like writing code as an Intern in a new company, it's going to be really overwhelming, but we also don't need to run fast, just sit, read the codebase, understand it, ask all of your queries to the maintainers - they're going to help you."
+            },
+            {
+                "type": "text",
+                "textContent": "Enjoy the process, collaborate between different communities and community members. Work on your soft skills like communication, listening, teaching, learning in public, and sharing your knowledge with others. These things play an important role."
             },
             {
                 "type": "img",
-                "imageSource": "https://github.com/yashsehgal.png"
+                "imageSource": ""
             }
         ],
         "links": [
