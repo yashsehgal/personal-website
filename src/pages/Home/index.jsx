@@ -1,5 +1,4 @@
 import { useRef } from 'react';
-import ProfilePicture from '../../lib/profile-better.jpg';
 import { FaGithub, FaInstagram, FaLinkedin, FaTwitter } from 'react-icons/fa';
 
 import RecentWorkExperienceData from '../../dataSource/recent-work.json';
