@@ -18,7 +18,7 @@ export default function Home() {
         <section className="home-view-container">
             <div className="hero-content-wrapper mt-20 flex flex-row items-center justify-center gap-24">
                 <div className="profile-picture-wrapper w-fit h-fit">
-                    <img src={ProfilePicture} 
+                    <img src={'https://ik.imagekit.io/eawrckp8wfi/profile-picture?ik-sdk-version=javascript-1.4.3&updatedAt=1663852726307'}
                         className="w-[360px] h-auto rounded-lg shadow-2xl"
                         alt="profile"
                     />
