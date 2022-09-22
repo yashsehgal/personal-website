@@ -14,10 +14,6 @@
             {
                 "type": "text",
                 "textContent": "Content is going to come soon!"
-            },
-            {
-                "type": "img",
-                "imageSource": ""
             }
         ],
         "links": [
@@ -40,6 +36,7 @@
                 "month": "April",
                 "year": "2022"
             }
-        }
+        },
+        "content": []
     }
 ]

@@ -57,8 +57,9 @@ export default function CommunityExperienceContentViewer({contentProps}) {
                         borderColor: 'transparent',
                         boxShadow: '0px 0px 6px rgba(0, 0, 0, 0.360)',
                         width: '800px',
-                        height: 'fit-content',
-                        // centering content
+                        height: "fit-content",
+                        maxHeight: '520px',
+                        // centering content (horizontally)
                         marginRight: 'auto',
                         marginLeft: 'auto',
                         marginTop: '4rem'
@@ -91,41 +92,43 @@ export default function CommunityExperienceContentViewer({contentProps}) {
                             </span>
                         </span>
                     </span>
-                    <div className="community-experience-content-innerContent-wrapper mt-8 flex flex-col items-start justify-start gap-3">
-                        {contentProps?.content?.map((contentItem, contentIndex) => {
-                            if (contentItem?.type?.toLowerCase() === "text") {
-                                return (
-                                    <p className="innerContent-textContent text-sm text-gray-700" key={contentIndex}>
-                                        {contentItem?.textContent}
-                                    </p>
-                                )
-                            } else if (contentItem?.type?.toLowerCase() === "img") {
-                                return (
-                                    <img src={contentItem?.imageSource} key={contentIndex} 
-                                        alt={contentProps?.title + "-img"}
-                                    />
-                                )
-                            } else {
-                                return <React.Fragment key={contentIndex}></React.Fragment>
+                    <div className="flex flex-col items-start justify-between">
+                        <div className="community-experience-content-innerContent-wrapper mt-8 flex flex-col items-start justify-start gap-3">
+                            {contentProps?.content?.map((contentItem, contentIndex) => {
+                                if (contentItem?.type?.toLowerCase() === "text") {
+                                    return (
+                                        <p className="innerContent-textContent text-sm text-gray-700" key={contentIndex}>
+                                            {contentItem?.textContent}
+                                        </p>
+                                    )
+                                } else if (contentItem?.type?.toLowerCase() === "img") {
+                                    return (
+                                        <img src={contentItem?.imageSource} key={contentIndex} 
+                                            alt={contentProps?.title + "-img"}
+                                        />
+                                    )
+                                } else {
+                                    return <React.Fragment key={contentIndex}></React.Fragment>
+                                }
+                            })}
+                        </div>
+                        <div className="community-experience-content-reference-links-wrapper mt-12">
+                            <h4 className="leading-snug text-base font-semibold text-gray-800">{"Reference Links"}</h4>
+                            {contentProps?.links
+                                ? <ul className="reference-links-list flex flex-col items-start gap-1">
+                                {contentProps?.links?.map((referenceLink, referenceLinkIndex) => (
+                                    <li className="reference-link-item text-sm" key={referenceLinkIndex}>
+                                        <a href={referenceLink?.url} target="_blank" rel="noreferrer"
+                                            className="text-blue-400 hover:underline"
+                                        >
+                                            {referenceLink?.name}
+                                        </a>
+                                    </li>
+                                ))}
+                            </ul>
+                            : <span className="text-sm font-normal text-gray-400">No reference links</span>
                             }
-                        })}
-                    </div>
-                    <div className="community-experience-content-reference-links-wrapper mt-12">
-                        <h4 className="leading-snug text-base font-semibold text-gray-800">{"Reference Links"}</h4>
-                        {contentProps?.links
-                            ? <ul className="reference-links-list flex flex-col items-start gap-1">
-                            {contentProps?.links?.map((referenceLink, referenceLinkIndex) => (
-                                <li className="reference-link-item text-sm" key={referenceLinkIndex}>
-                                    <a href={referenceLink?.url} target="_blank" rel="noreferrer"
-                                        className="text-blue-400 hover:underline"
-                                    >
-                                        {referenceLink?.name}
-                                    </a>
-                                </li>
-                            ))}
-                        </ul>
-                        : <span className="text-sm font-normal text-gray-400">No reference links</span>
-                        }
+                        </div>
                     </div>
                 </section>
             </ReactModal>
