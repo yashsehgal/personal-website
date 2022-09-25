@@ -38,5 +38,16 @@
             }
         },
         "content": []
+    },
+    {
+        "title": "Getting started with Hacktoberfest",
+        "coverImage": "",
+        "description": {
+            "organization": "AngelHacks MU",
+            "time": {
+                "month": "October",
+                "year": "2021"
+            }
+        }
     }
 ]
