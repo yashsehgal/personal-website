@@ -94,23 +94,31 @@ export default function CommunityExperienceContentViewer({contentProps}) {
                     </span>
                     <div className="flex flex-col items-start justify-between">
                         <div className="community-experience-content-innerContent-wrapper mt-8 flex flex-col items-start justify-start gap-3">
-                            {contentProps?.content?.map((contentItem, contentIndex) => {
-                                if (contentItem?.type?.toLowerCase() === "text") {
-                                    return (
-                                        <p className="innerContent-textContent text-sm text-gray-700" key={contentIndex}>
-                                            {contentItem?.textContent}
-                                        </p>
-                                    )
-                                } else if (contentItem?.type?.toLowerCase() === "img") {
-                                    return (
-                                        <img src={contentItem?.imageSource} key={contentIndex} 
-                                            alt={contentProps?.title + "-img"}
-                                        />
-                                    )
-                                } else {
-                                    return <React.Fragment key={contentIndex}></React.Fragment>
-                                }
-                            })}
+                            {contentProps?.content
+                                ? contentProps?.content?.map((contentItem, contentIndex) => {
+                                    if (contentItem?.type?.toLowerCase() === "text") {
+                                        return (
+                                            <p className="innerContent-textContent text-sm text-gray-700" key={contentIndex}>
+                                                {contentItem?.textContent}
+                                            </p>
+                                        )
+                                    } else if (contentItem?.type?.toLowerCase() === "img") {
+                                        return (
+                                            <img src={contentItem?.imageSource} key={contentIndex} 
+                                                alt={contentProps?.title + "-img"}
+                                            />
+                                        )
+                                    } else {
+                                        return <React.Fragment key={contentIndex}></React.Fragment>
+                                    }
+                                })
+
+                                : <React.Fragment>
+                                    <span className="select-none cursor-default text-base text-gray-400 font-normal">
+                                        No content added
+                                    </span>
+                                </React.Fragment>
+                            }
                         </div>
                         <div className="community-experience-content-reference-links-wrapper mt-12">
                             <h4 className="leading-snug text-base font-semibold text-gray-800">{"Reference Links"}</h4>

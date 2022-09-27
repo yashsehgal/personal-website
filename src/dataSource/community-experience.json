@@ -13,7 +13,15 @@
         "content": [
             {
                 "type": "text",
-                "textContent": "Content is going to come soon!"
+                "textContent": "Just going to start with a word, that is just WOW! This was my second ever offline event and first in-person offline conference too."
+            },
+            {
+                "type": "text",
+                "textContent": "Met a bunch of amazing folks from the community I am a part of, hackers all around the globe as well as some of the amazing MLH Coaches."
+            },
+            {
+                "type": "text",
+                "textContent": "This conference happened for the very first time ever in India, and to be a part of such a group was an amazing experience. I indeed made a lot of connections and met a bunch of people in real life, whom I have been linked with already of various online platforms."
             }
         ],
         "links": [
@@ -24,6 +32,10 @@
             {
                 "name": "tweet / selected for MLH HackCon",
                 "url": "https://twitter.com/yashsehgaldev/status/1570569517805498370?s=21&t=cvCN2eFxPrA3qgLqOOiczg"
+            },
+            {
+                "name": "Instagram Profile Highlight / Covering HackCon Activities",
+                "url": "https://www.instagram.com/stories/highlights/17935773104515641/"
             }
         ]
     },
@@ -37,7 +49,12 @@
                 "year": "2022"
             }
         },
-        "content": []
+        "content": [
+            {
+                "type": "text",
+                "textContent": "As my first ever community meetup, I met some of them for the very first time in real life. It was amazing to connect with people more than professionally and become friends."
+            }
+        ]
     },
     {
         "title": "Getting started with Hacktoberfest",
