@@ -22,6 +22,7 @@ export default function WorkExperience() {
                                             ? <div className="work-experience-comapny-cover-image mb-1 bg-white rounded w-[420px] h-[200px] flex flex-row items-center justify-center border border-gray-200">
                                                 <img src={workExperience?.coverImage}
                                                     className="max-w-[200px] max-h-[100px]"
+                                                    alt="company-cover"
                                                 />
                                             </div>
                                             : <React.Fragment>
