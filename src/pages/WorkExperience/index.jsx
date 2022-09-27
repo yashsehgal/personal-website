@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 import JobRoleCTA from '../../components/JobRoleCTA';
 import WorkExperienceData from '../../dataSource/work-experience.json';
 
@@ -18,6 +18,18 @@ export default function WorkExperience() {
                                     onClick={() => window.open(workExperience?.website)}
                                 >
                                     <div className="w-fit h-fit flex flex-col items-start justify-start gap-1">
+                                        {workExperience?.coverImage
+                                            ? <div className="work-experience-comapny-cover-image mb-1 bg-white rounded w-[420px] h-[200px] flex flex-row items-center justify-center border border-gray-200">
+                                                <img src={workExperience?.coverImage}
+                                                    className="max-w-[200px] max-h-[100px]"
+                                                />
+                                            </div>
+                                            : <React.Fragment>
+                                                <div className="work-experience-company-cover-image-placeholder mb-1 bg-white rounded w-[420px] h-[200px] border border-gray-200">
+                                                    {"Experience at " + workExperience?.company + " as a " + workExperience?.title}
+                                                </div>
+                                            </React.Fragment>
+                                        }
                                         <h3 className="leading-snug text-base font-semibold text-gray-700 w-[32ch]">
                                             {workExperience?.title}
                                         </h3>

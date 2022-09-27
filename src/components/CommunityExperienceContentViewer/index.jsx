@@ -14,7 +14,7 @@ export default function CommunityExperienceContentViewer({contentProps}) {
                     {contentProps?.coverImage
                         ? <img src={contentProps?.coverImage} 
                             alt="community-experience-banner" />
-                        : <div className="temporary-community-experience-banner rounded flex flex-row items-center justify-center w-[420px] h-[200px] bg-gray-900 text-white">
+                        : <div className="temporary-community-experience-banner rounded flex flex-row items-center justify-center w-[420px] h-[200px] text-white bg-gray-900">
                             <span className="font-semibold text-lg">
                                 {"Community Experience at " + contentProps?.description?.organization}
                             </span>
@@ -24,20 +24,32 @@ export default function CommunityExperienceContentViewer({contentProps}) {
                         {contentProps?.title}
                     </h1>
                     <span className="community-experience-description text-gray-400 flex flex-col items-start justify-start gap-1.5">
-                        <span className="community-experience-organization text-sm">
-                            {"organized by, " + contentProps?.description?.organization}
-                        </span>
-                        <span className="community-experience-time text-xs">
-                            <span className="at-time-wrapper">{"@"}</span>
-                            <span className="community-experience-time-date">
-                                {contentProps?.description?.time?.date}
-                            </span>
-                            <span className="community-experience-time-month">
-                                {contentProps?.description?.time?.month}
-                            </span>
-                            <span className="community-experience-time-year">
-                                {contentProps?.description?.time?.year}
-                            </span>
+                        {contentProps?.description?.organization
+                            ? <span className="community-experience-organization text-sm">
+                                {"organized by, " + contentProps?.description?.organization}
+                              </span>
+                            : <React.Fragment>
+                                <span className="text-sm text-gray-300">No organization mentioned</span>
+                            </React.Fragment>
+                        }
+                        <span className="community-experience-time text-xs w-fit h-fit flex flex-row items-center justify-start gap-[1px]">
+                            {contentProps?.description?.time
+                                ? <React.Fragment>
+                                    <span className="at-time-wrapper">{"@"}</span>
+                                        <span className="community-experience-time-date">
+                                            {contentProps?.description?.time?.date}
+                                        </span>
+                                        <span className="community-experience-time-month">
+                                            {contentProps?.description?.time?.month}
+                                        </span>
+                                        <span className="community-experience-time-year">
+                                            {contentProps?.description?.time?.year}
+                                        </span>
+                                    </React.Fragment>
+                                : <React.Fragment>
+                                    <span className="text-gray-300">No time is mentioned</span>
+                                </React.Fragment>
+                            }
                         </span>
                     </span>
                 </div>

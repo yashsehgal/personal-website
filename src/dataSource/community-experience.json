@@ -66,5 +66,15 @@
                 "year": "2021"
             }
         }
+    },
+    {
+        "title": "LocalHackDay 2021",
+        "coverImage": "",
+        "description": {
+            "organization": "MLH",
+            "time": {
+                "year": "2021"
+            }
+        }
     }
 ]
