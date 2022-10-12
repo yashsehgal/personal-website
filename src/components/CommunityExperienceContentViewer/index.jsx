@@ -13,7 +13,7 @@ export default function CommunityExperienceContentViewer({contentProps}) {
                 <div className="community-experience-item-content-wrapper flex flex-col items-start justify-start gap-2">
                     {contentProps?.coverImage
                         ? <img src={contentProps?.coverImage} 
-                            alt="community-experience-banner" />
+                            alt="community-experience-banner" className="w-[420px] h-auto" />
                         : <div className="temporary-community-experience-banner rounded flex flex-row items-center justify-center w-[420px] h-[200px] text-white bg-gray-900">
                             <span className="font-semibold text-lg">
                                 {"Community Experience at " + contentProps?.description?.organization}
@@ -105,6 +105,9 @@ export default function CommunityExperienceContentViewer({contentProps}) {
                         </span>
                     </span>
                     <div className="flex flex-col items-start justify-between">
+                    {/* {contentProps?.coverImage 
+                        && <img src={contentProps?.coverImage} 
+                            alt="community-experience-banner" className="w-[420px] h-auto mt-4" />} */}
                         <div className="community-experience-content-innerContent-wrapper mt-8 flex flex-col items-start justify-start gap-3">
                             {contentProps?.content
                                 ? contentProps?.content?.map((contentItem, contentIndex) => {

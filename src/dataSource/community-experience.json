@@ -1,5 +1,17 @@
 [
     {
+        "title": "First offline meetup in Indore / Datacode.io",
+        "coverImage": "https://ik.imagekit.io/eawrckp8wfi/portfolio-image-source/datacode-hekors-hacktoberfest-group-picture_NHXw7OBVP.jpg?ik-sdk-version=javascript-1.4.3&updatedAt=1665546939851",
+        "description": {
+            "organization": "Datacode.io",
+            "time": {
+                "date": "8",
+                "month": "October",
+                "year": "2022"
+            }
+        }
+    },
+    {
         "title": "My experience at HackCon India by MLH",
         "coverImage": "",
         "description": {
