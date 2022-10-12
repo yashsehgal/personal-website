@@ -53,7 +53,7 @@
     },
     {
         "title": "My first meetup, GitHub Field Day in Bangalore",
-        "coverImage": "",
+        "coverImage": "https://ik.imagekit.io/eawrckp8wfi/portfolio-image-source/gfd-blr-group-picture_zzEX_9YeQ.jpg?ik-sdk-version=javascript-1.4.3&updatedAt=1665609544939",
         "description": {
             "organization": "GitHub",
             "time": {
@@ -70,7 +70,7 @@
     },
     {
         "title": "Getting started with Hacktoberfest",
-        "coverImage": "",
+        "coverImage": "https://ik.imagekit.io/eawrckp8wfi/portfolio-image-source/angelhack-hacktoberfest-session-banner_az_9KXX_J.png?ik-sdk-version=javascript-1.4.3&updatedAt=1665609704432",
         "description": {
             "organization": "AngelHacks MU",
             "time": {
