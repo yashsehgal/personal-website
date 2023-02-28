@@ -1,12 +1,22 @@
 [
     {
+        "title": "Frontend Software Engineer",
+        "company": "Clamp",
+        "website": "https://joinclamp.com",
+        "coverImage": "https://ik.imagekit.io/eawrckp8wfi/portfolio-image-source/company-names/clamp-company-banner_rUqoT6zsZ.png?ik-sdk-version=javascript-1.4.3&updatedAt=1677583284471",
+        "duration": {
+            "startDate": "Jan 2023",
+            "endData": "Current"
+        }
+    },
+    {
         "title": "Product Design Contributor",
         "company": "AsyncAPI Initiative",
         "website": "https://asyncapi.com",
         "coverImage": "https://ik.imagekit.io/eawrckp8wfi/portfolio-image-source/company-names/asyncapi-company-logo_q_Y4tIXW4.jpeg?ik-sdk-version=javascript-1.4.3&updatedAt=1664269977768",
         "duration": {
             "startDate": "Jan 2022",
-            "endData": "current"
+            "endData": "Nov 2022"
         }
     },
     {
