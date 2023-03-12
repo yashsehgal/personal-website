@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply font-general;
+}
+
+/* Adding Third-Party Fonts */
+@font-face {
+  font-family: "Switzer";
+  src: url("../public/fonts/Switzer.ttf");
+}
