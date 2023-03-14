@@ -6,6 +6,7 @@ import {
     NavbarOptionPropsType,
     NavbarActionPropsType
 } from "./layout-types/navbar-type";
+import { ViewContainerPropsType } from "./layout-types/view-container-type";
 
 import { ActionPropsType } from "./component-types/action-type";
 
@@ -15,7 +16,9 @@ export type {
     NavbarLogoPropsType,
     NavbarOptionListPropsType,
     NavbarOptionPropsType,
-    NavbarActionPropsType
+    NavbarActionPropsType,
+
+    ViewContainerPropsType
 }
 
 // Layout Types Export

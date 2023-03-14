@@ -4,10 +4,55 @@
 
 body {
   @apply font-general;
+  cursor: url('../public/utils/cursor.svg'), default;
+}
+
+::selection {
+  @apply bg-zinc-900 text-white;
+}
+
+.section-container {
+  @apply my-48 py-24;
+}
+
+.cursor-action {
+  cursor: url('../public/utils/cursor-action.svg'), default;
+}
+
+#cursor-lighter {
+  cursor: url('../public/utils/cursor-lighter.svg');
+}
+
+/* .cursor-button {
+  cursor: url('../public/utils/cursor-button.svg'), pointer;
+} */
+
+h1, h2, h3 {
+  @apply font-headline;
+  /* cursor: url('../public/utils/cursor-heading.svg'), default; */
+}
+
+/* p, .paragraph {
+  cursor: url('../public/utils/cursor-paragraph.svg'), default;
+} */
+
+.comic-button:hover {
+  box-shadow: 0px 4px black;
+}
+
+/* View container, to add auto responsiveness to layouts and sections */
+.view-container {
+  max-width: 1200px;
+  @apply mx-auto;
 }
 
 /* Adding Third-Party Fonts */
 @font-face {
   font-family: "Switzer";
   src: url("../public/fonts/Switzer.ttf");
+}
+
+@font-face {
+  font-family: "Tanker";
+  src: url("../public/fonts/Tanker.ttf");
 }

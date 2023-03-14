@@ -1,9 +1,9 @@
 import { ReactNode } from "react";
 
-type ActionPropsType = {
+interface ActionPropsType extends React.AllHTMLAttributes<HTMLElement> {
     children?: ReactNode;
 };
 
-export type {
+export {
     ActionPropsType
 }
