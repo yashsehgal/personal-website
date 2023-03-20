@@ -3,12 +3,12 @@
 @tailwind utilities;
 
 html, body {
-    @apply bg-gray-100;
+    @apply bg-zinc-100;
     font-family: 'Outfit', sans-serif;
 }
 
 .view-container {
     @apply box-border mx-auto;
-    @apply max-2xl:w-[800px] max-xl:w-[720px] max-lg:w-[640px] max-md:w-[520px] max-sm:w-[320px];
+    @apply max-2xl:w-[800px] max-xl:w-[720px] max-lg:w-[640px] max-md:w-[560px] max-sm:w-[320px];
 }
 

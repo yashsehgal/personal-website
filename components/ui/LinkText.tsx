@@ -9,7 +9,7 @@ interface LinkTextProps extends LinkProps {
 const LinkText: React.FunctionComponent<LinkTextProps> = ({ children, ...attr }) => {
     return (
         <Link 
-            className={cn("text-base font-medium transition-all text-gray-900 hover:underline hover:underline-offset-2 active:text-gray-600", attr?.className)}
+            className={cn("text-base font-medium transition-all text-zinc-900 hover:underline hover:underline-offset-2 active:text-zinc-600", attr?.className)}
             {...attr}
         >
             {children}
