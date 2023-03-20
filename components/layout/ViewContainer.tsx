@@ -1,9 +1,11 @@
-import { ViewContainerPropsType } from "@/types";
+import { cn } from "@/lib/utils";
 
-export const ViewContainer: React.FunctionComponent<ViewContainerPropsType> = ({ children, ...viewContainerHTMLAttributes }) => {
+const ViewContainer: React.FunctionComponent<React.HTMLAttributes<HTMLDivElement>> = ({ ...attr }) => {
     return (
-        <div className={`view-container ${viewContainerHTMLAttributes?.className}`} {...viewContainerHTMLAttributes}>
-            {children}
+        <div className={cn("view-container", attr?.className)} {...attr}>
+            {attr?.children}
         </div>
     )
-};
+}
+
+export default ViewContainer;

@@ -11,10 +11,7 @@ module.exports = {
   ],
   theme: {
     extend: {
-      fontFamily: {
-        "general": ["Switzer"],
-        "headline": ["Tanker"]
-      },
+      fontFamily: {},
       keyframes: {
         "accordion-down": {
           from: { height: 0 },

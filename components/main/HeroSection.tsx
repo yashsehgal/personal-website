@@ -1,28 +1,24 @@
-import { ViewContainer } from "../layout/ViewContainer";
-import { ComicButton, OutlineButton } from "../ui/Button";
+import Section from "../layout/Section";
+import Callout from "./Callout";
 
-import { AiOutlineRight } from 'react-icons/ai';
-
-export const HeroSection: React.FunctionComponent = () => {
+const HeroSection: React.FunctionComponent = () => {
     return (
-        <main className="hero-section">
-            <ViewContainer>
-                <h1 className="text-8xl font-bold text-center mt-32">
-                    A Design to Code.<br />Practioner
-                </h1>
-                <p className="text-base font-normal text-zinc-400 mt-6 text-center leading-7">
-                    Studying Frontend Engineering with a design-first approach.<br />
-                    Inspired by many great designers and engineers. And having a passion  <br />
-                    for building great products, that people remember.
-                </p>
-                <div className="flex flex-row items-center justify-center my-6 gap-6">
-                    <ComicButton icon={<AiOutlineRight />}
-                        onClick={() => window.open("http://cal.com/yashsehgal")}
-                    >
-                        {"Schedule a meeting"}
-                    </ComicButton>
+        <main className="hero-section" id="hero">
+            <Section>
+                <h1 className="welcome-text leading-snug font-semibold text-2xl text-gray-900">{"👋 Hi, I am Yash"}</h1>
+                <div className="leading-snug font-normal text-base text-gray-500 mt-2">
+                    <p>{"A half frontend software engineer, half designer from India."}</p>
+                    <p>{(20 + (new Date().getFullYear() - 2023)) + ", he/him"}</p>
                 </div>
-            </ViewContainer>
+            </Section>
+            <Section>
+                <h2 className="about-us-heading leading-snug font-medium text-base text-gray-900">{"about."}</h2>
+                <Callout>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse blanditiis recusandae totam dolorum sunt expedita! Tempora iste maiores dolores ipsum?
+                </Callout>
+            </Section>
         </main>
     )
 };
+
+export default HeroSection;

@@ -1,13 +1,15 @@
-import { ExperienceSection } from "@/components/main/ExperienceSection";
-import { HeroSection } from "@/components/main/HeroSection";
-import React from "react";
+import ViewContainer from "@/components/layout/ViewContainer";
+import HeroSection from "@/components/main/HeroSection";
+import LinkText from "@/components/ui/LinkText";
+
 
 const MainView: React.FunctionComponent = () => {
   return (
-    <>
-      <HeroSection />
-      <ExperienceSection />
-    </>
+    <div className="main-view-container">
+      <ViewContainer>
+        <HeroSection />
+      </ViewContainer>
+    </div>
   )
 };
 
