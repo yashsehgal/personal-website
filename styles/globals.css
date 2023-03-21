@@ -2,13 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-html, body {
-    @apply bg-zinc-100;
-    font-family: 'Outfit', sans-serif;
+html,
+body {
+  @apply bg-zinc-100 mb-12;
+  font-family: 'Outfit', sans-serif;
 }
 
 .view-container {
-    @apply box-border mx-auto;
-    @apply max-2xl:w-[800px] max-xl:w-[720px] max-lg:w-[640px] max-md:w-[560px] max-sm:w-[320px];
+  @apply box-border mx-auto;
+  @apply max-2xl:w-[800px] max-xl:w-[720px] max-lg:w-[640px] max-md:w-[560px] max-sm:w-[400px];
 }
-
