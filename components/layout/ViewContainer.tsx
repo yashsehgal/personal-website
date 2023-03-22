@@ -2,9 +2,9 @@ import { cn } from '@/lib/utils';
 
 const ViewContainer: React.FunctionComponent<
   React.HTMLAttributes<HTMLDivElement>
-> = ({ ...attr }) => {
+> = ({ className, ...attr }) => {
   return (
-    <div className={cn('view-container', attr?.className)} {...attr}>
+    <div className={cn('view-container', className)} {...attr}>
       {attr?.children}
     </div>
   );

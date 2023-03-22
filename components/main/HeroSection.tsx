@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Section from '../layout/Section';
 import Button from '../ui/Button';
 import Callout from './Callout';
@@ -5,15 +6,24 @@ import Callout from './Callout';
 const HeroSection: React.FunctionComponent = () => {
   return (
     <main className="hero-section" id="hero">
-      <Section>
-        <h1 className="welcome-text leading-snug font-semibold text-2xl text-zinc-900">
-          {'👋 Hi, I am Yash'}
-        </h1>
-        <div className="leading-snug font-normal text-base text-zinc-500 mt-2">
-          <p>
-            {'A half frontend software engineer, half designer from India.'}
-          </p>
-          <p>{20 + (new Date().getFullYear() - 2023) + ', he/him'}</p>
+      <Section className="flex flex-row items-center justify-start gap-4 mt-12 max-sm:items-start max-md:items-start">
+        <Image
+          src={'/media/profile.jpg'}
+          alt="yash-profile"
+          width={'80'}
+          height={'80'}
+          className="rounded-full"
+        />
+        <div>
+          <h1 className="welcome-text leading-snug font-semibold text-2xl text-zinc-900">
+            {'👋 Hi, I am Yash'}
+          </h1>
+          <div className="leading-snug font-normal text-base text-zinc-500 mt-2">
+            <p>
+              {'A half frontend software engineer, half designer from India.'}
+            </p>
+            <p>{20 + (new Date().getFullYear() - 2023) + ', he/him'}</p>
+          </div>
         </div>
       </Section>
       <Section>

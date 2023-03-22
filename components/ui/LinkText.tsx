@@ -5,7 +5,7 @@ import { ArrowUpRight } from 'lucide-react';
 interface LinkTextProps extends LinkProps {
   children?: React.ReactNode;
   className?: string;
-  target?: "_blank" | "_parent" | "_self" | "_top";
+  target?: '_blank' | '_parent' | '_self' | '_top';
 }
 
 const LinkText: React.FunctionComponent<LinkTextProps> = ({
@@ -19,9 +19,10 @@ const LinkText: React.FunctionComponent<LinkTextProps> = ({
         'flex flex-row items-center justify-start gap-0.5 text-base font-medium transition-all text-zinc-900 hover:text-zinc-700 hover:gap-1 active:text-orange-500',
         className,
       )}
-      {...attr} target={target}>
-      <span className='link-text-content-wrapper'>{attr?.children}</span>
-      <ArrowUpRight className='w-4' />
+      {...attr}
+      target={target}>
+      <span className="link-text-content-wrapper">{attr?.children}</span>
+      <ArrowUpRight className="w-4" />
     </Link>
   );
 };

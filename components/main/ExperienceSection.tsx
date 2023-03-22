@@ -26,7 +26,7 @@ const ExperienceSection: React.FunctionComponent = () => {
       className="experience-section grid grid-cols-1 justify-start gap-4"
       id="experience">
       <h2 className="about-heading leading-snug font-medium text-base text-zinc-900">
-        {'worked with.'}
+        {'worked as.'}
       </h2>
       <Section className="experience-item-list-wrapper mt-4 grid grid-cols-1 justify-start gap-8">
         {getExperiences()?.map(
@@ -48,10 +48,15 @@ const ExperienceItem: React.FunctionComponent<ExperienceItemProps> = ({
   ...attr
 }) => {
   return (
-    <div className={cn('experience-item border-l-2 pl-4 hover:border-orange-300 cursor-default transition-all', className)} {...attr}>
+    <div
+      className={cn(
+        'experience-item border-l-2 pl-4 hover:border-orange-300 cursor-default transition-all',
+        className,
+      )}
+      {...attr}>
       <div className="flex flex-row items-start justify-between max-md:flex-col max-md:justify-start max-md:gap-2 max-sm:w-[320px]">
         <span>
-          <h3 className="experience-title font-normal text-zinc-900 capitalize w-[46ch] max-md:w-[32ch]">
+          <h3 className="experience-title font-normal text-zinc-900 capitalize w-[46ch] max-md:w-[30ch]">
             {experienceTitle + ', ' + experienceOrg?.name}
           </h3>
           <p className="experience-org-details-wrapper text-sm flex flex-row items-center justify-start gap-1.5">
@@ -60,7 +65,7 @@ const ExperienceItem: React.FunctionComponent<ExperienceItemProps> = ({
               <LinkText
                 className="font-normal text-sm"
                 href={experienceOrg?.link}
-                target={"_blank"}>
+                target={'_blank'}>
                 {experienceOrg?.websiteDisplayName}
               </LinkText>
             ) : (
@@ -81,7 +86,7 @@ const ExperienceItem: React.FunctionComponent<ExperienceItemProps> = ({
           )}
         </p>
       </div>
-      <div className="experience-description-content-wrapper mt-4 flex flex-col items-start justify-start gap-2">
+      <ul className="experience-description-list-content-wrapper mt-4 flex flex-col items-start justify-start gap-2 pl-3">
         {experienceDescription?.map((descriptionItem, descriptionIndex) => (
           <li
             className="font-normal text-zinc-500 text-sm list-disc list-outside"
@@ -89,7 +94,20 @@ const ExperienceItem: React.FunctionComponent<ExperienceItemProps> = ({
             {descriptionItem}
           </li>
         ))}
-      </div>
+        {experienceOrg?.name === 'AsyncAPI Initiative' && (
+          <Callout>
+            Was a part of AsyncAPI's first ever Mentorship Program, held in year
+            2022. Learn more{' '}
+            <LinkText
+              className="text-sm text-zinc-600"
+              href={
+                'https://github.com/asyncapi/community/discussions/376#discussioncomment-2890658'
+              }>
+              here
+            </LinkText>
+          </Callout>
+        )}
+      </ul>
     </div>
   );
 };
