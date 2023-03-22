@@ -27,7 +27,7 @@ const ProjectSection: React.FunctionComponent = () => {
     <Section
       className="projects-section grid grid-cols-1 justify-start gap-4"
       id="projects">
-      <h2 className="about-heading leading-snug font-medium text-base text-zinc-900">
+      <h2 className="project-heading leading-snug font-medium text-base text-zinc-900">
         {'projects.'}
       </h2>
       <Section className="project-item-list-wrapper mt-4 grid grid-cols-1 justify-start gap-8">

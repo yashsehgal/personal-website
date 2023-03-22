@@ -13,6 +13,7 @@ const HeroSection: React.FunctionComponent = () => {
           width={'80'}
           height={'80'}
           className="rounded-full"
+          priority
         />
         <div>
           <h1 className="welcome-text leading-snug font-semibold text-2xl text-zinc-900">
