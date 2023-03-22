@@ -1,4 +1,5 @@
 import ViewContainer from '@/components/layout/ViewContainer';
+import ContactSection from '@/components/main/ContactSection';
 import ExperienceSection from '@/components/main/ExperienceSection';
 import HeroSection from '@/components/main/HeroSection';
 import ProjectSection from '@/components/main/ProjectSection';
@@ -13,6 +14,7 @@ const MainView: React.FunctionComponent = () => {
         <HeroSection />
         <ExperienceSection />
         <ProjectSection />
+        <ContactSection />
       </ViewContainer>
     </div>
   );
