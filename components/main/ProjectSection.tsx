@@ -114,9 +114,11 @@ const ProjectItem: React.FunctionComponent<ProjectItemProps> = ({
             </li>
           ))}
         </ul>
-        <div className='project-category-tech-wrapper mt-4'>
-            <span className='project-category-wrapper text-sm text-gray-500'>{"category: " + category}</span>
-            {/* <div className="project-tech-list-wrapper mt-2 flex flex-row items-center justify-start">
+        <div className="project-category-tech-wrapper mt-4">
+          <span className="project-category-wrapper text-sm text-gray-500">
+            {'category: ' + category}
+          </span>
+          {/* <div className="project-tech-list-wrapper mt-2 flex flex-row items-center justify-start">
                 {tech?.map((techItem: string, techIndex: number) => (
                     <p className='text- font-normal mr-1 text-gray-500' key={techIndex}>{tech.length - 1 === techIndex ? techItem : (techItem + ", ")}</p>
                 ))}
