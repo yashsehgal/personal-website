@@ -96,7 +96,7 @@ const ExperienceItem: React.FunctionComponent<ExperienceItemProps> = ({
         ))}
         {experienceOrg?.name === 'AsyncAPI Initiative' && (
           <Callout>
-            Was a part of AsyncAPI's first ever Mentorship Program, held in year
+            Was a part of AsyncAPI&apos;s first ever Mentorship Program, held in year
             2022. Learn more{' '}
             <LinkText
               className="text-sm text-zinc-600"
