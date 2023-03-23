@@ -51,18 +51,22 @@ const ProjectItem: React.FunctionComponent<ProjectItemProps> = ({
   className,
   ...attr
 }) => {
-
-  const parseProjectStatus = ({ status="Maintained" } : { status: "Ongoing" | "Open Source" | "Maintained" }): string => {
-    switch(status) {
-      case "Ongoing":
-        return "🏗️ Ongoing"
-      case "Open Source":
-        return "✨ Open Source"
-      case "Maintained":
-        return "👍🏽 Maintained"
-      default: return ""
+  const parseProjectStatus = ({
+    status = 'Maintained',
+  }: {
+    status: 'Ongoing' | 'Open Source' | 'Maintained';
+  }): string => {
+    switch (status) {
+      case 'Ongoing':
+        return '🏗️ Ongoing';
+      case 'Open Source':
+        return '✨ Open Source';
+      case 'Maintained':
+        return '👍🏽 Maintained';
+      default:
+        return '';
     }
-  }
+  };
 
   return (
     <div
@@ -118,11 +122,13 @@ const ProjectItem: React.FunctionComponent<ProjectItemProps> = ({
         </span>
       </div>
       <div className="project-item-content-body-wrapper">
-        {status && <p className="project-status-content-wrapper my-2 text-xs rounded px-2 py-1 bg-zinc-200 w-fit text-zinc-500 hover:bg-zinc-800 hover:text-gray-100">
-          {parseProjectStatus({
-            status
-          })}
-        </p>}
+        {status && (
+          <p className="project-status-content-wrapper my-2 text-xs rounded px-2 py-1 bg-zinc-200 w-fit text-zinc-500 hover:bg-zinc-800 hover:text-gray-100">
+            {parseProjectStatus({
+              status,
+            })}
+          </p>
+        )}
         <ul className="project-description-list-content-wrapper mt-4 flex flex-col items-start justify-start gap-2 pl-3">
           {description?.map((descriptionItem, descriptionIndex) => (
             <li
