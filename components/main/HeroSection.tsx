@@ -17,7 +17,7 @@ const HeroSection: React.FunctionComponent = () => {
             priority
           />
           <div className="icon-content-wrapper animation-delay absolute px-2 py-1 bg-white shadow rounded-full text-sm left-14 bottom-0 cursor-default select-none max-sm:left-8 max-sm:text-xs max-sm:px-1 max-sm:py-0.5">
-            {"🌻"}
+            {'🌻'}
           </div>
         </div>
         <div>
@@ -28,7 +28,7 @@ const HeroSection: React.FunctionComponent = () => {
             <p>
               {'A half frontend software engineer, half designer from India.'}
             </p>
-            <p>{(new Date().getFullYear() - 2003) + ', he/him'}</p>
+            <p>{new Date().getFullYear() - 2003 + ', he/him'}</p>
           </div>
         </div>
       </Section>
