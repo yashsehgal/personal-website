@@ -1,3 +1,5 @@
+import ViewContainer from "@/components/layout/ViewContainer";
+import Header from "@/components/main/Header";
 import MetaHead from "@/components/seo/MetaHead"
 
 const BlogView: React.FunctionComponent = () => {
@@ -12,6 +14,11 @@ const BlogView: React.FunctionComponent = () => {
                     og: "https://ik.imagekit.io/eawrckp8wfi/portfolio-image-source/seo/blog?updatedAt=1679689643318"
                 }}
             />
+            <div className="blog-view-container" id="blog">
+                <ViewContainer>
+                    <Header />
+                </ViewContainer>
+            </div>
         </>
     )
 }
