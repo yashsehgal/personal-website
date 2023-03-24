@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Section from '../layout/Section';
 import Button from '../ui/Button';
+import LinkText from '../ui/LinkText';
 import Callout from './Callout';
 
 const HeroSection: React.FunctionComponent = () => {
@@ -54,9 +55,16 @@ const HeroSection: React.FunctionComponent = () => {
               'A collaborative team of engineers and designers, who are building great products. Interested in working together? Feel free to schedule a meet!'
             }
           </p>
-          <Button onClick={() => window.open('https://cal.com/yashsehgal')}>
-            {'Schedule a meet / cal.com'}
-          </Button>
+          <div className="flex flex-row items-center justify-start gap-4">
+            <Button onClick={() => window.open('https://cal.com/yashsehgal')}>
+              {'Schedule a meet / cal.com'}
+            </Button>
+            <LinkText
+              href={'/resume'}
+              className="text-zinc-600 font-medium text-sm">
+              {'Resume'}
+            </LinkText>
+          </div>
         </Callout>
       </Section>
     </main>
