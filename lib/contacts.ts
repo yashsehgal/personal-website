@@ -37,5 +37,12 @@ export const getContacts = function (): ContactItemProps[] {
         url: 'https://cal.com/yashsehgal',
       },
     },
+    {
+      title: 'Resume',
+      link: {
+        display: 'yashsehgal.com/resume',
+        url: '/resume',
+      },
+    },
   ];
 };
