@@ -9,7 +9,7 @@ const ResumeView: React.FunctionComponent = () => {
   return (
     <>
       <MetaHead
-        title={'Resume - Yash Sehgal'}
+        title={'Resume | Yash Sehgal'}
         description={
           'Checkout resume of Yash Sehgal. On Google Drive or Download as a PDF'
         }

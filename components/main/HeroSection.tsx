@@ -3,36 +3,12 @@ import Section from '../layout/Section';
 import Button from '../ui/Button';
 import LinkText from '../ui/LinkText';
 import Callout from './Callout';
+import Header from './Header';
 
 const HeroSection: React.FunctionComponent = () => {
   return (
     <main className="hero-section" id="hero">
-      <Section className="flex flex-row items-center justify-start gap-4 mt-12 max-sm:items-start max-md:items-start">
-        <div className="profile-icon-wrapper relative w-fit h-fit">
-          <Image
-            src={'/media/profile.jpg'}
-            alt="yash-profile"
-            width={'80'}
-            height={'80'}
-            className="rounded-full transition-all hover:grayscale"
-            priority
-          />
-          <div className="icon-content-wrapper animation-delay absolute px-2 py-1 bg-white shadow rounded-full text-sm left-14 bottom-0 cursor-default select-none max-sm:left-8 max-sm:text-xs max-sm:px-1 max-sm:py-0.5">
-            {'🌻'}
-          </div>
-        </div>
-        <div>
-          <h1 className="welcome-text leading-snug font-semibold text-2xl text-zinc-900">
-            {'👋 Hi, I am Yash'}
-          </h1>
-          <div className="leading-snug font-normal text-base text-zinc-500 mt-2">
-            <p>
-              {'A half frontend software engineer, half designer from India.'}
-            </p>
-            <p>{new Date().getFullYear() - 2003 + ', he/him'}</p>
-          </div>
-        </div>
-      </Section>
+      <Header />
       <Section>
         <h2 className="about-heading leading-snug font-medium text-base text-zinc-900">
           {'about me.'}

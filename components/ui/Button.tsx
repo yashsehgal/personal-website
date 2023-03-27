@@ -1,5 +1,4 @@
 import { cn } from '@/lib/utils';
-
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {}
 
 const Button: React.FunctionComponent<ButtonProps> = ({
