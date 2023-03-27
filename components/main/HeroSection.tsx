@@ -8,7 +8,6 @@ import Header from './Header';
 const HeroSection: React.FunctionComponent = () => {
   return (
     <main className="hero-section" id="hero">
-      <Header />
       <Section>
         <h2 className="about-heading leading-snug font-medium text-base text-zinc-900">
           {'about me.'}

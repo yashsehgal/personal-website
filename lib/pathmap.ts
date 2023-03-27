@@ -17,8 +17,8 @@ export const getPathMap = function (): PathMapProps[] {
     {
       pathType: 'internal',
       title: 'crafts',
-      link: '/craft',
-      isAvailable: false,
+      link: '/crafts',
+      isAvailable: true,
     },
   ];
 };

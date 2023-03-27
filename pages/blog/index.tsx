@@ -34,9 +34,8 @@ const BlogView: React.FunctionComponent = () => {
       />
       <div className="blog-view-container" id="blog">
         <ViewContainer className="grid grid-cols-1 items-start justify-start gap-12">
-          <Header />
           <Section
-            className="blogs-list-wrapper"
+            className="blogs-list-wrapper mt-8"
             id="blogs-list"
             aria-label="Blogs">
             <h2 className="about-heading leading-snug font-medium text-base text-zinc-900">
