@@ -33,7 +33,9 @@ const BlogView: React.FunctionComponent = () => {
         }}
       />
       <div className="blog-view-container" id="blog">
-        <ViewContainer className="grid grid-cols-1 items-start justify-start gap-12">
+        <ViewContainer>
+          <Header />
+        <Section className="grid grid-cols-1 items-start justify-start gap-12">
           <Section
             className="blogs-list-wrapper mt-8"
             id="blogs-list"
@@ -41,39 +43,39 @@ const BlogView: React.FunctionComponent = () => {
             <h2 className="about-heading leading-snug font-medium text-base text-zinc-900">
               {'blogs.'}
             </h2>
-            <ul className="blogs-list mt-8">
+            <ul className="blogs-list mt-8 grid grid-cols-1 gap-4">
               {getBlogs()?.map((blog: BlogProps, blogIndex: number) => {
                 if (blog?.link) {
                   return (
                     <li className="blog-item" key={blogIndex}>
-                      <Link
-                        href={blog?.link}
-                        target={
-                          blog?.linkType === 'external' ? '_blank' : '_self'
-                        }>
-                        <div className="blog-item__content-wrapper p-2 flex flex-row items-center justify-between transition-all border-b border-zinc-200 hover:text-orange-500">
-                          <h2 className="blog-title  max-sm:text-sm max-sm:truncate max-sm:w-[24ch]">
+                      <div className="blog-item__content-wrapper flex flex-col items-start justify-between gap-1">
+                        <Link
+                          href={blog?.link}
+                          target={
+                            blog?.linkType === 'external' ? '_blank' : '_self'
+                          }>
+                          <h2 className="blog-title text-lg hover:underline max-sm:text-sm max-sm:truncate max-sm:w-[24ch]">
                             {blog?.title}
                           </h2>
-                          <p className="blog-published-at text-sm font-normal text-zinc-500">
-                            {blog?.publishedAt?.date && (
-                              <span className="published-at__date">
-                                {blog?.publishedAt?.date}
-                              </span>
-                            )}
-                            {blog?.publishedAt?.month && (
-                              <span className="published-at__month">
-                                {blog?.publishedAt?.month}
-                              </span>
-                            )}
-                            {blog?.publishedAt?.year && (
-                              <span className="published-at__year">
-                                {blog?.publishedAt?.year}
-                              </span>
-                            )}
-                          </p>
-                        </div>
-                      </Link>
+                        </Link>
+                        <p className="blog-published-at text-sm font-normal text-zinc-500">
+                          {blog?.publishedAt?.date && (
+                            <span className="published-at__date">
+                              {blog?.publishedAt?.date}
+                            </span>
+                          )}
+                          {blog?.publishedAt?.month && (
+                            <span className="published-at__month">
+                              {blog?.publishedAt?.month}
+                            </span>
+                          )}
+                          {blog?.publishedAt?.year && (
+                            <span className="published-at__year">
+                              {blog?.publishedAt?.year}
+                            </span>
+                          )}
+                        </p>
+                      </div>
                     </li>
                   );
                 } else {
@@ -107,6 +109,7 @@ const BlogView: React.FunctionComponent = () => {
               })}
             </ul>
           </Section>
+        </Section>
         </ViewContainer>
       </div>
     </>

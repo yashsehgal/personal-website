@@ -1,6 +1,7 @@
 import ViewContainer from '@/components/layout/ViewContainer';
 import ContactSection from '@/components/main/ContactSection';
 import ExperienceSection from '@/components/main/ExperienceSection';
+import Header from '@/components/main/Header';
 import HeroSection from '@/components/main/HeroSection';
 import ProjectSection from '@/components/main/ProjectSection';
 import MetaHead from '@/components/seo/MetaHead';
