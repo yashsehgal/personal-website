@@ -22,9 +22,10 @@ const MDXHeader: React.FunctionComponent<
       setCopyAction(false);
     }, 3000);
   }, [copyAction]);
+  
   return (
     <div className={cn('mdx-header my-12', className)} {...attr}>
-      <ViewContainer className="">
+      <ViewContainer>
         <Link href={"/crafts"} className="text-zinc-500 flex flex-row items-center justify-start gap-1">
           <ArrowLeft className="w-4 h-4" />
           {"Back to crafts"}
