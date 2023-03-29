@@ -1,0 +1,123 @@
+import MDXHeader from '@/components/main/MDXHeader';
+import ViewContainer from '@/components/layout/ViewContainer';
+import Section from '@/components/layout/Section';
+import CraftedButton from '@/components/crafts/CraftedButton';
+
+<MDXHeader />
+
+<ViewContainer className="mdx-content">
+    <Section className="component-display-wrapper">
+        <div className="all-buttons-container grid grid-cols-1 gap-4">
+            <div className="large-size-buttons-layer-container flex flex-row items-center justify-center gap-8">
+                <CraftedButton size={"large"}>Primary</CraftedButton>
+                <CraftedButton variant={"solid"} size={"large"}>Solid</CraftedButton>
+                <CraftedButton variant={"outline"} size={"large"}>Outline</CraftedButton>
+            </div>
+            <div className="default-size-buttons-layer-container flex flex-row items-center justify-center gap-8">
+                <CraftedButton>Primary</CraftedButton>
+                <CraftedButton variant={"solid"}>Solid</CraftedButton>
+                <CraftedButton variant={"outline"}>Outline</CraftedButton>
+            </div>
+            <div className="small-size-buttons-layer-container flex flex-row items-center justify-center gap-8">
+                <CraftedButton size={"small"}>Primary</CraftedButton>
+                <CraftedButton variant={"solid"} size={"small"}>Solid</CraftedButton>
+                <CraftedButton variant={"outline"} size={"small"}>Outline</CraftedButton>
+            </div>
+        </div>
+    </Section>
+    <Section>
+        # Get started with the type and interface
+
+        To implement this clean looking button component, I have used Typescript, React, TailwindCSS and creativity.
+        To make sure, I have used NextJS to build this project, so the file structuing has been set accordind to that.
+
+        Firsly, create a file `components/Button.tsx`.
+
+        After that, we need to create an interface for our Button Component Props,
+
+        ```tsx
+        type ButtonSizeType = 'small' | 'medium' | 'large';
+        type ButtonVariantType = 'primary' | 'solid' | 'outline';
+
+        interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+            size?: ButtonSizeType;
+            variant?: ButtonVariantType;
+            fullWidth?: boolean;
+        }
+        ```
+    </Section>
+    <Section>
+        # Adding utility `cn()` method
+
+        Create a file `lib/utils.ts` and install packages: `clsx` and `tailwind-merge`
+
+        ## Installing Dependencies
+
+        ```cmd
+        npm install clsx tailwind-merge --save-dev
+        ```
+
+        Then add the code below the the `lib/utils` file,
+
+        ```tsx
+        import { ClassValue, clsx } from 'clsx';
+        import { twMerge } from 'tailwind-merge';
+
+        export function cn(...inputs: ClassValue[]) {
+            return twMerge(clsx(inputs));
+        }
+        ```
+
+    </Section>
+    <Section>
+        # Adding TailwindCSS Classes for Styling
+
+        ```tsx
+        const ButtonSizeClass = {
+            small: 'px-3 py-1.5 rounded text-sm font-normal',
+            medium: 'px-4 py-2 rounded-md text-base font-normal',
+            large: 'px-6 py-3 rounded-lg text-lg font-normal',
+        };
+
+        const ButtonVariantClass = {
+            primary:
+                'bg-orange-500 text-white border-transparent hover:brightness-105 active:brightness-110',
+            solid:
+                'bg-gray-900 text-gray-200 border-transparent hover:brightness-105 active:brightness-110',
+            outline: 'bg-white text-gray-800 border border-gray-300 hover:bg-gray-50',
+        };
+
+        const ButtonFullWidthClass = 'w-full';
+        ```
+    </Section>
+    <Section>
+        # Create Function Component for Button
+
+        ```tsx
+        import { cn } from '@/lib/utils';
+
+        const Button: React.FunctionComponent<ButtonProps> = ({
+            size = 'medium',
+            variant = 'primary',
+            fullWidth = false,
+            className,
+            ...attr
+        }) => {
+            const buttonStyleClass = cn(
+                'transition-all flex flex-row items-center justify-center gap-1 border shadow-lg active:shadow',
+                ButtonVariantClass[variant],
+                ButtonSizeClass[size],
+                fullWidth && ButtonFullWidthClass,
+            );
+            return (
+                <button className={cn(buttonStyleClass, className)} {...attr}>
+                    {attr?.children}
+                </button>
+            );
+        };
+
+        export default Button;
+        ```
+    </Section>
+
+</ViewContainer>
