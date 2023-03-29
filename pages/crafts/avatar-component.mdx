@@ -1,0 +1,37 @@
+import MDXHeader from '@/components/main/MDXHeader';
+import ViewContainer from '@/components/layout/ViewContainer';
+import Section from '@/components/layout/Section';
+import {
+  CraftedAvatar,
+  CraftedAvatarAltText,
+  CraftedAvatarImage,
+} from '@/components/crafts/CraftedAvatar';
+
+<MDXHeader />
+
+<ViewContainer className="mdx-content">
+  <Section className="component-display-wrapper">
+    <div className="flex flex-row items-center justify-center gap-4">
+      <CraftedAvatar
+        imgSrc={'https://github.com/yashsehgal.png'}
+        fallback={'YS'}
+        size={'small'}
+      />
+      <CraftedAvatar
+        imgSrc={'https://github.com/yashsehgal.png'}
+        fallback={'YS'}
+        size={'medium'}
+      />
+      <CraftedAvatar
+        imgSrc={'https://github.com/yashsehgal.png'}
+        fallback={'YS'}
+        size={'large'}
+      />
+      <CraftedAvatar
+        imgSrc={'https://github.com/yashsehgal.png'}
+        fallback={'YS'}
+        size={'extraLarge'}
+      />
+    </div>
+  </Section>
+</ViewContainer>
