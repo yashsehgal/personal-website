@@ -11,27 +11,47 @@ import {
 
 <ViewContainer className="mdx-content">
   <Section className="component-display-wrapper">
-    <div className="flex flex-row items-center justify-center gap-4">
-      <CraftedAvatar
-        imgSrc={'https://github.com/yashsehgal.png'}
-        fallback={'YS'}
-        size={'small'}
-      />
-      <CraftedAvatar
-        imgSrc={'https://github.com/yashsehgal.png'}
-        fallback={'YS'}
-        size={'medium'}
-      />
-      <CraftedAvatar
-        imgSrc={'https://github.com/yashsehgal.png'}
-        fallback={'YS'}
-        size={'large'}
-      />
-      <CraftedAvatar
-        imgSrc={'https://github.com/yashsehgal.png'}
-        fallback={'YS'}
-        size={'extraLarge'}
-      />
+    <div className="grid grid-cols-1 justify-center align-items gap-4">
+      <div className="flex flex-row items-center justify-center gap-4">
+        <CraftedAvatar
+          imgSrc={'https://github.com/yashsehgal.png'}
+          fallback={'YS'}
+          size={'small'}
+        />
+        <CraftedAvatar
+          imgSrc={'https://github.com/yashsehgal.png'}
+          fallback={'YS'}
+          size={'medium'}
+        />
+        <CraftedAvatar
+          imgSrc={'https://github.com/yashsehgal.png'}
+          fallback={'YS'}
+          size={'large'}
+        />
+        <CraftedAvatar
+          imgSrc={'https://github.com/yashsehgal.png'}
+          fallback={'YS'}
+          size={'extraLarge'}
+        />
+      </div>
+      <div className="flex flex-row items-center justify-center gap-4">
+        <CraftedAvatar
+          fallback={'YS'}
+          size={'small'}
+        />
+        <CraftedAvatar
+          fallback={'YS'}
+          size={'medium'}
+        />
+        <CraftedAvatar
+          fallback={'YS'}
+          size={'large'}
+        />
+        <CraftedAvatar
+          fallback={'YS'}
+          size={'extraLarge'}
+        />
+      </div>
     </div>
   </Section>
   <Section>

@@ -10,10 +10,10 @@ interface CraftedAvatarProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 const CraftedAvatarSizeClass = {
-  small: 'w-[24px] h-[24px]',
+  small: 'w-[24px] h-[24px] text-xs',
   medium: 'w-[32px] h-[32px]',
   large: 'w-[42px] h-[42px]',
-  extraLarge: 'w-[56px] h-[56px]',
+  extraLarge: 'w-[56px] h-[56px] text-xl',
 };
 
 const CraftedAvatar: React.FunctionComponent<CraftedAvatarProps> = ({
