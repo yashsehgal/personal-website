@@ -21,7 +21,7 @@ export const getCrafts = function (): CraftProps[] {
       craftDescription:
         'A basic way to create an action for implementing copy to clipboard action',
       linkType: 'internal',
-      craftSlug: 'copy-to-clipboard-action'
+      craftSlug: 'copy-to-clipboard-action',
     },
   ];
 };
