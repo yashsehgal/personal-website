@@ -53,7 +53,7 @@ const MDXHeader: React.FunctionComponent<MDXHeaderProps> = ({
               <h1 className="craft-title leading-snug text-5xl max-lg:text-3xl max-md:text-2xl font-semibold">
                 {craftHeaderData?.header}
               </h1>
-              <p className="craft-description text-zinc-500 text-lg max-lg:text-base max-md:text-sm">
+              <p className="craft-description truncate  text-zinc-500 text-lg max-lg:text-base max-md:text-sm">
                 {craftHeaderData?.description}
               </p>
               <p className="craft-uploaded-at flex flex-row items-center justify-start gap-1 text-zinc-500 text-base max-lg:text-sm max-md:text-xs">
@@ -84,7 +84,7 @@ const MDXHeader: React.FunctionComponent<MDXHeaderProps> = ({
                   });
                   setCopyAction(true);
                 }}>
-                {!copyAction ? 'Share Craft' : 'Link Copied ✅'}
+                {!copyAction ? 'Share Craft' : 'Copied ✅'}
               </Button>
             </div>
           </Section>

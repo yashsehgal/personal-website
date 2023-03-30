@@ -5,9 +5,23 @@ export const getCrafts = function (): CraftProps[] {
     {
       craftTitle: 'Button Component',
       craftDescription:
-        'Beautiful Button Component with Typescript + React + TailwindCSS',
+        'Beautiful Button Component with Typescript, React and TailwindCSS',
       linkType: 'internal',
       craftSlug: 'button-component',
+    },
+    {
+      craftTitle: 'Avatar Component',
+      craftDescription:
+        'A customizable avatar component, built with Typescript, React and TailwindCSS',
+      linkType: 'internal',
+      craftSlug: 'avatar-component',
+    },
+    {
+      craftTitle: 'Copy to Clipboard Action',
+      craftDescription:
+        'A basic way to create an action for implementing copy to clipboard action',
+      linkType: 'internal',
+      craftSlug: 'copy-to-clipboard-action',
     },
   ];
 };
