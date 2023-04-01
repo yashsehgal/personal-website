@@ -21,6 +21,16 @@ const CraftedCTCAction: React.FunctionComponent = () => {
     }, 2500);
   }, [contentCopied]);
 
+  const playCaptureContentAudio = function () {
+    const captureContentAudio = new Audio("/media/audio/capture-sound.mp3");
+    captureContentAudio.play();
+  };
+  
+  const playClearContentAudio = function () {
+    const clearContentAudio = new Audio("/media/audio/clear-data-sound.mp3");
+    clearContentAudio.play();
+  };
+
   return (
     <div className="copy-to-clipboard-action-component grid grid-cols-1 w-[340px] gap-4 max-md:w-[240px]">
       <div className="copy-paste-inputs-layer-container grid grid-cols-1 gap-2">
@@ -50,6 +60,7 @@ const CraftedCTCAction: React.FunctionComponent = () => {
           onClick={() => {
             setPastedContent('');
             setCopyableContent('');
+            playClearContentAudio();
           }}>
           {'Clear'}
         </CraftedButton>
@@ -57,6 +68,7 @@ const CraftedCTCAction: React.FunctionComponent = () => {
           onClick={() => {
             copyToClipboard({ content: copyableContent });
             setContentCopied(true);
+            playCaptureContentAudio();
           }}>
           {!contentCopied ? 'Copy Text' : 'Copied'}
         </CraftedButton>
