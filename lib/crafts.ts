@@ -23,6 +23,12 @@ export const getCrafts = function (): CraftProps[] {
       linkType: 'internal',
       craftSlug: 'copy-to-clipboard-action',
     },
+    {
+      craftTitle: 'Accordion Component',
+      craftDescription: 'Simple accordion component',
+      linkType: 'internal',
+      craftSlug: 'accordion-component',
+    },
   ];
 };
 
