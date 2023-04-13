@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Importing crafts CSS Modules */
+@import url('./crafts/CraftedDropdownStyle.css');
+
 html,
 body {
   @apply bg-zinc-100 mb-12;
@@ -48,4 +51,13 @@ pre > code {
 
 .component-display-wrapper {
   @apply flex flex-row items-center justify-center border-2 border-dashed border-zinc-200 p-12 rounded-md;
+}
+
+.ios-time-slider-component > * {
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scrollbar-width: none; /* Firefox */
+}
+
+.ios-time-slider-component > *::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
 }
