@@ -1,10 +1,12 @@
 import { cn } from '@/lib/utils';
-import { createContext, useState } from 'react';
-
-const CraftedDropdownContext = createContext({
-  hasClosableOverlay: false,
-  isMenuClosed: true,
-});
+import {
+  Children,
+  ReactElement,
+  useCallback,
+  useEffect,
+  useState,
+} from 'react';
+import { CraftedDropdownContext } from './stores/CraftedDropdownContext';
 
 const CraftedDropdown: React.FunctionComponent<
   React.HTMLAttributes<HTMLDivElement>
@@ -12,16 +14,46 @@ const CraftedDropdown: React.FunctionComponent<
   const [hasClosableOverlay, setHasClosableOverlay] = useState(false);
   const [isMenuClosed, setIsMenuClosed] = useState(true);
 
+  let defaultOptionConfig = {
+    defaultSelectionOption: false,
+    defaultTotalOptions: 1,
+  };
+
   const playClickAudio = function () {
     const checkAudio = new Audio('/media/audio/check-sound.mp3');
     checkAudio.play();
   };
+
+  const escapeAction = useCallback((event: any) => {
+    if (event.key === 'Escape') {
+      setHasClosableOverlay(false);
+      setIsMenuClosed(true);
+    }
+  }, []);
+
+  useEffect(() => {
+    document.addEventListener('keydown', escapeAction, false);
+    return () => {
+      document.removeEventListener('keydown', escapeAction, false);
+    };
+  }, [escapeAction]);
+
+  const selectDropdownAction = useCallback((event: any) => {
+    // arrow-up action handler
+    if (event.key === 'ArrowUp') {
+      event.preventDefault();
+    } else if (event.key === 'ArrowDown') {
+      event.preventDefault();
+    }
+  }, []);
 
   return (
     <CraftedDropdownContext.Provider
       value={{
         hasClosableOverlay: hasClosableOverlay,
         isMenuClosed: isMenuClosed,
+        selectedOption: defaultOptionConfig?.defaultSelectionOption,
+        totalOptions: defaultOptionConfig?.defaultTotalOptions,
       }}>
       <div
         className={cn(
@@ -69,17 +101,26 @@ const CraftedDropdownMenu: React.FunctionComponent<
 > = ({ className, ...attr }) => {
   return (
     <CraftedDropdownContext.Consumer>
-      {(context) => (
-        <ul
-          className={cn(
-            'dropdown-menu-list',
-            !context?.isMenuClosed ? 'visible' : 'hidden',
-            className,
-          )}
-          {...attr}>
-          {attr?.children}
-        </ul>
-      )}
+      {({ isMenuClosed, totalOptions }) => {
+        const currentOptionNodes = Children.toArray(attr?.children).filter(
+          // @ts-ignore
+          (child) => child && child.type.name === 'CraftedDropdownMenuOption',
+        );
+        console.log('nodes found', currentOptionNodes);
+        totalOptions = currentOptionNodes.length;
+        console.log(totalOptions);
+        return (
+          <ul
+            className={cn(
+              'dropdown-menu-list',
+              !isMenuClosed ? 'visible' : 'hidden',
+              className,
+            )}
+            {...attr}>
+            {attr?.children}
+          </ul>
+        );
+      }}
     </CraftedDropdownContext.Consumer>
   );
 };
@@ -95,7 +136,9 @@ const CraftedDropdownMenuOption: React.FunctionComponent<
   return (
     <li
       className={cn(
-        asChild ? 'dropdown-menu-option-asChild' : 'dropdown-menu-option',
+        asChild
+          ? 'dropdown-menu-option-item dropdown-menu-option-asChild'
+          : 'dropdown-menu-option',
         className,
       )}
       {...attr}>
