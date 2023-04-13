@@ -1,0 +1,38 @@
+details > summary {
+  list-style: none;
+}
+
+details > summary::marker, /* Latest Chrome, Edge, Firefox */ 
+  details > summary::-webkit-details-marker /* Safari */ {
+  display: none;
+}
+
+.dropdown-content-container {
+  position: relative;
+  z-index: 1;
+}
+
+.dropdown-summary-button {
+  @apply rounded px-4 py-2 bg-orange-500 shadow text-white w-full;
+}
+
+.dropdown-menu-list {
+  @apply rounded p-2 bg-white mt-2 border border-zinc-200 shadow-2xl shadow-zinc-200;
+}
+
+.dropdown-menu-option {
+  @apply rounded px-2 py-1 bg-transparent hover:bg-orange-100 cursor-pointer;
+}
+
+.dropdown-menu-option-asChild {
+  @apply bg-transparent py-2;
+}
+
+.closable-action-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}

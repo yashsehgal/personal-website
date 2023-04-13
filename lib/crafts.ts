@@ -3,6 +3,18 @@ import { CraftProps } from '@/pages/crafts';
 export const getCrafts = function (): CraftProps[] {
   return [
     {
+      craftTitle: 'Dropdown Component',
+      craftDescription: 'An accessible dropdown component.',
+      linkType: 'internal',
+      craftSlug: 'dropdown-component',
+    },
+    {
+      craftTitle: 'iOS type Time Slider',
+      craftDescription: 'A simple and beautiful iOS Time Slider',
+      linkType: 'internal',
+      craftSlug: 'ios-time-slider',
+    },
+    {
       craftTitle: 'Button Component',
       craftDescription:
         'Beautiful Button Component with Typescript, React and TailwindCSS',

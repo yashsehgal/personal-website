@@ -22,12 +22,12 @@ const CraftedCTCAction: React.FunctionComponent = () => {
   }, [contentCopied]);
 
   const playCaptureContentAudio = function () {
-    const captureContentAudio = new Audio("/media/audio/capture-sound.mp3");
+    const captureContentAudio = new Audio('/media/audio/capture-sound.mp3');
     captureContentAudio.play();
   };
-  
+
   const playClearContentAudio = function () {
-    const clearContentAudio = new Audio("/media/audio/clear-data-sound.mp3");
+    const clearContentAudio = new Audio('/media/audio/clear-data-sound.mp3');
     clearContentAudio.play();
   };
 

@@ -1,0 +1,38 @@
+import MDXHeader from '@/components/main/MDXHeader';
+import ViewContainer from '@/components/layout/ViewContainer';
+import Section from '@/components/layout/Section';
+import {
+  CraftedDropdown,
+  CraftedDropdownTrigger,
+  CraftedDropdownMenu,
+  CraftedDropdownMenuOption,
+} from '@/components/crafts/CraftedDropdown';
+import Button from '@/components/crafts/CraftedButton';
+
+<MDXHeader />
+
+<ViewContainer className="mdx-content">
+  <Section className="component-display-wrapper flex w-full">
+    <div className="flex flex-row items-start justify-between gap-12">
+      <CraftedDropdown>
+        <CraftedDropdownTrigger>Products</CraftedDropdownTrigger>
+        <CraftedDropdownMenu>
+          <CraftedDropdownMenuOption>{'Codespaces'}</CraftedDropdownMenuOption>
+          <CraftedDropdownMenuOption>{'Actions'}</CraftedDropdownMenuOption>
+          <CraftedDropdownMenuOption>{'Mobile'}</CraftedDropdownMenuOption>
+          <CraftedDropdownMenuOption asChild>
+            <Button variant={'outline'}>Check Website</Button>
+          </CraftedDropdownMenuOption>
+        </CraftedDropdownMenu>
+      </CraftedDropdown>
+      <CraftedDropdown>
+        <CraftedDropdownTrigger>Products</CraftedDropdownTrigger>
+        <CraftedDropdownMenu>
+          <CraftedDropdownMenuOption>{'Codespaces'}</CraftedDropdownMenuOption>
+          <CraftedDropdownMenuOption>{'Actions'}</CraftedDropdownMenuOption>
+          <CraftedDropdownMenuOption>{'Mobile'}</CraftedDropdownMenuOption>
+        </CraftedDropdownMenu>
+      </CraftedDropdown>
+    </div>
+  </Section>
+</ViewContainer>
