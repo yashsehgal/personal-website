@@ -3,6 +3,12 @@ import { CraftProps } from '@/pages/crafts';
 export const getCrafts = function (): CraftProps[] {
   return [
     {
+      craftTitle: 'Custom Command Palette',
+      craftDescription: 'A custom command palette using Radix UI Primitives',
+      linkType: 'internal',
+      craftSlug: 'command-palette-using-radix-ui',
+    },
+    {
       craftTitle: 'Dropdown Component',
       craftDescription: 'An accessible dropdown component.',
       linkType: 'internal',
