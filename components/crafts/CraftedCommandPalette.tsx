@@ -6,7 +6,7 @@ import { CheckIcon, Search } from 'lucide-react';
 import StaticCommandPaletteContent from '@/public/static/command-palette-content.json';
 
 const CraftedCommandPalette: React.FunctionComponent = () => {
-  const [isOpen, setIsOpen] = React.useState(true);
+  const [isOpen, setIsOpen] = React.useState(false);
   const [query, setQuery] = React.useState('');
 
   const openCommandPalette = function () {
