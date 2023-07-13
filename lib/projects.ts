@@ -31,27 +31,31 @@ export const getProjects = function (): ProjectItemProps[] {
       status: 'Maintained',
     },
     {
-      projectTitle: 'Aria Design System',
+      projectTitle: "GitHub inspired landing page",
       projectData: {
-        githubURL: 'https://github.com/yashsehgal/aria',
+        liveURL: "https://yashsehgal.github.io/github-landing/",
+        githubURL: "https://github.com/yashsehgal/github-landing",
         relatedLinks: [
           {
-            label: 'Figma',
-            link: 'https://www.figma.com/file/VrU8n3Oiu7gLHhN3acbQJL/Aria-(Design-System)?node-id=0%3A1&t=BxMDKgeQrfiKSF8p-1',
-          },
-        ],
+            label: "Figma",
+            link: "https://www.figma.com/file/iuLdt124KSHb20VQ7Z8kPM/GitHub-Assignment-(Landing-Page-Design)?type=design&mode=design&t=37ms2k7mq2WctrCh-0"
+          }
+        ]
       },
+      description: [
+        'Re-created github.com/home website using React and deployed it using GitHub Pages',
+        'Before implementing, I have designed the website sections in Figma'
+      ],
       tech: [
         'React',
-        'Typescript',
-        'Figma',
         'TailwindCSS',
-        'HTML',
-        'Storybook',
+        'CSS',
+        'GitHub Pages',
+        'Figma'
       ],
-      category: ['design-system'],
-      status: 'Ongoing',
-    },
+      category: ['design'],
+      status: 'Maintained'
+    }
   ];
 
   return projects.reverse();

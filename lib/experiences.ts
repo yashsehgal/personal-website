@@ -13,7 +13,10 @@ export const getExperiences = function (): ExperienceItemProps[] {
         link: 'https://joinclamp.com',
         websiteDisplayName: 'joinclamp.com',
       },
-      experienceStatus: 'current',
+      experienceStatus: {
+        startAt: 'Jan, 2023',
+        endAt: 'April, 2023'
+      },
     },
     {
       experienceTitle: 'Product Design Contributor',
