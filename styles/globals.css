@@ -16,6 +16,12 @@ body {
   @apply w-[900px] max-2xl:w-[800px] max-xl:w-[720px] max-lg:w-[640px] max-md:w-[560px] max-sm:w-[340px];
 }
 
+.subscribe-to-newsletter-view-container
+  > .view-container {
+    @apply box-border mx-auto;
+    @apply w-[900px] max-2xl:w-[900px] max-xl:w-[860px] max-lg:w-[640px] max-md:w-[540px] max-sm:w-[360px];
+  }
+
 .mdx-content > h1,
 .mdx-content > * > h1 {
   @apply text-2xl my-2 max-md:text-xl max-sm:text-lg;
@@ -60,4 +66,9 @@ pre > code {
 
 .ios-time-slider-component > *::-webkit-scrollbar {
   display: none; /* Safari and Chrome */
+}
+
+iframe > .subscribe-btn {
+  background-color: rgb(249 115 22);
+  color: white;
 }

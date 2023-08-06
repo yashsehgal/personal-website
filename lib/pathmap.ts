@@ -20,5 +20,11 @@ export const getPathMap = function (): PathMapProps[] {
       link: '/crafts',
       isAvailable: true,
     },
+    {
+      pathType: 'internal',
+      title: 'newsletter 🌱',
+      link: '/subscribe',
+      isAvailable: true
+    }
   ];
 };
