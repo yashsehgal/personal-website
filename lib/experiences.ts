@@ -15,7 +15,7 @@ export const getExperiences = function (): ExperienceItemProps[] {
       },
       experienceStatus: {
         startAt: 'Jan, 2023',
-        endAt: 'April, 2023'
+        endAt: 'April, 2023',
       },
     },
     {

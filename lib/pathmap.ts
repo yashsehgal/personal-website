@@ -24,7 +24,7 @@ export const getPathMap = function (): PathMapProps[] {
       pathType: 'internal',
       title: 'newsletter 🌱',
       link: '/subscribe',
-      isAvailable: true
-    }
+      isAvailable: true,
+    },
   ];
 };
