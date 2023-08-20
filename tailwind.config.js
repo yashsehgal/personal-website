@@ -12,7 +12,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        "inter": ["Inter Tight", "sans-serif"]
+        inter: ['Inter Tight', 'sans-serif'],
       },
     },
   },

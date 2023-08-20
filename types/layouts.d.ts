@@ -1,5 +1,4 @@
-declare interface ViewContainerType
-  extends React.HTMLAttributes<HTMLDivElement> {}
+declare interface ViewContainerType extends React.HTMLAttributes<HTMLDivElement> {}
 
 declare interface WrapperType extends React.HTMLAttributes<HTMLDivElement> {}
 
