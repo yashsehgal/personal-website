@@ -4,11 +4,11 @@
 
 html,
 body {
-  @apply bg-neutral-50 mb-12 font-inter;
+  @apply bg-neutral-50 font-inter;
 }
 
 .view-container {
-  @apply box-border mx-auto my-12;
+  @apply box-border mx-auto mt-24 mb-16 max-lg:mt-20 max-md:mt-24;
   @apply w-[900px] max-2xl:w-[800px] max-xl:w-[720px] max-lg:w-[640px] max-md:w-[560px] max-sm:w-[340px];
 }
 

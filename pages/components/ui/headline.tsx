@@ -11,8 +11,8 @@ const Headline: React.FunctionComponent<HeadlineType> = ({
     base: React.HTMLAttributes<HTMLHeadingElement> | any;
     large: React.HTMLAttributes<HTMLHeadingElement> | any;
     'x-large':
-      | React.HTMLAttributes<HTMLHeadingElement>
-      | any;
+    | React.HTMLAttributes<HTMLHeadingElement>
+    | any;
   } = {
     base: (
       <h2
@@ -28,7 +28,7 @@ const Headline: React.FunctionComponent<HeadlineType> = ({
     large: (
       <h1
         className={cn(
-          'headling-large text-2xl font-bold leading-snug',
+          'headling-large text-2xl font-semibold leading-snug',
           className,
         )}
         {...props}
@@ -39,7 +39,7 @@ const Headline: React.FunctionComponent<HeadlineType> = ({
     'x-large': (
       <h1
         className={cn(
-          'heading-x-large text-4xl font-bold leading-snug',
+          'heading-x-large text-4xl font-semibold leading-snug',
           className,
         )}
         {...props}
