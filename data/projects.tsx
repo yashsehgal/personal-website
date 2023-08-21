@@ -29,7 +29,7 @@ export const ProjectArchiveData: Array<ProjectArchiveType> = [
       <>
         Creating a short hand feature just like{' '}
         <Anchor href='https://peerlist.io' className='font-medium'>
-          peerlist.io 💚
+          peerlist.io
         </Anchor>
       </>
     ),
