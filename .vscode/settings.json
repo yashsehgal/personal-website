@@ -1,0 +1,6 @@
+{
+  "vscode-pets.theme": "forest",
+  "editor.formatOnSave": true,
+  "editor.formatOnType": true,
+  "editor.fontFamily": "'fira code'"
+}
