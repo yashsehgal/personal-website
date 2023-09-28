@@ -1,5 +1,6 @@
 import Section from '@/components/layout/Section';
 import ViewContainer from '@/components/layout/ViewContainer';
+import Callout from '@/components/main/Callout';
 import Header from '@/components/main/Header';
 import MetaHead from '@/components/seo/MetaHead';
 import Button from '@/components/ui/Button';
@@ -37,6 +38,17 @@ const Crafts: React.FunctionComponent = () => {
             className="crafts-list-wrapper mt-8"
             id="crafts-list"
             aria-label="Crafts">
+            <Callout className="my-6">
+              <div>
+                <p>Crafts have been shifted to another website.</p>
+                <Button
+                  className="mt-3"
+                  onClick={() => window.open('https://crafts.yashsehgal.com')}
+                >
+                  Visit crafts.yashsehgal.com
+                </Button>
+              </div>
+            </Callout>
             <h2 className="about-heading leading-snug font-medium text-base text-zinc-900">
               {'crafts.'}
             </h2>

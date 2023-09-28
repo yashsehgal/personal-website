@@ -18,5 +18,13 @@ export const getBlogs = function (): BlogProps[] {
         year: 2021,
       },
     },
+    {
+      title: 'Message for Open Source Contributors',
+      linkType: 'external',
+      link: 'https://yashsehgal.notion.site/Open-Source-Roadmap-9367431a742d41fba43907bb17ef3ea2?pvs=4',
+      publishedAt: {
+        year: 2021,
+      },
+    },
   ];
 };
