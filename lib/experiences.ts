@@ -3,6 +3,23 @@ import { ExperienceItemProps } from '@/components/main/ExperienceSection';
 export const getExperiences = function (): ExperienceItemProps[] {
   return [
     {
+      experienceTitle: 'Software Engineering Intern',
+      experienceDescription: [
+        'Built a QR generator app for GiHub Internal Team usage. Used React for frontend & fastify for backend and APIs. Created the UI for the app on Figma using GitHub’s Primer design system. Integrated the QR generation with another internal URL shortener service for standardized QR generation. i.e. gh.io',
+        'Worked on many UI designs and websites related to GitHub events & conferences with the DevRel engineering team.',
+        'Worked with GitHub-actions & workflows for automating preview deployments, slack-integrations & project management.',
+      ],
+      experienceOrg: {
+        name: 'GitHub',
+        link: 'https://github.com',
+        websiteDisplayName: 'github.com',
+      },
+      experienceStatus: {
+        startAt: 'May, 2023',
+        endAt: 'Sept, 2023',
+      },
+    },
+    {
       experienceTitle: 'frontend software engineer',
       experienceDescription: [
         'Building a complete platform for buying/purchasing digital asset indexes and managing your crypto portfolio.',
