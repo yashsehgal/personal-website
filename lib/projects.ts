@@ -50,6 +50,25 @@ export const getProjects = function (): ProjectItemProps[] {
       category: ['design'],
       status: 'Maintained',
     },
+    {
+      projectTitle: 'BeAlright',
+      projectData: {
+        liveURL: 'https://bealright.in',
+        relatedLinks: [
+          {
+            label: 'Twitter Post',
+            link: 'https://twitter.com/yashsehgaldev/status/1700511788826234913',
+          },
+        ],
+      },
+      description: [
+        'The app has to make its users feel connected, synced, and cared, without any distractions by checking chat notifications. All by iOS & Android Widgets 🍕',
+        "This is design-first project, right now I am working on it's design system",
+      ],
+      tech: ['Figma', 'React', 'TailwindCSS'],
+      category: ['design', 'design-system', 'ui/ux'],
+      status: 'Ongoing',
+    },
   ];
 
   return projects.reverse();
