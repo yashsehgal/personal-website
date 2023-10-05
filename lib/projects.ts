@@ -69,6 +69,24 @@ export const getProjects = function (): ProjectItemProps[] {
       category: ['design', 'design-system', 'ui/ux'],
       status: 'Ongoing',
     },
+    {
+      projectTitle: 'PrepMeUp',
+      projectData: {
+        liveURL: 'https://prepmeup.vercel.app/',
+        relatedLinks: [
+          {
+            label: 'GitHub',
+            link: 'https://github.com/yashsehgal/prepmeup',
+          },
+        ],
+      },
+      description: [
+        'PrepMeUp is an AI-powered interview preparation platform. Undergrad minor project 🍕',
+      ],
+      tech: ['NextJS', 'TailwindCSS', 'Typescript', 'OpenAI', 'GPT Models'],
+      category: ['ui/ux', 'full-stack'],
+      status: 'Ongoing',
+    },
   ];
 
   return projects.reverse();
