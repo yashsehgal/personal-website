@@ -38,7 +38,7 @@ const CraftedDropdown: React.FunctionComponent<
     };
   }, [escapeAction]);
 
-  const selectDropdownAction = useCallback((event: any) => {
+  const selectDropdownAction = useCallback((event: React.KeyboardEvent<HTMLInputElement>) => {
     // arrow-up action handler
     if (event.key === 'ArrowUp') {
       event.preventDefault();
