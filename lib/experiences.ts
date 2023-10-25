@@ -2,18 +2,18 @@ import { ExperienceItemProps } from '@/components/main/ExperienceSection';
 
 export const getExperiences = function (): ExperienceItemProps[] {
   return [
-    {
-      experienceTitle: 'Frontend Engineering Intern',
-      experienceDescription: [],
-      experienceOrg: {
-        name: 'Devfolio',
-        link: 'https://devfolio.co',
-        websiteDisplayName: 'devfolio.co',
-      },
-      experienceStatus: {
-        startAt: 'Oct, 2023',
-      },
-    },
+    // {
+    //   experienceTitle: 'Frontend Engineering Intern',
+    //   experienceDescription: [],
+    //   experienceOrg: {
+    //     name: 'Devfolio',
+    //     link: 'https://devfolio.co',
+    //     websiteDisplayName: 'devfolio.co',
+    //   },
+    //   experienceStatus: {
+    //     startAt: 'Oct, 2023',
+    //   },
+    // },
     {
       experienceTitle: 'Software Engineering Intern',
       experienceDescription: [
