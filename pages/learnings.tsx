@@ -24,9 +24,9 @@ const LearningsView: React.FunctionComponent = () => {
         title="Learnings | Yash Sehgal"
         description="My learnings while doing engineering and design in form of video logs"
         embedSource={{
-          twitter: "",
-          linkedin: "",
-          og: ""
+          twitter: "https://ik.imagekit.io/eawrckp8wfi/portfolio-image-source/seo/videos%20and%20learnings_Hkwu0mKIL.png?updatedAt=1700434417751&tr=w-1200%2Ch-675%2Cfo-auto",
+          linkedin: "https://ik.imagekit.io/eawrckp8wfi/portfolio-image-source/seo/videos%20and%20learnings_Hkwu0mKIL.png?updatedAt=1700434417751&tr=w-1200%2Ch-628%2Cfo-auto",
+          og: "https://ik.imagekit.io/eawrckp8wfi/portfolio-image-source/seo/videos%20and%20learnings_Hkwu0mKIL.png?updatedAt=1700434417751"
         }}
       />
       <div className="learnings-view-container">
