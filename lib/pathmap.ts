@@ -26,5 +26,11 @@ export const getPathMap = function (): PathMapProps[] {
       link: '/subscribe',
       isAvailable: true,
     },
+    {
+      pathType: 'internal',
+      title: 'learnings',
+      link: '/learnings',
+      isAvailable: true,
+    },
   ];
 };
