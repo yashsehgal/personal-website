@@ -1,6 +1,6 @@
 import { cn } from '@/lib/utils';
 
-interface TagProps extends React.HTMLAttributes<HTMLSpanElement> { }
+interface TagProps extends React.HTMLAttributes<HTMLSpanElement> {}
 
 const Tag: React.FunctionComponent<TagProps> = ({ className, ...attr }) => {
   return (

@@ -38,14 +38,17 @@ const CraftedDropdown: React.FunctionComponent<
     };
   }, [escapeAction]);
 
-  const selectDropdownAction = useCallback((event: React.KeyboardEvent<HTMLInputElement>) => {
-    // arrow-up action handler
-    if (event.key === 'ArrowUp') {
-      event.preventDefault();
-    } else if (event.key === 'ArrowDown') {
-      event.preventDefault();
-    }
-  }, []);
+  const selectDropdownAction = useCallback(
+    (event: React.KeyboardEvent<HTMLInputElement>) => {
+      // arrow-up action handler
+      if (event.key === 'ArrowUp') {
+        event.preventDefault();
+      } else if (event.key === 'ArrowDown') {
+        event.preventDefault();
+      }
+    },
+    [],
+  );
 
   return (
     <CraftedDropdownContext.Provider

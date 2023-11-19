@@ -1,10 +1,10 @@
-import Section from "@/components/layout/Section";
-import ViewContainer from "@/components/layout/ViewContainer";
-import Header from "@/components/main/Header";
-import MetaHead from "@/components/seo/MetaHead"
-import Tag from "@/components/ui/Tag";
-import { getLearnings } from "@/lib/learnings";
-import { cn } from "@/lib/utils";
+import Section from '@/components/layout/Section';
+import ViewContainer from '@/components/layout/ViewContainer';
+import Header from '@/components/main/Header';
+import MetaHead from '@/components/seo/MetaHead';
+import Tag from '@/components/ui/Tag';
+import { getLearnings } from '@/lib/learnings';
+import { cn } from '@/lib/utils';
 
 interface LearningItemProps extends React.HTMLAttributes<HTMLDivElement> {
   videoURL: string;
@@ -15,7 +15,7 @@ interface LearningItemProps extends React.HTMLAttributes<HTMLDivElement> {
   category?: Array<
     'design' | 'accessibilty' | 'ui/ux' | 'design-system' | 'full-stack'
   >;
-};
+}
 
 const LearningsView: React.FunctionComponent = () => {
   return (
@@ -24,9 +24,11 @@ const LearningsView: React.FunctionComponent = () => {
         title="Learnings | Yash Sehgal"
         description="My learnings while doing engineering and design in form of video logs"
         embedSource={{
-          twitter: "https://ik.imagekit.io/eawrckp8wfi/portfolio-image-source/seo/videos%20and%20learnings_Hkwu0mKIL.png?updatedAt=1700434417751&tr=w-1200%2Ch-675%2Cfo-auto",
-          linkedin: "https://ik.imagekit.io/eawrckp8wfi/portfolio-image-source/seo/videos%20and%20learnings_Hkwu0mKIL.png?updatedAt=1700434417751&tr=w-1200%2Ch-628%2Cfo-auto",
-          og: "https://ik.imagekit.io/eawrckp8wfi/portfolio-image-source/seo/videos%20and%20learnings_Hkwu0mKIL.png?updatedAt=1700434417751"
+          twitter:
+            'https://ik.imagekit.io/eawrckp8wfi/portfolio-image-source/seo/videos%20and%20learnings_Hkwu0mKIL.png?updatedAt=1700434417751&tr=w-1200%2Ch-675%2Cfo-auto',
+          linkedin:
+            'https://ik.imagekit.io/eawrckp8wfi/portfolio-image-source/seo/videos%20and%20learnings_Hkwu0mKIL.png?updatedAt=1700434417751&tr=w-1200%2Ch-628%2Cfo-auto',
+          og: 'https://ik.imagekit.io/eawrckp8wfi/portfolio-image-source/seo/videos%20and%20learnings_Hkwu0mKIL.png?updatedAt=1700434417751',
         }}
       />
       <div className="learnings-view-container">
@@ -39,10 +41,13 @@ const LearningsView: React.FunctionComponent = () => {
             <div className="learnings-content-container mt-10">
               {getLearnings()?.map((learning, index) => {
                 return (
-                  <div className={cn("rounded-xl bg-white overflow-hidden",
-                    "flex flex-row items-start justify-start",
-                    "max-lg:grid max-lg:w-fit"
-                  )} key={index}>
+                  <div
+                    className={cn(
+                      'rounded-xl bg-white overflow-hidden',
+                      'flex flex-row items-start justify-start',
+                      'max-lg:grid max-lg:w-fit',
+                    )}
+                    key={index}>
                     <iframe
                       src={learning.videoURL}
                       allow="autoplay"
@@ -59,15 +64,15 @@ const LearningsView: React.FunctionComponent = () => {
                       {!index && <Tag className="mt-2">Latest</Tag>}
                     </div>
                   </div>
-                )
+                );
               })}
             </div>
           </Section>
         </ViewContainer>
       </div>
     </>
-  )
-}
+  );
+};
 
 export default LearningsView;
 export type { LearningItemProps };

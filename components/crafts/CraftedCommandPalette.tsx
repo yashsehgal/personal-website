@@ -33,11 +33,11 @@ const CraftedCommandPalette: React.FunctionComponent = () => {
     query === ''
       ? StaticCommandPaletteContent
       : StaticCommandPaletteContent.filter((avenger) =>
-        avenger.content
-          .toLowerCase()
-          .replace(/\s+/g, '')
-          .includes(query.toLowerCase().replace(/\s+/g, '')),
-      );
+          avenger.content
+            .toLowerCase()
+            .replace(/\s+/g, '')
+            .includes(query.toLowerCase().replace(/\s+/g, '')),
+        );
 
   return (
     <>
@@ -113,23 +113,26 @@ const CraftedCommandPalette: React.FunctionComponent = () => {
                           <Combobox.Option
                             key={avengerIndex}
                             className={({ active }) =>
-                              `relative cursor-default select-none py-2 pl-10 pr-4 ${active
-                                ? 'bg-orange-500 text-white'
-                                : 'text-gray-900'
+                              `relative cursor-default select-none py-2 pl-10 pr-4 ${
+                                active
+                                  ? 'bg-orange-500 text-white'
+                                  : 'text-gray-900'
                               }`
                             }
                             value={avenger}>
                             {({ selected, active }) => (
                               <>
                                 <span
-                                  className={`block truncate ${selected ? 'font-medium' : 'font-normal'
-                                    }`}>
+                                  className={`block truncate ${
+                                    selected ? 'font-medium' : 'font-normal'
+                                  }`}>
                                   {avenger.content}
                                 </span>
                                 {selected ? (
                                   <span
-                                    className={`absolute inset-y-0 left-0 flex items-center pl-3 ${active ? 'text-white' : 'text-orange-600'
-                                      }`}>
+                                    className={`absolute inset-y-0 left-0 flex items-center pl-3 ${
+                                      active ? 'text-white' : 'text-orange-600'
+                                    }`}>
                                     <CheckIcon
                                       className="h-5 w-5"
                                       aria-hidden="true"

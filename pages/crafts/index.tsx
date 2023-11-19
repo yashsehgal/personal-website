@@ -43,8 +43,7 @@ const Crafts: React.FunctionComponent = () => {
                 <p>Crafts have been shifted to another website.</p>
                 <Button
                   className="mt-3"
-                  onClick={() => window.open('https://crafts.yashsehgal.com')}
-                >
+                  onClick={() => window.open('https://crafts.yashsehgal.com')}>
                   Visit crafts.yashsehgal.com
                 </Button>
               </div>

@@ -17,7 +17,13 @@ interface ProjectItemProps extends React.HTMLAttributes<HTMLDivElement> {
   description?: string[];
   tech?: string[];
   category?: Array<
-    'design' | 'community' | 'accessibilty' | 'ui/ux' | 'design-system' | 'static-website' | 'full-stack'
+    | 'design'
+    | 'community'
+    | 'accessibilty'
+    | 'ui/ux'
+    | 'design-system'
+    | 'static-website'
+    | 'full-stack'
   >;
   status?: 'Ongoing' | 'Open Source' | 'Maintained';
 }
