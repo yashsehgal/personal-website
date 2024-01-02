@@ -12,6 +12,25 @@ export const getLearnings = function (): LearningItemProps[] {
       },
       category: ['design-system'],
     },
+    {
+      videoURL:
+        'https://drive.google.com/file/d/1lr5Ex3SB5qCaof_3ir7dRWBxpBhSWS8B/preview',
+      details: {
+        title: 'Cards | Design System UI Components',
+        description:
+          'Understanding how to build a custom card with additional stylings.',
+      },
+      category: ['design-system'],
+    },
+    {
+      videoURL:
+        'https://drive.google.com/file/d/1F7Jdetswf3rKlpbIr50vlLhsavAddWpq/preview',
+      details: {
+        title: 'My learnings about structuring a full-stack project',
+        description:
+          'Sharing my experience of managing folder structure in a full-stack application. Subjective to my learnings and experience ^^',
+      },
+    },
   ];
 
   return learnings.reverse();

@@ -38,7 +38,7 @@ const LearningsView: React.FunctionComponent = () => {
             <h2 className="about-heading leading-snug font-medium text-base text-zinc-900">
               {'learnings.'}
             </h2>
-            <div className="learnings-content-container mt-10">
+            <div className="learnings-content-container mt-10 grid grid-cols-1 gap-6">
               {getLearnings()?.map((learning, index) => {
                 return (
                   <div
