@@ -51,42 +51,45 @@ export const getProjects = function (): ProjectItemProps[] {
       status: 'Maintained',
     },
     {
-      projectTitle: 'BeAlright',
+      projectTitle: "Basefolio",
       projectData: {
-        liveURL: 'https://bealright.in',
-        relatedLinks: [
-          {
-            label: 'Twitter Post',
-            link: 'https://twitter.com/yashsehgaldev/status/1700511788826234913',
-          },
-        ],
+        githubURL: "https://github.com/yashsehgal/basefolio",
       },
       description: [
-        'The app has to make its users feel connected, synced, and cared, without any distractions by checking chat notifications. All by iOS & Android Widgets 🍕',
-        "This is design-first project, right now I am working on it's design system",
+        'Building all the internal services, APIs and middleware using NextJS and Typescript.',
+        'Technology Used: NextJS, Tailwind, Typescript, Strapi CMS, Web Cookies',
+        'The platform carries hackathon experience for both participants and organizers'
       ],
-      tech: ['Figma', 'React', 'TailwindCSS'],
-      category: ['design', 'design-system', 'ui/ux'],
-      status: 'Ongoing',
+      tech: ['NextJS', 'Strapi CMS', 'TailwindCSS', 'Typescript'],
+      category: ['full-stack'],
+      status: 'Open Source',
     },
     {
-      projectTitle: 'PrepMeUp',
+      projectTitle: 'Communal',
       projectData: {
-        liveURL: 'https://prepmeup.vercel.app/',
+        githubURL: 'https://github.com/communal/communalapp',
+        liveURL: 'https://communalapp-test.vercel.app/',
         relatedLinks: [
           {
-            label: 'GitHub',
-            link: 'https://github.com/yashsehgal/prepmeup',
+            label: 'Craftbook NPM',
+            link: 'https://npmjs.com/package/craftbook',
+          },
+          {
+            label: 'Craftbook GitHub',
+            link: 'https://github.com/Communal/craftbook/'
           },
         ],
       },
       description: [
-        'PrepMeUp is an AI-powered interview preparation platform. Undergrad minor project 🍕',
+        'Building a community management + social app using NextJS, Tailwind, Typescript.',
+        'Building craftbook -- a specific UI kit and component library for Communal-based components',
+        'Using Clerk for auth, Supabase as a DB, Resend for generating mails and web-technologies like Typescript, NextJS server components to build the frontend.',
+        'Using Storybook and ViteJS to build the component package'
       ],
-      tech: ['NextJS', 'TailwindCSS', 'Typescript', 'OpenAI', 'GPT Models'],
-      category: ['ui/ux', 'full-stack'],
+      tech: ['NextJS', 'Typescript', 'Clerk Auth', 'Supabase', 'Resend', 'NPM', 'Vite', 'Javascript', 'Server components', 'Storybook'],
       status: 'Ongoing',
-    },
+      category: ['full-stack', 'design-system']
+    }
   ];
 
   return projects.reverse();
