@@ -24,3 +24,40 @@ const nextConfig = {
 
 // Merge MDX config with Next.js config
 module.exports = withMDX(nextConfig);
+
+module.exports = {
+  async redirects() {
+    return [
+      {
+        source: '/twitter',
+        destination: 'https://twitter.com/yashsehgaldev',
+        permanent: true,
+      },
+      {
+        source: '/linkedin',
+        destination: 'https://linkedin.com/in/sehgalyash',
+        permanent: true,
+      },
+      {
+        source: '/meeting',
+        destination: 'https://cal.com/yashsehgal',
+        permanent: true,
+      },
+      {
+        source: '/calcom',
+        destination: 'https://cal.com/yashsehgal',
+        permanent: true,
+      },
+      {
+        source: '/instagram',
+        destination: 'https://instagram.com/sehgalyash_',
+        permanent: true,
+      },
+      {
+        source: '/github',
+        destination: 'https://github.com/yashsehgal',
+        permanent: true,
+      }
+    ]
+  },
+}
