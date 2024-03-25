@@ -7,5 +7,6 @@ body, html {
 }
 
 a {
-  @apply underline-offset-2 underline;
+  @apply tracking-tight font-normal no-underline border-b border-b-gray-300;
+  @apply hover:border-b-gray-400;
 }
