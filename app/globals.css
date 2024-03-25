@@ -5,3 +5,7 @@
 body, html {
   @apply text-gray-800 bg-gray-50;
 }
+
+a {
+  @apply underline-offset-2 underline;
+}
