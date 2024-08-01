@@ -1,6 +1,6 @@
-'use client';
-import { cn } from '@/helpers/utils';
-import { forwardRef } from 'react';
+"use client";
+import { cn } from "@/helpers/utils";
+import { forwardRef } from "react";
 
 export interface ResponsiveContentControlProps
   extends React.HTMLAttributes<HTMLDivElement> {}
@@ -12,9 +12,9 @@ export const ResponsiveContentControl = forwardRef<
     <div
       ref={ref}
       className={cn(
-        'responsive-control',
-        'box-border mx-auto',
-        'w-[1100px] max-2xl:w-[1200px] max-xl:w-[920px] max-lg:w-[680px] max-md:w-[440px] max-sm:w-[340px]',
+        "responsive-content-control",
+        "box-border mx-auto",
+        "w-[900px] max-2xl:w-[800px] max-xl:w-[720px] max-lg:w-[640px] max-md:w-[560px] max-sm:w-[340px]",
         className,
       )}
       {...props}
@@ -22,4 +22,4 @@ export const ResponsiveContentControl = forwardRef<
   );
 });
 
-ResponsiveContentControl.displayName = 'ResponsiveContentControl';
+ResponsiveContentControl.displayName = "ResponsiveContentControl";
