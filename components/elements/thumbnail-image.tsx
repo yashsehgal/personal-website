@@ -30,7 +30,7 @@ export const ThumbnailImage = forwardRef<
         size === "lg" &&
           "w-[160px] h-[160px] border-8 shadow-2xl rounded-3xl max-md:w-[120px] max-md:h-[120px] max-md:border-4",
         // DEFAULT thumbnail component styles
-        "border-white shadow-neutral-200 transition-all",
+        "border-white shadow-neutral-200 transition-all select-none",
         className,
       )}
       alt={alt}
