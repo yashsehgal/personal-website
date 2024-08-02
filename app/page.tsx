@@ -7,6 +7,7 @@ export default function HomePage() {
   return (
     <PageContainer id="home">
       <HomePageHeroSection />
+      <HomePageCollageContainer />
       <CurrentWorkDetailSection />
     </PageContainer>
   );
