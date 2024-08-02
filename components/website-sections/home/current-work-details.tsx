@@ -19,7 +19,11 @@ export const CurrentWorkDetailSection = () => {
               Helping the product scale in terms of design and user experience,
               by making clean, easy-to-use interfaces and components.
             </p>
-            <p className="leading-snug text-2xl mt-2"></p>
+            <p className="leading-snug text-2xl mt-8">
+              Being a member of the product delight and UX improvement team, I
+              am working closely with the product improvements. Alongside,
+              building many AI-based tools for enterprises.
+            </p>
           </div>
         </div>
       </ResponsiveContentControl>
