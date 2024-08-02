@@ -12,7 +12,7 @@ export const SectionContainer = forwardRef<
   return (
     <section
       ref={ref}
-      className={cn("section-container border-y", className)}
+      className={cn("section-container border-b", className)}
       {...props}
     />
   );
