@@ -9,7 +9,9 @@ export const BannerImage = forwardRef<
   return (
     <Image
       ref={ref}
-      className={cn("banner-image w-[250px] h-auto rounded-2xl shadow-xl")}
+      className={cn(
+        "banner-image w-[250px] h-auto rounded-2xl shadow-xl max-xl:w-[200px]",
+      )}
       alt={alt}
       width={250}
       height={300}

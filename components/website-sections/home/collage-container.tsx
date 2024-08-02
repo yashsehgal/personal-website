@@ -13,7 +13,10 @@ const BANNER_IMAGES: { alt: string; name: string }[] = [
 
 export const HomePageCollageContainer = () => {
   return (
-    <SectionContainer id="home-collage-container" className="my-24">
+    <SectionContainer
+      id="home-collage-container"
+      className="my-24 max-lg:hidden"
+    >
       <ResponsiveContentControl className="flex items-center justify-evenly">
         {BANNER_IMAGES.map((banner, index) => {
           return (

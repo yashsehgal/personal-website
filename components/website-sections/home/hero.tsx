@@ -37,7 +37,7 @@ export const HomePageHeroSection = () => {
               companies build better and beautiful user interfaces. Using ideal
               coding patterns, Micro interactions and Accessibility.
             </ParagraphContent>
-            <ResponsiveButtonContainer className="flex items-center gap-4 justify-end">
+            <ResponsiveButtonContainer className="flex items-center gap-4 justify-end max-lg:justify-normal">
               <Button
                 variant="secondary"
                 supportIcon={<IconMail {...TABLER_ICON_STYLE} />}
