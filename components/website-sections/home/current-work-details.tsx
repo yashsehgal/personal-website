@@ -1,3 +1,4 @@
+import { Button } from "@/components/elements/button";
 import { ParagraphContent } from "@/components/elements/paragraph-content";
 import { ThumbnailImage } from "@/components/elements/thumbnail-image";
 import { ResponsiveContentControl } from "@/components/layout-utils/responsive-content-control";
@@ -13,17 +14,20 @@ export const CurrentWorkDetailSection = () => {
             alt="rocketium-logo"
             className="p-2 bg-white"
           />
-          <div className="role-details-wrapper">
+          <div className="role-details-wrapper space-y-8">
             <p className="leading-snug text-2xl">
               Currently working as a frontend sofware engineer at Rocketium.
               Helping the product scale in terms of design and user experience,
               by making clean, easy-to-use interfaces and components.
             </p>
-            <p className="leading-snug text-2xl mt-8">
+            <p className="leading-snug text-2xl">
               Being a member of the product delight and UX improvement team, I
               am working closely with the product improvements. Alongside,
               building many AI-based tools for enterprises.
             </p>
+            <Button variant="secondary" withArrow="leading" className="mt-4">
+              Read more about my experience
+            </Button>
           </div>
         </div>
       </ResponsiveContentControl>
