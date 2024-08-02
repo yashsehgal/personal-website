@@ -17,8 +17,8 @@ export const HomePageHeroSection = () => {
         <div className="header-content-container">
           <InteractionWrapper
             initial={{ opacity: 0, scale: 0.2, rotate: -24 }}
-            animate={{ opacity: 1, scale: 1, rotate: 0 }}
-            whileHover={{ rotate: -4, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1, rotate: -4 }}
+            whileHover={{ rotate: -2, scale: 0.9 }}
             transition={{
               type: "spring",
             }}
