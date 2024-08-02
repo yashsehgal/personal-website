@@ -13,7 +13,7 @@ export const ResponsiveContentControl = forwardRef<
       ref={ref}
       className={cn(
         "responsive-content-control",
-        "box-border mx-auto",
+        "box-border mx-auto border-x p-4",
         "w-[900px] max-2xl:w-[800px] max-xl:w-[720px] max-lg:w-[640px] max-md:w-[560px] max-sm:w-[340px]",
         className,
       )}

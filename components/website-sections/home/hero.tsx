@@ -12,8 +12,8 @@ import { IconMail } from "@tabler/icons-react";
 
 export const HomePageHeroSection = () => {
   return (
-    <SectionContainer id="home-page-hero-section" className="mt-24">
-      <ResponsiveContentControl>
+    <SectionContainer id="home-page-hero-section">
+      <ResponsiveContentControl className="pt-24">
         <div className="header-content-container">
           <InteractionWrapper
             initial={{ opacity: 0, scale: 0.2, rotate: -24 }}

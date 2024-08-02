@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { cn } from '@/helpers/utils';
-import { forwardRef } from 'react';
+import { cn } from "@/helpers/utils";
+import { forwardRef } from "react";
 
 export interface SectionContainerProps
   extends React.HTMLAttributes<HTMLDivElement> {}
@@ -12,10 +12,10 @@ export const SectionContainer = forwardRef<
   return (
     <section
       ref={ref}
-      className={cn('section-container py-4', className)}
+      className={cn("section-container border-y", className)}
       {...props}
     />
   );
 });
 
-SectionContainer.displayName = 'SectionContainer';
+SectionContainer.displayName = "SectionContainer";
