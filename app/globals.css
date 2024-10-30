@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  @apply bg-white text-gray-900 font-mono pt-6 pb-12;
+  @apply selection:text-white selection:bg-black;
+}
+
+a {
+  @apply text-indigo-600 hover:underline hover:underline-offset-2;
+}
