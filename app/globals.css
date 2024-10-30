@@ -2,18 +2,20 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Restting page behaviour and properties across elements */
-*,
-*::after,
-*::before {
-  text-rendering: optimizeLegibility;
-  @apply scroll-smooth;
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
 }
 
-html,
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
 body {
-  /* PAGE + BG stylings */
-  @apply bg-neutral-50;
-  /* TEXT stylings */
-  @apply tracking-tight font-medium text-neutral-800;
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
 }
