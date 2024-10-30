@@ -1,4 +1,3 @@
-import { IconPencil } from '@tabler/icons-react';
 import Link from 'next/link';
 
 const WRITINGS: { name: string; slug: string; emoji: string }[] = [

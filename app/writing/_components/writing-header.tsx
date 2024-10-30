@@ -50,3 +50,5 @@ export const WritingDetails = forwardRef<
     </p>
   );
 });
+
+WritingDetails.displayName = 'WritingDetails';

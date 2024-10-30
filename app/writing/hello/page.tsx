@@ -24,9 +24,10 @@ export default function PostHello() {
         <p>
           hello, i&apos;m yash, and welcome to my latest portfolio site!
           i&apos;ve kept this version clean and minimal so that it feels like a
-          blank canvas, ready for all the ideas i want to share. lately, i've
-          been working with some beautifully complex components, and i thought
-          it would be fun to write about what i&apos;m learning and creating.
+          blank canvas, ready for all the ideas i want to share. lately,
+          i&apos;ve been working with some beautifully complex components, and i
+          thought it would be fun to write about what i&apos;m learning and
+          creating.
         </p>
         <p>
           this simple setup will help me share articles, thoughts, and stories
