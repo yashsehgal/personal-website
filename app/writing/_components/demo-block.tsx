@@ -28,6 +28,8 @@ export const DemoBlock = forwardRef<HTMLDivElement, DemoBlockProps>(
   },
 );
 
+DemoBlock.displayName = 'DemoBlock';
+
 export const DemoBlockFooter = forwardRef<HTMLDivElement, DemoBlockFooterProps>(
   ({ className, ...props }, ref) => {
     return (
@@ -43,3 +45,5 @@ export const DemoBlockFooter = forwardRef<HTMLDivElement, DemoBlockFooterProps>(
     );
   },
 );
+
+DemoBlockFooter.displayName = 'DemoBlockFooter';

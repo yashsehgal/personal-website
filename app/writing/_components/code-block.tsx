@@ -48,3 +48,5 @@ export const CodeBlock = forwardRef<HTMLPreElement, CodeBlockProps>(
     );
   },
 );
+
+CodeBlock.displayName = 'CodeBlock';
