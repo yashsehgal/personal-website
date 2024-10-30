@@ -6,13 +6,14 @@ const SOCIALS: { name: string; link: string }[] = [
   { name: 'x', link: 'https://x.com/yashsehgaldev' },
   { name: 'linkedin', link: 'https://linkedin.com/in/sehgalyash' },
   { name: 'substack', link: 'https://yashsehgal.substack.com/' },
+  { name: 'write me a mail', link: 'mailto:yashsehgal.work@gmail.com' },
 ];
 
 export default function Header() {
   return (
-    <header className="page-header">
+    <header className="page-header space-y-1">
       <h1 className="text-xl font-medium tracking-tight">Yash Sehgal</h1>
-      <p className="text-sm text-gray-500 tracking-tight">Design Engineering</p>
+      <p className="text-sm text-gray-500 tracking-tight">Design Engineer</p>
       <SocialsWrapper />
     </header>
   );
