@@ -154,7 +154,6 @@ export default function PostExtensiveReactComponents() {
           </DemoButton>
           <DemoBlockFooter className="flex items-center gap-3 flex-wrap justify-center">
             <select
-              defaultValue="primary"
               value={demoButton.variant}
               onChange={(e) =>
                 DemoHandler.changeVariant(e.target.value as ButtonVariant)
@@ -164,7 +163,6 @@ export default function PostExtensiveReactComponents() {
               <option value="ghost">ghost</option>
             </select>
             <select
-              defaultValue="md"
               value={demoButton.size}
               onChange={(e) =>
                 DemoHandler.changeSize(e.target.value as ButtonSize)
