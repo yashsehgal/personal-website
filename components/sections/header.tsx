@@ -6,7 +6,7 @@ const SOCIALS: { name: string; link: string }[] = [
   { name: 'x', link: 'https://x.com/yashsehgaldev' },
   { name: 'linkedin', link: 'https://linkedin.com/in/sehgalyash' },
   { name: 'substack', link: 'https://yashsehgal.substack.com/' },
-  { name: 'write me a mail', link: 'mailto:yashsehgal.work@gmail.com' },
+  { name: 'mail', link: 'mailto:yashsehgal.work@gmail.com' },
 ];
 
 export default function Header() {
