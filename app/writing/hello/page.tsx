@@ -14,6 +14,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from '@/components/ui/tooltip';
+import { motion } from 'framer-motion';
 
 const IMAGES: { file: string; description: string }[] = [
   {
@@ -48,7 +49,7 @@ export default function PostHello() {
       <WritingContainer id="post__hello">
         <WritingHeader>
           <WritingHeadline>hello there!</WritingHeadline>
-          <WritingDetails>Wed 31st, 2024</WritingDetails>
+          <WritingDetails>Wed, 30st Oct, 2024</WritingDetails>
         </WritingHeader>
         <WritingContent>
           <p>
@@ -80,16 +81,23 @@ export default function PostHello() {
             <TooltipProvider key={index}>
               <Tooltip delayDuration={100}>
                 <TooltipTrigger>
-                  <Image
-                    src={`/media/${image.file}`}
-                    alt={image.file}
-                    width={300}
-                    height={500}
-                    draggable={false}
-                    className={cn(
-                      'w-full h-[240px] rounded-3xl shadow-xl select-none',
-                    )}
-                  />
+                  <motion.div
+                    initial={{ filter: `blur(${index % 2 === 0 ? 3 : 6}px)` }}
+                    animate={{ filter: 'blur(0px)' }}
+                    transition={{
+                      duration: 0.6,
+                    }}>
+                    <Image
+                      src={`/media/${image.file}`}
+                      alt={image.file}
+                      width={300}
+                      height={500}
+                      draggable={false}
+                      className={cn(
+                        'w-full h-[240px] rounded-3xl shadow-xl select-none',
+                      )}
+                    />
+                  </motion.div>
                 </TooltipTrigger>
                 <TooltipContent className="bg-black/80 text-white rounded-lg p-1 px-2">
                   {image.description}

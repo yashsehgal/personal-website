@@ -2,6 +2,11 @@ import Link from 'next/link';
 
 const WRITINGS: { name: string; slug: string; emoji: string }[] = [
   { name: 'hello there!', slug: 'hello', emoji: '👋🏽' },
+  {
+    name: 'how i write extensive react components (ui elements)',
+    slug: 'extensive-react-components',
+    emoji: '🔮',
+  },
 ];
 
 export default function Writings() {

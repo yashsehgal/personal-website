@@ -11,6 +11,7 @@ export const WritingContent = forwardRef<HTMLDivElement, WritingContentProps>(
         className={cn(
           'writing-content-wrapper leading-8 break-words mt-6',
           '[&>p]:mb-6 [&>p]:text-sm',
+          '[&>h3]:mt-8 [&>h3]:mb-4 [&>h3]:text-sm [&>h3]:font-semibold',
           className,
         )}
         {...props}
