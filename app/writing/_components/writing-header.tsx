@@ -44,7 +44,7 @@ export const WritingDetails = forwardRef<
   return (
     <p
       ref={ref}
-      className={cn('writing-details text-sm text-gray-500', props)}
+      className={cn('writing-details text-sm text-gray-500', className)}
       {...props}>
       Posted on {children}
     </p>
