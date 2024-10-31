@@ -41,6 +41,14 @@ const IMAGES: { file: string; description: string }[] = [
     file: 'desk-friends.jpg',
     description: 'my desk buddies',
   },
+  {
+    file: 'yash-on-slide.jpg',
+    description: 'on a slide',
+  },
+  {
+    file: 'authentic-food.jpg',
+    description: 'treid some authentic andhra food, blr',
+  },
 ];
 
 export default function PostHello() {
