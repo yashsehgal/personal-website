@@ -57,7 +57,7 @@ export default function PostHello() {
       <WritingContainer id="post__hello">
         <WritingHeader>
           <WritingHeadline>hello there!</WritingHeadline>
-          <WritingDetails>Wed, 30st Oct, 2024</WritingDetails>
+          <WritingDetails>wednesday, 30st Oct, 2024</WritingDetails>
         </WritingHeader>
         <WritingContent>
           <p>

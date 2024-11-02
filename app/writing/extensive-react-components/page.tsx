@@ -79,7 +79,7 @@ export default function PostExtensiveReactComponents() {
         <WritingHeadline>
           how i write extensive react components (ui elements)
         </WritingHeadline>
-        <WritingDetails>Thursday, 31st Oct, 2024</WritingDetails>
+        <WritingDetails>thursday, 31st Oct, 2024</WritingDetails>
       </WritingHeader>
       <WritingContent>
         <p>
