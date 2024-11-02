@@ -5,6 +5,4 @@ export enum DYNAMIC_ISLAND_STATE {
 }
 
 export interface DynamicIslandProps
-  extends React.HTMLAttributes<HTMLDivElement> {
-  suggestions?: string[];
-}
+  extends React.HTMLAttributes<HTMLDivElement> {}

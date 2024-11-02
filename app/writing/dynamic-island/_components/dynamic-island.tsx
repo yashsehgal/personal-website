@@ -33,11 +33,7 @@ function getDynamicIslandBorderRaduisByState(
   }
 }
 
-export function DynamicIsland({
-  suggestions,
-  className,
-  ...props
-}: DynamicIslandProps) {
+export function DynamicIsland({ className, ...props }: DynamicIslandProps) {
   const { state } = useContext(DynamicIslandContext);
 
   // Custom blur state whenever there is a state change
