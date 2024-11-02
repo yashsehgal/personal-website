@@ -86,8 +86,8 @@ export default function PostDynamicIsland() {
             implementation.
           </li>
           <li className="list-item">
-            A float effect using shadows to make it feel like it's sitting above
-            the interface.
+            A float effect using shadows to make it feel like it&apos;s sitting
+            above the interface.
           </li>
         </ul>
         <h3>Step 1: Setting Up the Foundation 🧱</h3>
@@ -107,7 +107,8 @@ export interface DynamicIslandProps extends React.HTMLAttributes<HTMLDivElement>
         <h3>Step 2: Creating the Context 🌴</h3>
         <p>
           To manage the state globally, I&apos;ll need a context. This allows
-          any child component to access and modify the Dynamic Island's state:
+          any child component to access and modify the Dynamic Island&apos;s
+          state:
         </p>
         <CodeBlock lang="typescript">
           {`export type DynamicIslandContextType = {

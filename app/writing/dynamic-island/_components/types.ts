@@ -4,5 +4,4 @@ export enum DYNAMIC_ISLAND_STATE {
   EXPANDED = 'EXPANDED',
 }
 
-export interface DynamicIslandProps
-  extends React.HTMLAttributes<HTMLDivElement> {}
+export type DynamicIslandProps = React.HTMLAttributes<HTMLDivElement>;
