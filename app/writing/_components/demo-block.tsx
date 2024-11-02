@@ -38,6 +38,7 @@ export const DemoBlockFooter = forwardRef<HTMLDivElement, DemoBlockFooterProps>(
         className={cn(
           'demo-block-footer absolute bottom-0 left-0 w-full p-2 border-t bg-gray-50',
           '[&>select]:text-sm [&>select]:px-3 [&>select]:py-1 [&>select]:border [&>select]:rounded-lg',
+          '[&>button]:text-sm [&>button]:px-2 [&>button]:py-0.5 [&>button]:rounded-lg [&>button]:bg-black/5 hover:[&>button]:bg-black/10',
           className,
         )}
         {...props}

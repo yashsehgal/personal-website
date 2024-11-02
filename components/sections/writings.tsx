@@ -7,6 +7,11 @@ const WRITINGS: { name: string; slug: string; emoji: string }[] = [
     slug: 'extensive-react-components',
     emoji: '🔮',
   },
+  {
+    name: 'writing a dynamic island component',
+    slug: 'dynamic-island',
+    emoji: '🏝️',
+  },
 ];
 
 export default function Writings() {
