@@ -56,6 +56,7 @@ export function DynamicIsland({ className, ...props }: DynamicIslandProps) {
         width: getDynamicIslandWidthByState(state),
         scale: state === DYNAMIC_ISLAND_STATE.EXPANDED ? 1.2 : 1,
         filter: showBlur ? 'blur(2px)' : 'blur(0px)',
+        y: state === DYNAMIC_ISLAND_STATE.EXPANDED ? 4 : 0,
       }}
       transition={{
         type: 'spring',

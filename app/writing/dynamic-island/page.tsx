@@ -21,13 +21,7 @@ import {
 import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
 import { CodeBlock } from '../_components/code-block';
-
-// State change demo block
-{
-  /* <DynamicIslandProvider>
-  <DynamicIslandStateChangeDemoBlock />
-</DynamicIslandProvider>; */
-}
+import { cn } from '@/helpers';
 
 export default function PostDynamicIsland() {
   return (
@@ -278,87 +272,127 @@ function DynamicIslandMainDemoBlock() {
   }, [state]);
 
   return (
-    <DemoBlock className="items-start pt-4 h-[400px]">
+    <DemoBlock
+      className={cn(
+        'items-start h-[480px]',
+        state === DYNAMIC_ISLAND_STATE.EXPANDED ? 'pt-8' : 'pt-4',
+      )}>
       <DynamicIsland>
-        <div className="w-full flex items-center gap-2">
-          <motion.button
-            onClick={toggleEye}
-            className="focus:outline-none focus-visible:bg-blue-500 p-2 rounded-full hover:bg-white/20 shrink-0"
-            whileTap={{ scale: 0.8 }}>
-            {eye ? (
-              <motion.div
-                initial={{ opacity: 0, scale: 0.2 }}
-                animate={{ opacity: 1, scale: 1 }}
-                key="eye-open">
-                <IconEye size={14} />
-              </motion.div>
-            ) : (
-              <motion.div
-                initial={{ opacity: 0, scale: 0.2 }}
-                animate={{ opacity: 1, scale: 1 }}
-                key="eye-closed">
-                <IconEyeClosed size={14} />
-              </motion.div>
-            )}
-          </motion.button>
-          <motion.div
-            layout
-            transition={{ duration: 0.2, ease: 'easeInOut' }}
-            className="user-list gap-2 flex items-center border-l pl-4 border-white/20 shrink-0">
-            <AnimatePresence mode="popLayout">
-              {showNewUser && (
+        {state !== DYNAMIC_ISLAND_STATE.EXPANDED ? (
+          <div className="w-full flex items-center gap-2">
+            <motion.button
+              onClick={toggleEye}
+              className="focus:outline-none focus-visible:bg-blue-500 p-2 rounded-full hover:bg-white/20 shrink-0"
+              whileTap={{ scale: 0.8 }}>
+              {eye ? (
                 <motion.div
-                  key="new-user"
-                  initial={{ opacity: 0, scale: 0 }}
-                  animate={{ opacity: 1, scale: 1 }}>
-                  <Image
-                    src="https://github.com/yashsehgal.png"
-                    alt="yash"
-                    width={40}
-                    height={40}
-                    className="w-6 h-6 rounded-full shrink-0 border-2 border-yellow-400"
-                  />
+                  initial={{ opacity: 0, scale: 0.2 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  key="eye-open">
+                  <IconEye size={14} />
+                </motion.div>
+              ) : (
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.2 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  key="eye-closed">
+                  <IconEyeClosed size={14} />
                 </motion.div>
               )}
-            </AnimatePresence>
-            {['vercel', 'shadcn'].map((profile, index) => {
-              return (
-                <Image
-                  key={index}
-                  src={`https://github.com/${profile}.png`}
-                  alt={profile}
-                  width={40}
-                  height={40}
-                  className="w-6 h-6 rounded-full shrink-0"
-                />
-              );
-            })}
-          </motion.div>
-          {state === DYNAMIC_ISLAND_STATE.SUGGESTIVE && (
-            <div className="user-list gap-2 flex items-center border-l pl-4 border-white/20 justify-end w-full">
-              <motion.button
-                onClick={toggleShowNewUser}
-                className="focus:outline-none bg-blue-500 p-2 rounded-full  shrink-0"
-                whileTap={{ scale: 0.8 }}>
-                {!showNewUser ? (
+            </motion.button>
+            <motion.div
+              layout
+              transition={{ duration: 0.2, ease: 'easeInOut' }}
+              className="user-list gap-2 flex items-center border-l pl-4 border-white/20 shrink-0">
+              <AnimatePresence mode="popLayout">
+                {showNewUser && (
                   <motion.div
-                    initial={{ opacity: 0, scale: 0.2 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    key="show-new-user">
-                    <IconPlus size={14} />
-                  </motion.div>
-                ) : (
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0.2 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    key="hide-new-user">
-                    <IconMinus size={14} />
+                    key="new-user"
+                    initial={{ opacity: 0, scale: 0 }}
+                    animate={{ opacity: 1, scale: 1 }}>
+                    <Image
+                      src="https://github.com/yashsehgal.png"
+                      alt="yash"
+                      width={40}
+                      height={40}
+                      className="w-6 h-6 rounded-full shrink-0 border-2 border-yellow-400"
+                    />
                   </motion.div>
                 )}
-              </motion.button>
+              </AnimatePresence>
+              {['vercel', 'shadcn'].map((profile, index) => {
+                return (
+                  <Image
+                    key={index}
+                    src={`https://github.com/${profile}.png`}
+                    alt={profile}
+                    width={40}
+                    height={40}
+                    className="w-6 h-6 rounded-full shrink-0"
+                  />
+                );
+              })}
+            </motion.div>
+            {state === DYNAMIC_ISLAND_STATE.SUGGESTIVE && (
+              <div className="user-list gap-2 flex items-center border-l pl-4 border-white/20 justify-end w-full">
+                <motion.button
+                  onClick={toggleShowNewUser}
+                  className="focus:outline-none bg-blue-500 p-2 rounded-full shrink-0"
+                  whileTap={{ scale: 0.8 }}>
+                  {!showNewUser ? (
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0.2 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      key="show-new-user">
+                      <IconPlus size={14} />
+                    </motion.div>
+                  ) : (
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0.2 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      key="hide-new-user">
+                      <IconMinus size={14} />
+                    </motion.div>
+                  )}
+                </motion.button>
+              </div>
+            )}
+          </div>
+        ) : (
+          <motion.div
+            initial={{ height: 0 }}
+            animate={{ height: 110 }}
+            className="px-2">
+            <p className="font-medium text-[10px]">All members</p>
+            <div className="my-2 flex w-full gap-2">
+              {[
+                'yashsehgal',
+                'vercel',
+                'shadcn',
+                'rauchg',
+                'rightfitso',
+                'facebook',
+              ].map((user, index) => {
+                return (
+                  <div
+                    key={index}
+                    className="shrink-0 text-center flex flex-col items-center">
+                    <Image
+                      src={`https://github.com/${user}.png`}
+                      alt={user}
+                      width={60}
+                      height={60}
+                      className="w-8 h-8 rounded-full"
+                    />
+                    <span className="text-[8px] text-white/70 truncate">
+                      {user}
+                    </span>
+                  </div>
+                );
+              })}
             </div>
-          )}
-        </div>
+          </motion.div>
+        )}
       </DynamicIsland>
       <DemoBlockFooter className="flex items-center justify-center gap-3">
         <button onClick={() => setState(DYNAMIC_ISLAND_STATE.IDLE)}>
