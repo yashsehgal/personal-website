@@ -15,6 +15,14 @@ export default function Header() {
       <h1 className="text-xl font-medium tracking-tight">Yash Sehgal</h1>
       <p className="text-sm text-gray-500 tracking-tight">Design Engineer</p>
       <SocialsWrapper />
+      <div className="!mt-8 text-sm">
+        At present, I am working as a design engineer at{' '}
+        <Link href="https://rocketium.com" target="_blank">
+          rocketium
+        </Link>
+        . Building components and layouts for AI flows within the product.
+        Including the internal design system.
+      </div>
     </header>
   );
 }
