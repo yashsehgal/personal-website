@@ -12,6 +12,11 @@ const WRITINGS: { name: string; slug: string; emoji: string }[] = [
     slug: 'dynamic-island',
     emoji: '🏝️',
   },
+  {
+    name: 'creating a figma like comment pin',
+    slug: 'comment-pin',
+    emoji: '📌',
+  },
 ];
 
 export default function Writings() {

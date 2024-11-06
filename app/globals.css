@@ -11,3 +11,13 @@ body {
 a {
   @apply text-indigo-600 hover:underline hover:underline-offset-2;
 }
+
+.comment-accessible-section,
+.comment-pinable-canvas {
+  cursor: url("data:image/svg+xml,%3Csvg width='32' height='32' viewBox='0 0 32 32' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M16.0008 5C22.0759 5 27.0008 9.92487 27.0008 16C27.0008 22.0751 22.0759 27 16.0008 27C14.0456 27 12.5008 27 11.0008 27H5.00079L5.00042 21.5C4.99924 20 5.00079 17.9549 5.00079 16C5.00079 9.92487 9.92566 5 16.0008 5Z' fill='%23577CFF' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"),
+    pointer;
+}
+
+.hide-scroll::-webkit-scrollbar {
+  display: none;
+}
