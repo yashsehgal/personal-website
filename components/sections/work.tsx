@@ -11,25 +11,25 @@ const WORK_EXPERIENCE: {
 }[] = [
   {
     name: 'rightfit',
-    description: 'co-founder',
+    description: 'Co-founder',
     link: 'https://rightfit.so',
     status: 'present',
   },
   {
-    name: 'rocketium',
-    description: 'design engineer',
+    name: 'Rocketium',
+    description: 'Frontend Design Engineer',
     link: 'https://rocketium.com',
-    status: 'present',
+    status: '2024, 8 months',
   },
   {
-    name: 'github',
-    description: 'software engineering intern',
+    name: 'GitHub',
+    description: 'Frontend Engineering Intern (DevRel team)',
     link: 'https://github.com',
     status: '2023, 5 months',
   },
   {
     name: 'economize.cloud',
-    description: 'frontend engineering intern',
+    description: 'Frontend Engineering Intern',
     link: 'https://economize.cloud',
     status: '2021, 6 months',
   },

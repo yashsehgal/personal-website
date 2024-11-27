@@ -4,18 +4,18 @@ const PROJECTS: { name: string; description: string; link: string }[] = [
   {
     name: 'rightfit',
     description:
-      'a community based hiring platform for engineers and designers.',
+      'A community based hiring platform for engineers and designers.',
     link: 'https://rightfit.so',
   },
   {
     name: 'rightfit-hire',
-    description: 'hire platform for companies hiring via rightfit.',
+    description: 'Hire platform for companies hiring via rightfit.',
     link: 'https://hire.rightfit.so',
   },
   {
     name: 'cookies',
     description:
-      'a typescript, react, tailwind and framer-motion based UI kit.',
+      'A typescript, react, tailwind and framer-motion based UI kit.',
     link: 'https://usecookies.vercel.app/',
   },
 ];
@@ -23,7 +23,7 @@ const PROJECTS: { name: string; description: string; link: string }[] = [
 export default function Projects() {
   return (
     <section className="projects space-y-3">
-      <h2 className="text-sm font-semibold">projects</h2>
+      <h2 className="text-sm font-semibold">Projects</h2>
       <ul className="project-list space-y-2">
         {PROJECTS.map((project, index) => {
           return (

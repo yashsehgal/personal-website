@@ -16,12 +16,17 @@ export default function Header() {
       <p className="text-sm text-gray-500 tracking-tight">Design Engineer</p>
       <SocialsWrapper />
       <div className="!mt-8 text-sm">
-        At present, I am working as a design engineer at{' '}
+        My recent experience was working as a frontend/design engineer at{' '}
         <Link href="https://rocketium.com" target="_blank">
-          rocketium
+          Rocketium
         </Link>
         . Building components and layouts for AI flows within the product.
-        Including the internal design system.
+        Including the internal design system. Also, worked with{' '}
+        <Link href="https://github.com/home" target="_blank">
+          GitHub
+        </Link>{' '}
+        as an frontend engineering intern. Worked on internal tools and landing
+        pages with APAC and Latin region DevRel team.
       </div>
     </header>
   );

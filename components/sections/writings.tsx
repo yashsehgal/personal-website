@@ -1,27 +1,27 @@
 import Link from 'next/link';
 
 const WRITINGS: { name: string; slug: string; emoji: string }[] = [
-  { name: 'hello there!', slug: 'hello', emoji: '👋🏽' },
+  { name: 'Hello there!', slug: 'hello', emoji: '👋🏽' },
   {
-    name: 'how i write extensive react components (ui elements)',
+    name: 'How I write extensive react components (ui elements)',
     slug: 'extensive-react-components',
     emoji: '🔮',
   },
   {
-    name: 'writing a dynamic island component',
+    name: 'Writing a dynamic island component',
     slug: 'dynamic-island',
     emoji: '🏝️',
   },
   {
-    name: 'creating a figma like comment pin',
+    name: 'Creating a figma like comment pin',
     slug: 'comment-pin',
     emoji: '📌',
   },
   {
-    name: 'automation flow component',
+    name: 'Automation flow component',
     slug: 'automation-flow-component',
-    emoji: '⚙️'
-  }
+    emoji: '⚙️',
+  },
 ];
 
 export default function Writings() {
