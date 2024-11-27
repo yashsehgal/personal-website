@@ -1,5 +1,4 @@
-import { CodeBlock } from '../_components/code-block';
-import { DemoBlock, DemoBlockFooter } from '../_components/demo-block';
+import { DemoBlock } from '../_components/demo-block';
 import { WritingContainer } from '../_components/writing-container';
 import { WritingContent } from '../_components/writing-content';
 import {
