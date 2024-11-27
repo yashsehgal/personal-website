@@ -17,6 +17,11 @@ const WRITINGS: { name: string; slug: string; emoji: string }[] = [
     slug: 'comment-pin',
     emoji: '📌',
   },
+  {
+    name: 'automation flow component',
+    slug: 'automation-flow-component',
+    emoji: '⚙️'
+  }
 ];
 
 export default function Writings() {
