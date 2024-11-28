@@ -38,7 +38,7 @@ const WORK_EXPERIENCE: {
 export default function Work() {
   return (
     <section className="work space-y-3">
-      <h2 className="text-sm font-semibold">work</h2>
+      <h2 className="text-sm font-semibold">Work</h2>
       <ul className="work-list space-y-2">
         {WORK_EXPERIENCE.map((experience, index) => {
           return <Experience {...experience} key={index} />;

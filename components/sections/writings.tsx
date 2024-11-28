@@ -27,7 +27,7 @@ const WRITINGS: { name: string; slug: string; emoji: string }[] = [
 export default function Writings() {
   return (
     <section className="writings space-y-3">
-      <h2 className="text-sm font-semibold">writings</h2>
+      <h2 className="text-sm font-semibold">Writings</h2>
       <ul className="writing-list">
         {WRITINGS.map((writing, index) => {
           return (

@@ -2,11 +2,11 @@ import Link from 'next/link';
 import React from 'react';
 
 const SOCIALS: { name: string; link: string }[] = [
-  { name: 'github', link: 'https://github.com/yashsehgal' },
-  { name: 'x', link: 'https://x.com/yashsehgaldev' },
-  { name: 'linkedin', link: 'https://linkedin.com/in/sehgalyash' },
-  { name: 'substack', link: 'https://yashsehgal.substack.com/' },
-  { name: 'mail', link: 'mailto:yashsehgal.work@gmail.com' },
+  { name: 'GitHub', link: 'https://github.com/yashsehgal' },
+  { name: 'X', link: 'https://x.com/yashsehgaldev' },
+  { name: 'LinkedIn', link: 'https://linkedin.com/in/sehgalyash' },
+  { name: 'Substack', link: 'https://yashsehgal.substack.com/' },
+  { name: 'Mail', link: 'mailto:yashsehgal.work@gmail.com' },
 ];
 
 export default function Header() {
