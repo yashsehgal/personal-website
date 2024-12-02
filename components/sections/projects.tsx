@@ -45,6 +45,11 @@ const PROJECTS: {
     label: 'Figma',
     link: 'https://www.figma.com/file/PIw6wbYcMe0JMwtA0yeuYy/StackAI-Landing-Page-Redesign---Design-Engineer-Assignment?type=design&node-id=1:2&mode=design&t=SVBbe6AGIXbRa9I9-1',
   },
+  {
+    name: 'Typewriter',
+    description: 'A simple typewriter page',
+    link: 'https://usetypewriter.vercel.app/',
+  },
 ];
 
 export default function Projects() {
