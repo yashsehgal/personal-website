@@ -92,3 +92,39 @@ export async function getDiscussionContent(discussionId: number): Promise<{
     return { messages: [], error };
   }
 }
+
+interface CreateDiscussionPayload {
+  title: string;
+}
+
+export async function createDiscussion(
+  payload: CreateDiscussionPayload,
+): Promise<{
+  discussion: SupabaseDiscussionInterface | null;
+  error: Error | null;
+}> {
+  try {
+    const { data, error, status } = await supabase
+      .from('discussions')
+      .insert([{ title: payload.title }])
+      .select()
+      .single();
+
+    if (error) {
+      console.error('[createDiscussion]: Error:', error.message);
+      return { discussion: null, error: new Error(error.message) };
+    }
+
+    if (!data) {
+      console.warn('[createDiscussion]: No data received, status:', status);
+      return { discussion: null, error: null };
+    }
+
+    return { discussion: data, error: null };
+  } catch (err) {
+    const error =
+      err instanceof Error ? err : new Error('Unknown error occurred');
+    console.error('[createDiscussion]: Unexpected error:', error);
+    return { discussion: null, error };
+  }
+}
