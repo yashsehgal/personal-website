@@ -10,6 +10,7 @@ import {
   IconSparkles,
 } from '@tabler/icons-react';
 import { useState } from 'react';
+import Link from 'next/link';
 
 export default function DiscussionsPage(): JSX.Element {
   const [showNewDiscussionForm, setShowNewDiscussionForm] =
@@ -86,7 +87,10 @@ export default function DiscussionsPage(): JSX.Element {
     <div className="page__discussions">
       <ViewContainer>
         <div className="space-y-4">
-          <h1 className="leading-snug text-xl font-semibold">/Discussions</h1>
+          <h1 className="leading-snug text-xl font-semibold">
+            <Link href="/">Yash Sehgal</Link>
+            /Discussions
+          </h1>
           <p className="text-sm text-gray-500">
             An open discussion/chatting area. Share your views related to
             design, engineering, start a discussion about AI, travelling, art or
