@@ -40,7 +40,7 @@ export default function DiscussionsPage(): JSX.Element {
 
   const handleCreateDiscussion = () => {
     const title = newDiscussionInput.trim();
-    if (!title || title === 'New discussion') return;
+    if (!title) return;
 
     createDiscussionMutation.mutate({ title });
   };

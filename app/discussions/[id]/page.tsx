@@ -1,17 +1,24 @@
 'use client';
 
 import { ViewContainer } from '@/components/layout/view-container';
-import { getDiscussion, getDiscussionContent } from '@/services/discussions';
-import { useQuery } from '@tanstack/react-query';
+import {
+  createMessage,
+  getDiscussion,
+  getDiscussionContent,
+} from '@/services/discussions';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { CommentItem } from '../_components/comment-item';
-import { IconInfoCircle, IconLoader2 } from '@tabler/icons-react';
-import React from 'react';
+import { IconInfoCircle, IconLoader2, IconSend } from '@tabler/icons-react';
+import React, { useState } from 'react';
+import { AutoResizeTextarea } from '@/components/ui/auto-resize-textarea';
 
 export default function DiscussionPage(): JSX.Element {
   const params = useParams();
   const discussionId = parseInt(params.id as string, 10);
+  const queryClient = useQueryClient();
+  const [newMessage, setNewMessage] = useState('');
 
   // Validate discussionId
   if (isNaN(discussionId)) {
@@ -53,6 +60,27 @@ export default function DiscussionPage(): JSX.Element {
     enabled: !isNaN(discussionId),
   });
 
+  const createMessageMutation = useMutation({
+    mutationFn: createMessage,
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['discussion-content', discussionId],
+      });
+      setNewMessage('');
+    },
+  });
+
+  const handleCreateMessage = (e: React.FormEvent) => {
+    e.preventDefault();
+    const content = newMessage.trim();
+    if (!content || createMessageMutation.isPending) return;
+
+    createMessageMutation.mutate({
+      discussion_id: discussionId,
+      content,
+    });
+  };
+
   const renderContent = () => {
     if (isLoadingMessages) {
       return (
@@ -71,25 +99,59 @@ export default function DiscussionPage(): JSX.Element {
       );
     }
 
-    if (!messagesResponse?.messages?.length) {
-      return (
-        <div className="p-4 text-gray-500 bg-gray-50 rounded text-sm flex items-center gap-2 border">
-          <IconInfoCircle size={16} />
-          No messages in this discussion yet. Be the first to comment!
-        </div>
-      );
-    }
-
     return (
-      <div className="discussions-thread-container">
-        {messagesResponse.messages.map((message, index) => (
-          <React.Fragment key={index}>
-            {index !== 0 && (
-              <div className="w-[1px] h-[40px] bg-gray-200 ml-12" />
-            )}
-            <CommentItem key={message.id} {...message} />
-          </React.Fragment>
-        ))}
+      <div className="space-y-6 mb-56">
+        {!messagesResponse?.messages?.length ? (
+          <div className="p-4 text-gray-500 bg-gray-50 rounded text-sm flex items-center gap-2 border">
+            <IconInfoCircle size={16} />
+            No messages in this discussion yet. Be the first to comment!
+          </div>
+        ) : (
+          <div className="discussions-thread-container">
+            {messagesResponse.messages.map((message, index) => (
+              <React.Fragment key={index}>
+                {index !== 0 && (
+                  <div className="w-[1px] h-[40px] bg-gray-200 ml-12" />
+                )}
+                <CommentItem key={message.id} {...message} />
+              </React.Fragment>
+            ))}
+          </div>
+        )}
+
+        {createMessageMutation.isError && (
+          <div className="p-4 text-gray-500 bg-red-50 rounded text-sm flex items-center gap-2 border text-red-600">
+            <IconInfoCircle size={16} />
+            Failed to send message. Please try again.
+          </div>
+        )}
+
+        <form onSubmit={handleCreateMessage} className="mt-12 bg-white">
+          <div className="flex items-center gap-2 p-2 border rounded-md bg-white">
+            <AutoResizeTextarea
+              placeholder="Type your message..."
+              className="flex-1 text-sm px-2 py-1.5 focus:outline-none max-h-[200px]"
+              value={newMessage}
+              onChange={(e) => setNewMessage(e.target.value)}
+              disabled={createMessageMutation.isPending}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' && e.shiftKey) {
+                  e.preventDefault();
+                  handleCreateMessage(e);
+                }
+              }}
+            />
+            <button
+              type="submit"
+              disabled={createMessageMutation.isPending || !newMessage.trim()}
+              className="text-xs text-gray-500 flex gap-2 items-center hover:bg-gray-100 px-1.5 py-0.5 rounded-md active:bg-gray-200 disabled:opacity-50">
+              <IconSend size={14} />
+            </button>
+          </div>
+          <div className="support-text text-xs mt-2 flex items-center justify-end">
+            Press shift + enter to send
+          </div>
+        </form>
       </div>
     );
   };

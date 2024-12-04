@@ -128,3 +128,43 @@ export async function createDiscussion(
     return { discussion: null, error };
   }
 }
+
+interface CreateMessagePayload {
+  discussion_id: number;
+  content: string;
+}
+
+export async function createMessage(payload: CreateMessagePayload): Promise<{
+  message: SupabaseMessageInterface | null;
+  error: Error | null;
+}> {
+  try {
+    const { data, error, status } = await supabase
+      .from('messages')
+      .insert([
+        {
+          discussion_id: payload.discussion_id,
+          content: payload.content,
+        },
+      ])
+      .select()
+      .single();
+
+    if (error) {
+      console.error('[createMessage]: Error:', error.message);
+      return { message: null, error: new Error(error.message) };
+    }
+
+    if (!data) {
+      console.warn('[createMessage]: No data received, status:', status);
+      return { message: null, error: null };
+    }
+
+    return { message: data, error: null };
+  } catch (err) {
+    const error =
+      err instanceof Error ? err : new Error('Unknown error occurred');
+    console.error('[createMessage]: Unexpected error:', error);
+    return { message: null, error };
+  }
+}
