@@ -9,7 +9,7 @@ body {
 }
 
 a {
-  @apply text-indigo-600 hover:underline hover:underline-offset-2;
+  @apply text-indigo-600 hover:bg-indigo-600 hover:text-white active:bg-indigo-800 active:text-white;
 }
 
 .comment-accessible-section,
