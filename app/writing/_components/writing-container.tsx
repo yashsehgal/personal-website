@@ -1,6 +1,5 @@
 import { ViewContainer } from '@/components/layout/view-container';
 import { cn } from '@/helpers';
-import { IconChevronLeft } from '@tabler/icons-react';
 import Link from 'next/link';
 import { forwardRef } from 'react';
 

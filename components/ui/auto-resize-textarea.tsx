@@ -26,8 +26,10 @@ export const AutoResizeTextarea = forwardRef<
       {...props}
       ref={(node) => {
         textareaRef.current = node;
-        if (ref) {
-          // @ts-ignore
+        // Handle both function refs and object refs
+        if (typeof ref === 'function') {
+          ref(node);
+        } else if (ref) {
           ref.current = node;
         }
       }}
@@ -38,7 +40,8 @@ export const AutoResizeTextarea = forwardRef<
       rows={1}
       style={{
         resize: 'none',
-        overflow: 'hidden',
+        overflowX: 'hidden',
+        overflowY: 'scroll',
         ...props.style,
       }}
     />

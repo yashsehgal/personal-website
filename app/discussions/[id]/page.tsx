@@ -20,22 +20,6 @@ export default function DiscussionPage(): JSX.Element {
   const queryClient = useQueryClient();
   const [newMessage, setNewMessage] = useState('');
 
-  // Validate discussionId
-  if (isNaN(discussionId)) {
-    return (
-      <ViewContainer>
-        <div className="text-center py-8">
-          <h1 className="text-xl font-semibold">Invalid Discussion ID</h1>
-          <Link
-            href="/discussions"
-            className="w-fit text-xs font-medium text-black px-2 py-1">
-            back to /discussions
-          </Link>
-        </div>
-      </ViewContainer>
-    );
-  }
-
   const {
     data: discussionResponse,
     error: discussionError,
@@ -69,6 +53,22 @@ export default function DiscussionPage(): JSX.Element {
       setNewMessage('');
     },
   });
+
+  // Validate discussionId
+  if (isNaN(discussionId)) {
+    return (
+      <ViewContainer>
+        <div className="text-center py-8">
+          <h1 className="text-xl font-semibold">Invalid Discussion ID</h1>
+          <Link
+            href="/discussions"
+            className="w-fit text-xs font-medium text-black px-2 py-1">
+            back to /discussions
+          </Link>
+        </div>
+      </ViewContainer>
+    );
+  }
 
   const handleCreateMessage = (e: React.FormEvent) => {
     e.preventDefault();

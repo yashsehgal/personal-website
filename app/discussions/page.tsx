@@ -67,8 +67,8 @@ export default function DiscussionsPage(): JSX.Element {
 
     if (!response?.discussions?.length) {
       return (
-        <div className="p-4 text-gray-500 bg-gray-50 rounded text-sm flex items-center gap-2 border">
-          <IconSparkles size={16} className="animate-spin" />
+        <div className="p-4 text-indigo-500 bg-indigo-50 rounded text-sm flex items-center gap-2 border border-indigo-200">
+          <IconSparkles size={16} className="" />
           Not discussions found! Be the first one to start
         </div>
       );
@@ -139,7 +139,7 @@ export default function DiscussionsPage(): JSX.Element {
             </div>
           ) : (
             <button
-              className="mb-4 text-sm text-gray-500 flex gap-2 items-center hover:bg-gray-100 px-1.5 py-0.5 rounded-md w-fit ml-auto active:bg-gray-200"
+              className="mb-8 text-sm text-gray-500 flex gap-2 items-center hover:bg-gray-100 px-1.5 py-0.5 rounded-md w-fit ml-auto active:bg-gray-200"
               onClick={() => setShowNewDiscussionForm(true)}>
               <IconPlus size={14} />
               Start a new discussion
