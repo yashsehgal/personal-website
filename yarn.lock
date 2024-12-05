@@ -1149,6 +1149,11 @@ concat-map@0.0.1:
   resolved "https://registry.yarnpkg.com/concat-map/-/concat-map-0.0.1.tgz#d8a96bd77fd68df7793a73036a3ba0d5405d477b"
   integrity sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==
 
+core-js@^3.38.1:
+  version "3.39.0"
+  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.39.0.tgz#57f7647f4d2d030c32a72ea23a0555b2eaa30f83"
+  integrity sha512-raM0ew0/jJUqkJ0E6e8UDtl+y/7ktFivgWvqw8dNSQeNWoSDLvQ1H/RN3aPXB9tBd4/FhyR4RDPGhsNIMsAn7g==
+
 cross-spawn@^7.0.0, cross-spawn@^7.0.2:
   version "7.0.5"
   resolved "https://registry.yarnpkg.com/cross-spawn/-/cross-spawn-7.0.5.tgz#910aac880ff5243da96b728bc6521a5f6c2f2f82"
@@ -1699,6 +1704,11 @@ fastq@^1.6.0:
   integrity sha512-sRVD3lWVIXWg6By68ZN7vho9a1pQcN/WBFaAAsDDFzlJjvoGx0P8z7V1t72grFJfJhu3YPZBuu25f7Kaw2jN1w==
   dependencies:
     reusify "^1.0.4"
+
+fflate@^0.4.8:
+  version "0.4.8"
+  resolved "https://registry.yarnpkg.com/fflate/-/fflate-0.4.8.tgz#f90b82aefbd8ac174213abb338bd7ef848f0f5ae"
+  integrity sha512-FJqqoDBR00Mdj9ppamLa/Y7vxm+PRmNWA67N846RvsoYVMKB4q3y/de5PA7gUmRMYK/8CMz2GDZQmCRN1wBcWA==
 
 file-entry-cache@^6.0.1:
   version "6.0.1"
@@ -3005,6 +3015,21 @@ postcss@^8, postcss@^8.4.23:
     picocolors "^1.1.1"
     source-map-js "^1.2.1"
 
+posthog-js@^1.194.3:
+  version "1.194.3"
+  resolved "https://registry.yarnpkg.com/posthog-js/-/posthog-js-1.194.3.tgz#4ae936a1e33f32ae960708e8df898f13593c84ce"
+  integrity sha512-/YFpBMqZzRpywa07QeoaIojdrUDijFajT4gZBSCFUBuZA5BN5xr5S1spsvtpT7E4RjkQSVgRvUngI4W19csgQw==
+  dependencies:
+    core-js "^3.38.1"
+    fflate "^0.4.8"
+    preact "^10.19.3"
+    web-vitals "^4.2.0"
+
+preact@^10.19.3:
+  version "10.25.1"
+  resolved "https://registry.yarnpkg.com/preact/-/preact-10.25.1.tgz#1c4b84253c42dee874bfbf6a92bdce45e3662665"
+  integrity sha512-frxeZV2vhQSohQwJ7FvlqC40ze89+8friponWUFeVEkaCfhC6Eu4V0iND5C9CXz8JLndV07QRDeXzH1+Anz5Og==
+
 prelude-ls@^1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/prelude-ls/-/prelude-ls-1.2.1.tgz#debc6489d7a6e6b0e7611888cec880337d316396"
@@ -3727,6 +3752,11 @@ vfile@^6.0.0:
   dependencies:
     "@types/unist" "^3.0.0"
     vfile-message "^4.0.0"
+
+web-vitals@^4.2.0:
+  version "4.2.4"
+  resolved "https://registry.yarnpkg.com/web-vitals/-/web-vitals-4.2.4.tgz#1d20bc8590a37769bd0902b289550936069184b7"
+  integrity sha512-r4DIlprAGwJ7YM11VZp4R884m0Vmgr6EAKe3P+kO0PPj3Unqyvv59rczf6UiGcb9Z8QxZVcqKNwv/g0WNdWwsw==
 
 webidl-conversions@^3.0.0:
   version "3.0.1"

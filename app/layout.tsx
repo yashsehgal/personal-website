@@ -3,6 +3,7 @@ import localFont from 'next/font/local';
 import './globals.css';
 import { GlobalContextProvider } from '@/provider/global-context-provider';
 import TanStackReactQueryProvider from '@/provider/tanstack-react-query-provider';
+import { PHProvider } from '@/provider/posthog-provider';
 
 const geistSans = localFont({
   src: './fonts/GeistVF.woff',
@@ -27,12 +28,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <TanStackReactQueryProvider>
-          <GlobalContextProvider>{children}</GlobalContextProvider>
-        </TanStackReactQueryProvider>
-      </body>
+      <PHProvider>
+        <body
+          className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+          <TanStackReactQueryProvider>
+            <GlobalContextProvider>{children}</GlobalContextProvider>
+          </TanStackReactQueryProvider>
+        </body>
+      </PHProvider>
     </html>
   );
 }
