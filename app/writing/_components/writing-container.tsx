@@ -1,6 +1,5 @@
 import { ViewContainer } from '@/components/layout/view-container';
 import { cn } from '@/helpers';
-import { IconChevronLeft } from '@tabler/icons-react';
 import Link from 'next/link';
 import { forwardRef } from 'react';
 
@@ -12,11 +11,10 @@ export const WritingContainer = forwardRef<
 >(({ className, ...props }, ref) => {
   return (
     <main ref={ref} className={cn('writing-container', className)} {...props}>
-      <Link href="/" className="text-inherit max-lg:hidden">
-        <button className="absolute top-12 left-12 font-semibold text-sm flex gap-2 items-center">
-          <IconChevronLeft size={14} />
-          Back
-        </button>
+      <Link
+        href="/"
+        className="fixed top-6 left-6 w-fit text-xs font-medium text-black px-2 py-1 max-xl:hidden">
+        Back to home
       </Link>
       <ViewContainer>{props.children}</ViewContainer>
     </main>
