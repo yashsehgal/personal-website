@@ -10,7 +10,9 @@ export function DiscussionItem({
 }: SupabaseDiscussionInterface): JSX.Element {
   return (
     <ViewContainer className="discussion-item flex items-center text-sm gap-2">
-      <Link href={`/discussions/${id}`} className="truncate min-w-0 shrink">
+      <Link
+        href={`/discussions/${id}`}
+        className="truncate min-w-[12ch] shrink">
         <span className="truncate block">{title || 'Untitled Discussion'}</span>
       </Link>
       <div className="h-[1px] w-full bg-gray-200 shrink" />
