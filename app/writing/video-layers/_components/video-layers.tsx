@@ -1,6 +1,6 @@
 'use client';
 import { cn } from '@/helpers';
-import { useState, FocusEvent } from 'react';
+import { useState, useRef } from 'react';
 import { motion, MotionProps } from 'framer-motion';
 import {
   IconGripVertical,
@@ -14,6 +14,13 @@ interface LayerProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   length: number;
   name: string;
   variant: LayerVariant;
+  darkMode: boolean;
+}
+
+interface LayerConfig {
+  length: number;
+  name: string;
+  variant: LayerVariant;
 }
 
 enum LAYER_UI_STATE {
@@ -21,11 +28,7 @@ enum LAYER_UI_STATE {
   SELECTED = 'SELECTED',
 }
 
-const LAYERS_INITIAL_CONFIG: {
-  length: number;
-  name: string;
-  variant: LayerVariant;
-}[] = [
+const LAYERS_INITIAL_CONFIG: LayerConfig[] = [
   { length: 40, name: 'CTA', variant: 'text' },
   { length: 12, name: 'Logo', variant: 'image' },
   { length: 30, name: 'Headline', variant: 'text' },
@@ -33,33 +36,36 @@ const LAYERS_INITIAL_CONFIG: {
   { length: 20, name: 'Description', variant: 'text' },
   { length: 60, name: 'Tagline', variant: 'text' },
   { length: 20, name: 'Terms and condition', variant: 'text' },
-] as const;
+];
 
 export function LayersContainer({
   className,
+  darkMode = false,
   ...props
-}: React.HTMLAttributes<HTMLDivElement>): JSX.Element {
+}: React.HTMLAttributes<HTMLDivElement> & { darkMode: boolean }): JSX.Element {
+  const [layers, setLayers] = useState<LayerConfig[]>(LAYERS_INITIAL_CONFIG);
+
   return (
     <div
       className={cn('LayersContainer grid gap-2 w-[80%] font-sans', className)}
       {...props}>
-      {LAYERS_INITIAL_CONFIG.map((layer, index) => {
-        return (
-          <Layer
-            key={index}
-            length={layer.length}
-            name={layer.name}
-            variant={layer.variant}
-          />
-        );
-      })}
+      {layers.map((layer, index) => (
+        <Layer
+          key={index}
+          darkMode={darkMode}
+          length={layer.length}
+          name={layer.name}
+          variant={layer.variant}
+        />
+      ))}
     </div>
   );
 }
 
 function Layer({
   className,
-  length,
+  length: initialLength,
+  darkMode,
   name,
   variant,
   ...props
@@ -67,31 +73,75 @@ function Layer({
   const [LayerUIState, setLayerUIState] = useState<LAYER_UI_STATE>(
     LAYER_UI_STATE.IDLE,
   );
+  const [length, setLength] = useState(initialLength);
+  const [isDragging, setIsDragging] = useState(false);
+  const resizeRef = useRef<HTMLSpanElement>(null);
+  const lastValidWidth = useRef(length);
 
-  const handleLayerSelection = (e: FocusEvent<HTMLButtonElement>) => {
+  const handleLayerSelection = () => {
     setLayerUIState(LAYER_UI_STATE.SELECTED);
   };
 
-  const handleLayerDeselection = (e: FocusEvent<HTMLButtonElement>) => {
+  const handleLayerDeselection = () => {
     setLayerUIState(LAYER_UI_STATE.IDLE);
+  };
+
+  const handleResize = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setIsDragging(true);
+
+    const startX = e.clientX;
+    const startWidth = length;
+
+    const handleMouseMove = (moveEvent: MouseEvent) => {
+      const deltaX = moveEvent.clientX - startX;
+      const containerWidth = window.innerWidth * 0.4; // Assuming container is 80% of window width
+      const deltaPercent = (deltaX / containerWidth) * 100;
+      const newLength = Math.max(10, Math.min(100, startWidth + deltaPercent));
+
+      // Only update if the change is significant enough
+      if (Math.abs(newLength - lastValidWidth.current) > 0.1) {
+        lastValidWidth.current = newLength;
+        setLength(newLength);
+      }
+    };
+
+    const handleMouseUp = () => {
+      setIsDragging(false);
+      document.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mouseup', handleMouseUp);
+    };
+
+    document.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener('mouseup', handleMouseUp);
   };
 
   return (
     <motion.button
+      drag={isDragging ? false : 'x'}
+      dragMomentum={false}
+      dragConstraints={{ left: 0, right: 0 }}
+      dragElastic={0.1}
       onFocus={handleLayerSelection}
       onBlur={handleLayerDeselection}
       className={cn(
-        'Layer h-10 rounded-xl bg-black text-xs text-white flex items-center px-2 select-none transition-all focus-visible:outline-none relative',
+        'Layer h-10 rounded-xl text-xs text-white flex items-center px-2 select-none relative focus-visible:outline-none',
         LayerUIState === LAYER_UI_STATE.SELECTED &&
-          'border-4 my-6 shadow-md shadow-black/20 rounded-bl-xl rounded-tl rounded-r-none',
+          'border-4 my-4 shadow-md shadow-black/20 rounded-bl-xl rounded-tl rounded-r-none',
         variant === 'image' ? 'border-yellow-400' : 'border-blue-500',
+        darkMode ? 'bg-neutral-800' : 'bg-neutral-200/50 text-black',
         className,
       )}
-      style={{ width: `${length}%` }}
+      style={{
+        width: `${length}%`,
+        transition: isDragging ? 'none' : 'width 0.2s ease-out',
+      }}
       {...(props as MotionProps)}>
       {LayerUIState === LAYER_UI_STATE.SELECTED && (
         <>
           <motion.span
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
             className={cn(
               'max-w-[90%] text-xs absolute -top-[16px] -left-1 px-2 truncate rounded-t-md flex items-center gap-1',
               variant === 'image'
@@ -106,8 +156,10 @@ function Layer({
             <span className="truncate">{name}</span>
           </motion.span>
           <motion.span
+            ref={resizeRef}
+            onMouseDown={handleResize}
             className={cn(
-              'h-10 p-0.5 flex items-center justify-center absolute -right-[14px] rounded-r-lg shadow-lg shadow-black/15',
+              'h-10 p-0.5 flex items-center justify-center absolute -right-[14px] rounded-r-lg cursor-ew-resize',
               variant === 'image'
                 ? 'bg-yellow-400 text-black'
                 : 'bg-blue-500 text-white',
@@ -120,3 +172,5 @@ function Layer({
     </motion.button>
   );
 }
+
+export default Layer;
