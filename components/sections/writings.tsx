@@ -22,6 +22,11 @@ const WRITINGS: { name: string; slug: string; emoji: string }[] = [
     slug: 'automation-flow-component',
     emoji: '⚙️',
   },
+  {
+    name: 'Video layers',
+    slug: 'video-layers',
+    emoji: '📀',
+  },
 ];
 
 export default function Writings() {
