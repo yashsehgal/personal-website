@@ -43,13 +43,11 @@ export function LayersContainer({
   darkMode = false,
   ...props
 }: React.HTMLAttributes<HTMLDivElement> & { darkMode: boolean }): JSX.Element {
-  const [layers, setLayers] = useState<LayerConfig[]>(LAYERS_INITIAL_CONFIG);
-
   return (
     <div
       className={cn('LayersContainer grid gap-2 w-[80%] font-sans', className)}
       {...props}>
-      {layers.map((layer, index) => (
+      {LAYERS_INITIAL_CONFIG.map((layer, index) => (
         <Layer
           key={index}
           darkMode={darkMode}
