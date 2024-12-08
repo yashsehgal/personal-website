@@ -116,6 +116,25 @@ function Layer({
     document.addEventListener('mouseup', handleMouseUp);
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>) => {
+    if (LayerUIState !== LAYER_UI_STATE.SELECTED) return;
+
+    const STEP_SIZE = 2; // Percentage to change per keypress
+
+    switch (e.key) {
+      case 'ArrowRight':
+        e.preventDefault();
+        setLength((prev) => Math.min(100, prev + STEP_SIZE));
+        lastValidWidth.current = Math.min(100, length + STEP_SIZE);
+        break;
+      case 'ArrowLeft':
+        e.preventDefault();
+        setLength((prev) => Math.max(10, prev - STEP_SIZE));
+        lastValidWidth.current = Math.max(10, length - STEP_SIZE);
+        break;
+    }
+  };
+
   return (
     <motion.button
       drag={isDragging ? false : 'x'}
@@ -124,6 +143,7 @@ function Layer({
       dragElastic={0.1}
       onFocus={handleLayerSelection}
       onBlur={handleLayerDeselection}
+      onKeyDown={handleKeyDown}
       className={cn(
         'Layer h-10 rounded-xl text-xs text-white flex items-center px-2 select-none relative focus-visible:outline-none',
         LayerUIState === LAYER_UI_STATE.SELECTED &&
@@ -143,7 +163,7 @@ function Layer({
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             className={cn(
-              'max-w-[90%] text-xs absolute -top-[16px] -left-1 px-2 truncate rounded-t-md flex items-center gap-1',
+              'max-w-[90%] min-w-[10%] text-xs absolute -top-[16px] -left-1 px-2 truncate rounded-t-md flex items-center gap-1',
               variant === 'image'
                 ? 'bg-yellow-400 text-black'
                 : 'bg-blue-500 text-white',
