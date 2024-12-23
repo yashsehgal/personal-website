@@ -27,6 +27,11 @@ const WRITINGS: { name: string; slug: string; emoji: string }[] = [
     slug: 'dropdown-with-micro-interactions',
     emoji: '✨',
   },
+  {
+    name: 'Video layers',
+    slug: 'video-layers',
+    emoji: '📀',
+  },
 ];
 
 export default function Writings() {
