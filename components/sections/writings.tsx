@@ -23,6 +23,11 @@ const WRITINGS: { name: string; slug: string; emoji: string }[] = [
     emoji: '⚙️',
   },
   {
+    name: 'Dropdown with micro interactions',
+    slug: 'dropdown-with-micro-interactions',
+    emoji: '✨',
+  },
+  {
     name: 'Video layers',
     slug: 'video-layers',
     emoji: '📀',
