@@ -22,6 +22,11 @@ const WRITINGS: { name: string; slug: string; emoji: string }[] = [
     slug: 'automation-flow-component',
     emoji: '⚙️',
   },
+  {
+    name: 'Dropdown with micro interactions',
+    slug: 'dropdown-with-micro-interactions',
+    emoji: '✨',
+  },
 ];
 
 export default function Writings() {
