@@ -32,6 +32,11 @@ const WRITINGS: { name: string; slug: string; emoji: string }[] = [
     slug: 'video-layers',
     emoji: '📀',
   },
+  {
+    name: 'CTA with micro interactions',
+    slug: 'cta-with-micro-interactions',
+    emoji: '🗂️',
+  },
 ];
 
 export default function Writings() {
