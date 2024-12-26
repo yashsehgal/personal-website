@@ -78,31 +78,30 @@ export function KnowledgeBaseCTA() {
       onMouseEnter={() => setHoveringCTA(true)}
       onMouseLeave={() => setHoveringCTA(false)}>
       <div className="Knowledge-base-cta-card--bg-elements-wrapper p-3 flex items-center justify-end gap-2">
-        {hoveringCTA &&
-          Object.keys(KNOWLEDGE_BASE_ELEMENTS).map((element, index) => {
-            const typedElement = element as ELEMENT;
-            return (
-              <motion.div
-                key={index}
-                initial={{
-                  y: MOTION_ELEMENTS_INITIAL_Y * (index + 1),
-                }}
-                animate={{ y: 0 }}
-                style={{
-                  top: -18,
-                  ...getElementStyle(typedElement),
-                }}
-                transition={{
-                  type: 'spring',
-                  bounce: 1,
-                  stiffness: 160,
-                  delay: 0.04 * index,
-                }}
-                className="w-fit h-fit border-2 border-white rounded-xl shadow-lg absolute">
-                {KNOWLEDGE_BASE_ELEMENTS[typedElement]}
-              </motion.div>
-            );
-          })}
+        {Object.keys(KNOWLEDGE_BASE_ELEMENTS).map((element, index) => {
+          const typedElement = element as ELEMENT;
+          return (
+            <motion.div
+              key={index}
+              initial={{
+                y: MOTION_ELEMENTS_INITIAL_Y * (index + 1),
+              }}
+              animate={{ y: hoveringCTA ? -36 : -8 }}
+              style={{
+                top: 18,
+                ...getElementStyle(typedElement),
+              }}
+              transition={{
+                type: 'spring',
+                bounce: 1,
+                stiffness: 160,
+                delay: 0.04 * index,
+              }}
+              className="w-fit h-fit border-2 border-white rounded-xl shadow-lg absolute">
+              {KNOWLEDGE_BASE_ELEMENTS[typedElement]}
+            </motion.div>
+          );
+        })}
       </div>
       <div className="Knowledge-base-cta-card--main-content-container bg-white p-6 rounded-xl border-t z-20 relative">
         <h1 className="text-lg font-medium">Knowledge Base</h1>
