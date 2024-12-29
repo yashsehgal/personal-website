@@ -37,6 +37,11 @@ const WRITINGS: { name: string; slug: string; emoji: string }[] = [
     slug: 'cta-with-micro-interactions',
     emoji: '🗂️',
   },
+  {
+    name: 'Panel with custom order',
+    slug: 'panel-with-custom-order',
+    emoji: '🧱',
+  },
 ];
 
 export default function Writings() {
