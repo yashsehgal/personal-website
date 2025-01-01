@@ -1,8 +1,5 @@
 'use client';
-import {
-  IPlatformUsageCardProps,
-  PLATFORM_USAGE_CARD_VIEW,
-} from '@/app/writing/platform-usage-card/_components/interfaces';
+import { PLATFORM_USAGE_CARD_VIEW } from '@/app/writing/platform-usage-card/_components/interfaces';
 import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { cn } from '@/helpers';
@@ -17,109 +14,82 @@ import {
 
 const AUTO_INTERVAL_DURATION = 2000; // duration of interval
 
-export function PlatformUsageCard({
-  withAutoInterval,
-  currentState = PLATFORM_USAGE_CARD_VIEW.SHOW_TIME,
-}: IPlatformUsageCardProps): JSX.Element {
+export function PlatformUsageCard(): JSX.Element {
   const [platformUsageCardContent, setPlatformUsageCardContent] = useState<
     PLATFORM_USAGE_CARD_VIEW[]
   >([PLATFORM_USAGE_CARD_VIEW.SHOW_TIME]);
-
   const [isAddingContent, setIsAddingContent] = useState(true);
 
   useEffect(() => {
-    if (!withAutoInterval) {
-      setPlatformUsageCardContent(
-        [
-          PLATFORM_USAGE_CARD_VIEW.SHOW_TIME,
-          currentState !== PLATFORM_USAGE_CARD_VIEW.SHOW_TIME
-            ? currentState
-            : null,
-        ].filter(Boolean) as PLATFORM_USAGE_CARD_VIEW[],
-      );
-      return;
-    }
-
-    const getNextState = (
-      prevContent: PLATFORM_USAGE_CARD_VIEW[],
-      isAdding: boolean,
-    ) => {
-      if (isAdding) {
-        // Adding content logic
-        if (prevContent.length === 1) {
-          return [
-            PLATFORM_USAGE_CARD_VIEW.SHOW_TIME,
-            PLATFORM_USAGE_CARD_VIEW.SHOW_GRAPH,
-          ];
-        }
-
-        if (prevContent.length === 2) {
-          return [
-            PLATFORM_USAGE_CARD_VIEW.SHOW_TIME,
-            PLATFORM_USAGE_CARD_VIEW.SHOW_GRAPH,
-            PLATFORM_USAGE_CARD_VIEW.SHOW_MOST_USED,
-          ];
-        }
-
-        // When array is full, switch to removing mode
-        setIsAddingContent(false);
-        return prevContent;
-      } else {
-        // Removing content logic
-        if (prevContent.length > 1) {
-          return prevContent.slice(0, -1);
-        }
-
-        // When only SHOW_TIME remains, switch back to adding mode
-        setIsAddingContent(true);
-        return prevContent;
-      }
-    };
-
     const intervalId = setInterval(() => {
-      setPlatformUsageCardContent((prevContent) =>
-        getNextState(prevContent, isAddingContent),
-      );
+      setPlatformUsageCardContent((prevContent) => {
+        if (prevContent.length === 3) {
+          clearInterval(intervalId);
+          return prevContent;
+        }
+
+        switch (prevContent.length) {
+          case 0:
+            return [PLATFORM_USAGE_CARD_VIEW.SHOW_TIME];
+          case 1:
+            return [
+              PLATFORM_USAGE_CARD_VIEW.SHOW_TIME,
+              PLATFORM_USAGE_CARD_VIEW.SHOW_GRAPH,
+            ];
+          case 2:
+            return [
+              PLATFORM_USAGE_CARD_VIEW.SHOW_TIME,
+              PLATFORM_USAGE_CARD_VIEW.SHOW_GRAPH,
+              PLATFORM_USAGE_CARD_VIEW.SHOW_MOST_USED,
+            ];
+          default:
+            return prevContent;
+        }
+      });
     }, AUTO_INTERVAL_DURATION);
 
     return () => clearInterval(intervalId);
-  }, [withAutoInterval, currentState, isAddingContent]);
+  }, []);
 
   return (
-    <div className="Platform-usage-card-container font-sans p-2 rounded-3xl bg-gray-100 w-[420px] select-none cursor-default">
-      <div
-        className={cn(
-          'Platform-usage-card--time-graph-content-container bg-white p-6 rounded-2xl shadow shadow-gray-200 space-y-6',
-          platformUsageCardContent.includes(
-            PLATFORM_USAGE_CARD_VIEW.SHOW_GRAPH,
-          ) && 'pb-12',
-        )}>
+    <AnimatePresence mode="sync">
+      <motion.div
+        layout
+        className="Platform-usage-card-container font-sans p-2 rounded-3xl bg-gray-100 w-[420px] select-none cursor-default">
+        <div
+          className={cn(
+            'Platform-usage-card--time-graph-content-container bg-white p-6 rounded-2xl shadow shadow-gray-200 space-y-6',
+            platformUsageCardContent.includes(
+              PLATFORM_USAGE_CARD_VIEW.SHOW_GRAPH,
+            ) && 'pb-12',
+          )}>
+          <AnimatePresence mode="wait">
+            {platformUsageCardContent.includes(
+              PLATFORM_USAGE_CARD_VIEW.SHOW_TIME,
+            ) && <PlatformUsageCardTimeContent />}
+          </AnimatePresence>
+          <AnimatePresence mode="wait">
+            {platformUsageCardContent.includes(
+              PLATFORM_USAGE_CARD_VIEW.SHOW_GRAPH,
+            ) && <PlatformUsageCardGraphContent />}
+          </AnimatePresence>
+        </div>
         <AnimatePresence mode="wait">
           {platformUsageCardContent.includes(
-            PLATFORM_USAGE_CARD_VIEW.SHOW_TIME,
-          ) && <PlatformUsageCardTimeContent />}
+            PLATFORM_USAGE_CARD_VIEW.SHOW_MOST_USED,
+          ) && (
+            <motion.div
+              className="Platform-usage-card--most-used-container px-4 pt-6 pb-4"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.3 }}>
+              <PlatformUsageCardMostUsedContent />
+            </motion.div>
+          )}
         </AnimatePresence>
-        <AnimatePresence mode="wait">
-          {platformUsageCardContent.includes(
-            PLATFORM_USAGE_CARD_VIEW.SHOW_GRAPH,
-          ) && <PlatformUsageCardGraphContent />}
-        </AnimatePresence>
-      </div>
-      <AnimatePresence mode="wait">
-        {platformUsageCardContent.includes(
-          PLATFORM_USAGE_CARD_VIEW.SHOW_MOST_USED,
-        ) && (
-          <motion.div
-            className="Platform-usage-card--most-used-container px-4 pt-6 pb-4"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3 }}>
-            <PlatformUsageCardMostUsedContent />
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
+      </motion.div>
+    </AnimatePresence>
   );
 }
 
@@ -221,7 +191,7 @@ function PlatformUsageCardMostUsedContent(): JSX.Element {
 
   return (
     <motion.div
-      className="grid grid-cols-2 gap-4"
+      className="grid grid-cols-2 gap-4 overflow-hidden"
       variants={containerVariants}
       initial="hidden"
       animate="visible"
