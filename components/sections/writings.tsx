@@ -37,6 +37,11 @@ const WRITINGS: { name: string; slug: string; emoji: string }[] = [
     slug: 'cta-with-micro-interactions',
     emoji: '🗂️',
   },
+  {
+    name: 'Platform usage card',
+    slug: 'platform-usage-card',
+    emoji: '📊',
+  },
 ];
 
 export default function Writings() {
