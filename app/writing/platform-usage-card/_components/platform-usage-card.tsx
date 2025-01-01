@@ -18,7 +18,6 @@ export function PlatformUsageCard(): JSX.Element {
   const [platformUsageCardContent, setPlatformUsageCardContent] = useState<
     PLATFORM_USAGE_CARD_VIEW[]
   >([PLATFORM_USAGE_CARD_VIEW.SHOW_TIME]);
-  const [isAddingContent, setIsAddingContent] = useState(true);
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -197,22 +196,20 @@ function PlatformUsageCardMostUsedContent(): JSX.Element {
       animate="visible"
       exit="exit"
       layout>
-      {PLATFORMS_USAGE_DATA.map(
-        ({ icon: PlatformIcon, name, usage }, index) => (
-          <motion.div
-            key={`platform-${name.toLowerCase()}`}
-            className="flex items-center gap-4"
-            variants={itemVariants}>
-            <div className="p-2 rounded-lg bg-white text-black border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
-              <PlatformIcon size={20} strokeWidth={1.5} />
-            </div>
-            <div className="w-full">
-              <p className="text-sm font-medium text-gray-900">{name}</p>
-              <p className="text-xs text-gray-500 font-medium">{usage}</p>
-            </div>
-          </motion.div>
-        ),
-      )}
+      {PLATFORMS_USAGE_DATA.map(({ icon: PlatformIcon, name, usage }) => (
+        <motion.div
+          key={`platform-${name.toLowerCase()}`}
+          className="flex items-center gap-4"
+          variants={itemVariants}>
+          <div className="p-2 rounded-lg bg-white text-black border border-gray-200 shadow-sm hover:shadow-md transition-shadow">
+            <PlatformIcon size={20} strokeWidth={1.5} />
+          </div>
+          <div className="w-full">
+            <p className="text-sm font-medium text-gray-900">{name}</p>
+            <p className="text-xs text-gray-500 font-medium">{usage}</p>
+          </div>
+        </motion.div>
+      ))}
     </motion.div>
   );
 }
