@@ -1,13 +1,6 @@
 'use client';
 
-import {
-  IconBrandSlack,
-  IconLink,
-  IconLoader,
-  IconLoader2,
-  IconPlugConnected,
-  IconX,
-} from '@tabler/icons-react';
+import { IconPlugConnected, IconX } from '@tabler/icons-react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { useState } from 'react';
