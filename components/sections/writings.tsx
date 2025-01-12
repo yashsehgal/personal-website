@@ -42,6 +42,11 @@ const WRITINGS: { name: string; slug: string; emoji: string }[] = [
     slug: 'platform-usage-card',
     emoji: '📊',
   },
+  {
+    name: 'Integrations',
+    slug: 'integrations',
+    emoji: '🔗',
+  },
 ];
 
 export default function Writings() {
