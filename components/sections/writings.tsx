@@ -47,6 +47,11 @@ const WRITINGS: { name: string; slug: string; emoji: string }[] = [
     slug: 'integrations',
     emoji: '🔗',
   },
+  {
+    name: 'Overlaying video player',
+    slug: 'overlaying-video-player',
+    emoji: '📽️',
+  },
 ];
 
 export default function Writings() {
