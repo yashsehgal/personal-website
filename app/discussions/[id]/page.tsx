@@ -195,7 +195,7 @@ export default function DiscussionPage(): JSX.Element {
           <div className="flex flex-col space-y-4">
             <Link
               href="/discussions"
-              className="w-fit fixed top-6 left-6 text-xs font-medium text-black px-2 py-1">
+              className="w-fit fixed top-6 left-6 text-xs font-medium text-black px-2 py-1 max-xl:hidden">
               back to /discussions
             </Link>
             <h1 className="text-xl font-semibold">

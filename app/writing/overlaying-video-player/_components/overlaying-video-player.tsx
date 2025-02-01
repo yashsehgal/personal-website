@@ -4,7 +4,7 @@ import {
   IconPlayerPlayFilled,
 } from '@tabler/icons-react';
 import { motion } from 'framer-motion';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 
 const VIDEO_URL: string =
   'https://www.youtube.com/embed/XTp5jaRU3Ws?si=14X0ZrChPQ5ZnGjd&amp;controls=0' as const;
@@ -35,7 +35,9 @@ export function OverlayingVideoPlayer() {
   );
 
   const [interacting, setInteracting] = useState<boolean>(false);
+  const [isDragging, setIsDragging] = useState(false);
   const [videoTimestamp, setVideoTimestamp] = useState<number>(40);
+  const lastValidTimestamp = useRef(videoTimestamp);
 
   return (
     <div className="w-full h-full flex items-center justify-center">
@@ -108,24 +110,51 @@ export function OverlayingVideoPlayer() {
               </button>
               <motion.div
                 onMouseDown={(e) => {
-                  setInteracting(true);
-                }}
-                onMouseUp={() => {
-                  setInteracting(false);
-                }}
-                onMouseLeave={(e) => {
                   e.stopPropagation();
-                  setTimeout(() => {
-                    if (interacting) setInteracting(false);
-                  }, 20);
+                  setIsDragging(true);
+                  setInteracting(true);
+
+                  const startX = e.clientX;
+                  const startTimestamp = videoTimestamp;
+                  const timelineRect = e.currentTarget.getBoundingClientRect();
+
+                  const handleMouseMove = (moveEvent: MouseEvent) => {
+                    const deltaX = moveEvent.clientX - timelineRect.left;
+                    const containerWidth = timelineRect.width;
+                    const newTimestamp = Math.max(
+                      0,
+                      Math.min(100, (deltaX / containerWidth) * 100),
+                    );
+
+                    if (
+                      Math.abs(newTimestamp - lastValidTimestamp.current) > 0.1
+                    ) {
+                      lastValidTimestamp.current = newTimestamp;
+                      setVideoTimestamp(newTimestamp);
+                    }
+                  };
+
+                  const handleMouseUp = () => {
+                    setIsDragging(false);
+                    setInteracting(false);
+                    document.removeEventListener('mousemove', handleMouseMove);
+                    document.removeEventListener('mouseup', handleMouseUp);
+                  };
+
+                  handleMouseMove(e.nativeEvent);
+                  document.addEventListener('mousemove', handleMouseMove);
+                  document.addEventListener('mouseup', handleMouseUp);
                 }}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                whileHover={{ height: `10px` }}
-                className="rounded-full overflow-hidden bg-white/20 h-1.5 w-[90%] absolute bottom-2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                <div
+                whileHover={{ height: '10px' }}
+                className="rounded-full overflow-hidden bg-white/20 h-1.5 w-[90%] absolute bottom-2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 cursor-pointer select-none">
+                <motion.div
                   className="bg-white h-full"
-                  style={{ width: `${videoTimestamp}%` }}
+                  style={{
+                    width: `${videoTimestamp}%`,
+                    transition: isDragging ? 'none' : 'width 0.2s ease-out',
+                  }}
                 />
               </motion.div>
             </>
