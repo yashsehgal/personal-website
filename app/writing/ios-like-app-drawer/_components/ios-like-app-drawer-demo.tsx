@@ -55,6 +55,10 @@ const FOLDER_TILES: AppDrawerFolderTileProps['folder'][] = [
         iconImagePathname: 'notes.svg',
       },
     ],
+    position: {
+      initial: { x: 400, y: 1000 },
+      animate: { x: 0, y: 0 },
+    },
   },
   {
     name: 'Social',
@@ -76,6 +80,10 @@ const FOLDER_TILES: AppDrawerFolderTileProps['folder'][] = [
         iconImagePathname: 'youtube.svg',
       },
     ],
+    position: {
+      initial: { x: 600, y: 800 },
+      animate: { x: 0, y: 0 },
+    },
   },
   {
     name: 'Creative',
@@ -97,6 +105,10 @@ const FOLDER_TILES: AppDrawerFolderTileProps['folder'][] = [
         iconImagePathname: 'adobe.svg',
       },
     ],
+    position: {
+      initial: { x: 200, y: 900 },
+      animate: { x: 0, y: 0 },
+    },
   },
   {
     name: 'Travel',
@@ -111,6 +123,10 @@ const FOLDER_TILES: AppDrawerFolderTileProps['folder'][] = [
       },
       { name: 'Apple Maps', iconImagePathname: 'apple-maps.svg' },
     ],
+    position: {
+      initial: { x: 250, y: 700 },
+      animate: { x: 0, y: 0 },
+    },
   },
 ] as const;
 
