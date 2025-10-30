@@ -56,7 +56,7 @@ const FOLDER_TILES: AppDrawerFolderTileProps['folder'][] = [
       },
     ],
     position: {
-      initial: { x: 300, y: 600 },
+      initial: { x: 700, y: 800 },
       animate: { x: 40, y: 40 },
     },
   },
@@ -81,7 +81,7 @@ const FOLDER_TILES: AppDrawerFolderTileProps['folder'][] = [
       },
     ],
     position: {
-      initial: { x: 300, y: 600 },
+      initial: { x: 600, y: 800 },
       animate: { x: 80, y: 40 },
     },
   },
@@ -106,7 +106,7 @@ const FOLDER_TILES: AppDrawerFolderTileProps['folder'][] = [
       },
     ],
     position: {
-      initial: { x: 300, y: 600 },
+      initial: { x: 200, y: 800 },
       animate: { x: 120, y: 40 },
     },
   },
@@ -124,7 +124,7 @@ const FOLDER_TILES: AppDrawerFolderTileProps['folder'][] = [
       { name: 'Apple Maps', iconImagePathname: 'apple-maps.svg' },
     ],
     position: {
-      initial: { x: 300, y: 600 },
+      initial: { x: 0, y: 800 },
       animate: { x: 160, y: 40 },
     },
   },
@@ -174,7 +174,7 @@ const FOLDER_TILES: AppDrawerFolderTileProps['folder'][] = [
       },
     ],
     position: {
-      initial: { x: 300, y: 600 },
+      initial: { x: 200, y: 800 },
       animate: { x: -305, y: 190 },
     },
   },
