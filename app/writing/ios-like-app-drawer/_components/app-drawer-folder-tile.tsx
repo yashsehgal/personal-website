@@ -28,7 +28,7 @@ export function AppDrawerFolderTile({
   return (
     <motion.div
       key={folder.name}
-      className="flex flex-col items-center justify-center w-fit h-fit gap-2"
+      className="flex flex-col items-center justify-center w-fit h-fit gap-2 pointer-events-none cursor-default select-none"
       initial={{
         filter: 'blur(24px)',
         scale: 0,
