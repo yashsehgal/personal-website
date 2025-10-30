@@ -53,7 +53,7 @@ export function AppDrawerFolderTile({
       {...(props as MotionProps)}>
       <div
         className={cn(
-          'w-24 h-24 p-3 border rounded-3xl grid grid-cols-2 items-center justify-center gap-3 bg-white/30 backdrop-blur-lg',
+          'w-24 h-24 p-3 border shadow border-white/20 rounded-3xl grid grid-cols-2 items-center justify-center gap-3 bg-gradient-to-b from-white/5 to-white/20 backdrop-blur-2xl',
           className,
         )}
         {...props}>
@@ -70,7 +70,7 @@ export function AppDrawerFolderTile({
           );
         })}
       </div>
-      <p className="text-xs">{folder.name}</p>
+      <p className="text-xs text-white font-medium">{folder.name}</p>
     </motion.div>
   );
 }

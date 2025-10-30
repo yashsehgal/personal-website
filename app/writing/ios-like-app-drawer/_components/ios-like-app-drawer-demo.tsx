@@ -129,23 +129,23 @@ const FOLDER_TILES: AppDrawerFolderTileProps['folder'][] = [
     },
   },
   {
-    name: 'Music',
+    name: 'Google',
     apps: [
       {
-        name: 'Netflix',
-        iconImagePathname: 'netflix.svg',
+        name: 'Google',
+        iconImagePathname: 'google.svg',
       },
       {
-        name: 'AppleTV',
-        iconImagePathname: 'apple-tv.svg',
+        name: 'Google Calendar',
+        iconImagePathname: 'google-calendar.svg',
       },
       {
-        name: 'AppleMusic',
-        iconImagePathname: 'apple-music.svg',
+        name: 'Gmail',
+        iconImagePathname: 'google-mail.svg',
       },
       {
-        name: 'YouTube',
-        iconImagePathname: 'youtube.svg',
+        name: 'Google Maps',
+        iconImagePathname: 'google-maps.svg',
       },
     ],
     position: {
@@ -217,12 +217,18 @@ export function IOSLikeAppDrawerDemo() {
   return (
     <div
       className="h-full w-full relative"
+      style={{
+        backgroundImage: 'url(/assets/bg.jpg)',
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+      }}
       onClick={() => {
         setIsOpen(false);
       }}>
       <motion.div
         key="ios-like-app-drawer-dock"
-        className="flex items-center justify-center gap-2 py-2 pl-3 pr-2.5 rounded-xl border absolute bottom-3 left-1/2 -translate-x-1/2 bg-white backdrop-blur-lg divide-x"
+        className="select-none flex items-center justify-center gap-2 py-2 pl-3 pr-2.5 rounded-xl border border-white/20 absolute bottom-3 left-1/2 -translate-x-1/2 bg-white/30 backdrop-blur-lg divide-x divide-white/30"
         initial={{ y: 0, x: -95 }}
         animate={{
           y: isOpen ? 56 : 0,
