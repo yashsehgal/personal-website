@@ -14,7 +14,7 @@ export default function PostIOSLikeAppDrawer() {
         <WritingHeader>iOS-like App Drawer</WritingHeader>
         <WritingDetails>Thursday, 30th October, 2025</WritingDetails>
       </WritingHeader>
-      <WritingContent className="py-24">
+      <WritingContent>
         <DemoBlock className="font-sans h-[420px] rounded-[28px]">
           <IOSLikeAppDrawerDemo />
         </DemoBlock>
