@@ -4,12 +4,6 @@ import {
   AppDrawerFolderTileProps,
 } from '@/app/writing/ios-like-app-drawer/_components/app-drawer-folder-tile';
 import { AppDrawerTrigger } from '@/app/writing/ios-like-app-drawer/_components/app-drawer-trigger';
-import {
-  IconBrandPinterestFilled,
-  IconSettings,
-  ReactNode,
-  TablerIcon,
-} from '@tabler/icons-react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
