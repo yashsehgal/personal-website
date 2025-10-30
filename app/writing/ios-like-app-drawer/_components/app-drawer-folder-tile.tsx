@@ -16,6 +16,7 @@ export interface AppDrawerFolderTileProps
     };
   };
   isOpen: boolean;
+  index: number;
 }
 
 export function AppDrawerFolderTile({
@@ -23,6 +24,7 @@ export function AppDrawerFolderTile({
   className,
   children: _,
   isOpen,
+  index,
   ...props
 }: AppDrawerFolderTileProps) {
   return (
@@ -45,10 +47,8 @@ export function AppDrawerFolderTile({
       }
       transition={{
         type: 'spring',
-        duration: 1.2,
-        bounce: 0.2,
-        stiffness: 50,
-        damping: 12,
+        duration: 0.8,
+        delay: 0.04 * index,
       }}
       {...(props as MotionProps)}>
       <div

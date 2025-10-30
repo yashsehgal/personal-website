@@ -16,7 +16,8 @@ interface AppDrawerTriggerProps {
 }
 
 export function AppDrawerTrigger({ setIsOpen }: AppDrawerTriggerProps) {
-  const handleTriggerClick = () => {
+  const handleTriggerClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.stopPropagation();
     setIsOpen((open) => !open);
   };
 
@@ -24,7 +25,7 @@ export function AppDrawerTrigger({ setIsOpen }: AppDrawerTriggerProps) {
     <motion.button
       key="app-drawer-trigger"
       onClick={handleTriggerClick}
-      className="flex items-center gap-0 cursor-pointer"
+      className="flex items-center gap-0 cursor-pointer focus-visible:outline-none"
       whileHover={{ scale: 1.06 }}
       transition={{ type: 'spring', duration: 0.6 }}>
       <div className="w-6 h-6 rounded-md border -z-20 bg-white" />

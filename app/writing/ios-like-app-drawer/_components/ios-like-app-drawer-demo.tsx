@@ -12,7 +12,7 @@ import {
 } from '@tabler/icons-react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export interface DemoApplicationInterface {
   name: string;
@@ -199,11 +199,36 @@ const FOLDER_TILES: AppDrawerFolderTileProps['folder'][] = [
 ] as const;
 
 export function IOSLikeAppDrawerDemo() {
-  const [isOpen, setIsOpen] = useState<boolean>(true);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  useEffect(() => {
+    const handleEscapeKey = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener('keydown', handleEscapeKey);
+    return () => {
+      document.removeEventListener('keydown', handleEscapeKey);
+    };
+  }, []);
 
   return (
-    <div className="h-full w-full relative">
-      <motion.div className="flex items-center justify-center gap-2 py-2 pl-3 pr-2.5 rounded-xl border absolute bottom-3 left-1/2 -translate-x-1/2 bg-white backdrop-blur-lg divide-x">
+    <div
+      className="h-full w-full relative"
+      onClick={() => {
+        setIsOpen(false);
+      }}>
+      <motion.div
+        key="ios-like-app-drawer-dock"
+        className="flex items-center justify-center gap-2 py-2 pl-3 pr-2.5 rounded-xl border absolute bottom-3 left-1/2 -translate-x-1/2 bg-white backdrop-blur-lg divide-x"
+        initial={{ y: 0, x: -95 }}
+        animate={{
+          y: isOpen ? 56 : 0,
+          filter: isOpen ? 'blur(6px)' : undefined,
+        }}
+        transition={{ type: 'spring', duration: 0.8 }}>
         <div className="flex items-center justify-start gap-2">
           {DEMO_APPLICATIONS.map((app) => {
             return (
@@ -224,12 +249,13 @@ export function IOSLikeAppDrawerDemo() {
       </motion.div>
       {isOpen && (
         <div className="App-drawer-container flex flex-row items-center justify-start flex-wrap">
-          {FOLDER_TILES.map((folder) => {
+          {FOLDER_TILES.map((folder, index) => {
             return (
               <AppDrawerFolderTile
                 key={folder.name}
                 folder={folder}
                 isOpen={isOpen}
+                index={index}
               />
             );
           })}
