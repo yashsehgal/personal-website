@@ -6,7 +6,7 @@ import { motion, MotionProps } from 'framer-motion';
 import Image from 'next/image';
 
 export interface AppDrawerFolderTileProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+  extends Omit<React.HTMLAttributes<HTMLDivElement>, 'children'> {
   folder: {
     name: string;
     apps: DemoApplicationInterface[];
@@ -22,7 +22,6 @@ export interface AppDrawerFolderTileProps
 export function AppDrawerFolderTile({
   folder,
   className,
-  children: _,
   isOpen,
   index,
   ...props
