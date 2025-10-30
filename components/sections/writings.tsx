@@ -3,6 +3,11 @@ import Link from 'next/link';
 const WRITINGS: { name: string; slug: string; emoji: string }[] = [
   { name: 'Hello there!', slug: 'hello', emoji: '👋🏽' },
   {
+    name: 'iOS like app drawer',
+    slug: 'ios-like-app-drawer',
+    emoji: '📱',
+  },
+  {
     name: 'How I write extensive react components (ui elements)',
     slug: 'extensive-react-components',
     emoji: '🔮',
