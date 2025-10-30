@@ -12,7 +12,7 @@ export default function PostIOSLikeAppDrawer() {
     <WritingContainer id="post__integrations">
       <WritingHeader>
         <WritingHeader>iOS-like App Drawer</WritingHeader>
-        <WritingDetails>Thursday, 12th October, 2025</WritingDetails>
+        <WritingDetails>Thursday, 30th October, 2025</WritingDetails>
       </WritingHeader>
       <WritingContent>
         <DemoBlock className="font-sans h-[560px] rounded-[28px]">

@@ -8,6 +8,7 @@ import {
 } from '@tabler/icons-react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import { useState } from 'react';
 
 interface DemoApplicationInterface {
   name: string;
@@ -30,9 +31,10 @@ const DEMO_APPLICATIONS: DemoApplicationInterface[] = [
 ] as const;
 
 export function IOSLikeAppDrawerDemo() {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   return (
     <div className="h-full w-full relative">
-      <motion.div className="flex items-center justify-center gap-2 py-2 px-3 rounded-xl border absolute bottom-3 left-1/2 -translate-x-1/2 bg-white backdrop-blur-lg divide-x">
+      <motion.div className="flex items-center justify-center gap-2 py-2 pl-3 pr-2.5 rounded-xl border absolute bottom-3 left-1/2 -translate-x-1/2 bg-white backdrop-blur-lg divide-x">
         <div className="flex items-center justify-start gap-2">
           {DEMO_APPLICATIONS.map((app) => {
             return (
@@ -48,7 +50,7 @@ export function IOSLikeAppDrawerDemo() {
           })}
         </div>
         <div className="flex items-center justify-end gap-2 pl-2">
-          <AppDrawerTrigger />
+          <AppDrawerTrigger setIsOpen={setIsOpen} />
         </div>
       </motion.div>
     </div>

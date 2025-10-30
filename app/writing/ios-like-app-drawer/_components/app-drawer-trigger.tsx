@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import React, { SetStateAction } from 'react';
 
 const APP_DRAWER_TRIGGER_ICON_PATHNAMES: string[] = [
   'apple-music.svg',
@@ -10,10 +11,19 @@ const APP_DRAWER_TRIGGER_ICON_PATHNAMES: string[] = [
   'netflix.svg',
 ] as const;
 
-export function AppDrawerTrigger() {
+interface AppDrawerTriggerProps {
+  setIsOpen: React.Dispatch<SetStateAction<boolean>>;
+}
+
+export function AppDrawerTrigger({ setIsOpen }: AppDrawerTriggerProps) {
+  const handleTriggerClick = () => {
+    setIsOpen((open) => !open);
+  };
+
   return (
-    <motion.div
+    <motion.button
       key="app-drawer-trigger"
+      onClick={handleTriggerClick}
       className="flex items-center gap-0 cursor-pointer"
       whileHover={{ scale: 1.06 }}
       transition={{ type: 'spring', duration: 0.6 }}>
@@ -36,6 +46,6 @@ export function AppDrawerTrigger() {
           })}
         </div>
       </div>
-    </motion.div>
+    </motion.button>
   );
 }
