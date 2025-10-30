@@ -15,12 +15,14 @@ export interface AppDrawerFolderTileProps
       animate: { x: number; y: number };
     };
   };
+  isOpen: boolean;
 }
 
 export function AppDrawerFolderTile({
   folder,
   className,
   children: _,
+  isOpen,
   ...props
 }: AppDrawerFolderTileProps) {
   return (
@@ -28,18 +30,27 @@ export function AppDrawerFolderTile({
       key={folder.name}
       className="flex flex-col items-center justify-center w-fit h-fit gap-2"
       initial={{
-        filter: 'blur(64px)',
-        opacity: 0.1,
+        filter: 'blur(24px)',
+        scale: 0,
         x: folder.position.initial.x,
         y: folder.position.initial.y,
       }}
-      animate={{
-        filter: 'blur(0px)',
-        opacity: 1,
-        x: folder.position.animate.x,
-        y: folder.position.animate.y,
+      animate={
+        isOpen && {
+          filter: 'blur(0px)',
+          scale: 1,
+          x: folder.position.animate.x,
+          y: folder.position.animate.y,
+        }
+      }
+      transition={{
+        type: 'spring',
+        duration: 1.2,
+        bounce: 0.2,
+        stiffness: 50,
+        damping: 12,
       }}
-      transition={{ type: 'spring', duration: 1.4, bounce: 0.2 }}>
+      {...(props as MotionProps)}>
       <div
         className={cn(
           'w-24 h-24 p-3 border rounded-3xl grid grid-cols-2 items-center justify-center gap-3 bg-white/30 backdrop-blur-lg',

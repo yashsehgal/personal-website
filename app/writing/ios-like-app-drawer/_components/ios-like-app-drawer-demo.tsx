@@ -56,8 +56,8 @@ const FOLDER_TILES: AppDrawerFolderTileProps['folder'][] = [
       },
     ],
     position: {
-      initial: { x: 400, y: 1000 },
-      animate: { x: 0, y: 0 },
+      initial: { x: 300, y: 600 },
+      animate: { x: 40, y: 40 },
     },
   },
   {
@@ -81,8 +81,8 @@ const FOLDER_TILES: AppDrawerFolderTileProps['folder'][] = [
       },
     ],
     position: {
-      initial: { x: 600, y: 800 },
-      animate: { x: 0, y: 0 },
+      initial: { x: 300, y: 600 },
+      animate: { x: 80, y: 40 },
     },
   },
   {
@@ -106,8 +106,8 @@ const FOLDER_TILES: AppDrawerFolderTileProps['folder'][] = [
       },
     ],
     position: {
-      initial: { x: 200, y: 900 },
-      animate: { x: 0, y: 0 },
+      initial: { x: 300, y: 600 },
+      animate: { x: 120, y: 40 },
     },
   },
   {
@@ -124,8 +124,76 @@ const FOLDER_TILES: AppDrawerFolderTileProps['folder'][] = [
       { name: 'Apple Maps', iconImagePathname: 'apple-maps.svg' },
     ],
     position: {
-      initial: { x: 250, y: 700 },
-      animate: { x: 0, y: 0 },
+      initial: { x: 300, y: 600 },
+      animate: { x: 160, y: 40 },
+    },
+  },
+  {
+    name: 'Music',
+    apps: [
+      {
+        name: 'Netflix',
+        iconImagePathname: 'netflix.svg',
+      },
+      {
+        name: 'AppleTV',
+        iconImagePathname: 'apple-tv.svg',
+      },
+      {
+        name: 'AppleMusic',
+        iconImagePathname: 'apple-music.svg',
+      },
+      {
+        name: 'YouTube',
+        iconImagePathname: 'youtube.svg',
+      },
+    ],
+    position: {
+      initial: { x: 300, y: 600 },
+      animate: { x: -345, y: 190 },
+    },
+  },
+  {
+    name: 'Work',
+    apps: [
+      {
+        name: 'Dribbble',
+        iconImagePathname: 'dribbble.svg',
+      },
+      {
+        name: 'Garage Band',
+        iconImagePathname: 'garageband.svg',
+      },
+      {
+        name: 'Figma',
+        iconImagePathname: 'figma.svg',
+      },
+      {
+        name: 'Adobe',
+        iconImagePathname: 'adobe.svg',
+      },
+    ],
+    position: {
+      initial: { x: 300, y: 600 },
+      animate: { x: -305, y: 190 },
+    },
+  },
+  {
+    name: 'Maps',
+    apps: [
+      {
+        name: 'Navigation',
+        iconImagePathname: 'navigation.svg',
+      },
+      {
+        name: 'Uber',
+        iconImagePathname: 'uber.svg',
+      },
+      { name: 'Apple Maps', iconImagePathname: 'apple-maps.svg' },
+    ],
+    position: {
+      initial: { x: 300, y: 600 },
+      animate: { x: 312, y: 70 },
     },
   },
 ] as const;
@@ -155,9 +223,15 @@ export function IOSLikeAppDrawerDemo() {
         </div>
       </motion.div>
       {isOpen && (
-        <div className="App-drawer-container">
+        <div className="App-drawer-container flex flex-row items-center justify-start flex-wrap">
           {FOLDER_TILES.map((folder) => {
-            return <AppDrawerFolderTile key={folder.name} folder={folder} />;
+            return (
+              <AppDrawerFolderTile
+                key={folder.name}
+                folder={folder}
+                isOpen={isOpen}
+              />
+            );
           })}
         </div>
       )}

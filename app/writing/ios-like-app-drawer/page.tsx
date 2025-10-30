@@ -15,7 +15,7 @@ export default function PostIOSLikeAppDrawer() {
         <WritingDetails>Thursday, 30th October, 2025</WritingDetails>
       </WritingHeader>
       <WritingContent>
-        <DemoBlock className="font-sans h-[560px] rounded-[28px]">
+        <DemoBlock className="font-sans h-[420px] rounded-[28px]">
           <IOSLikeAppDrawerDemo />
         </DemoBlock>
       </WritingContent>
