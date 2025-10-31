@@ -38,14 +38,14 @@ export function AppDrawerFolderTile({
       key={folder.name}
       onClick={handleOnClick}
       initial={{
-        filter: 'blur(12px)',
-        scale: 0,
+        // filter: 'blur(12px)',
+        scale: 0.1,
         x: folder.position.initial.x,
         y: folder.position.initial.y,
       }}
       animate={
         isOpen && {
-          filter: 'blur(0px)',
+          // filter: 'blur(0px)',
           scale: 1,
           x: folder.position.animate.x,
           y: folder.position.animate.y,
@@ -54,14 +54,14 @@ export function AppDrawerFolderTile({
       transition={{
         type: 'spring',
         duration: 0.3,
-        bounce: 0.15,
-        delay: 0.04 * index,
+        bounce: 0.2,
+        delay: 0.025 * index,
       }}
       className="flex flex-col items-center justify-center w-fit h-fit gap-2 cursor-pointer select-none focus-visible:outline-none"
       {...(props as MotionProps)}>
       <div
         className={cn(
-          'w-24 h-24 p-3 border shadow border-white/20 rounded-3xl grid grid-cols-2 items-center justify-center gap-3 bg-gradient-to-b from-white/5 to-white/20 backdrop-blur-2xl',
+          'w-24 h-24 p-3 border shadow border-white/20 rounded-3xl grid grid-cols-2 items-center justify-center gap-2 bg-gradient-to-b from-white/5 to-white/20 backdrop-blur-2xl',
           className,
         )}
         {...props}>

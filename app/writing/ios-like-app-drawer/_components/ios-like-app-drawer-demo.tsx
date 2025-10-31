@@ -228,7 +228,7 @@ export function IOSLikeAppDrawerDemo() {
           y: isOpen ? 56 : 0,
           filter: isOpen ? 'blur(6px)' : undefined,
         }}
-        transition={{ type: 'spring', duration: 0.8 }}>
+        transition={{ type: 'spring', duration: 0.5 }}>
         <div className="flex items-center justify-start gap-2">
           {DEMO_APPLICATIONS.map((app) => {
             return (
