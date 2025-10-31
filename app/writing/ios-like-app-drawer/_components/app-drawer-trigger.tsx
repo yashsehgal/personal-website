@@ -36,6 +36,7 @@ export function AppDrawerTrigger({ setIsOpen }: AppDrawerTriggerProps) {
             return (
               <motion.div key={index} className="w-3.5 h-3.5 shrink-0">
                 <Image
+                  priority
                   src={`/assets/app-icons/${app}`}
                   alt={app}
                   width={24}

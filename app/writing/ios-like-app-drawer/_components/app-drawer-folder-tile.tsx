@@ -69,6 +69,7 @@ export function AppDrawerFolderTile({
           return (
             <motion.div key={app.name}>
               <Image
+                priority
                 src={`/assets/app-icons/${app.iconImagePathname}`}
                 alt={app.name}
                 width={36}
