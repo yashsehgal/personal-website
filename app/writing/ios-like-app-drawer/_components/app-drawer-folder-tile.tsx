@@ -53,9 +53,9 @@ export function AppDrawerFolderTile({
       }
       transition={{
         type: 'spring',
-        duration: 0.3,
+        duration: 0.4,
         bounce: 0.2,
-        delay: 0.025 * index,
+        delay: 0.03 * index,
       }}
       className="flex flex-col items-center justify-center w-fit h-fit gap-2 cursor-pointer select-none focus-visible:outline-none"
       {...(props as MotionProps)}>
