@@ -46,7 +46,8 @@ export function AppDrawerFolderTile({
       }
       transition={{
         type: 'spring',
-        duration: 0.8,
+        duration: 0.5,
+        bounce: 0.2,
         delay: 0.04 * index,
       }}
       {...(props as MotionProps)}>
