@@ -4,6 +4,7 @@ import { DemoApplicationInterface } from '@/app/writing/ios-like-app-drawer/_com
 import { cn } from '@/helpers';
 import { motion, MotionProps } from 'framer-motion';
 import Image from 'next/image';
+import React from 'react';
 
 export interface AppDrawerFolderTileProps
   extends Omit<React.HTMLAttributes<HTMLDivElement>, 'children'> {
@@ -27,10 +28,15 @@ export function AppDrawerFolderTile({
   index,
   ...props
 }: AppDrawerFolderTileProps) {
+  const handleOnClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+    onClick?.(e);
+  };
+
   return (
-    <motion.button
-      onClick={(e) => e.stopPropagation()}
+    <motion.div
       key={folder.name}
+      onClick={handleOnClick}
       initial={{
         filter: 'blur(12px)',
         scale: 0,
@@ -73,6 +79,6 @@ export function AppDrawerFolderTile({
         })}
       </div>
       <p className="text-xs text-white font-medium">{folder.name}</p>
-    </motion.button>
+    </motion.div>
   );
 }
