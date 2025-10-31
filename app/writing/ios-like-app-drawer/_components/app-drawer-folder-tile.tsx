@@ -23,13 +23,14 @@ export function AppDrawerFolderTile({
   folder,
   className,
   isOpen,
+  onClick,
   index,
   ...props
 }: AppDrawerFolderTileProps) {
   return (
-    <motion.div
+    <motion.button
+      onClick={(e) => e.stopPropagation()}
       key={folder.name}
-      className="flex flex-col items-center justify-center w-fit h-fit gap-2 pointer-events-none cursor-default select-none"
       initial={{
         filter: 'blur(12px)',
         scale: 0,
@@ -50,6 +51,7 @@ export function AppDrawerFolderTile({
         bounce: 0.2,
         delay: 0.04 * index,
       }}
+      className="flex flex-col items-center justify-center w-fit h-fit gap-2 cursor-pointer select-none focus-visible:outline-none"
       {...(props as MotionProps)}>
       <div
         className={cn(
@@ -71,6 +73,6 @@ export function AppDrawerFolderTile({
         })}
       </div>
       <p className="text-xs text-white font-medium">{folder.name}</p>
-    </motion.div>
+    </motion.button>
   );
 }
