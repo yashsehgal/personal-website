@@ -210,7 +210,7 @@ export function IOSLikeAppDrawerDemo() {
 
   return (
     <div
-      className="h-full w-full relative grayscale"
+      className="h-full w-full relative"
       style={{
         backgroundImage: 'url(/assets/bg.jpg)',
         backgroundRepeat: 'no-repeat',
