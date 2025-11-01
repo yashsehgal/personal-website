@@ -33,30 +33,49 @@ export function AppDrawerFolderTile({
     onClick?.(e);
   };
 
-  return (
-    <motion.div
-      key={folder.name}
-      onClick={handleOnClick}
-      initial={{
-        // filter: 'blur(12px)',
-        scale: 0.1,
-        x: folder.position.initial.x,
-        y: folder.position.initial.y,
-      }}
-      animate={
-        isOpen && {
-          // filter: 'blur(0px)',
-          scale: 1,
-          x: folder.position.animate.x,
-          y: folder.position.animate.y,
-        }
-      }
-      transition={{
+  const variants = {
+    initial: {
+      scale: 0.1,
+      x: folder.position.initial.x,
+      y: folder.position.initial.y,
+    },
+    animate: {
+      scale: 1,
+      x: folder.position.animate.x,
+      y: folder.position.animate.y,
+      transition: {
         type: 'spring',
         duration: 0.4,
         bounce: 0.2,
         delay: 0.03 * index,
-      }}
+      },
+    },
+    exit: {
+      scale: 0.1,
+      x: folder.position.initial.x,
+      y: folder.position.initial.y,
+      opacity: 0,
+      transition: {
+        type: 'spring',
+        duration: 0.25,
+        bounce: 0.1,
+        delay: 0.02 * index,
+        opacity: {
+          duration: 0.25,
+          ease: [0.4, 0, 0.2, 1],
+        },
+      },
+    },
+  };
+
+  return (
+    <motion.div
+      key={folder.name}
+      onClick={handleOnClick}
+      initial="initial"
+      animate={isOpen ? 'animate' : 'initial'}
+      exit="exit"
+      variants={variants}
       className="flex flex-col items-center justify-center w-fit h-fit gap-2 cursor-pointer select-none focus-visible:outline-none"
       {...(props as MotionProps)}>
       <div

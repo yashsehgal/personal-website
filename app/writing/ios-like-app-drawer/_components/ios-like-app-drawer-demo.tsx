@@ -4,7 +4,7 @@ import {
   AppDrawerFolderTileProps,
 } from '@/app/writing/ios-like-app-drawer/_components/app-drawer-folder-tile';
 import { AppDrawerTrigger } from '@/app/writing/ios-like-app-drawer/_components/app-drawer-trigger';
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
@@ -247,20 +247,22 @@ export function IOSLikeAppDrawerDemo() {
           <AppDrawerTrigger setIsOpen={setIsOpen} />
         </div>
       </motion.div>
-      {isOpen && (
-        <div className="App-drawer-container flex flex-row items-center justify-start flex-wrap">
-          {FOLDER_TILES.map((folder, index) => {
-            return (
-              <AppDrawerFolderTile
-                key={folder.name}
-                folder={folder}
-                isOpen={isOpen}
-                index={index}
-              />
-            );
-          })}
-        </div>
-      )}
+      <AnimatePresence>
+        {isOpen && (
+          <div className="App-drawer-container flex flex-row items-center justify-start flex-wrap">
+            {FOLDER_TILES.map((folder, index) => {
+              return (
+                <AppDrawerFolderTile
+                  key={folder.name}
+                  folder={folder}
+                  isOpen={isOpen}
+                  index={index}
+                />
+              );
+            })}
+          </div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
