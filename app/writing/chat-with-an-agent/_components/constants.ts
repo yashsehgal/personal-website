@@ -166,4 +166,139 @@ export const AGENT_CHAT_PREVIEW_LOG: AgentChatLogListType = [
         'Next steps: implement changes in a feature branch, run unit tests (npm run test), run linter (npm run lint), and create PR referencing issue #42 with description and migration notes.',
     },
   },
+
+  {
+    agent_chat_log_item_type: AGENT_CHAT_LOG_ITEM_TYPE.SEARCHED,
+    config: {
+      message:
+        'Deep search for "refreshIfNeeded", "refreshToken", and "inFlight" tokens across repo and tests. Found helpers, mocks, and flaky test patterns that reinitialize auth state.',
+    } as any,
+  },
+  {
+    agent_chat_log_item_type: AGENT_CHAT_LOG_ITEM_TYPE.READ_FILE,
+    config: {
+      message:
+        'Opening test file to understand flaky behavior and teardown logic that may cause token state leaks between tests.',
+      file_path: 'test/auth/refresh.spec.ts',
+    },
+  },
+  {
+    agent_chat_log_item_type: AGENT_CHAT_LOG_ITEM_TYPE.ANALYSING_FILE,
+    config: {
+      message:
+        'refresh.spec.ts: several tests reset global axios interceptors directly; mock implementations of token-utils do not simulate in-progress refresh. Tests assume refresh is instantaneous which masks race conditions.',
+    },
+  },
+  {
+    agent_chat_log_item_type: AGENT_CHAT_LOG_ITEM_TYPE.THOUGHT,
+    config: {
+      message:
+        'Idea: Add a test helper that simulates a slow refresh (Promise that resolves after X ms) and spawn parallel requests to assert only one network refresh is issued.',
+    },
+  },
+  {
+    agent_chat_log_item_type: AGENT_CHAT_LOG_ITEM_TYPE.CHAT_MESSAGE,
+    config: {
+      message:
+        'Suggestion: Add metrics/logging for refresh start/end to help debug production incidents — include timestamps and request ids to correlate concurrent refreshes.',
+    },
+  },
+  {
+    agent_chat_log_item_type: AGENT_CHAT_LOG_ITEM_TYPE.FILE_CONTENT_CHANGE,
+    config: {
+      file_name: 'src/services/auth.ts',
+      diff: {
+        addition: 48,
+        deletion: 6,
+      },
+    },
+  },
+  {
+    agent_chat_log_item_type: AGENT_CHAT_LOG_ITEM_TYPE.READ_FILE,
+    config: {
+      message:
+        'Inspecting src/services/token-utils.ts for existing refresh helpers and how they are consumed by the client.',
+      file_path: 'src/services/token-utils.ts',
+    },
+  },
+  {
+    agent_chat_log_item_type: AGENT_CHAT_LOG_ITEM_TYPE.ANALYSING_FILE,
+    config: {
+      message:
+        'token-utils.ts: utility exposes refreshIfNeeded but callers sometimes call refreshToken directly. Consolidation needed to avoid duplicate refreshes and inconsistent error handling.',
+    },
+  },
+  {
+    agent_chat_log_item_type: AGENT_CHAT_LOG_ITEM_TYPE.TODO_LIST,
+    config: {
+      title: 'Implementation checklist (detailed)',
+      todo_list_items: [
+        {
+          name: 'Implement refreshInFlight in auth service with cancellation safety',
+          completed: false,
+        },
+        {
+          name: 'Update axios interceptor to await auth.refreshIfNeeded() instead of token-utils.refreshToken()',
+          completed: false,
+        },
+        {
+          name: 'Add integration test that launches 10 parallel requests returning 401 and asserts single refresh request',
+          completed: false,
+        },
+        {
+          name: 'Document migration in CONTRIBUTING.md and update CHANGELOG',
+          completed: false,
+        },
+        {
+          name: 'Add runtime metric (counter) for refresh attempts and instrument with existing telemetry',
+          completed: false,
+        },
+      ],
+    },
+  },
+  {
+    agent_chat_log_item_type: AGENT_CHAT_LOG_ITEM_TYPE.SEARCHING_CODEBASE,
+    config: {
+      message:
+        'Searching for places where token functions are imported directly (vs via auth service). Flagging pattern occurrences for later automated codemod.',
+      resources_visited: [
+        'src',
+        'src/components',
+        'scripts/codemods',
+        'test',
+        'package.json',
+      ],
+    },
+  },
+  {
+    agent_chat_log_item_type: AGENT_CHAT_LOG_ITEM_TYPE.CHAT_MESSAGE,
+    config: {
+      message:
+        'Will propose a small codemod to replace direct imports of token-utils.refreshToken with auth.refreshIfNeeded. Plan to run on CI for affected files only.',
+    },
+  },
+  {
+    agent_chat_log_item_type: AGENT_CHAT_LOG_ITEM_TYPE.THOUGHT,
+    config: {
+      message:
+        'Corner case: background sync tasks that run outside request lifecycle — ensure refreshIfNeeded returns a promise that is safe to call from cron jobs or workers.',
+    },
+  },
+  {
+    agent_chat_log_item_type: AGENT_CHAT_LOG_ITEM_TYPE.CHAT_MESSAGE,
+    config: {
+      message:
+        'Estimate: ~3-5 days of work including tests and migration. Can split into two PRs: (A) auth service + tests, (B) client/hook updates + codemod.',
+    },
+  },
+  {
+    agent_chat_log_item_type: AGENT_CHAT_LOG_ITEM_TYPE.FILE_CONTENT_CHANGE,
+    config: {
+      file_name: 'test/auth/refresh.spec.ts',
+      diff: {
+        addition: 36,
+        deletion: 12,
+      },
+    },
+  },
 ] as const;
