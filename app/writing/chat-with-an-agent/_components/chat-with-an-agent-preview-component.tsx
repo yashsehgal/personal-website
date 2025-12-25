@@ -38,7 +38,7 @@ export function ChatWithAnAgentPreviewComponent() {
     startedRef.current = true;
 
     const minDelay = 1200;
-    const maxDelay = 2400;
+    const maxDelay = 1600;
 
     const randomDelay = () =>
       Math.floor(Math.random() * (maxDelay - minDelay + 1)) + minDelay;
@@ -137,7 +137,7 @@ export function ChatWithAnAgentPreviewComponent() {
   return (
     <div
       ref={containerRef}
-      className="max-w-3xl w-full font-sans space-y-1.5 h-[28rem] overflow-y-scroll hide-scroll border p-4 rounded-2xl">
+      className="max-w-3xl w-full font-sans space-y-1.5 h-[28rem] overflow-y-scroll hide-scroll">
       {agentChatPreviewLogState.map((log, index) => {
         // Using proper types for logs by removing duration property from it
         const { duration, ...logWithoutDuration } = log;
