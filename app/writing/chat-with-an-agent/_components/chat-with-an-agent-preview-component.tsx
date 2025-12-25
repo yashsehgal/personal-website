@@ -51,7 +51,7 @@ export function ChatWithAnAgentPreviewComponent() {
   };
 
   return (
-    <div className="max-w-2xl w-full font-sans space-y-1.5">
+    <div className="max-w-2xl w-full font-sans space-y-1.5 max-h-[32rem] overflow-y-scroll hide-scroll border p-4 rounded-2xl">
       {AGENT_CHAT_PREVIEW_LOG.map((log, index) => {
         return <RenderLogComponent log={log} index={index} key={index} />;
       })}
