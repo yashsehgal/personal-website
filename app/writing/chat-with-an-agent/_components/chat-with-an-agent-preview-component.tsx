@@ -123,7 +123,7 @@ export function ChatWithAnAgentPreviewComponent() {
   return (
     <div
       ref={containerRef}
-      className="max-w-3xl w-full font-sans space-y-1.5 h-[32rem] overflow-y-scroll hide-scroll border p-4 rounded-2xl">
+      className="max-w-3xl w-full font-sans space-y-1.5 h-[28rem] overflow-y-scroll hide-scroll border p-4 rounded-2xl">
       {agentChatPreviewLogState.map((log, index) => {
         // Using proper types for logs by removing duration property from it
         const { duration, ...logWithoutDuration } = log;
