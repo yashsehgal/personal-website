@@ -15,7 +15,7 @@ export function TodoListBlock({ config, index }: TodoListBlockProps) {
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.2 * index, type: 'tween' }}>
-      <div className="bg-white border rounded-xl divide-y w-[0%]">
+      <div className="bg-white border rounded-xl divide-y w-[90%]">
         <div className="px-3 py-1.5 text-xs">{config.title}</div>
         <div className="p-3 flex flex-col items-start gap-2 justify-start">
           {config.todo_list_items.map((todoItem, index) => {
