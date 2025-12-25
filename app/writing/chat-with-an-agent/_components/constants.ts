@@ -3,7 +3,7 @@ import {
   AgentChatLogListType,
 } from '@/app/writing/chat-with-an-agent/_components/types';
 
-export const AGENT_CHAT_LOG: AgentChatLogListType = [
+export const AGENT_CHAT_PREVIEW_LOG: AgentChatLogListType = [
   {
     agent_chat_log_item_type: AGENT_CHAT_LOG_ITEM_TYPE.SEARCHING_CODEBASE,
     config: {
