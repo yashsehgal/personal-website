@@ -86,9 +86,11 @@ export function ChatWithAnAgentPreviewComponent() {
   const RenderLogComponent = ({
     log,
     duration,
+    completed,
   }: {
     log: AgentChatLogType;
     duration: AgentChatLogWithDurationType['duration'];
+    completed?: boolean;
   }) => {
     switch (log.agent_chat_log_item_type) {
       case AGENT_CHAT_LOG_ITEM_TYPE.ANALYSING_FILE:
@@ -100,9 +102,21 @@ export function ChatWithAnAgentPreviewComponent() {
           <FileContentChangeBlock config={log.config} duration={duration} />
         );
       case AGENT_CHAT_LOG_ITEM_TYPE.READ_FILE:
-        return <ReadFileBlock config={log.config} duration={duration} />;
+        return (
+          <ReadFileBlock
+            config={log.config}
+            duration={duration}
+            completed={!!completed}
+          />
+        );
       case AGENT_CHAT_LOG_ITEM_TYPE.READ_FOLDER:
-        return <ReadFolderBlock config={log.config} duration={duration} />;
+        return (
+          <ReadFolderBlock
+            config={log.config}
+            duration={duration}
+            completed={!!completed}
+          />
+        );
       case AGENT_CHAT_LOG_ITEM_TYPE.SEARCHED:
         return <SearchedBlock config={log.config} duration={duration} />;
       case AGENT_CHAT_LOG_ITEM_TYPE.SEARCHING_CODEBASE:
@@ -127,10 +141,12 @@ export function ChatWithAnAgentPreviewComponent() {
       {agentChatPreviewLogState.map((log, index) => {
         // Using proper types for logs by removing duration property from it
         const { duration, ...logWithoutDuration } = log;
+        const isLast = index === agentChatPreviewLogState.length - 1;
         return (
           <RenderLogComponent
             duration={log.duration}
             log={logWithoutDuration}
+            completed={isLast}
             key={index}
           />
         );
