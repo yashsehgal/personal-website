@@ -8,11 +8,8 @@ interface ChatMessageBlockProps {
 
 export function ChatMessageBlock({ config }: ChatMessageBlockProps) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 24, filter: 'blur(6px)' }}
-      animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
-      transition={{ type: 'tween' }}>
+    <div key={config.message}>
       <p className="text-sm">{config.message}</p>
-    </motion.div>
+    </div>
   );
 }

@@ -11,11 +11,7 @@ export function FileContentChangeBlock({
   config,
 }: FileContentChangeBlockProps) {
   return (
-    <motion.div
-      key={config.file_name}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ type: 'tween' }}>
+    <div key={config.file_name}>
       <div className="py-2 px-3 bg-white border flex items-center justify-start gap-2 rounded-lg ring-2 ring-neutral-100 ring-offset-1">
         <IconFile className="text-neutral-400" size={16} />
         <p className="text-sm text-black">{config.file_name}</p>
@@ -28,6 +24,6 @@ export function FileContentChangeBlock({
           </span>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 }

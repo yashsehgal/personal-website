@@ -26,12 +26,15 @@ export function ChatWithAnAgentPreviewComponent() {
   const timersRef = useRef<ReturnType<typeof setTimeout>[]>([]);
   const startedRef = useRef(false);
 
+  // ref to the scroll container so we can keep newest item in view
+  const containerRef = useRef<HTMLDivElement | null>(null);
+
   useEffect(() => {
     if (startedRef.current) return;
     startedRef.current = true;
 
-    const minDelay = 300;
-    const maxDelay = 1400;
+    const minDelay = 1200;
+    const maxDelay = 2400;
 
     const randomDelay = () =>
       Math.floor(Math.random() * (maxDelay - minDelay + 1)) + minDelay;
@@ -57,6 +60,16 @@ export function ChatWithAnAgentPreviewComponent() {
       timersRef.current = [];
     };
   }, []);
+
+  // when a new log is added, scroll the container to the bottom so the newest item is visible
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    // wait for the new item to render then scroll
+    requestAnimationFrame(() => {
+      el.scrollTo({ top: el.scrollHeight, behavior: 'smooth' });
+    });
+  }, [agentChatPreviewLogState.length]);
 
   const RenderLogComponent = ({ log }: { log: AgentChatLogType }) => {
     switch (log.agent_chat_log_item_type) {
@@ -86,7 +99,9 @@ export function ChatWithAnAgentPreviewComponent() {
   };
 
   return (
-    <div className="max-w-2xl w-full font-sans space-y-1.5 max-h-[32rem] overflow-y-scroll hide-scroll border p-4 rounded-2xl">
+    <div
+      ref={containerRef}
+      className="max-w-3xl w-full font-sans space-y-1.5 h-[32rem] overflow-y-scroll hide-scroll border p-4 rounded-2xl">
       {agentChatPreviewLogState.map((log, index) => {
         return <RenderLogComponent log={log} key={index} />;
       })}
