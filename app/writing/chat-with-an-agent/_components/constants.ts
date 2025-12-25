@@ -42,7 +42,7 @@ export const AGENT_CHAT_PREVIEW_LOG: AgentChatLogListType = [
     agent_chat_log_item_type: AGENT_CHAT_LOG_ITEM_TYPE.ANALYSING_FILE,
     config: {
       message:
-        'Analyzing auth.ts: found exports login(), logout(), getAccessToken(), and a refreshToken() helper that invokes /auth/refresh. refreshToken is used directly in two places — token-utils and Profile/SessionManager.',
+        'auth.ts: found exports login(), logout(), getAccessToken(), and a refreshToken() helper that invokes /auth/refresh. refreshToken is used directly in two places — token-utils and Profile/SessionManager.',
     },
   },
   {

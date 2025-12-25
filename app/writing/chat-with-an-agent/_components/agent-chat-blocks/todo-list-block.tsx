@@ -2,8 +2,9 @@ import { TodoListLogConfig } from '@/app/writing/chat-with-an-agent/_components/
 
 interface TodoListBlockProps {
   config: TodoListLogConfig;
+  index: number;
 }
 
-export function TodoListBlock({ config }: TodoListBlockProps) {
+export function TodoListBlock({ config, index }: TodoListBlockProps) {
   return <div />;
 }

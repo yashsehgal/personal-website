@@ -2,8 +2,9 @@ import { ReadFolderLogConfig } from '@/app/writing/chat-with-an-agent/_component
 
 interface ReadFolderBlockProps {
   config: ReadFolderLogConfig;
+  index: number;
 }
 
-export function ReadFolderBlock({ config }: ReadFolderBlockProps) {
+export function ReadFolderBlock({ config, index }: ReadFolderBlockProps) {
   return <div />;
 }

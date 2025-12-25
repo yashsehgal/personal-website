@@ -2,8 +2,9 @@ import { ThoughtLogConfig } from '@/app/writing/chat-with-an-agent/_components/t
 
 interface ThoughtBlockProps {
   config: ThoughtLogConfig;
+  index: number;
 }
 
-export function ThoughtBlock({ config }: ThoughtBlockProps) {
+export function ThoughtBlock({ config, index }: ThoughtBlockProps) {
   return <div />;
 }

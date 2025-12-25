@@ -17,37 +17,43 @@ import {
 } from '@/app/writing/chat-with-an-agent/_components/types';
 
 export function ChatWithAnAgentPreviewComponent() {
-  const RenderLogComponent = (log: AgentChatLogType) => {
+  const RenderLogComponent = ({
+    log,
+    index = 1,
+  }: {
+    log: AgentChatLogType;
+    index: number;
+  }) => {
     switch (log.agent_chat_log_item_type) {
       case AGENT_CHAT_LOG_ITEM_TYPE.ANALYSING_FILE:
-        return <AnalysingFileBlock config={log.config} />;
+        return <AnalysingFileBlock config={log.config} index={index} />;
       case AGENT_CHAT_LOG_ITEM_TYPE.CHAT_MESSAGE:
-        return <ChatMessageBlock config={log.config} />;
+        return <ChatMessageBlock config={log.config} index={index} />;
       case AGENT_CHAT_LOG_ITEM_TYPE.FILE_CONTENT_CHANGE:
-        return <FileContentChangeBlock config={log.config} />;
+        return <FileContentChangeBlock config={log.config} index={index} />;
       case AGENT_CHAT_LOG_ITEM_TYPE.READ_FILE:
-        return <ReadFileBlock config={log.config} />;
+        return <ReadFileBlock config={log.config} index={index} />;
       case AGENT_CHAT_LOG_ITEM_TYPE.READ_FOLDER:
-        return <ReadFolderBlock config={log.config} />;
+        return <ReadFolderBlock config={log.config} index={index} />;
       case AGENT_CHAT_LOG_ITEM_TYPE.SEARCHED:
-        return <SearchedBlock config={log.config} />;
+        return <SearchedBlock config={log.config} index={index} />;
       case AGENT_CHAT_LOG_ITEM_TYPE.SEARCHING_CODEBASE:
-        return <SearchingCodebaseBlock config={log.config} />;
+        return <SearchingCodebaseBlock config={log.config} index={index} />;
       case AGENT_CHAT_LOG_ITEM_TYPE.THINKING:
-        return <ThinkingBlock config={log.config} />;
+        return <ThinkingBlock config={log.config} index={index} />;
       case AGENT_CHAT_LOG_ITEM_TYPE.THOUGHT:
-        return <ThoughtBlock config={log.config} />;
+        return <ThoughtBlock config={log.config} index={index} />;
       case AGENT_CHAT_LOG_ITEM_TYPE.TODO_LIST:
-        return <TodoListBlock config={log.config} />;
+        return <TodoListBlock config={log.config} index={index} />;
       default:
         return;
     }
   };
 
   return (
-    <div className="max-w-2xl w-full">
+    <div className="max-w-2xl w-full font-sans space-y-1.5">
       {AGENT_CHAT_PREVIEW_LOG.map((log, index) => {
-        return <RenderLogComponent {...log} key={index} />;
+        return <RenderLogComponent log={log} index={index} key={index} />;
       })}
     </div>
   );
