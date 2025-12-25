@@ -1,14 +1,16 @@
 'use client';
+import { AgentChatLogWithDurationType } from '@/app/writing/chat-with-an-agent/_components/chat-with-an-agent-preview-component';
 import { FileContentChangeLogConfig } from '@/app/writing/chat-with-an-agent/_components/types';
 import { IconFile } from '@tabler/icons-react';
-import { motion } from 'framer-motion';
 
 interface FileContentChangeBlockProps {
   config: FileContentChangeLogConfig;
+  duration: AgentChatLogWithDurationType['duration'];
 }
 
 export function FileContentChangeBlock({
   config,
+  duration,
 }: FileContentChangeBlockProps) {
   return (
     <div key={config.file_name}>

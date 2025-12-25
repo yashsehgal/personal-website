@@ -13,14 +13,18 @@ import { TodoListBlock } from '@/app/writing/chat-with-an-agent/_components/agen
 import { AGENT_CHAT_PREVIEW_LOG } from '@/app/writing/chat-with-an-agent/_components/constants';
 import {
   AGENT_CHAT_LOG_ITEM_TYPE,
-  AgentChatLogListType,
   AgentChatLogType,
 } from '@/app/writing/chat-with-an-agent/_components/types';
 import { useEffect, useRef, useState } from 'react';
 
+export type AgentChatLogWithDurationType = AgentChatLogType & {
+  duration: number;
+};
+
 export function ChatWithAnAgentPreviewComponent() {
-  const [agentChatPreviewLogState, setAgentChatPreviewLogState] =
-    useState<AgentChatLogListType>([]);
+  const [agentChatPreviewLogState, setAgentChatPreviewLogState] = useState<
+    AgentChatLogWithDurationType[]
+  >([]);
 
   // keep refs for timers so we can clear on unmount
   const timersRef = useRef<ReturnType<typeof setTimeout>[]>([]);
@@ -41,13 +45,21 @@ export function ChatWithAnAgentPreviewComponent() {
 
     const scheduleNext = (index: number) => {
       if (index >= AGENT_CHAT_PREVIEW_LOG.length) return;
+
+      // Getting the random delay initial to use it as log duration
+      const delay = randomDelay();
+      const _agentChatPreviewLogWithDuration: AgentChatLogWithDurationType = {
+        ...AGENT_CHAT_PREVIEW_LOG[index],
+        duration: delay,
+      };
+
       const t = setTimeout(() => {
         setAgentChatPreviewLogState((prev) => [
           ...prev,
-          AGENT_CHAT_PREVIEW_LOG[index],
+          _agentChatPreviewLogWithDuration,
         ]);
         scheduleNext(index + 1);
-      }, randomDelay());
+      }, delay);
       timersRef.current.push(t);
     };
 
@@ -71,28 +83,38 @@ export function ChatWithAnAgentPreviewComponent() {
     });
   }, [agentChatPreviewLogState.length]);
 
-  const RenderLogComponent = ({ log }: { log: AgentChatLogType }) => {
+  const RenderLogComponent = ({
+    log,
+    duration,
+  }: {
+    log: AgentChatLogType;
+    duration: AgentChatLogWithDurationType['duration'];
+  }) => {
     switch (log.agent_chat_log_item_type) {
       case AGENT_CHAT_LOG_ITEM_TYPE.ANALYSING_FILE:
-        return <AnalysingFileBlock config={log.config} />;
+        return <AnalysingFileBlock config={log.config} duration={duration} />;
       case AGENT_CHAT_LOG_ITEM_TYPE.CHAT_MESSAGE:
-        return <ChatMessageBlock config={log.config} />;
+        return <ChatMessageBlock config={log.config} duration={duration} />;
       case AGENT_CHAT_LOG_ITEM_TYPE.FILE_CONTENT_CHANGE:
-        return <FileContentChangeBlock config={log.config} />;
+        return (
+          <FileContentChangeBlock config={log.config} duration={duration} />
+        );
       case AGENT_CHAT_LOG_ITEM_TYPE.READ_FILE:
-        return <ReadFileBlock config={log.config} />;
+        return <ReadFileBlock config={log.config} duration={duration} />;
       case AGENT_CHAT_LOG_ITEM_TYPE.READ_FOLDER:
-        return <ReadFolderBlock config={log.config} />;
+        return <ReadFolderBlock config={log.config} duration={duration} />;
       case AGENT_CHAT_LOG_ITEM_TYPE.SEARCHED:
-        return <SearchedBlock config={log.config} />;
+        return <SearchedBlock config={log.config} duration={duration} />;
       case AGENT_CHAT_LOG_ITEM_TYPE.SEARCHING_CODEBASE:
-        return <SearchingCodebaseBlock config={log.config} />;
+        return (
+          <SearchingCodebaseBlock config={log.config} duration={duration} />
+        );
       case AGENT_CHAT_LOG_ITEM_TYPE.THINKING:
-        return <ThinkingBlock config={log.config} />;
+        return <ThinkingBlock config={log.config} duration={duration} />;
       case AGENT_CHAT_LOG_ITEM_TYPE.THOUGHT:
-        return <ThoughtBlock config={log.config} />;
+        return <ThoughtBlock config={log.config} duration={duration} />;
       case AGENT_CHAT_LOG_ITEM_TYPE.TODO_LIST:
-        return <TodoListBlock config={log.config} />;
+        return <TodoListBlock config={log.config} duration={duration} />;
       default:
         return;
     }
@@ -103,7 +125,15 @@ export function ChatWithAnAgentPreviewComponent() {
       ref={containerRef}
       className="max-w-3xl w-full font-sans space-y-1.5 h-[32rem] overflow-y-scroll hide-scroll border p-4 rounded-2xl">
       {agentChatPreviewLogState.map((log, index) => {
-        return <RenderLogComponent log={log} key={index} />;
+        // Using proper types for logs by removing duration property from it
+        const { duration, ...logWithoutDuration } = log;
+        return (
+          <RenderLogComponent
+            duration={log.duration}
+            log={logWithoutDuration}
+            key={index}
+          />
+        );
       })}
     </div>
   );
