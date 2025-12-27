@@ -5,12 +5,10 @@ import { IconFile } from '@tabler/icons-react';
 
 interface FileContentChangeBlockProps {
   config: FileContentChangeLogConfig;
-  duration: AgentChatLogWithDurationType['duration'];
 }
 
 export function FileContentChangeBlock({
   config,
-  duration: _,
 }: FileContentChangeBlockProps) {
   return (
     <div key={config.file_name}>

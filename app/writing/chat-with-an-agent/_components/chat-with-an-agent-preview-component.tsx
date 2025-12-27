@@ -96,11 +96,9 @@ export function ChatWithAnAgentPreviewComponent() {
       case AGENT_CHAT_LOG_ITEM_TYPE.ANALYSING_FILE:
         return <AnalysingFileBlock config={log.config} duration={duration} />;
       case AGENT_CHAT_LOG_ITEM_TYPE.CHAT_MESSAGE:
-        return <ChatMessageBlock config={log.config} duration={duration} />;
+        return <ChatMessageBlock config={log.config} />;
       case AGENT_CHAT_LOG_ITEM_TYPE.FILE_CONTENT_CHANGE:
-        return (
-          <FileContentChangeBlock config={log.config} duration={duration} />
-        );
+        return <FileContentChangeBlock config={log.config} />;
       case AGENT_CHAT_LOG_ITEM_TYPE.READ_FILE:
         return (
           <ReadFileBlock
@@ -128,7 +126,7 @@ export function ChatWithAnAgentPreviewComponent() {
       case AGENT_CHAT_LOG_ITEM_TYPE.THOUGHT:
         return <ThoughtBlock config={log.config} duration={duration} />;
       case AGENT_CHAT_LOG_ITEM_TYPE.TODO_LIST:
-        return <TodoListBlock config={log.config} duration={duration} />;
+        return <TodoListBlock config={log.config} />;
       default:
         return;
     }

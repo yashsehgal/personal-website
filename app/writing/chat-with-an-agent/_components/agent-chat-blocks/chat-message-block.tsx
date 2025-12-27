@@ -4,13 +4,9 @@ import { ChatMessageLogConfig } from '@/app/writing/chat-with-an-agent/_componen
 
 interface ChatMessageBlockProps {
   config: ChatMessageLogConfig;
-  duration: AgentChatLogWithDurationType['duration'];
 }
 
-export function ChatMessageBlock({
-  config,
-  duration: _,
-}: ChatMessageBlockProps) {
+export function ChatMessageBlock({ config }: ChatMessageBlockProps) {
   return (
     <div key={config.message} className="px-3 py-2">
       <p className="text-sm">{config.message}</p>

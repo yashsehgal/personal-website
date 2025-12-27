@@ -11,20 +11,26 @@ interface ReadFolderBlockProps {
 
 export function ReadFolderBlock({
   config,
-  duration: _,
+  duration,
   completed,
 }: ReadFolderBlockProps) {
+  const durationToDisplay = (duration / 100).toPrecision(3);
   return (
     <div key={config.message}>
-      <div className="flex flex-col items-start justify-start gap-1 text-sm px-3 py-2">
+      <div className="flex flex-col items-start justify-start gap-1 text-sm px-3 py-2 group/container">
         <div className="flex items-center justify-start gap-1">
           {completed ? (
             <IconLoader2 className="animate-spin shrink-0" size={14} />
           ) : (
             <IconCheck className="shrink-0" size={14} />
           )}
-          <p className="text-neutral-600 font-medium">Read in</p>
-          <p className="text-neutral-500">{config.folder_path}</p>
+          <div className="flex items-center justify-start gap-1">
+            <p className="text-neutral-600 font-medium">Read in</p>
+            <p className="text-neutral-500">{config.folder_path}</p>
+            <p className="text-xs text-neutral-400 mt-[1px] hidden group-hover/container:block">
+              {durationToDisplay}s
+            </p>
+          </div>
         </div>
         <p className="text-xs text-neutral-500">{config.message}</p>
       </div>

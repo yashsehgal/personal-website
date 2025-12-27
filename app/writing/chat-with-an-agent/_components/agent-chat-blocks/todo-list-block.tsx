@@ -5,10 +5,9 @@ import { IconCircle, IconCircleCheck } from '@tabler/icons-react';
 
 interface TodoListBlockProps {
   config: TodoListLogConfig;
-  duration: AgentChatLogWithDurationType['duration'];
 }
 
-export function TodoListBlock({ config, duration: _ }: TodoListBlockProps) {
+export function TodoListBlock({ config }: TodoListBlockProps) {
   return (
     <div key={config.title}>
       <div className="bg-white border rounded-xl divide-y w-[90%] ml-3 mb-4">

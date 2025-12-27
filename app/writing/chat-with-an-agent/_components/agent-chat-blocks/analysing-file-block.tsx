@@ -9,12 +9,18 @@ interface AnalysingFileBlockProps {
 
 export function AnalysingFileBlock({
   config,
-  duration: _,
+  duration,
 }: AnalysingFileBlockProps) {
+  const durationToDisplay = (duration / 100).toPrecision(3);
   return (
     <div key={config.message} className="py-2">
-      <div className="flex flex-col items-start justify-start gap-1 text-sm px-3">
-        <p className="text-neutral-600 font-medium">Analysing</p>
+      <div className="flex flex-col items-start justify-start gap-1 text-sm px-3 group/container">
+        <div className="flex items-center justify-start gap-1">
+          <p className="text-neutral-600 font-medium">Analysing</p>
+          <p className="text-xs text-neutral-400 mt-[1px] hidden group-hover/container:block">
+            {durationToDisplay}s
+          </p>
+        </div>
         <p className="text-neutral-500">{config.message}</p>
       </div>
     </div>
