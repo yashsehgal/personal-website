@@ -172,7 +172,7 @@ export const AGENT_CHAT_PREVIEW_LOG: AgentChatLogListType = [
     config: {
       message:
         'Deep search for "refreshIfNeeded", "refreshToken", and "inFlight" tokens across repo and tests. Found helpers, mocks, and flaky test patterns that reinitialize auth state.',
-    } as any,
+    },
   },
   {
     agent_chat_log_item_type: AGENT_CHAT_LOG_ITEM_TYPE.READ_FILE,
