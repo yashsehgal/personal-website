@@ -7,7 +7,7 @@ interface SearchedBlockProps {
   duration: AgentChatLogWithDurationType['duration'];
 }
 
-export function SearchedBlock({ config, duration }: SearchedBlockProps) {
+export function SearchedBlock({ config, duration: _ }: SearchedBlockProps) {
   return (
     <div key={config.message}>
       <div className="flex flex-col items-start justify-start gap-1 text-sm px-3 py-2">

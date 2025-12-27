@@ -8,7 +8,7 @@ interface TodoListBlockProps {
   duration: AgentChatLogWithDurationType['duration'];
 }
 
-export function TodoListBlock({ config, duration }: TodoListBlockProps) {
+export function TodoListBlock({ config, duration: _ }: TodoListBlockProps) {
   return (
     <div key={config.title}>
       <div className="bg-white border rounded-xl divide-y w-[90%] ml-3 mb-4">

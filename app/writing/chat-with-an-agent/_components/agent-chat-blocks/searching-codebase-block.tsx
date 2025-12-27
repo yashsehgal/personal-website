@@ -9,7 +9,7 @@ interface SearchingCodebaseBlockProps {
 
 export function SearchingCodebaseBlock({
   config,
-  duration,
+  duration: _,
 }: SearchingCodebaseBlockProps) {
   return (
     <div key={config.message}>

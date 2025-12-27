@@ -11,7 +11,7 @@ interface ReadFolderBlockProps {
 
 export function ReadFolderBlock({
   config,
-  duration,
+  duration: _,
   completed,
 }: ReadFolderBlockProps) {
   return (

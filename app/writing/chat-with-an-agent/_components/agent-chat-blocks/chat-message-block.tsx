@@ -7,7 +7,10 @@ interface ChatMessageBlockProps {
   duration: AgentChatLogWithDurationType['duration'];
 }
 
-export function ChatMessageBlock({ config, duration }: ChatMessageBlockProps) {
+export function ChatMessageBlock({
+  config,
+  duration: _,
+}: ChatMessageBlockProps) {
   return (
     <div key={config.message} className="px-3 py-2">
       <p className="text-sm">{config.message}</p>

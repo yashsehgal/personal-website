@@ -11,7 +11,7 @@ interface ReadFileBlockProps {
 
 export function ReadFileBlock({
   config,
-  duration,
+  duration: _,
   completed,
 }: ReadFileBlockProps) {
   return (

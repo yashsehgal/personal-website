@@ -9,7 +9,7 @@ interface AnalysingFileBlockProps {
 
 export function AnalysingFileBlock({
   config,
-  duration,
+  duration: _,
 }: AnalysingFileBlockProps) {
   return (
     <div key={config.message} className="py-2">

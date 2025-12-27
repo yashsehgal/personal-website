@@ -10,7 +10,7 @@ interface FileContentChangeBlockProps {
 
 export function FileContentChangeBlock({
   config,
-  duration,
+  duration: _,
 }: FileContentChangeBlockProps) {
   return (
     <div key={config.file_name}>

@@ -7,7 +7,7 @@ interface ThinkingBlockProps {
   duration: AgentChatLogWithDurationType['duration'];
 }
 
-export function ThinkingBlock({ config, duration }: ThinkingBlockProps) {
+export function ThinkingBlock({ config, duration: _ }: ThinkingBlockProps) {
   return (
     <div key={config.message}>
       <div className="flex flex-col items-start justify-start gap-1 text-sm px-3 py-2">
