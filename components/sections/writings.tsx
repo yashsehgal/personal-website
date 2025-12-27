@@ -52,6 +52,11 @@ const WRITINGS: { name: string; slug: string; emoji: string }[] = [
     slug: 'integrations',
     emoji: '🔗',
   },
+  {
+    name: 'Agentic chat preview',
+    slug: 'chat-with-an-agent',
+    emoji: '✨',
+  },
 ];
 
 export default function Writings() {

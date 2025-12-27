@@ -4,8 +4,7 @@
 
 html,
 body {
-  /* @apply bg-white text-gray-900 font-mono pt-6 pb-12; */
-  @apply bg-white text-gray-900 font-mono; /* temporary css style */
+  @apply bg-white text-gray-900 font-mono pt-6 pb-12;
   @apply selection:text-white selection:bg-black;
 }
 
