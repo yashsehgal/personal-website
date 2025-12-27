@@ -138,11 +138,11 @@ export function ChatWithAnAgentPreviewComponent() {
       className="max-w-3xl w-full font-sans space-y-1.5 overflow-y-scroll hide-scroll p-4 border rounded-2xl h-[32rem] select-none cursor-default">
       {agentChatPreviewLogState.map((log, index) => {
         // Using proper types for logs by removing duration property from it
-        const { duration: _, ...logWithoutDuration } = log;
+        const { duration, ...logWithoutDuration } = log;
         const isLast = index === agentChatPreviewLogState.length - 1;
         return (
           <RenderLogComponent
-            duration={log.duration}
+            duration={duration}
             log={logWithoutDuration}
             completed={isLast}
             key={index}
