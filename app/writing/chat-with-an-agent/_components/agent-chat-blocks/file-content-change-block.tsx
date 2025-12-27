@@ -1,5 +1,4 @@
 'use client';
-import { AgentChatLogWithDurationType } from '@/app/writing/chat-with-an-agent/_components/chat-with-an-agent-preview-component';
 import { FileContentChangeLogConfig } from '@/app/writing/chat-with-an-agent/_components/types';
 import { IconFile } from '@tabler/icons-react';
 
