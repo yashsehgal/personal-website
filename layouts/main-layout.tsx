@@ -18,7 +18,7 @@ export function MainLayout({ className, children, ...props }: MainLayoutProps) {
   return (
     <div
       className={cn(
-        'divide-y divide-neutral-200 flex flex-col h-screen',
+        'divide-y divide-neutral-200 flex flex-col h-screen overflow-hidden',
         className,
       )}
       {...props}>
@@ -45,10 +45,10 @@ export function MainLayout({ className, children, ...props }: MainLayoutProps) {
           )}
         </div>
       </header>
-      <main className="flex-1">
+      <main className="flex-1 h-full">
         <div className="mx-auto w-4xl max-w-full flex items-start justify-center h-full divide-x divide-neutral-200">
           <NavigationSidebar />
-          <div className="flex-1 h-full border-r border-neutral-200">
+          <div className="flex-1 h-full border-r border-neutral-200 overflow-y-scroll pb-12 hide-scroll">
             {children}
           </div>
         </div>

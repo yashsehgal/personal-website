@@ -6,12 +6,12 @@ export default function Page() {
       <div className="space-y-4 p-6 pb-8">
         <h1 className="font-medium">About me</h1>
         <div className="space-y-2 text-neutral-500">
-          <p>
+          <p className="leading-7">
             I like to build clean looking products and websites. My work
             involves using design tools and frontend engineering to create
             components and design systems.
           </p>
-          <p>
+          <p className="leading-7">
             Recently, I&apos;ve been working on the{' '}
             <Link
               href="https://stack.ai"
@@ -25,7 +25,7 @@ export default function Page() {
             users creating and managing AI pipelines. Worked on quality-of-life
             improvements and accessibility features alongside.
           </p>
-          <p className="text-balance">
+          <p className="text-balance leading-7">
             I am based out of India and I like to travel, study and make music.
           </p>
         </div>

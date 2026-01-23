@@ -27,3 +27,7 @@ body {
 .clean-link {
   @apply border-b border-neutral-300 text-neutral-600 hover:text-black;
 }
+
+.hide-scroll::-webkit-scrollbar {
+  display: none;
+}
