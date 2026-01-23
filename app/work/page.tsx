@@ -3,7 +3,7 @@ import Link from 'next/link';
 export default function WorkPage() {
   return (
     <div className="p-6 space-y-8">
-      <div className="space-y-4">
+      <div className="space-y-6">
         <h1 className="font-medium">Work and Projects</h1>
         <div className="space-y-2 text-neutral-500">
           <p className="text-balance leading-7">
@@ -12,11 +12,11 @@ export default function WorkPage() {
           </p>
         </div>
       </div>
-      <div className="space-y-8">
-        <div className="space-y-3">
+      <div className="space-y-12">
+        <div className="space-y-6">
           <div className="flex items-center justify-start gap-3">
             <p className="text-neutral-400">2025</p>
-            <h2>StackAI</h2>
+            <h2 className="font-serif italic">StackAI</h2>
           </div>
           <p className="text-neutral-500 leading-7 text-balance">
             I worked on the{' '}
@@ -36,10 +36,10 @@ export default function WorkPage() {
             filtering, along with several other product enhancements.
           </p>
         </div>
-        <div className="space-y-3">
+        <div className="space-y-6">
           <div className="flex items-center justify-start gap-3">
             <p className="text-neutral-400">2024</p>
-            <h2>Rocketium</h2>
+            <h2 className="font-serif italic">Rocketium</h2>
           </div>
           <p className="text-neutral-500 leading-7 text-balance">
             At{' '}
@@ -59,10 +59,10 @@ export default function WorkPage() {
             to build clean, efficient, and user-centered solutions.
           </p>
         </div>
-        <div className="space-y-3">
+        <div className="space-y-6">
           <div className="flex items-center justify-start gap-3">
             <p className="text-neutral-400">2023</p>
-            <h2>Cookies</h2>
+            <h2 className="font-serif italic">Cookies</h2>
           </div>
           <p className="text-neutral-500 leading-7 text-balance">
             Worked on a component library inspired by shadcn, check out the{' '}
@@ -75,10 +75,10 @@ export default function WorkPage() {
             .
           </p>
         </div>
-        <div className="space-y-3">
+        <div className="space-y-6">
           <div className="flex items-center justify-start gap-3">
             <p className="text-neutral-400">2023</p>
-            <h2>GitHub</h2>
+            <h2 className="font-serif italic">GitHub</h2>
           </div>
           <p className="text-neutral-500 leading-7 text-balance">
             At{' '}

@@ -17,7 +17,7 @@ export function NestedNavigationBreadcrumb() {
     <div className="flex items-center justify-start gap-1.5">
       {segments.map((segment, index) => {
         return (
-          <div className="flex items-center justify-start gap-1.5" key={index}>
+          <div className="flex items-center justify-start gap-2" key={index}>
             {index < segments.length && <IconChevronRight className="size-4" />}
             <Link href={getSegmentPath(index)}>
               <p className="font-medium select-none">
