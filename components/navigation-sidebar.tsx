@@ -20,7 +20,7 @@ export function NavigationSidebar() {
                 <Link
                   href={navigationItem.route}
                   className={cn(
-                    '',
+                    'font-serif italic',
                     isActive(navigationItem.route)
                       ? 'text-black'
                       : 'text-neutral-400',

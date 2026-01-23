@@ -1,3 +1,3 @@
 export default function PostsPage() {
-  return <div>Posts page</div>;
+  return <div className="p-6 space-y-8"></div>;
 }

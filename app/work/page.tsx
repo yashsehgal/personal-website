@@ -38,22 +38,6 @@ export default function WorkPage() {
         </div>
         <div className="space-y-3">
           <div className="flex items-center justify-start gap-3">
-            <p className="text-neutral-400">2023</p>
-            <h2>Cookies</h2>
-          </div>
-          <p className="text-neutral-500 leading-7">
-            Worked on a component library inspired by shadcn, check out the{' '}
-            <Link
-              href="https://usecookies.vercel.app/"
-              target="_blank"
-              className="clean-link">
-              library website
-            </Link>
-            .
-          </p>
-        </div>
-        <div className="space-y-3">
-          <div className="flex items-center justify-start gap-3">
             <p className="text-neutral-400">2024</p>
             <h2>Rocketium</h2>
           </div>
@@ -73,6 +57,22 @@ export default function WorkPage() {
             support future development and cross-team collaboration. This
             experience strengthened my ability to balance design and engineering
             to build clean, efficient, and user-centered solutions.
+          </p>
+        </div>
+        <div className="space-y-3">
+          <div className="flex items-center justify-start gap-3">
+            <p className="text-neutral-400">2023</p>
+            <h2>Cookies</h2>
+          </div>
+          <p className="text-neutral-500 leading-7">
+            Worked on a component library inspired by shadcn, check out the{' '}
+            <Link
+              href="https://usecookies.vercel.app/"
+              target="_blank"
+              className="clean-link">
+              library website
+            </Link>
+            .
           </p>
         </div>
         <div className="space-y-3">
