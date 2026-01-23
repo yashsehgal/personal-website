@@ -18,7 +18,7 @@ export default function WorkPage() {
             <p className="text-neutral-400">2025</p>
             <h2>StackAI</h2>
           </div>
-          <p className="text-neutral-500 leading-7">
+          <p className="text-neutral-500 leading-7 text-balance">
             I worked on the{' '}
             <Link
               href="https://stack.ai"
@@ -41,7 +41,7 @@ export default function WorkPage() {
             <p className="text-neutral-400">2024</p>
             <h2>Rocketium</h2>
           </div>
-          <p className="text-neutral-500 leading-7">
+          <p className="text-neutral-500 leading-7 text-balance">
             At{' '}
             <Link
               href="https://rocketium.ai/"
@@ -64,7 +64,7 @@ export default function WorkPage() {
             <p className="text-neutral-400">2023</p>
             <h2>Cookies</h2>
           </div>
-          <p className="text-neutral-500 leading-7">
+          <p className="text-neutral-500 leading-7 text-balance">
             Worked on a component library inspired by shadcn, check out the{' '}
             <Link
               href="https://usecookies.vercel.app/"
@@ -80,7 +80,7 @@ export default function WorkPage() {
             <p className="text-neutral-400">2023</p>
             <h2>GitHub</h2>
           </div>
-          <p className="text-neutral-500 leading-7">
+          <p className="text-neutral-500 leading-7 text-balance">
             At{' '}
             <Link
               href="https://github.com/"
