@@ -15,7 +15,7 @@ export default function WorkPage() {
       <div className="space-y-8">
         <div className="space-y-3">
           <div className="flex items-center justify-start gap-3">
-            <p className="text-neutral-500">2025</p>
+            <p className="text-neutral-400">2025</p>
             <h2>StackAI</h2>
           </div>
           <p className="text-neutral-500 leading-7">
@@ -38,7 +38,7 @@ export default function WorkPage() {
         </div>
         <div className="space-y-3">
           <div className="flex items-center justify-start gap-3">
-            <p className="text-neutral-500">2023</p>
+            <p className="text-neutral-400">2023</p>
             <h2>Cookies</h2>
           </div>
           <p className="text-neutral-500 leading-7">
@@ -54,7 +54,7 @@ export default function WorkPage() {
         </div>
         <div className="space-y-3">
           <div className="flex items-center justify-start gap-3">
-            <p className="text-neutral-500">2024</p>
+            <p className="text-neutral-400">2024</p>
             <h2>Rocketium</h2>
           </div>
           <p className="text-neutral-500 leading-7">
@@ -77,7 +77,7 @@ export default function WorkPage() {
         </div>
         <div className="space-y-3">
           <div className="flex items-center justify-start gap-3">
-            <p className="text-neutral-500">2023</p>
+            <p className="text-neutral-400">2023</p>
             <h2>GitHub</h2>
           </div>
           <p className="text-neutral-500 leading-7">
