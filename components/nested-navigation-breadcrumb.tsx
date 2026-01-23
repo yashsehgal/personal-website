@@ -17,14 +17,14 @@ export function NestedNavigationBreadcrumb() {
     <div className="flex items-center justify-start gap-2">
       {segments.map((segment, index) => {
         return (
-          <>
+          <div className="flex items-center justify-start gap-2" key={index}>
             {index < segments.length && <IconChevronRight className="size-4" />}
-            <Link href={getSegmentPath(index)} key={index}>
+            <Link href={getSegmentPath(index)}>
               <p className="font-medium select-none">
                 {getRouteTitle(segment as ApplicationRoute)}
               </p>
             </Link>
-          </>
+          </div>
         );
       })}
     </div>
