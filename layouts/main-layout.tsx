@@ -1,5 +1,6 @@
 import { ROUTES } from '@/common/routes';
 import { NavigationSidebar } from '@/components/navigation-sidebar';
+import { NestedNavigationBreadcrumb } from '@/components/nested-navigation-breadcrumb';
 import { cn } from '@/helpers/cn';
 import Link from 'next/link';
 
@@ -28,6 +29,7 @@ export function MainLayout({ className, children, ...props }: MainLayoutProps) {
               {MAIN_LAYOUT_HEADER_LEFT_TITLE}
             </p>
           </Link>
+          <NestedNavigationBreadcrumb />
         </div>
         <div className="flex items-center justify-end gap-3">
           {Object.entries(MAIN_LAYOUT_HEADER_SOCIAL_OPTIONS).map(
