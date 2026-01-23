@@ -7,7 +7,7 @@ export default function Page() {
         <h1 className="font-medium">About me</h1>
         <div className="space-y-2 text-neutral-500">
           <p className="leading-7">
-            I like to build clean looking products and websites. My work
+            I like to build clean-looking products and websites. My work
             involves using design tools and frontend engineering to create
             components and design systems.
           </p>
@@ -22,8 +22,9 @@ export default function Page() {
             </Link>{' '}
             platform: Designing and building interfaces for the dashboard and
             visual workflow builder, and refining the end-to-end experience for
-            users creating and managing AI pipelines. Worked on quality-of-life
-            improvements and accessibility features alongside.
+            users creating and managing AI pipelines. I also worked on
+            quality-of-life improvements and accessibility features alongside
+            this.
           </p>
           <p className="text-balance leading-7">
             I am based out of India and I like to travel, study and make music.
