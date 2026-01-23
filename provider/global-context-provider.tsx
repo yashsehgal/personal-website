@@ -5,6 +5,9 @@ import { getAllDiscussions } from '@/services/discussions';
 import { useQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 
+const STALE_TIME: number = 1000 * 60 * 5; // Cache for 5 minutes
+const RETRY: number = 2;
+
 export function GlobalContextProvider({
   children,
 }: {
@@ -21,8 +24,8 @@ export function GlobalContextProvider({
   } = useQuery({
     queryKey: ['discussions'],
     queryFn: getAllDiscussions,
-    staleTime: 1000 * 60 * 5, // Cache for 5 minutes
-    retry: 2,
+    staleTime: STALE_TIME,
+    retry: RETRY,
   });
 
   useEffect(() => {
