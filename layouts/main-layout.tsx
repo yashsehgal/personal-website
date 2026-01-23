@@ -23,7 +23,7 @@ export function MainLayout({ className, children, ...props }: MainLayoutProps) {
       )}
       {...props}>
       <header className="py-2 px-3 flex items-center justify-between">
-        <div className="flex items-center justify-start gap-2">
+        <div className="flex items-center justify-start gap-1.5">
           <Link href={ROUTES.HOME}>
             <p className="font-medium select-none">
               {MAIN_LAYOUT_HEADER_LEFT_TITLE}
@@ -46,7 +46,7 @@ export function MainLayout({ className, children, ...props }: MainLayoutProps) {
         </div>
       </header>
       <main className="flex-1">
-        <div className="mx-auto w-4xl max-w-full flex items-start justify-center h-full">
+        <div className="mx-auto w-4xl max-w-full flex items-start justify-center h-full divide-x divide-neutral-200">
           <NavigationSidebar />
           <div className="flex-1 p-3">{children}</div>
         </div>
