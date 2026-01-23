@@ -23,3 +23,7 @@ body {
   background: var(--background);
   color: var(--foreground);
 }
+
+.clean-link {
+  @apply border-b border-neutral-300 text-neutral-600 hover:text-black;
+}

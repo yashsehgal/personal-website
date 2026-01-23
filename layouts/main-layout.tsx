@@ -48,7 +48,9 @@ export function MainLayout({ className, children, ...props }: MainLayoutProps) {
       <main className="flex-1">
         <div className="mx-auto w-4xl max-w-full flex items-start justify-center h-full divide-x divide-neutral-200">
           <NavigationSidebar />
-          <div className="flex-1 p-3">{children}</div>
+          <div className="flex-1 h-full border-r border-neutral-200">
+            {children}
+          </div>
         </div>
       </main>
     </div>

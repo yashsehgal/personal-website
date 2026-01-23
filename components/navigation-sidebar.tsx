@@ -11,7 +11,7 @@ export function NavigationSidebar() {
   const isActive = (route: ApplicationRoute): boolean => pathname === route;
 
   return (
-    <aside className="max-w-80 min-w-12 h-full p-3">
+    <aside className="max-w-80 min-w-12 h-full p-6">
       <nav>
         <ul className="flex flex-col gap-1">
           {NAVIGATION.map((navigationItem, index) => {
