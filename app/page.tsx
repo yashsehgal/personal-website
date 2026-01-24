@@ -3,9 +3,12 @@ import Link from 'next/link';
 
 export default function Page() {
   return (
-    <div className="divide-y divide-neutral-200">
+    <div className="divide-y divide-neutral-200udarauda">
       <div className="space-y-6 p-6 pb-8">
-        <h1 className="font-medium">Hi, I am Yash</h1>
+        <div className="space-y-1">
+          <h1 className="font-medium">Hi, I am Yash</h1>
+          <p className="text-neutral-500 italic font-serif">Design Engineer</p>
+        </div>
         <div className="space-y-2 text-neutral-500">
           <p className="leading-7">
             I like to build clean-looking products and websites. My work
@@ -29,6 +32,14 @@ export default function Page() {
           </p>
           <p className="text-balance leading-7">
             I am based out of India and I like to travel, study and make music.
+          </p>
+          <p className="text-balance leading-7">
+            Write me at{' '}
+            <Link
+              href="mailto:yashsehgal.work@gmail.com"
+              className="clean-link">
+              yashsehgal.work@gmail.com
+            </Link>
           </p>
         </div>
       </div>
