@@ -15,7 +15,7 @@ export default function PostEditingSoftwareTimelineComponentPage() {
       )}>
       <div
         className={cn(
-          'h-[520px] w-3xl flex flex-col gap-16 items-center justify-center',
+          'h-[520px] w-3xl flex flex-col gap-16 items-center justify-center max-lg:w-md',
         )}>
         <LayersContainer darkMode={darkMode} />
         <button
