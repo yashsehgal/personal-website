@@ -1,5 +1,4 @@
 'use client';
-import { ROUTES } from '@/common/routes';
 import { NavigationSidebar } from '@/components/navigation-sidebar';
 import { NestedNavigationBreadcrumb } from '@/components/nested-navigation-breadcrumb';
 import { cn } from '@/helpers/cn';
@@ -8,8 +7,6 @@ import { motion } from 'framer-motion';
 import { usePathname } from 'next/navigation';
 
 type MainLayoutProps = React.HTMLAttributes<HTMLDivElement>;
-
-const MAIN_LAYOUT_HEADER_LEFT_TITLE: string = 'Yash Sehgal' as const;
 
 const MAIN_LAYOUT_HEADER_SOCIAL_OPTIONS = {
   X: 'https://x.com/yashsehgaldev',
@@ -27,14 +24,7 @@ export function MainLayout({ className, children, ...props }: MainLayoutProps) {
       )}
       {...props}>
       <header className="py-2 px-3 flex items-center justify-between">
-        <div className="flex items-center justify-start gap-1.5">
-          <Link href={ROUTES.HOME}>
-            <p className="font-medium select-none">
-              {MAIN_LAYOUT_HEADER_LEFT_TITLE}
-            </p>
-          </Link>
-          <NestedNavigationBreadcrumb />
-        </div>
+        <NestedNavigationBreadcrumb />
         <div className="flex items-center justify-end gap-3">
           {Object.entries(MAIN_LAYOUT_HEADER_SOCIAL_OPTIONS).map(
             ([key, value]) => (

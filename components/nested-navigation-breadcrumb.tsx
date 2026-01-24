@@ -14,15 +14,21 @@ export function NestedNavigationBreadcrumb() {
 
   return (
     <div className="flex items-center justify-start gap-1.5">
-      {segments.map((segment, index) => {
+      {segments.map((_, index) => {
+        const path = getSegmentPath(index);
+        const title = getRouteTitle(path);
+        const isLast = index === segments.length - 1;
+
         return (
           <div className="flex items-center justify-start gap-2" key={index}>
-            {index < segments.length && <IconChevronRight className="size-4" />}
-            <Link href={getSegmentPath(index)}>
-              <p className="font-medium select-none">
-                {getRouteTitle(getSegmentPath(index))}
-              </p>
-            </Link>
+            {index > 0 && <IconChevronRight className="size-4" />}
+            {isLast ? (
+              <p className="font-medium select-none">{title}</p>
+            ) : (
+              <Link href={`/${path}`}>
+                <p className="font-medium select-none">{title}</p>
+              </Link>
+            )}
           </div>
         );
       })}
