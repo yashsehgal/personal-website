@@ -10,8 +10,10 @@ export function NavigationSidebar() {
 
   const isActive = (route: ApplicationRoute): boolean => pathname === route;
 
-  const hasActiveInnerPage = (innerPages: { route: string; isExternal: boolean }[] | undefined): boolean =>
-    (innerPages?.some((p) => !p.isExternal && pathname === p.route) ?? false);
+  const hasActiveInnerPage = (
+    innerPages: { route: string; isExternal: boolean }[] | undefined,
+  ): boolean =>
+    innerPages?.some((p) => !p.isExternal && pathname === p.route) ?? false;
 
   return (
     <aside className="w-80 h-full p-6">
@@ -22,7 +24,9 @@ export function NavigationSidebar() {
               navigationItem.innerPages?.length,
             );
             if (hasInnerPages) {
-              const showInnerPages = hasActiveInnerPage(navigationItem.innerPages);
+              const showInnerPages = hasActiveInnerPage(
+                navigationItem.innerPages,
+              );
               return (
                 <div className="flex flex-col items-end gap-1.5" key={index}>
                   <Link
@@ -43,7 +47,7 @@ export function NavigationSidebar() {
                           <Link key={index} href={innerPage.route}>
                             <div
                               className={cn(
-                                'text-sm truncate h-8 flex items-center justify-start pr-8 transition-colors pl-4 rounded-lg hover:bg-neutral-100 relative',
+                                'text-sm truncate h-8 flex items-center justify-start pr-8 pl-4 rounded-lg hover:bg-neutral-100 relative',
                                 isActive(innerPage.route as ApplicationRoute)
                                   ? 'text-black bg-neutral-100'
                                   : 'text-neutral-400',
