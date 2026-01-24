@@ -5,7 +5,7 @@ export default function Page() {
   return (
     <div className="divide-y divide-neutral-200">
       <div className="space-y-6 p-6 pb-8">
-        <h1 className="font-medium">About me</h1>
+        <h1 className="font-medium">Hi, I am Yash</h1>
         <div className="space-y-2 text-neutral-500">
           <p className="leading-7">
             I like to build clean-looking products and websites. My work
@@ -13,7 +13,7 @@ export default function Page() {
             components and design systems.
           </p>
           <p className="leading-7">
-            Recently, I&apos;ve been working on the{' '}
+            My recent work experience while building{' '}
             <Link
               href="https://stack.ai"
               target="_blank"
@@ -21,11 +21,11 @@ export default function Page() {
               className="clean-link">
               StackAI
             </Link>{' '}
-            platform: Designing and building interfaces for the dashboard and
-            visual workflow builder, and refining the end-to-end experience for
-            users creating and managing AI pipelines. I also worked on
-            quality-of-life improvements and accessibility features alongside
-            this.
+            workflow builder: Designing and building interfaces for the
+            dashboard and visual workflow builder, and refining the end-to-end
+            experience for users creating and managing AI pipelines. I also
+            worked on quality-of-life improvements and accessibility features
+            alongside this.
           </p>
           <p className="text-balance leading-7">
             I am based out of India and I like to travel, study and make music.
