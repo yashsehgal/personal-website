@@ -52,6 +52,17 @@ export const POSTS: InnerPage[] = [
     route: 'https://x.com/yashsehgaldev/status/2006262558446285044',
     isExternal: true,
   },
+  {
+    title: 'Background score: Epic, Hopeful, Dignified',
+    route:
+      'https://drive.google.com/drive/folders/1GUeDSncLmAMMqaSpRpss3ZAR4o9fipCh?usp=sharing',
+    isExternal: true,
+  },
+  {
+    title: 'Background score: Kingdom Introduction',
+    route: 'https://x.com/yashsehgaldev/status/2013026621897523684',
+    isExternal: true,
+  },
 ] as const;
 
 export const NAVIGATION: {
