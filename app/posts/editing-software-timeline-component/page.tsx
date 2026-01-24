@@ -4,7 +4,7 @@ import { LayersContainer } from '@/app/posts/editing-software-timeline-component
 import { cn } from '@/helpers/cn';
 import { useState } from 'react';
 
-export default function PostCreateAnIntegrationPage() {
+export default function PostEditingSoftwareTimelineComponentPage() {
   const [darkMode, setDarkMode] = useState<boolean>(false);
 
   return (
