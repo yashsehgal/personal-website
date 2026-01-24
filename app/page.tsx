@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 export default function Page() {
   return (
-    <div className="divide-y divide-neutral-200udarauda">
+    <div className="divide-y divide-neutral-200">
       <div className="space-y-6 p-6 pb-8">
         <div className="space-y-1">
           <h1 className="font-medium">Hi, I am Yash</h1>
