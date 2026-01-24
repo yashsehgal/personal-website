@@ -43,7 +43,7 @@ export function NavigationSidebar() {
                       'font-serif italic',
                       isActive(navigationItem.route)
                         ? 'text-black'
-                        : 'text-neutral-400',
+                        : 'text-neutral-500',
                     )}>
                     {navigationItem.title}
                   </Link>
@@ -58,7 +58,7 @@ export function NavigationSidebar() {
                                 'text-sm truncate h-8 flex items-center justify-start pr-8 pl-4 rounded-lg hover:bg-neutral-100 relative',
                                 isActive(innerPage.route as ApplicationRoute)
                                   ? 'text-black bg-neutral-100'
-                                  : 'text-neutral-400',
+                                  : 'text-neutral-500',
                               )}>
                               {innerPage.title}
                               <div
@@ -66,7 +66,7 @@ export function NavigationSidebar() {
                                   'h-8 w-px absolute top-0 right-3',
                                   isActive(innerPage.route as ApplicationRoute)
                                     ? 'bg-black'
-                                    : 'bg-neutral-200',
+                                    : 'bg-neutral-300',
                                 )}
                               />
                             </div>
