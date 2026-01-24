@@ -15,8 +15,16 @@ export function NavigationSidebar() {
   ): boolean =>
     innerPages?.some((p) => !p.isExternal && pathname === p.route) ?? false;
 
+  const isAnyInnerPageActive = NAVIGATION.some((item) =>
+    hasActiveInnerPage(item.innerPages),
+  );
+
   return (
-    <aside className="w-80 h-full p-6">
+    <aside
+      className={cn(
+        'w-80 h-full p-6 max-lg:w-fit',
+        isAnyInnerPageActive && 'max-lg:hidden',
+      )}>
       <nav>
         <ul className="flex flex-col gap-1 items-end">
           {NAVIGATION.map((navigationItem, index) => {
@@ -40,7 +48,7 @@ export function NavigationSidebar() {
                     {navigationItem.title}
                   </Link>
                   {showInnerPages && (
-                    <div className="flex flex-col items-end justify-start">
+                    <div className="flex flex-col items-end justify-start max-lg:hidden">
                       {navigationItem.innerPages?.map((innerPage, index) => {
                         if (innerPage.isExternal) return;
                         return (

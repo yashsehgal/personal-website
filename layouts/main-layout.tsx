@@ -43,7 +43,7 @@ export function MainLayout({ className, children, ...props }: MainLayoutProps) {
         <div className="mx-auto w-full max-w-7xl min-w-0 flex items-start justify-center h-full divide-x divide-neutral-200">
           <NavigationSidebar />
           <motion.div
-            className="flex-1 h-full border-r border-neutral-200 overflow-y-scroll hide-scroll"
+            className="flex-1 h-full border-r border-neutral-200 overflow-y-scroll hide-scroll max-xl:border-r-0"
             key={pathname}
             initial={{ filter: 'blur(4px)' }}
             animate={{ filter: 'blur(0px)' }}
