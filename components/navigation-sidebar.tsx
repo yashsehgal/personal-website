@@ -10,8 +10,8 @@ export function NavigationSidebar() {
 
   const isActive = (route: ApplicationRoute): boolean => pathname === route;
 
-  const isParentActive = (parentRoute: string): boolean =>
-    pathname === parentRoute || pathname.startsWith(parentRoute + '/');
+  const hasActiveInnerPage = (innerPages: { route: string; isExternal: boolean }[] | undefined): boolean =>
+    (innerPages?.some((p) => !p.isExternal && pathname === p.route) ?? false);
 
   return (
     <aside className="w-80 h-full p-6">
@@ -22,7 +22,7 @@ export function NavigationSidebar() {
               navigationItem.innerPages?.length,
             );
             if (hasInnerPages) {
-              const showInnerPages = isParentActive(navigationItem.route);
+              const showInnerPages = hasActiveInnerPage(navigationItem.innerPages);
               return (
                 <div className="flex flex-col items-end gap-1.5" key={index}>
                   <Link
