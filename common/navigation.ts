@@ -42,11 +42,11 @@ export const POSTS: InnerPage[] = [
     route: ROUTES.POST__FIGMA_LIKE_COMMENT_PIN_COMPONENT,
     isExternal: false,
   },
-  {
-    title: NAVIGATION_SEGMENT_TITLE_MAP[ROUTES.POST__DYNAMIC_ISLAND_COMPONENT],
-    route: ROUTES.POST__DYNAMIC_ISLAND_COMPONENT,
-    isExternal: false,
-  },
+  // {
+  //   title: NAVIGATION_SEGMENT_TITLE_MAP[ROUTES.POST__DYNAMIC_ISLAND_COMPONENT],
+  //   route: ROUTES.POST__DYNAMIC_ISLAND_COMPONENT,
+  //   isExternal: false,
+  // },
   {
     title: 'Books I read in 2025',
     route: 'https://x.com/yashsehgaldev/status/2006262558446285044',
