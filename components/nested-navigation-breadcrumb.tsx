@@ -1,6 +1,5 @@
 'use client';
 import { getRouteTitle } from '@/common/navigation';
-import { ApplicationRoute } from '@/common/routes';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { IconChevronRight } from '@tabler/icons-react';
@@ -21,7 +20,7 @@ export function NestedNavigationBreadcrumb() {
             {index < segments.length && <IconChevronRight className="size-4" />}
             <Link href={getSegmentPath(index)}>
               <p className="font-medium select-none">
-                {getRouteTitle(segment as ApplicationRoute)}
+                {getRouteTitle(getSegmentPath(index))}
               </p>
             </Link>
           </div>

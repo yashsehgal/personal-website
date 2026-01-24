@@ -1,3 +1,4 @@
+'use client';
 import { POSTS } from '@/common/navigation';
 import Link from 'next/link';
 

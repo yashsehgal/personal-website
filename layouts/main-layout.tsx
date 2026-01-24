@@ -50,7 +50,7 @@ export function MainLayout({ className, children, ...props }: MainLayoutProps) {
         </div>
       </header>
       <main className="flex-1 h-full">
-        <div className="mx-auto w-4xl max-w-full flex items-start justify-center h-full divide-x divide-neutral-200">
+        <div className="mx-auto w-6xl max-w-full flex items-start justify-center h-full divide-x divide-neutral-200">
           <NavigationSidebar />
           <motion.div
             className="flex-1 h-full border-r border-neutral-200 overflow-y-scroll pb-12 hide-scroll"

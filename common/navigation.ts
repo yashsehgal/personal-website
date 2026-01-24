@@ -4,46 +4,46 @@ export const NAVIGATION_SEGMENT_TITLE_MAP = {
   [ROUTES.HOME]: 'Home',
   [ROUTES.WORK]: 'Work',
   [ROUTES.POSTS]: 'Posts',
+  [ROUTES.POST__AUTOMATION_FLOW_COMPONENT]: 'Automation flow component',
+  [ROUTES.POST__CREATE_AN_INTEGRATION]: 'Create an integration',
+  [ROUTES.POST__EDITING_SOFTWARE_TIMELINE_COMPONENT]:
+    'Editing software timeline component',
+  [ROUTES.POST__FIGMA_LIKE_COMMENT_PIN_COMPONENT]:
+    'Figma-like comment pin component',
+  [ROUTES.POST__DYNAMIC_ISLAND_COMPONENT]: 'Dynamic island component',
 } as const;
 
-export const NAVIGATION: { title: string; route: ApplicationRoute }[] = [
-  { title: NAVIGATION_SEGMENT_TITLE_MAP[ROUTES.HOME], route: ROUTES.HOME },
-  { title: NAVIGATION_SEGMENT_TITLE_MAP[ROUTES.WORK], route: ROUTES.WORK },
-  { title: NAVIGATION_SEGMENT_TITLE_MAP[ROUTES.POSTS], route: ROUTES.POSTS },
-] as const;
+export type InnerPage = { title: string; route: string; isExternal: boolean };
 
-export const getRouteTitle = (route: string): string => {
-  const routeWithInitialSlash: string = '/' + route;
-  return (
-    NAVIGATION_SEGMENT_TITLE_MAP[
-      routeWithInitialSlash as keyof typeof NAVIGATION_SEGMENT_TITLE_MAP
-    ] ?? ''
-  );
-};
-
-export const POSTS: { title: string; route: string; isExternal: boolean }[] = [
+export const POSTS: InnerPage[] = [
   {
-    title: 'Automation flow component',
+    title: NAVIGATION_SEGMENT_TITLE_MAP[ROUTES.POST__AUTOMATION_FLOW_COMPONENT],
     route: ROUTES.POST__AUTOMATION_FLOW_COMPONENT,
     isExternal: false,
   },
   {
-    title: 'Create an integration',
+    title: NAVIGATION_SEGMENT_TITLE_MAP[ROUTES.POST__CREATE_AN_INTEGRATION],
     route: ROUTES.POST__CREATE_AN_INTEGRATION,
     isExternal: false,
   },
   {
-    title: 'Editing software timeline component',
+    title:
+      NAVIGATION_SEGMENT_TITLE_MAP[
+        ROUTES.POST__EDITING_SOFTWARE_TIMELINE_COMPONENT
+      ],
     route: ROUTES.POST__EDITING_SOFTWARE_TIMELINE_COMPONENT,
     isExternal: false,
   },
   {
-    title: 'Figma-like comment pin component',
+    title:
+      NAVIGATION_SEGMENT_TITLE_MAP[
+        ROUTES.POST__FIGMA_LIKE_COMMENT_PIN_COMPONENT
+      ],
     route: ROUTES.POST__FIGMA_LIKE_COMMENT_PIN_COMPONENT,
     isExternal: false,
   },
   {
-    title: 'Dynamic island component',
+    title: NAVIGATION_SEGMENT_TITLE_MAP[ROUTES.POST__DYNAMIC_ISLAND_COMPONENT],
     route: ROUTES.POST__DYNAMIC_ISLAND_COMPONENT,
     isExternal: false,
   },
@@ -53,3 +53,35 @@ export const POSTS: { title: string; route: string; isExternal: boolean }[] = [
     isExternal: true,
   },
 ] as const;
+
+export const NAVIGATION: {
+  title: string;
+  route: ApplicationRoute;
+  innerPages?: InnerPage[];
+}[] = [
+  { title: NAVIGATION_SEGMENT_TITLE_MAP[ROUTES.HOME], route: ROUTES.HOME },
+  { title: NAVIGATION_SEGMENT_TITLE_MAP[ROUTES.WORK], route: ROUTES.WORK },
+  {
+    title: NAVIGATION_SEGMENT_TITLE_MAP[ROUTES.POSTS],
+    route: ROUTES.POSTS,
+    innerPages: POSTS,
+  },
+] as const;
+
+export const getRouteTitle = (route: string): string => {
+  const pathWithSlash = route.startsWith('/') ? route : '/' + route;
+
+  const fromMap =
+    NAVIGATION_SEGMENT_TITLE_MAP[
+      pathWithSlash as keyof typeof NAVIGATION_SEGMENT_TITLE_MAP
+    ];
+  if (fromMap) return fromMap;
+
+  for (const { innerPages } of NAVIGATION) {
+    if (!innerPages) continue;
+    const inner = innerPages.find((p) => p.route === pathWithSlash);
+    if (inner) return inner.title;
+  }
+
+  return '';
+};
