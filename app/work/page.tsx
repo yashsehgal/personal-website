@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 export default function WorkPage() {
   return (
-    <div className="p-6 space-y-8">
+    <div className="p-6 space-y-8 pb-24">
       <div className="space-y-6">
         <h1 className="font-medium">Work and Projects</h1>
         <div className="space-y-2 text-neutral-500">
