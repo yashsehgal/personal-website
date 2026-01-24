@@ -86,7 +86,7 @@ export function NavigationSidebar() {
                       'font-serif italic',
                       isActive(navigationItem.route)
                         ? 'text-black'
-                        : 'text-neutral-400',
+                        : 'text-neutral-500',
                     )}>
                     {navigationItem.title}
                   </Link>
