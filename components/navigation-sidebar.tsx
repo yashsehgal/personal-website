@@ -10,8 +10,11 @@ export function NavigationSidebar() {
 
   const isActive = (route: ApplicationRoute): boolean => pathname === route;
 
+  const isParentActive = (parentRoute: string): boolean =>
+    pathname === parentRoute || pathname.startsWith(parentRoute + '/');
+
   return (
-    <aside className="max-w-80 min-w-12 h-full p-6">
+    <aside className="w-80 h-full p-6">
       <nav>
         <ul className="flex flex-col gap-1 items-end">
           {NAVIGATION.map((navigationItem, index) => {
@@ -19,6 +22,7 @@ export function NavigationSidebar() {
               navigationItem.innerPages?.length,
             );
             if (hasInnerPages) {
+              const showInnerPages = isParentActive(navigationItem.route);
               return (
                 <div className="flex flex-col items-end gap-1.5" key={index}>
                   <Link
@@ -31,32 +35,34 @@ export function NavigationSidebar() {
                     )}>
                     {navigationItem.title}
                   </Link>
-                  <div className="flex flex-col items-end justify-start">
-                    {navigationItem.innerPages?.map((innerPage, index) => {
-                      if (innerPage.isExternal) return;
-                      return (
-                        <Link key={index} href={innerPage.route}>
-                          <div
-                            className={cn(
-                              'text-sm truncate h-8 flex items-center justify-start pr-8 transition-colors pl-4 rounded-lg hover:bg-neutral-100 relative',
-                              isActive(innerPage.route as ApplicationRoute)
-                                ? 'text-black bg-neutral-100'
-                                : 'text-neutral-400',
-                            )}>
-                            {innerPage.title}
+                  {showInnerPages && (
+                    <div className="flex flex-col items-end justify-start">
+                      {navigationItem.innerPages?.map((innerPage, index) => {
+                        if (innerPage.isExternal) return;
+                        return (
+                          <Link key={index} href={innerPage.route}>
                             <div
                               className={cn(
-                                'h-8 w-px absolute top-0 right-3',
+                                'text-sm truncate h-8 flex items-center justify-start pr-8 transition-colors pl-4 rounded-lg hover:bg-neutral-100 relative',
                                 isActive(innerPage.route as ApplicationRoute)
-                                  ? 'bg-black'
-                                  : 'bg-neutral-200',
-                              )}
-                            />
-                          </div>
-                        </Link>
-                      );
-                    })}
-                  </div>
+                                  ? 'text-black bg-neutral-100'
+                                  : 'text-neutral-400',
+                              )}>
+                              {innerPage.title}
+                              <div
+                                className={cn(
+                                  'h-8 w-px absolute top-0 right-3',
+                                  isActive(innerPage.route as ApplicationRoute)
+                                    ? 'bg-black'
+                                    : 'bg-neutral-200',
+                                )}
+                              />
+                            </div>
+                          </Link>
+                        );
+                      })}
+                    </div>
+                  )}
                 </div>
               );
             } else
