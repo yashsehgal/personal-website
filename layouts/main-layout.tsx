@@ -33,7 +33,7 @@ export function MainLayout({ className, children, ...props }: MainLayoutProps) {
                 href={value}
                 target="_blank"
                 rel="noopener noreferrer">
-                <p className="select-none text-neutral-400 hover:text-black">
+                <p className="select-none text-neutral-500 hover:text-black">
                   {key}
                 </p>
               </Link>
