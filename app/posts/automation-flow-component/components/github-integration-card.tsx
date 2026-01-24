@@ -30,7 +30,7 @@ export function GitHubAutomationCard({
           <motion.div
             key={currentLog.id}
             ref={scope}
-            className="absolute top-2 w-[120px] h-[120px] border-[8px] border-teal-400 blur-[24px] border-neutral-200"
+            className="absolute top-2 w-[120px] h-[120px] border-[8px] border-teal-400 blur-[24px]"
             initial={{ scale: 0 }}
           />
         )}
