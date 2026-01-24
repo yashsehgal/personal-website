@@ -23,7 +23,7 @@ export function MainLayout({ className, children, ...props }: MainLayoutProps) {
         className,
       )}
       {...props}>
-      <header className="py-2 px-3 flex items-center justify-between">
+      <header className="py-2 px-3 flex items-center justify-between gap-4">
         <NestedNavigationBreadcrumb />
         <div className="flex items-center justify-end gap-3">
           {Object.entries(MAIN_LAYOUT_HEADER_SOCIAL_OPTIONS).map(

@@ -13,20 +13,24 @@ export function NestedNavigationBreadcrumb() {
   };
 
   return (
-    <div className="flex items-center justify-start gap-1.5">
+    <div className="flex items-center justify-start gap-1.5 truncate">
       {segments.map((_, index) => {
         const path = getSegmentPath(index);
         const title = getRouteTitle(path);
         const isLast = index === segments.length - 1;
 
         return (
-          <div className="flex items-center justify-start gap-2" key={index}>
-            {index > 0 && <IconChevronRight className="size-4" />}
+          <div
+            className="flex items-center justify-start gap-2 truncate"
+            key={index}>
+            {index > 0 && <IconChevronRight className="size-4 shrink-0" />}
             {isLast ? (
-              <p className="font-medium select-none">{title}</p>
+              <p className="font-medium select-none truncate">{title}</p>
             ) : (
               <Link href={`/${path}`}>
-                <p className="font-medium select-none">{title}</p>
+                <p className="font-medium select-none text-neutral-400 hover:text-neutral-500">
+                  {title}
+                </p>
               </Link>
             )}
           </div>
