@@ -1,4 +1,3 @@
-
 export default function Page() {
-  return <div className=""></div>
+  return <div className="p-4"></div>;
 }
