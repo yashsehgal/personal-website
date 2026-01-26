@@ -20,6 +20,10 @@
 }
 
 body {
-  background: var(--background);
+  background: var(--foreground);
   color: var(--foreground);
+}
+
+.content-container {
+  background: var(--background);
 }

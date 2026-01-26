@@ -1,4 +1,4 @@
 
 export default function Page() {
-  return <div>App is running</div>
+  return <div className=""></div>
 }
