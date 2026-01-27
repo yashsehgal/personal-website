@@ -83,7 +83,7 @@ export function HeroSectionPrimaryAction({
   return (
     <button
       className={cn(
-        'hero-section-primary-action px-4 py-2 rounded-lg bg-foreground text-background font-medium',
+        'hero-section-primary-action px-4 py-2 rounded-lg bg-blue-500 text-white font-medium',
         className,
       )}
       {...props}

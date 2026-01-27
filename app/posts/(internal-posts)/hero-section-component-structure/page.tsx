@@ -23,8 +23,18 @@ export default function HeroSectionComponentStructurePage() {
         hero section on top. In real life, the section can also be reused on the
         marketing page for showing templates.
       </p>
-      <div className="">
-        <HeroSectionDemoConsoleWithAlignmentOptions />
+      <HeroSectionDemoConsoleWithAlignmentOptions />
+      <div className="space-y-12">
+        <p className="text">
+          The demo shown above for a hero section is an example how we can
+          collectively use smaller components to make one parent component. The
+          title, heading and buttons are written into their separate components.
+        </p>
+        <p className="text">
+          Along with that, we can have our own custom features based on the UI
+          requirements. In this example, we have enabled this component with an
+          alignment prop.
+        </p>
       </div>
     </InternalPostContainer>
   );
@@ -59,7 +69,7 @@ export function HeroSectionDemoConsoleWithAlignmentOptions() {
           <HeroSectionSecondaryAction>Learn more</HeroSectionSecondaryAction>
         </HeroSectionActionsContainer>
       </HeroSection>
-      <div className="h-16 absolute w-full bottom-0 border-t border-foreground/10 flex items-center justify-center gap-2">
+      <div className="h-16 absolute w-full bottom-0 border-t border-foreground/10 flex items-center justify-center gap-2 bg-secondary/2">
         <button
           className={cn(
             'px-6 py-2 border rounded-full cursor-pointer',
