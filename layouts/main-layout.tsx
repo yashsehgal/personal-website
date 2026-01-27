@@ -7,12 +7,12 @@ export function MainLayout({ className, children, ...props }: MainLayoutProps) {
   return (
     <div
       className={cn(
-        'main-layout h-screen mx-auto max-w-7xl content-container p-12',
+        'main-layout h-screen mx-auto max-w-7xl content-container p-12 space-y-16 flex items-start justify-between max-lg:flex-col',
         className,
       )}
       {...props}>
       <MainLayoutNavigation />
-      <div className="main-layout-children-container">{children}</div>
+      <div className="main-layout-children-container flex-1">{children}</div>
     </div>
   );
 }

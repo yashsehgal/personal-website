@@ -1,22 +1,24 @@
 import { cn } from '@/helpers/cn';
+import Link, { LinkProps } from 'next/link';
 
-type ButtonVariantType = 'default';
-type ButtonSizeType = 'default' | 'sm' | 'lg';
+type LinkButtonVariantType = 'default';
+type LinkButtonSizeType = 'default' | 'sm' | 'lg';
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: ButtonVariantType;
-  size?: ButtonSizeType;
-}
+type LinkButtonProps = React.AnchorHTMLAttributes<HTMLAnchorElement> &
+  LinkProps & {
+    variant?: LinkButtonVariantType;
+    size?: LinkButtonSizeType;
+  };
 
-export function Button({
+export function LinkButton({
   className,
   children,
   variant = 'default',
   size = 'default',
   ...props
-}: ButtonProps) {
+}: LinkButtonProps) {
   return (
-    <button
+    <Link
       className={cn(
         'button cursor-pointer flex items-center',
         variant === 'default' && 'text-foreground hover:bg-foreground/10',
@@ -27,6 +29,6 @@ export function Button({
       )}
       {...props}>
       {children}
-    </button>
+    </Link>
   );
 }

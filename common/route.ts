@@ -2,7 +2,7 @@ export const ROUTES = {
   HOME: '/',
   ABOUT: '/about',
   WORK: '/work',
-  ARTICLES: '/articles',
+  POSTS: '/posts',
   ART: '/art',
 } as const;
 
