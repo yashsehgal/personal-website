@@ -11,7 +11,9 @@ import {
 } from '@/components/examples/hero-section';
 import { InternalPostContainer } from '@/components/sections/internal-post-container';
 import { cn } from '@/helpers/cn';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 export default function HeroSectionComponentStructurePage() {
   return (
@@ -26,9 +28,9 @@ export default function HeroSectionComponentStructurePage() {
       <HeroSectionDemoConsoleWithAlignmentOptions />
       <div className="space-y-12">
         <p className="text">
-          The demo shown above for a hero section is an example how we can
+          The demo shown above for a hero section is an example of how we can
           collectively use smaller components to make one parent component. The
-          title, heading and buttons are written into their separate components.
+          title, heading, and buttons are written as separate components.
         </p>
         <p className="text">
           Along with that, we can have our own custom features based on the UI
@@ -36,13 +38,25 @@ export default function HeroSectionComponentStructurePage() {
           alignment prop.
         </p>
       </div>
+      <Image
+        src="/hero-section-alignment-demo.svg"
+        alt="demo"
+        width={1600}
+        height={980}
+        className="w-full"
+      />
+      <p className="text">
+        As the structure is explained in the figure above, the{' '}
+        <code>alignment</code> prop can be used to conditionally apply the{' '}
+        <code>align-items</code> property to the hero section flex container.
+      </p>
     </InternalPostContainer>
   );
 }
 
 type AlignmentOptions = 'left' | 'center' | 'right';
 
-export function HeroSectionDemoConsoleWithAlignmentOptions() {
+function HeroSectionDemoConsoleWithAlignmentOptions() {
   const [selectedAlignmentOption, setSelectedAlignmentOption] =
     useState<AlignmentOptions>('left');
 

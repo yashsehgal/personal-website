@@ -30,3 +30,7 @@ body {
 .content-container {
   background: var(--background);
 }
+
+code {
+  @apply font-mono px-2 py-1 font-medium text-sm border rounded-lg border-foreground/10 bg-foreground/5;
+}
