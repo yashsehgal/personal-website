@@ -35,7 +35,7 @@ export function InternalPostContainer({
       <header className="internal-post-container-header">
         <h1 className="font-semibold">{internalPostTitle}</h1>
       </header>
-      <main className="internal-post-container-main-content [&_.text]:leading-7">
+      <main className="internal-post-container-main-content [&_.text]:leading-7 space-y-12">
         {children}
       </main>
     </div>
