@@ -33,7 +33,9 @@ export default function Page() {
             {slicedPostItems.map((post, index) => {
               return (
                 <div key={index} className="flex flex-col items-start gap-1">
-                  <LinkButton href={post.link} target="_blank">
+                  <LinkButton
+                    href={post.link}
+                    target={post.isInternal ? undefined : '_blank'}>
                     {post.title}
                   </LinkButton>
                   <p className="font-medium text-secondary ml-1.5">

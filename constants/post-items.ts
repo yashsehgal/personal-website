@@ -1,10 +1,19 @@
+import { ROUTES } from '@/common/route';
+
 export interface PostItem {
   title: string;
   description: string;
   link: string;
+  isInternal?: boolean;
 }
 
 export const POST_ITEMS: PostItem[] = [
+  {
+    title: 'Hero section component structure',
+    description: '',
+    link: ROUTES.INTERNAL_POST_HERO_SECTION_COMPONENT_STRUCTURE,
+    isInternal: true,
+  },
   {
     title: 'Automation flow',
     description: 'Component design to show automated action logs.',
