@@ -11,8 +11,7 @@ import {
 } from '@/components/examples/hero-section';
 import { InternalPostContainer } from '@/components/sections/internal-post-container';
 import { cn } from '@/helpers/cn';
-import { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import { useState } from 'react';
 import Image from 'next/image';
 
 export default function HeroSectionComponentStructurePage() {
