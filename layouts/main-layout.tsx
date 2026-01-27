@@ -23,7 +23,7 @@ export function MainLayout({ className, children, ...props }: MainLayoutProps) {
   return (
     <div
       className={cn(
-        'main-layout min-h-screen mx-auto max-w-7xl content-container p-12 space-y-16 flex items-start justify-between max-lg:flex-col',
+        'main-layout min-h-screen mx-auto max-w-7xl content-container p-12 max-lg:p-8 space-y-16 flex items-start justify-between max-lg:flex-col',
         className,
       )}
       {...props}>

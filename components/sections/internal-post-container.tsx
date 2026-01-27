@@ -20,7 +20,7 @@ export function InternalPostContainer({
   return (
     <div
       className={cn(
-        'internal-post-container w-3xl mx-auto space-y-12',
+        'internal-post-container w-3xl mx-auto space-y-12 max-lg:w-full',
         className,
       )}
       {...props}>
