@@ -1,9 +1,25 @@
+'use client';
+import { ApplicationRoute, ROUTES } from '@/common/route';
 import { MainLayoutNavigation } from '@/components/sections/main-layout-navigation';
 import { cn } from '@/helpers/cn';
+import { usePathname } from 'next/navigation';
 
 type MainLayoutProps = React.HTMLAttributes<HTMLDivElement>;
 
+const SHOW_NAVIGATION_ON_ROUTES: ApplicationRoute[] = [
+  ROUTES.HOME,
+  ROUTES.ABOUT,
+  ROUTES.ART,
+  ROUTES.WORK,
+  ROUTES.POSTS,
+] as const;
+
 export function MainLayout({ className, children, ...props }: MainLayoutProps) {
+  const pathname = usePathname();
+  const shouldShowNavigation: boolean = SHOW_NAVIGATION_ON_ROUTES.includes(
+    pathname as unknown as ApplicationRoute,
+  );
+
   return (
     <div
       className={cn(
@@ -11,7 +27,7 @@ export function MainLayout({ className, children, ...props }: MainLayoutProps) {
         className,
       )}
       {...props}>
-      <MainLayoutNavigation />
+      {shouldShowNavigation && <MainLayoutNavigation />}
       <div className="main-layout-children-container flex-1">{children}</div>
     </div>
   );
