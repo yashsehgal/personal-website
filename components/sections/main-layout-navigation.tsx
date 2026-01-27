@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 const NAVIGATION_OPTIONS: { title: string; route: ApplicationRoute }[] = [
-  { title: '/home', route: ROUTES.HOME },
+  { title: 'Home', route: ROUTES.HOME },
   { title: 'About', route: ROUTES.ABOUT },
   { title: 'Work', route: ROUTES.WORK },
   { title: 'Posts', route: ROUTES.POSTS },
