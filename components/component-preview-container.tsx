@@ -9,7 +9,7 @@ export function ComponentPreviewContainer({
   return (
     <div
       className={cn(
-        'component-preview-container rounded-xl overflow-hidden shadow-2xs min-h-4 border border-foreground/10',
+        'component-preview-container rounded-2xl overflow-hidden shadow-2xs min-h-4 border border-foreground/10',
         className,
       )}
       {...props}

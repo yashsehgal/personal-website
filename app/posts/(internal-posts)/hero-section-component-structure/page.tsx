@@ -1,6 +1,14 @@
 'use client';
 import { Button } from '@/components/button';
 import { ComponentPreviewContainer } from '@/components/component-preview-container';
+import {
+  HeroSection,
+  HeroSectionActionsContainer,
+  HeroSectionDescription,
+  HeroSectionPrimaryAction,
+  HeroSectionSecondaryAction,
+  HeroSectionTitle,
+} from '@/components/examples/hero-section';
 import { InternalPostContainer } from '@/components/sections/internal-post-container';
 import { cn } from '@/helpers/cn';
 import { useState } from 'react';
@@ -35,7 +43,22 @@ export function HeroSectionDemoConsoleWithAlignmentOptions() {
     setSelectedAlignmentOption(alignment);
 
   return (
-    <ComponentPreviewContainer className="relative h-96">
+    <ComponentPreviewContainer className="relative h-96 max-lg:h-80">
+      <HeroSection
+        alignment={selectedAlignmentOption}
+        className="p-16 max-lg:p-8">
+        <HeroSectionTitle>
+          Explore templates for your next AI Agent
+        </HeroSectionTitle>
+        <HeroSectionDescription>
+          The marketplace has a wide range of templates from various IT,
+          Engineering departments.
+        </HeroSectionDescription>
+        <HeroSectionActionsContainer>
+          <HeroSectionPrimaryAction>Get started</HeroSectionPrimaryAction>
+          <HeroSectionSecondaryAction>Learn more</HeroSectionSecondaryAction>
+        </HeroSectionActionsContainer>
+      </HeroSection>
       <div className="h-16 absolute w-full bottom-0 border-t border-foreground/10 flex items-center justify-center gap-2">
         <button
           className={cn(
