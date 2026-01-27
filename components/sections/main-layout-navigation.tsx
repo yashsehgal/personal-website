@@ -7,7 +7,8 @@ import { usePathname } from 'next/navigation';
 
 const NAVIGATION_OPTIONS: { title: string; route: ApplicationRoute }[] = [
   { title: 'Home', route: ROUTES.HOME },
-  { title: 'About', route: ROUTES.ABOUT },
+  //   Not adding this in the initial deployment
+  //   { title: 'About', route: ROUTES.ABOUT },
   { title: 'Work', route: ROUTES.WORK },
   { title: 'Posts', route: ROUTES.POSTS },
   { title: 'Art', route: ROUTES.ART },
