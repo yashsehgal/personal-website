@@ -11,11 +11,10 @@ export interface PostItem {
 export const POST_ITEMS: PostItem[] = [
   {
     title:
-      getInternalPostData(ROUTES.INTERNAL_POST_SPACING_AND_OPTICAL_ALIGNMENT)
-        ?.title ?? '',
+      getInternalPostData(ROUTES.INTERNAL_POST_OPTICAL_SPACING)?.title ?? '',
     description:
-      'Set of rules to make a cleanly positioned and optically easy-to-use user interfaces.',
-    link: ROUTES.INTERNAL_POST_SPACING_AND_OPTICAL_ALIGNMENT,
+      'Has an example of a hero section to explain the guidelines for better consistent and optical spacing.',
+    link: ROUTES.INTERNAL_POST_OPTICAL_SPACING,
     isInternal: true,
   },
   {
