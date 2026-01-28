@@ -2,8 +2,8 @@ import { ApplicationRoute, ROUTES } from '@/common/route';
 
 export const INTERNAL_POSTS: { route: ApplicationRoute; title: string }[] = [
   {
-    route: ROUTES.INTERNAL_POST_HERO_SECTION_COMPONENT_STRUCTURE,
-    title: 'Hero Section Component Structure',
+    route: ROUTES.INTERNAL_POST_SPACING_AND_OPTICAL_ALIGNMENT,
+    title: 'Spacing and optical alignment',
   },
 ] as const;
 

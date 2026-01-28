@@ -1,4 +1,5 @@
 import { ROUTES } from '@/common/route';
+import { getInternalPostData } from '@/constants/interal-posts';
 
 export interface PostItem {
   title: string;
@@ -9,9 +10,12 @@ export interface PostItem {
 
 export const POST_ITEMS: PostItem[] = [
   {
-    title: 'Hero section component structure',
-    description: '',
-    link: ROUTES.INTERNAL_POST_HERO_SECTION_COMPONENT_STRUCTURE,
+    title:
+      getInternalPostData(ROUTES.INTERNAL_POST_SPACING_AND_OPTICAL_ALIGNMENT)
+        ?.title ?? '',
+    description:
+      'Set of rules to make a cleanly positioned and optically easy-to-use user interfaces.',
+    link: ROUTES.INTERNAL_POST_SPACING_AND_OPTICAL_ALIGNMENT,
     isInternal: true,
   },
   {

@@ -4,8 +4,8 @@ export const ROUTES = {
   WORK: '/work',
   POSTS: '/posts',
   ART: '/art',
-  INTERNAL_POST_HERO_SECTION_COMPONENT_STRUCTURE:
-    '/posts/hero-section-component-structure',
+  INTERNAL_POST_SPACING_AND_OPTICAL_ALIGNMENT:
+    '/posts/spacing-and-optical-alignment',
 } as const;
 
 export type ApplicationRoute = (typeof ROUTES)[keyof typeof ROUTES];
