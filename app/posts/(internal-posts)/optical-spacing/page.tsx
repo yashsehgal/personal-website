@@ -99,11 +99,11 @@ function HeroSectionSpacingGuidelinesDemo({
   const reduceOpacity: boolean = showSpacingBetweenButtons && showGuidelines;
 
   return (
-    <ComponentPreviewContainer className="h-96 relative pt-16">
-      <div className="hero-section-demo mx-auto w-2/3 space-y-8">
+    <ComponentPreviewContainer className="h-96 relative pt-16 max-lg:hidden">
+      <div className="hero-section-demo mx-auto w-2/3 space-y-8 max-md:w-4/5 max-sm:w-[90%]">
         <div className="space-y-4">
           <motion.h1
-            className="font-semibold text-3xl tracking-tight"
+            className="font-semibold text-3xl tracking-tight max-sm:text-xl"
             animate={{
               filter: reduceOpacity ? 'blur(4px)' : undefined,
               opacity: reduceOpacity ? OPACITY : undefined,
@@ -111,7 +111,7 @@ function HeroSectionSpacingGuidelinesDemo({
             Start creating finance agents using templates from the marketplace
           </motion.h1>
           <motion.p
-            className="text-base text-secondary w-[90%]"
+            className="text-base text-secondary w-[90%] max-sm:text-sm"
             animate={{
               filter: reduceOpacity ? 'blur(4px)' : undefined,
               opacity: reduceOpacity ? OPACITY : undefined,
@@ -141,28 +141,28 @@ function HeroSectionSpacingGuidelinesDemo({
         <>
           {/* lines between hero section title and description */}
           <motion.div
-            className="absolute h-6 guideline-block-horizontal top-[132px]"
+            className="absolute h-6 guideline-block-horizontal top-[132px] max-sm:top-[116px]"
             initial={{ width: 0 }}
             animate={{ width: '100%' }}
             transition={{ ease: 'easeIn' }}
           />
           <motion.div
             key="badge-between-title-description"
-            className="w-fit px-1.5 absolute top-[131px] py-1 scale-90 rounded-lg text-xs bg-red-50 text-red-500 font-mono font-medium border border-red-400 right-24 dark:bg-red-950 dark:text-red-200 dark:border-red-900"
+            className="w-fit px-1.5 absolute top-[131px] max-sm:top-[116px] py-1 scale-90 rounded-lg text-xs bg-red-50 text-red-500 font-mono font-medium border border-red-400 right-24 dark:bg-red-950 dark:text-red-200 dark:border-red-900"
             initial={{ opacity: 0, scale: 0 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.5 }}>
             16px
           </motion.div>
           <motion.div
-            className="absolute h-[38px] guideline-block-horizontal top-[195px]"
+            className="absolute h-[38px] guideline-block-horizontal top-[195px] max-sm:top-[171px]"
             initial={{ width: 0 }}
             animate={{ width: '100%' }}
             transition={{ ease: 'easeIn', delay: 0.3 }}
           />
           <motion.div
             key="badge-between-content-button"
-            className="w-fit px-1.5 absolute top-[201px] py-1 scale-90 rounded-lg text-xs bg-blue-50 text-blue-500 font-mono font-medium border border-blue-400 right-24 dark:bg-blue-950 dark:text-blue-200 dark:border-blue-900"
+            className="w-fit px-1.5 absolute top-[201px] max-sm:top-[177px] py-1 scale-90 rounded-lg text-xs bg-blue-50 text-blue-500 font-mono font-medium border border-blue-400 right-24 dark:bg-blue-950 dark:text-blue-200 dark:border-blue-900"
             initial={{ opacity: 0, scale: 0 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.8 }}>
