@@ -62,7 +62,7 @@ function HeroSectionSpacingGuidelinesDemo({
 
   const toggleGuidelinesVisibility = () => setShowGuidelines((show) => !show);
 
-  const OPACITY: number = 0.2 as const;
+  const OPACITY: number = 0 as const;
   const reduceOpacity: boolean = showSpacingBetweenButtons && showGuidelines;
 
   return (
@@ -79,20 +79,28 @@ function HeroSectionSpacingGuidelinesDemo({
           <motion.p
             className="text-base text-secondary w-[90%]"
             animate={{
-              opacity: reduceOpacity ? OPACITY + 0.1 : undefined,
+              opacity: reduceOpacity ? OPACITY : undefined,
             }}>
             Create powerful finance agents using ready-made, customizable
             templates available in the marketplace.
           </motion.p>
         </div>
-        <div className="flex items-center justify-start gap-4">
+        <motion.div
+          key="hero-section-buttons-container"
+          className="flex items-center justify-start gap-4"
+          animate={{
+            scale: reduceOpacity ? 1.5 : undefined,
+            y: reduceOpacity ? -80 : undefined,
+            x: reduceOpacity ? 210 : undefined,
+          }}
+          transition={{ bounce: 0.2, type: 'spring', ease: 'easeInOut' }}>
           <button className="rounded-full p-4 py-2 bg-foreground text-background text-sm font-medium">
             Get started
           </button>
           <button className="rounded-full p-4 py-2 border border-foreground/10 shadow-2xs text-foreground text-sm font-medium">
             Learn more
           </button>
-        </div>
+        </motion.div>
       </div>
       {showGuidelines && !showSpacingBetweenButtons && (
         <>
@@ -131,14 +139,14 @@ function HeroSectionSpacingGuidelinesDemo({
         <>
           <motion.div
             key="show-button-guideline"
-            className="absolute guideline-block-vertical top-0 left-[234px] w-[18px] z-0"
+            className="absolute guideline-block-vertical top-0 left-[370px] w-[24px] z-0"
             initial={{ height: 0 }}
             animate={{ height: '360px' }}
             transition={{ ease: 'easeIn' }}
           />
           <motion.div
             key="badge-between-buttons-container"
-            className="w-fit px-1.5 absolute bottom-[156px] py-1 scale-90 rounded-lg text-xs bg-red-50 text-red-500 font-mono font-medium border border-red-400 left-[222px]"
+            className="w-fit px-1.5 absolute bottom-[140px] py-1 rounded-lg text-xs bg-red-50 text-red-500 font-mono font-medium border border-red-400 left-[360px]"
             initial={{ opacity: 0, scale: 0 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.4 }}>
