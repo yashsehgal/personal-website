@@ -1,10 +1,22 @@
+import { ROUTES } from '@/common/route';
+import { getInternalPostData } from '@/constants/interal-posts';
+
 export interface PostItem {
   title: string;
   description: string;
   link: string;
+  isInternal?: boolean;
 }
 
 export const POST_ITEMS: PostItem[] = [
+  {
+    title:
+      getInternalPostData(ROUTES.INTERNAL_POST_OPTICAL_SPACING)?.title ?? '',
+    description:
+      'Has an example of a hero section to explain the guidelines for better consistent and optical spacing.',
+    link: ROUTES.INTERNAL_POST_OPTICAL_SPACING,
+    isInternal: true,
+  },
   {
     title: 'Automation flow',
     description: 'Component design to show automated action logs.',
