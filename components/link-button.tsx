@@ -25,7 +25,8 @@ export function LinkButton({
         size === 'default' &&
           'py-0.5 px-1.5 rounded-md font-semibold gap-1.5 hover:text-foreground',
         size === 'sm' && '',
-        size === 'lg' && '',
+        size === 'lg' &&
+          'text-xl py-0.5 px-1.5 rounded-lg font-semibold gap-1.5',
         className,
       )}
       {...props}>
