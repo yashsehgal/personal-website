@@ -4,6 +4,7 @@ import { InternalPostContainer } from '@/components/sections/internal-post-conta
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import { cn } from '@/helpers/cn';
 
 export default function SpacingAndOpticalAlignmentPage() {
   return (
@@ -99,7 +100,11 @@ function HeroSectionSpacingGuidelinesDemo({
   const reduceOpacity: boolean = showSpacingBetweenButtons && showGuidelines;
 
   return (
-    <ComponentPreviewContainer className="h-96 relative pt-16 max-lg:hidden">
+    <ComponentPreviewContainer
+      className={cn(
+        'h-96 relative pt-16',
+        showSpacingBetweenButtons && 'max-lg:hidden',
+      )}>
       <div className="hero-section-demo mx-auto w-2/3 space-y-8 max-md:w-4/5 max-sm:w-[90%]">
         <div className="space-y-4">
           <motion.h1
