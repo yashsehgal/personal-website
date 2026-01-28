@@ -3,6 +3,7 @@ import { ComponentPreviewContainer } from '@/components/component-preview-contai
 import { InternalPostContainer } from '@/components/sections/internal-post-container';
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 export default function SpacingAndOpticalAlignmentPage() {
   return (
@@ -35,19 +36,51 @@ export default function SpacingAndOpticalAlignmentPage() {
         </p>
         <p className="text">
           For the spacing between hero section title and description, we are
-          using <code>16px</code> as horizontal spacing. Using <code>8px</code>{' '}
-          as the base spacing unit, the next spacing used between the hero
-          description and buttons container, is the{' '}
+          using <span className="font-serif italic">16px</span> as horizontal
+          spacing. Using <span className="font-serif italic">8px</span> as the
+          base spacing unit, the next spacing used between the hero description
+          and buttons container, is the{' '}
           <span className="font-serif italic">
             (spacing between title and description) + (base spacing unit) = 16px
             + 8px = 24px
           </span>
+          .
         </p>
         <p className="text">
           Now for the spacing between the primary and secondary button, we are
           going to use the exact spacing used between title and description.
         </p>
         <HeroSectionSpacingGuidelinesDemo showSpacingBetweenButtons />
+      </div>
+      <div className="space-y-12">
+        <p className="text">
+          The above shared spacing units are geometrically added, which means if
+          there is some extra leading space coming from headings and paragraph
+          texts, that will be included in the total optical spacing as well.
+        </p>
+        <ComponentPreviewContainer className="p-12 space-y-12">
+          <Image
+            src="/optical-spacing-with-leading-example.svg"
+            alt="total-optical-spacing"
+            className="w-full"
+            width={400}
+            height={300}
+          />
+          <Image
+            src="/optical-spacing-with-leading-calculation.svg"
+            alt="total-optical-spacing"
+            className="w-full"
+            width={400}
+            height={300}
+          />
+        </ComponentPreviewContainer>
+        <p className="text">
+          To keep the spacing consistent in these types of conditions we can
+          reduce the base spacing unit to{' '}
+          <span className="font-serif italic">4px</span> so that the{' '}
+          <span className="font-serif italic">total optical spacing</span>{' '}
+          becomes <span className="font-serif italic">24px</span>.
+        </p>
       </div>
     </InternalPostContainer>
   );
@@ -156,9 +189,9 @@ function HeroSectionSpacingGuidelinesDemo({
           </motion.div>
         </>
       )}
-      <div className="absolute z-20 w-full bg-white border-t border-foreground/10 flex items-center justify-center p-2 bottom-0">
+      <div className="absolute z-20 w-full bg-background border-t border-foreground/10 flex items-center justify-center p-2 bottom-0">
         <button
-          className="rounded-full p-4 py-2 border border-foreground/10 shadow-2xs text-foreground text-sm font-medium bg-white cursor-pointer"
+          className="rounded-full p-4 py-2 border border-foreground/10 shadow-2xs text-foreground text-sm font-medium bg-background cursor-pointer"
           onClick={toggleGuidelinesVisibility}>
           {showGuidelines ? 'Hide guidelines' : 'Show guidelines'}
         </button>
