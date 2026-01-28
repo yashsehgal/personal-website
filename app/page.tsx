@@ -28,7 +28,7 @@ export default function Page() {
       <h1 className="text-2xl font-semibold ml-1.5">Hi, I am Yash</h1>
       <div className="grid grid-cols-2 items-start justify-start w-fit gap-24 max-lg:flex max-lg:flex-col max-xl:gap-12">
         <div className="post-container w-72 flex flex-col items-start gap-12">
-          <h2 className="text-xl font-semibold ml-1.5">Posts</h2>
+          <Button size="lg">Posts</Button>
           <div className="post-list-container gap-8 flex items-start flex-col">
             {slicedPostItems.map((post, index) => {
               return (
@@ -54,7 +54,7 @@ export default function Page() {
           </div>
         </div>
         <div className="work-and-projects--container w-72 flex flex-col items-start gap-12">
-          <h2 className="text-xl font-semibold ml-1.5">Work and projects</h2>
+          <Button size="lg">Work and projects</Button>
           <div className="work-and-projects-list-container gap-8 flex items-start flex-col">
             {slicedWorkItems.map((work, index) => {
               return (

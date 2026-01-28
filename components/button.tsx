@@ -22,7 +22,8 @@ export function Button({
         variant === 'default' && 'text-foreground hover:bg-foreground/10',
         size === 'default' && 'py-0.5 px-1.5 rounded-md font-semibold gap-1.5',
         size === 'sm' && '',
-        size === 'lg' && '',
+        size === 'lg' &&
+          'text-xl py-0.5 px-1.5 rounded-lg font-semibold gap-1.5',
         className,
       )}
       {...props}>
