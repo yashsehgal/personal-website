@@ -72,6 +72,7 @@ function HeroSectionSpacingGuidelinesDemo({
           <motion.h1
             className="font-semibold text-3xl tracking-tight"
             animate={{
+              filter: reduceOpacity ? 'blur(4px)' : undefined,
               opacity: reduceOpacity ? OPACITY : undefined,
             }}>
             Start creating finance agents using templates from the marketplace
@@ -79,6 +80,7 @@ function HeroSectionSpacingGuidelinesDemo({
           <motion.p
             className="text-base text-secondary w-[90%]"
             animate={{
+              filter: reduceOpacity ? 'blur(4px)' : undefined,
               opacity: reduceOpacity ? OPACITY : undefined,
             }}>
             Create powerful finance agents using ready-made, customizable
