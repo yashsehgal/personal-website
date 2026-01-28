@@ -37,3 +37,29 @@ body {
 code {
   @apply font-mono px-2 py-1 font-medium text-sm border rounded-lg border-foreground/10 bg-foreground/5;
 }
+
+.guideline-block-horizontal {
+  @apply border-y border-neutral-200;
+  background-color: #ffffff;
+  opacity: 0.6;
+  background: repeating-linear-gradient(
+    -45deg,
+    #e5e5e5,
+    #e5e5e5 2px,
+    #ffffff 2px,
+    #ffffff 8px
+  );
+}
+
+.guideline-block-vertical {
+  @apply border-x border-neutral-300;
+  background-color: #ffffff;
+  opacity: 0.6;
+  background: repeating-linear-gradient(
+    -45deg,
+    #e5e5e5,
+    #e5e5e5 2px,
+    #ffffff 2px,
+    #ffffff 8px
+  );
+}
