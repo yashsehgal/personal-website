@@ -148,7 +148,7 @@ function HeroSectionSpacingGuidelinesDemo({
           />
           <motion.div
             key="badge-between-title-description"
-            className="w-fit px-1.5 absolute top-[131px] py-1 scale-90 rounded-lg text-xs bg-red-50 text-red-500 font-mono font-medium border border-red-400 right-24"
+            className="w-fit px-1.5 absolute top-[131px] py-1 scale-90 rounded-lg text-xs bg-red-50 text-red-500 font-mono font-medium border border-red-400 right-24 dark:bg-red-950 dark:text-red-200 dark:border-red-900"
             initial={{ opacity: 0, scale: 0 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.5 }}>
@@ -162,7 +162,7 @@ function HeroSectionSpacingGuidelinesDemo({
           />
           <motion.div
             key="badge-between-content-button"
-            className="w-fit px-1.5 absolute top-[201px] py-1 scale-90 rounded-lg text-xs bg-blue-50 text-blue-500 font-mono font-medium border border-blue-400 right-24"
+            className="w-fit px-1.5 absolute top-[201px] py-1 scale-90 rounded-lg text-xs bg-blue-50 text-blue-500 font-mono font-medium border border-blue-400 right-24 dark:bg-blue-950 dark:text-blue-200 dark:border-blue-900"
             initial={{ opacity: 0, scale: 0 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.8 }}>
@@ -181,7 +181,7 @@ function HeroSectionSpacingGuidelinesDemo({
           />
           <motion.div
             key="badge-between-buttons-container"
-            className="w-fit px-1.5 absolute bottom-[140px] py-1 rounded-lg text-xs bg-red-50 text-red-500 font-mono font-medium border border-red-400 left-[360px]"
+            className="w-fit px-1.5 absolute bottom-[140px] py-1 rounded-lg text-xs bg-red-50 text-red-500  font-mono font-medium border border-red-400 left-[360px] dark:bg-red-950 dark:text-red-200 dark:border-red-900"
             initial={{ opacity: 0, scale: 0 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ delay: 0.4 }}>
