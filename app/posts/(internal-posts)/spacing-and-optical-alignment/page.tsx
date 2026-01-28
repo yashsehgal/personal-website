@@ -10,23 +10,23 @@ export default function SpacingAndOpticalAlignmentPage() {
     <InternalPostContainer>
       <div className="space-y-12">
         <p className="text">
-          When a user is looking at your design, along with a clean looking
-          design, it is important to have better spacing, making the UI more
-          breathable. Including better spacing, we also need to put the data in
-          an optically aligned manner.
+          When a user is looking at your design, in addition to a clean-looking
+          layout, it&apos;s important to use better spacing to make the UI feel
+          more breathable. Along with better spacing, we also need to present
+          data in an optically aligned way.
         </p>
         <p className="text">
           This becomes more important when the UI has a lot of data and elements
           to show. Consider a hero section that has a headline, a small
-          description and 2 relevant actions for onboarding the users. In this
-          example, more than the colors we use for the primary button, the
-          position of the Get started button becomes important.
+          description, and 2 relevant actions to onboard users. In this example,
+          even more than the colors we use for the primary button, the position
+          of the Get started button becomes important.
         </p>
         <HeroSectionSpacingGuidelinesDemo />
         <p className="text">
-          The above example uses a basic spacing rule which is used to highlight
-          the exact elements we want to show to the customer. Description text
-          being a relatively less important has a secondary text color and is
+          The example above uses a basic spacing rule that highlights the exact
+          elements we want to show the customer. Because the description text is
+          relatively less important, it uses a secondary text color and sits
           close to the main heading.
         </p>
         <p className="text">
@@ -36,10 +36,10 @@ export default function SpacingAndOpticalAlignmentPage() {
         </p>
         <p className="text">
           For the spacing between hero section title and description, we are
-          using <span className="font-serif italic">16px</span> as horizontal
+          using <span className="font-serif italic">16px</span> as vertical
           spacing. Using <span className="font-serif italic">8px</span> as the
           base spacing unit, the next spacing used between the hero description
-          and buttons container, is the{' '}
+          and buttons container is the{' '}
           <span className="font-serif italic">
             (spacing between title and description) + (base spacing unit) = 16px
             + 8px = 24px
@@ -75,7 +75,7 @@ export default function SpacingAndOpticalAlignmentPage() {
           />
         </ComponentPreviewContainer>
         <p className="text">
-          To keep the spacing consistent in these types of conditions we can
+          To keep the spacing consistent in these types of conditions, we can
           reduce the base spacing unit to{' '}
           <span className="font-serif italic">4px</span> so that the{' '}
           <span className="font-serif italic">total optical spacing</span>{' '}
