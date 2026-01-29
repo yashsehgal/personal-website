@@ -18,7 +18,7 @@ import {
 } from '@tabler/icons-react';
 import { motion } from 'framer-motion';
 import { useQueryState } from 'nuqs';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
 const DASHBOARD_SIDEBAR_TREE_NODE_ICON: number = 16 as const;
 const NUQS_SELECTED_NODE_ITEM: string = 'nodeId';
@@ -45,6 +45,25 @@ function createDirectoryIdToNameMap(nodes: Directory[]) {
 }
 
 const DIRECTORY_ID_TO_NAME = createDirectoryIdToNameMap(DIRECTORY);
+
+/**
+ * Computes which nodes should be expanded based on a selected node ID.
+ * Returns a Set of node IDs that should be expanded (all parent nodes of the selected node).
+ */
+function computeExpandedNodes(selectedNodeId: string | null): Set<string> {
+  if (!selectedNodeId) return new Set();
+
+  const expandedNodes = new Set<string>();
+  const parts = selectedNodeId.split('/');
+
+  // Build all parent paths (e.g., 'a/b/c' -> ['a', 'a/b', 'a/b/c'])
+  for (let i = 1; i < parts.length; i++) {
+    const parentPath = parts.slice(0, i).join('/');
+    expandedNodes.add(parentPath);
+  }
+
+  return expandedNodes;
+}
 
 export default function BreadcrumbComponentPage() {
   return (
@@ -155,6 +174,75 @@ function DashboardBreadcrumbComponent() {
 }
 
 function DashboardSidebarComponent() {
+  const [selectedFileNodeId] = useQueryState(NUQS_SELECTED_NODE_ITEM);
+  const [manuallyExpandedNodes, setManuallyExpandedNodes] = useState<
+    Set<string>
+  >(new Set());
+  const [manuallyCollapsedNodes, setManuallyCollapsedNodes] = useState<
+    Set<string>
+  >(new Set());
+
+  // Compute required expanded nodes from query state
+  const requiredExpandedNodes = useMemo(
+    () => computeExpandedNodes(selectedFileNodeId),
+    [selectedFileNodeId],
+  );
+
+  // Merge required expansions (from query state) with manual expansions,
+  // but exclude nodes that have been manually collapsed
+  const expandedNodes = useMemo(() => {
+    const merged = new Set<string>();
+    // Add all required nodes (from query state) except manually collapsed ones
+    requiredExpandedNodes.forEach((nodeId) => {
+      if (!manuallyCollapsedNodes.has(nodeId)) {
+        merged.add(nodeId);
+      }
+    });
+    // Add all manually expanded nodes
+    manuallyExpandedNodes.forEach((nodeId) => merged.add(nodeId));
+    return merged;
+  }, [requiredExpandedNodes, manuallyExpandedNodes, manuallyCollapsedNodes]);
+
+  const toggleNodeExpansion = (nodeId: string) => {
+    const isRequired = requiredExpandedNodes.has(nodeId);
+    const isCurrentlyExpanded = expandedNodes.has(nodeId);
+
+    if (isCurrentlyExpanded) {
+      // Collapsing the node
+      if (isRequired) {
+        // If it's a required node, mark it as manually collapsed
+        setManuallyCollapsedNodes((prev) => {
+          const next = new Set(prev);
+          next.add(nodeId);
+          return next;
+        });
+      } else {
+        // If it's manually expanded, remove it from manually expanded
+        setManuallyExpandedNodes((prev) => {
+          const next = new Set(prev);
+          next.delete(nodeId);
+          return next;
+        });
+      }
+    } else {
+      // Expanding the node
+      // Remove from collapsed set if it was there
+      setManuallyCollapsedNodes((prev) => {
+        const next = new Set(prev);
+        next.delete(nodeId);
+        return next;
+      });
+      // Add to manually expanded if it's not required
+      if (!isRequired) {
+        setManuallyExpandedNodes((prev) => {
+          const next = new Set(prev);
+          next.add(nodeId);
+          return next;
+        });
+      }
+    }
+  };
+
   return (
     <aside className="w-60 h-full overflow-y-scroll hide-scrollbar">
       {DIRECTORY.map((node) => {
@@ -163,6 +251,8 @@ function DashboardSidebarComponent() {
             level={1}
             key={node.id}
             node={node}
+            expandedNodes={expandedNodes}
+            onToggleExpansion={toggleNodeExpansion}
           />
         );
       })}
@@ -173,18 +263,22 @@ function DashboardSidebarComponent() {
 function DashboardSidebarTreeNodeContainerComponent({
   node,
   level = 1,
+  expandedNodes,
+  onToggleExpansion,
 }: {
   node: Directory;
   level: number;
+  expandedNodes: Set<string>;
+  onToggleExpansion: (nodeId: string) => void;
 }) {
   const [, setSelectedFileNodeId] = useQueryState(NUQS_SELECTED_NODE_ITEM, {
     defaultValue: '',
   });
-  const [openFolderNode, setOpenFolderNode] = useState<boolean>(false);
   const isNodeFolder: boolean = node.children.length > 0;
+  const isNodeExpanded: boolean = expandedNodes.has(node.id);
 
   const handleOpenFolderNode = () => {
-    setOpenFolderNode((state) => !state);
+    onToggleExpansion(node.id);
   };
 
   const handleSelectedFileNode = (id: string) => {
@@ -201,9 +295,9 @@ function DashboardSidebarTreeNodeContainerComponent({
             id={node.id}
             name={node.name}
             level={level}
-            isFolderOpen={openFolderNode}
+            isFolderOpen={isNodeExpanded}
           />
-          {openFolderNode ? (
+          {isNodeExpanded ? (
             <motion.div
               key={node.id}
               className="dashboard-sidebar-tree-node-children-items-container overflow-hidden"
@@ -217,6 +311,8 @@ function DashboardSidebarTreeNodeContainerComponent({
                     level={level + 1}
                     key={childNode.id}
                     node={childNode}
+                    expandedNodes={expandedNodes}
+                    onToggleExpansion={onToggleExpansion}
                   />
                 );
               })}
