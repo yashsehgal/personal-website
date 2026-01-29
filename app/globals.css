@@ -65,3 +65,8 @@ code {
     var(--background) 8px
   );
 }
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+  scroll-behavior: smooth;
+}
