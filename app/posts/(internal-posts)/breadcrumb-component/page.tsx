@@ -8,7 +8,7 @@ import {
   IconFolderFilled,
   IconPointFilled,
 } from '@tabler/icons-react';
-import { AnimatePresence, motion, MotionConfig } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useState } from 'react';
 
 const DASHBOARD_SIDEBAR_TREE_NODE_ICON: number = 16 as const;
@@ -127,7 +127,7 @@ function DashboardSidebarNodeComponent(
   return (
     <button
       onClick={node.onClick}
-      className="w-full h-8 hover:bg-foreground/10 flex items-center justify-start gap-2 rounded-md cursor-pointer group/tree-node pr-3 active:bg-foreground/15"
+      className="w-full h-8 hover:bg-foreground/5 flex items-center justify-start gap-2 rounded-md cursor-pointer group/tree-node pr-3 active:bg-foreground/10"
       style={{
         paddingLeft: `${(node.isNodeFolder ? 12 : 12) * node.level}px`,
       }}>
