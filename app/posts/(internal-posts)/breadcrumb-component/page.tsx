@@ -22,7 +22,7 @@ import { useMemo, useState } from 'react';
 
 const DASHBOARD_SIDEBAR_TREE_NODE_ICON: number = 16 as const;
 const NUQS_SELECTED_NODE_ITEM: string = 'nodeId';
-const BASE_SEGMENTS_LIMIT: number = 3 as const;
+const BASE_SEGMENTS_LIMIT: number = 2 as const;
 
 export interface Directory {
   id: string;
@@ -139,7 +139,7 @@ function DashboardBreadcrumbComponent() {
                 return (
                   <DropdownMenuItem
                     key={middleSegment.id}
-                    className="first:rounded-t-lg last:rounded-b-lg cursor-pointer font-medium"
+                    className="first:rounded-t-lg last:rounded-b-lg cursor-pointer font-medium pr-8"
                     style={{ paddingLeft: `${(index + 1) * 12}px` }}>
                     <IconCornerDownRight
                       size={DASHBOARD_SIDEBAR_TREE_NODE_ICON}
