@@ -10,9 +10,6 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { cn } from '@/helpers/cn';
 import {
-  IconArrowDownLeft,
-  IconArrowDownRight,
-  IconArrowForward,
   IconChevronRight,
   IconCornerDownRight,
   IconDots,
@@ -32,6 +29,22 @@ export interface Directory {
   name: string;
   children: Directory[];
 }
+
+function createDirectoryIdToNameMap(nodes: Directory[]) {
+  const map = new Map<string, string>();
+
+  const walk = (nodeList: Directory[]) => {
+    for (const node of nodeList) {
+      map.set(node.id, node.name);
+      if (node.children.length > 0) walk(node.children);
+    }
+  };
+
+  walk(nodes);
+  return map;
+}
+
+const DIRECTORY_ID_TO_NAME = createDirectoryIdToNameMap(DIRECTORY);
 
 export default function BreadcrumbComponentPage() {
   return (
@@ -56,7 +69,12 @@ function DashboardComponentPreview() {
 
 function DashboardBreadcrumbComponent() {
   const [selectedFileNodeId] = useQueryState(NUQS_SELECTED_NODE_ITEM);
-  const segments = selectedFileNodeId?.split('/');
+  const segmentParts = selectedFileNodeId?.split('/');
+  const segments = segmentParts?.map((part, index) => {
+    const id = segmentParts.slice(0, index + 1).join('/');
+    const name = DIRECTORY_ID_TO_NAME.get(id) ?? part;
+    return { id, name };
+  });
 
   const [middleSegmentsDropdownOpen, setMiddleSegmentsDropdownOpen] =
     useState<boolean>(false);
@@ -65,10 +83,9 @@ function DashboardBreadcrumbComponent() {
     setMiddleSegmentsDropdownOpen(open);
   };
 
-  const getMiddleSegments = () => {
-    if (!segments || segments.length <= 1) return null;
-    return segments.slice(0, -1);
-  };
+  const middleSegments =
+    segments && segments.length > 1 ? segments.slice(0, -1) : null;
+  const lastSegment = segments?.[segments.length - 1] ?? null;
 
   const shouldTruncateSegments: boolean = segments
     ? segments?.length > BASE_SEGMENTS_LIMIT
@@ -95,16 +112,16 @@ function DashboardBreadcrumbComponent() {
               className="min-w-56 max-w-80 rounded-xl"
               align="start"
               alignOffset={-36}>
-              {getMiddleSegments()?.map((middleSegment, index) => {
+              {middleSegments?.map((middleSegment, index) => {
                 return (
                   <DropdownMenuItem
-                    key={middleSegment}
+                    key={middleSegment.id}
                     className="first:rounded-t-lg last:rounded-b-lg cursor-pointer font-medium"
                     style={{ paddingLeft: `${(index + 1) * 12}px` }}>
                     <IconCornerDownRight
                       size={DASHBOARD_SIDEBAR_TREE_NODE_ICON}
                     />
-                    {middleSegment}
+                    {middleSegment.name}
                   </DropdownMenuItem>
                 );
               })}
@@ -114,22 +131,18 @@ function DashboardBreadcrumbComponent() {
             size={DASHBOARD_SIDEBAR_TREE_NODE_ICON}
             className="shrink-0"
           />
-          {segments ? (
-            <p className="text-sm">{segments[segments.length - 1]}</p>
-          ) : null}
+          {lastSegment ? <p className="text-sm">{lastSegment.name}</p> : null}
         </>
       ) : (
-        segments?.map((segment, index) => {
+        segments?.map((segment) => {
           return (
-            <>
+            <div key={segment.id} className="flex items-center gap-2">
               <IconChevronRight
                 size={DASHBOARD_SIDEBAR_TREE_NODE_ICON}
                 className="shrink-0"
               />
-              <p key={index} className="text-sm">
-                {segment}
-              </p>
-            </>
+              <p className="text-sm">{segment.name}</p>
+            </div>
           );
         })
       )}
@@ -160,7 +173,7 @@ function DashboardSidebarTreeNodeContainerComponent({
   node: Directory;
   level: number;
 }) {
-  const [_, setSelectedFileNodeId] = useQueryState(NUQS_SELECTED_NODE_ITEM, {
+  const [, setSelectedFileNodeId] = useQueryState(NUQS_SELECTED_NODE_ITEM, {
     defaultValue: '',
   });
   const [openFolderNode, setOpenFolderNode] = useState<boolean>(false);
