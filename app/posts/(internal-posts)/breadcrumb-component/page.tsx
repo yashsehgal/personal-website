@@ -68,9 +68,45 @@ function computeExpandedNodes(selectedNodeId: string | null): Set<string> {
 export default function BreadcrumbComponentPage() {
   return (
     <InternalPostContainer>
-      <ComponentPreviewContainer className="h-[420px]">
-        <DashboardComponentPreview />
-      </ComponentPreviewContainer>
+      <div className="space-y-12">
+        <p className="text">
+          Having a sidebar nested content and a breadcrumb component is one of
+          the best and most common ways of having a clear navigation. This
+          article has a basic implementation both explaining my design and
+          logical approach on how to design a layout with these elements.
+        </p>
+        <p className="text">
+          For state management, using a state manager like use-state, redux,
+          zustand sounds like a good option. I prefer using query states for
+          this as it acts as a shared context inside the URL. When a page is
+          open and the user reloads or share the current page link with someone,
+          if the sidebar and breadcrumb is backward compatible, we can auto
+          expand to that particular page.
+        </p>
+        <p className="text">
+          Here is an example component that uses query state and NUQs to store
+          the current open page path as a unique ID. That can be used to
+          highlight the sidebar content tree node and render the segment path
+          for the breadcrumb.
+        </p>
+        <ComponentPreviewContainer className="h-[420px]">
+          <DashboardComponentPreview />
+        </ComponentPreviewContainer>
+        <p className="text">
+          Let&apos;s understand how we can implement this using query states,
+          NUQs with some basic design and logic.
+        </p>
+      </div>
+      <div className="space-y-12">
+        <h2>State management</h2>
+      </div>
+      <div className="space-y-12">
+        <h2>Sidebar component with content tree</h2>
+      </div>
+      <div className="space-y-12">
+        <h2>Breadcrumb component</h2>
+      </div>
+      <div>Making the navigation support backward compatibility</div>
     </InternalPostContainer>
   );
 }
