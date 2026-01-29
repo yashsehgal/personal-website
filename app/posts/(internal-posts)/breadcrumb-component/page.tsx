@@ -143,6 +143,7 @@ function DashboardBreadcrumbComponent() {
                     style={{ paddingLeft: `${(index + 1) * 12}px` }}>
                     <IconCornerDownRight
                       size={DASHBOARD_SIDEBAR_TREE_NODE_ICON}
+                      className="text-foreground/40"
                     />
                     {middleSegment.name}
                   </DropdownMenuItem>
