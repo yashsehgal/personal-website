@@ -356,7 +356,7 @@ function DashboardSidebarNodeComponent(
           'bg-foreground/5 hover:bg-foreground/5 active:bg-foreground/5',
       )}
       style={{
-        paddingLeft: `${(node.isNodeFolder ? 12 : 12) * node.level}px`,
+        paddingLeft: `${(node.isNodeFolder ? 12 : 15) * node.level}px`,
       }}>
       {node.isNodeFolder ? (
         <>
