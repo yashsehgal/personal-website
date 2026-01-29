@@ -104,14 +104,18 @@ function DashboardBreadcrumbComponent() {
             open={middleSegmentsDropdownOpen}
             onOpenChange={handleMiddleSegmentsDropdownOpenStateChange}>
             <DropdownMenuTrigger asChild>
-              <button className="size-7 rounded-lg flex items-center justify-center hover:bg-foreground/10 cursor-pointer active:bg-foreground/15">
+              <button
+                className={cn(
+                  'size-7 rounded-lg flex items-center justify-center hover:bg-foreground/10 cursor-pointer',
+                  middleSegmentsDropdownOpen && 'bg-foreground/10',
+                )}>
                 <IconDots size={DASHBOARD_SIDEBAR_TREE_NODE_ICON} />
               </button>
             </DropdownMenuTrigger>
             <DropdownMenuContent
               className="min-w-56 max-w-80 rounded-xl"
               align="start"
-              alignOffset={-36}>
+              alignOffset={-24}>
               {middleSegments?.map((middleSegment, index) => {
                 return (
                   <DropdownMenuItem
