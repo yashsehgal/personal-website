@@ -9,9 +9,11 @@ import {
   IconPointFilled,
 } from '@tabler/icons-react';
 import { motion } from 'framer-motion';
+import { useQueryState } from 'nuqs';
 import { useState } from 'react';
 
 const DASHBOARD_SIDEBAR_TREE_NODE_ICON: number = 16 as const;
+const NUQS_SELECTED_NODE_ITEM: string = 'nodeId';
 
 export interface Directory {
   id: string;
@@ -61,11 +63,19 @@ function DashboardSidebarTreeNodeContainerComponent({
   node: Directory;
   level: number;
 }) {
+  const [selectedFileNodeId, setSelectedFileNodeId] = useQueryState(
+    NUQS_SELECTED_NODE_ITEM,
+    { defaultValue: '' },
+  );
   const [openFolderNode, setOpenFolderNode] = useState<boolean>(false);
   const isNodeFolder: boolean = node.children.length > 0;
 
   const handleOpenFolderNode = () => {
     setOpenFolderNode((state) => !state);
+  };
+
+  const handleSelectedFileNode = (id: string) => {
+    setSelectedFileNodeId(id);
   };
 
   return (
@@ -104,7 +114,7 @@ function DashboardSidebarTreeNodeContainerComponent({
       ) : (
         <DashboardSidebarNodeComponent
           isNodeFolder={false}
-          onClick={() => {}}
+          onClick={() => handleSelectedFileNode(node.id)}
           level={level}
           name={node.name}
           id={node.id}
