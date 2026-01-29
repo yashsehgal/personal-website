@@ -79,7 +79,7 @@ function DashboardComponentPreview() {
   return (
     <div className="w-full h-full flex items-stretch justify-start bg-foreground/5 p-2 gap-2">
       <DashboardSidebarComponent />
-      <main className="flex-1 bg-background rounded-xl shadow-2xs border border-foreground/10 px-4">
+      <main className="flex-1 bg-background rounded-xl shadow-2xs border border-foreground/10 px-4 flex items-center justify-center">
         <DashboardBreadcrumbComponent />
       </main>
     </div>
