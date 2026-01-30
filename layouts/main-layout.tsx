@@ -4,6 +4,7 @@ import { MainLayoutNavigation } from '@/components/sections/main-layout-navigati
 import { cn } from '@/helpers/cn';
 import { usePathname } from 'next/navigation';
 import { NuqsAdapter } from 'nuqs/adapters/next/app';
+import { Suspense } from 'react';
 
 type MainLayoutProps = React.HTMLAttributes<HTMLDivElement>;
 
@@ -22,16 +23,20 @@ export function MainLayout({ className, children, ...props }: MainLayoutProps) {
   );
 
   return (
-    <NuqsAdapter>
-      <div
-        className={cn(
-          'main-layout min-h-screen mx-auto max-w-7xl content-container p-12 max-lg:p-8 space-y-16 flex items-start justify-between max-lg:flex-col',
-          className,
-        )}
-        {...props}>
-        {shouldShowNavigation && <MainLayoutNavigation />}
-        <div className="main-layout-children-container flex-1">{children}</div>
-      </div>
-    </NuqsAdapter>
+    <Suspense>
+      <NuqsAdapter>
+        <div
+          className={cn(
+            'main-layout min-h-screen mx-auto max-w-7xl content-container p-12 max-lg:p-8 space-y-16 flex items-start justify-between max-lg:flex-col',
+            className,
+          )}
+          {...props}>
+          {shouldShowNavigation && <MainLayoutNavigation />}
+          <div className="main-layout-children-container flex-1">
+            {children}
+          </div>
+        </div>
+      </NuqsAdapter>
+    </Suspense>
   );
 }
