@@ -250,3 +250,7 @@ code {
   display: none;
   scroll-behavior: smooth;
 }
+
+code.code-block {
+  @apply p-4 font-normal bg-background shadow-2xs;
+}

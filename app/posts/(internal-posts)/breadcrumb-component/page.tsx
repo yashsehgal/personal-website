@@ -93,25 +93,15 @@ export default function BreadcrumbComponentPage() {
           <DashboardComponentPreview />
         </ComponentPreviewContainer>
         <p className="text">
-          Let&apos;s understand how we can implement this using query states,
-          NUQs with some basic design and logic.
+          Unlike local component state, query states persist in the URL, making
+          the navigation experience more robust. This way, your sidebar and
+          breadcrumb context survive refreshes or link sharing without extra
+          work, helping users keep their states, no matter how they load the
+          page.
         </p>
       </div>
       <div className="space-y-12">
-        <h2>State management</h2>
-        <p className="text">
-          Using query state is pretty simple, just like we use the useState
-          hook, we just need to install the NUQs package and use the{' '}
-          <code>useQueryState</code> hook. Which takes 2 arguments: the unique
-          key which is the NUQ, and the state value options. By default we put
-          the <code>defaultValue</code> as false.
-        </p>
-      </div>
-      <div className="space-y-12">
-        <h2>Sidebar component with content tree</h2>
-      </div>
-      <div className="space-y-12">
-        <h2>Breadcrumb component</h2>
+        <h2>Writing breadcrumb and sidebar content tree component</h2>
       </div>
       <div className="space-y-12">
         <h2>Making the navigation support backward compatibility</h2>
