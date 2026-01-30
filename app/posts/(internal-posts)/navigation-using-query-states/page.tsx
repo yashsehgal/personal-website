@@ -91,8 +91,11 @@ export default function BreadcrumbComponentPage() {
           highlight the sidebar content tree node and render the segment path
           for the breadcrumb.
         </p>
-        <ComponentPreviewContainer className="h-[420px]">
+        <ComponentPreviewContainer className="h-[420px] max-lg:hidden">
           <DashboardComponentPreview />
+        </ComponentPreviewContainer>
+        <ComponentPreviewContainer className="lg:hidden p-4 text-center">
+          Use desktop to use component preview
         </ComponentPreviewContainer>
         <p className="text">
           Unlike local component state, query states persist in the URL, making
@@ -118,6 +121,9 @@ export default function BreadcrumbComponentPage() {
           needed.
         </p>
         <BreadcrumbPreviewComponent />
+        <ComponentPreviewContainer className="lg:hidden p-4 text-center">
+          Use desktop to use component preview
+        </ComponentPreviewContainer>
       </div>
       <div className="space-y-12">
         <h2>Making the navigation support backward compatibility</h2>
@@ -176,6 +182,9 @@ export default function BreadcrumbComponentPage() {
 }, [requiredExpandedNodes, manuallyExpandedNodes, manuallyCollapsedNodes]);`}</code>
         </pre>
         <BacktrackingPreviewComponent />
+        <ComponentPreviewContainer className="lg:hidden p-4 text-center">
+          Use desktop to use component preview
+        </ComponentPreviewContainer>
         <p className="text">
           This approach ensures that when a page loads with a selected node ID
           in the query state, all parent nodes automatically expand to reveal
@@ -197,7 +206,7 @@ function BreadcrumbPreviewComponent() {
   };
 
   return (
-    <ComponentPreviewContainer className="h-[320px] flex items-center justify-center select-none">
+    <ComponentPreviewContainer className="h-[320px] flex items-center justify-center select-none max-lg:hidden">
       <div className="flex items-center justify-center gap-2">
         <p className="font-medium">Home</p>
         <IconChevronRight
@@ -419,7 +428,7 @@ function BacktrackingPreviewComponent() {
 
   return (
     <MotionConfig transition={{ type: 'spring', bounce: 0 }}>
-      <ComponentPreviewContainer className="h-[420px] relative select-none cursor-default">
+      <ComponentPreviewContainer className="h-[420px] relative select-none cursor-default max-lg:hidden">
         {!isUndefined && (
           <>
             <motion.div className="w-full h-full flex items-center justify-center">
