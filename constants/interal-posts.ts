@@ -7,7 +7,7 @@ export const INTERNAL_POSTS: { route: ApplicationRoute; title: string }[] = [
   },
   {
     route: ROUTES.INTERNAL_POST_BREADCRUMB_COMPONENT,
-    title: 'Breadcrumb component',
+    title: 'Dashboard navigation using query states',
   },
 ] as const;
 
