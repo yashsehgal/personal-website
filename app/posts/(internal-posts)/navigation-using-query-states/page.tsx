@@ -157,12 +157,15 @@ export default function BreadcrumbComponentPage() {
           interactions. First, the component calculates which nodes must be
           expanded based on the selected file node ID:
         </p>
-        <pre className="code-block">
+        <pre className="code-block max-lg:hidden">
           <code>{`const requiredExpandedNodes = useMemo(
   () => computeExpandedNodes(selectedFileNodeId),
   [selectedFileNodeId],
 );`}</code>
         </pre>
+        <ComponentPreviewContainer className="lg:hidden p-4 text-center">
+          Use desktop to use code block
+        </ComponentPreviewContainer>
         <p className="text">
           These required nodes are then merged with manually expanded nodes,
           while respecting user preferences for collapsed nodes:
@@ -181,6 +184,9 @@ export default function BreadcrumbComponentPage() {
   return merged;
 }, [requiredExpandedNodes, manuallyExpandedNodes, manuallyCollapsedNodes]);`}</code>
         </pre>
+        <ComponentPreviewContainer className="lg:hidden p-4 text-center">
+          Use desktop to use code block
+        </ComponentPreviewContainer>
         <BacktrackingPreviewComponent />
         <ComponentPreviewContainer className="lg:hidden p-4 text-center">
           Use desktop to use component preview

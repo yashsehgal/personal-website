@@ -210,11 +210,11 @@ code {
 }
 
 pre.code-block {
-  @apply p-6 font-normal bg-background shadow-2xs block whitespace-pre-wrap;
+  @apply p-6 font-normal bg-background shadow-2xs block whitespace-pre-wrap max-lg:hidden;
 }
 
 pre.code-block code {
-  @apply font-mono text-sm;
+  @apply font-mono text-sm max-lg:hidden;
   background: transparent;
   border: none;
   padding: 12px;
