@@ -124,7 +124,6 @@ enum BACKTRACKING_PREVIEW_STATE {
   SHOW_URL_IN_BROWSER = 'SHOW_URL_IN_BROWSER',
   HIGHLIGHT_SEGMENTS = 'HIGHLIGHT_SEGMENTS',
   ZOOM_SEGMENTS = 'ZOOM_SEGMENTS',
-  MAKE_SEGMENTS_ARRAY = 'MAKE_SEGMENTS_ARRAY',
   SHOW_FOLDER_TREE_NODE = 'SHOW_PARENT_FOLDER_TREE_NODE',
   HIGHLIGHT_NESTED_SEGMENT_AS_TREE_NODES = 'HIGHLIGHT_NESTED_SEGMENT_AS_TREE_NODES',
   END_SCENE = 'END_SCENE',
@@ -134,7 +133,6 @@ const BACKTRACKING_SCENE_ORDER: BACKTRACKING_PREVIEW_STATE[] = [
   BACKTRACKING_PREVIEW_STATE.SHOW_URL_IN_BROWSER,
   BACKTRACKING_PREVIEW_STATE.HIGHLIGHT_SEGMENTS,
   BACKTRACKING_PREVIEW_STATE.ZOOM_SEGMENTS,
-  BACKTRACKING_PREVIEW_STATE.MAKE_SEGMENTS_ARRAY,
   BACKTRACKING_PREVIEW_STATE.SHOW_FOLDER_TREE_NODE,
   BACKTRACKING_PREVIEW_STATE.HIGHLIGHT_NESTED_SEGMENT_AS_TREE_NODES,
   BACKTRACKING_PREVIEW_STATE.END_SCENE,
@@ -145,7 +143,7 @@ const SCENE_INTERVAL_MS: number = 2000 as const;
 function BacktrackingPreviewComponent() {
   const [scene, setScene] = useState<BACKTRACKING_PREVIEW_STATE>(
     undefined as unknown as BACKTRACKING_PREVIEW_STATE,
-    // BACKTRACKING_PREVIEW_STATE.MAKE_SEGMENTS_ARRAY,
+    // BACKTRACKING_PREVIEW_STATE.SHOW_FOLDER_TREE_NODE,
   );
   const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
@@ -184,21 +182,18 @@ function BacktrackingPreviewComponent() {
         initial: {},
         animate: { scale: 1.3, x: -160 },
       },
-      [BACKTRACKING_PREVIEW_STATE.MAKE_SEGMENTS_ARRAY]: {
-        initial: {},
-        animate: { scale: 0.9, x: -140 },
-      },
+
       [BACKTRACKING_PREVIEW_STATE.SHOW_FOLDER_TREE_NODE]: {
         initial: {},
-        animate: { opacity: 0, y: -24, filter: 'blur(4px)', x: -150 },
+        animate: { y: -160, scale: 0.6, x: -85 },
       },
       [BACKTRACKING_PREVIEW_STATE.HIGHLIGHT_NESTED_SEGMENT_AS_TREE_NODES]: {
         initial: {},
-        animate: {},
+        animate: { y: -160, scale: 0.6, x: -85 },
       },
       [BACKTRACKING_PREVIEW_STATE.END_SCENE]: {
-        initial: { y: 12, opacity: 0, scale: 1 },
-        animate: {},
+        initial: {},
+        animate: { y: -160, scale: 0.6, x: -85 },
       },
     },
     'base-url-path': {
@@ -214,10 +209,7 @@ function BacktrackingPreviewComponent() {
         initial: {},
         animate: { opacity: 0, scale: 0.4 },
       },
-      [BACKTRACKING_PREVIEW_STATE.MAKE_SEGMENTS_ARRAY]: {
-        initial: {},
-        animate: { opacity: 0, scale: 0.4 },
-      },
+
       [BACKTRACKING_PREVIEW_STATE.SHOW_FOLDER_TREE_NODE]: {
         initial: {},
         animate: { opacity: 0, display: 'hidden' },
@@ -241,16 +233,10 @@ function BacktrackingPreviewComponent() {
         animate: {},
       },
       [BACKTRACKING_PREVIEW_STATE.ZOOM_SEGMENTS]: { initial: {}, animate: {} },
-      [BACKTRACKING_PREVIEW_STATE.MAKE_SEGMENTS_ARRAY]: {
-        initial: {},
-        animate: {
-          x: 165,
-          y: -90,
-        },
-      },
+
       [BACKTRACKING_PREVIEW_STATE.SHOW_FOLDER_TREE_NODE]: {
         initial: {},
-        animate: { opacity: 0, display: 'hidden' },
+        animate: {},
       },
       [BACKTRACKING_PREVIEW_STATE.HIGHLIGHT_NESTED_SEGMENT_AS_TREE_NODES]: {
         initial: {},
@@ -268,16 +254,10 @@ function BacktrackingPreviewComponent() {
         animate: {},
       },
       [BACKTRACKING_PREVIEW_STATE.ZOOM_SEGMENTS]: { initial: {}, animate: {} },
-      [BACKTRACKING_PREVIEW_STATE.MAKE_SEGMENTS_ARRAY]: {
-        initial: {},
-        animate: {
-          x: 0,
-          y: -20,
-        },
-      },
+
       [BACKTRACKING_PREVIEW_STATE.SHOW_FOLDER_TREE_NODE]: {
         initial: {},
-        animate: { opacity: 0, display: 'hidden' },
+        animate: {},
       },
       [BACKTRACKING_PREVIEW_STATE.HIGHLIGHT_NESTED_SEGMENT_AS_TREE_NODES]: {
         initial: {},
@@ -295,16 +275,10 @@ function BacktrackingPreviewComponent() {
         animate: {},
       },
       [BACKTRACKING_PREVIEW_STATE.ZOOM_SEGMENTS]: { initial: {}, animate: {} },
-      [BACKTRACKING_PREVIEW_STATE.MAKE_SEGMENTS_ARRAY]: {
-        initial: {},
-        animate: {
-          x: -140,
-          y: 50,
-        },
-      },
+
       [BACKTRACKING_PREVIEW_STATE.SHOW_FOLDER_TREE_NODE]: {
         initial: {},
-        animate: { opacity: 0, display: 'hidden' },
+        animate: {},
       },
       [BACKTRACKING_PREVIEW_STATE.HIGHLIGHT_NESTED_SEGMENT_AS_TREE_NODES]: {
         initial: {},
@@ -322,21 +296,10 @@ function BacktrackingPreviewComponent() {
         animate: {},
       },
       [BACKTRACKING_PREVIEW_STATE.ZOOM_SEGMENTS]: { initial: {}, animate: {} },
-      [BACKTRACKING_PREVIEW_STATE.MAKE_SEGMENTS_ARRAY]: {
-        initial: {},
-        animate: {
-          x: -12,
-          opacity: 0,
-          display: 'hidden',
-        },
-      },
+
       [BACKTRACKING_PREVIEW_STATE.SHOW_FOLDER_TREE_NODE]: {
         initial: {},
-        animate: {
-          x: -12,
-          opacity: 0,
-          display: 'hidden',
-        },
+        animate: {},
       },
       [BACKTRACKING_PREVIEW_STATE.HIGHLIGHT_NESTED_SEGMENT_AS_TREE_NODES]: {
         initial: {},
@@ -382,82 +345,70 @@ function BacktrackingPreviewComponent() {
     <MotionConfig transition={{ type: 'spring', bounce: 0 }}>
       <ComponentPreviewContainer className="h-[420px] relative select-none cursor-default">
         {!isUndefined && (
-          <motion.div className="w-full h-full flex items-center justify-center">
-            <motion.div
-              key="full-url"
-              initial={SCENE_ANIMATIONS['full-url'][scene]?.initial}
-              animate={SCENE_ANIMATIONS['full-url'][scene]?.animate}
-              className={cn(
-                'text-2xl font-medium text-foreground font-mono flex items-center',
-              )}>
-              {/* engineering/setup/frontend */}
-              <motion.p
-                animate={SCENE_ANIMATIONS['base-url-path'][scene]?.animate}>
-                /dashboard?nodeId=
-              </motion.p>
+          <>
+            <motion.div className="w-full h-full flex items-center justify-center">
               <motion.div
-                key="segments-container"
+                key="full-url"
+                initial={SCENE_ANIMATIONS['full-url'][scene]?.initial}
+                animate={SCENE_ANIMATIONS['full-url'][scene]?.animate}
                 className={cn(
-                  'transition-[padding] w-fit flex items-center',
-                  (validateActiveScene(
-                    BACKTRACKING_PREVIEW_STATE.HIGHLIGHT_SEGMENTS,
-                  ) ||
-                    validateActiveScene(
-                      BACKTRACKING_PREVIEW_STATE.ZOOM_SEGMENTS,
-                    )) &&
-                    'px-3 py-1 rounded-xl border border-blue-300 bg-blue-50 text-blue-400 dark:bg-blue-950 dark:text-blue-200 dark:border-blue-600',
-                  validateActiveScene(
-                    BACKTRACKING_PREVIEW_STATE.MAKE_SEGMENTS_ARRAY,
-                  ) && '',
+                  'text-2xl font-medium text-foreground font-mono flex items-center',
                 )}>
+                {/* engineering/setup/frontend */}
                 <motion.p
-                  key="segment-engineering"
-                  animate={
-                    SCENE_ANIMATIONS['segment-engineering'][scene]?.animate
-                  }
-                  className={cn(
-                    validateActiveScene(
-                      BACKTRACKING_PREVIEW_STATE.MAKE_SEGMENTS_ARRAY,
-                    ) &&
-                      'px-3 py-1 rounded-xl border border-blue-300 bg-blue-50 text-blue-400 dark:bg-blue-950 dark:text-blue-200 dark:border-blue-600 mr-2 transition-[margin]',
-                  )}>
-                  engineering
+                  animate={SCENE_ANIMATIONS['base-url-path'][scene]?.animate}>
+                  /dashboard?nodeId=
                 </motion.p>
-                <motion.span
-                  key="segment-slash-1"
-                  animate={SCENE_ANIMATIONS['segment-slash'][scene]?.animate}>
-                  /
-                </motion.span>
-                <motion.p
-                  key="segment-setup"
-                  animate={SCENE_ANIMATIONS['segment-setup'][scene]?.animate}
+                <motion.div
+                  key="segments-container"
                   className={cn(
-                    validateActiveScene(
-                      BACKTRACKING_PREVIEW_STATE.MAKE_SEGMENTS_ARRAY,
+                    'transition-[padding] w-fit flex items-center',
+                    !validateActiveScene(
+                      BACKTRACKING_PREVIEW_STATE.SHOW_URL_IN_BROWSER,
                     ) &&
-                      'px-3 py-1 rounded-xl border border-blue-300 bg-blue-50 text-blue-400 dark:bg-blue-950 dark:text-blue-200 dark:border-blue-600 transition-[margin]',
+                      'px-3 py-1 rounded-xl border border-blue-300 bg-blue-50 text-blue-400 dark:bg-blue-950 dark:text-blue-200 dark:border-blue-600',
                   )}>
-                  setup
-                </motion.p>
-                <motion.span
-                  key="segment-slash-2"
-                  animate={SCENE_ANIMATIONS['segment-slash'][scene]?.animate}>
-                  /
-                </motion.span>
-                <motion.p
-                  key="segment-frontend"
-                  animate={SCENE_ANIMATIONS['segment-frontend'][scene]?.animate}
-                  className={cn(
-                    validateActiveScene(
-                      BACKTRACKING_PREVIEW_STATE.MAKE_SEGMENTS_ARRAY,
-                    ) &&
-                      'px-3 py-1 rounded-xl border border-blue-300 bg-blue-50 text-blue-400 dark:bg-blue-950 dark:text-blue-200 dark:border-blue-600 ml-2 transition-[margin]',
-                  )}>
-                  frontend
-                </motion.p>
+                  <motion.p
+                    key="segment-engineering"
+                    animate={
+                      SCENE_ANIMATIONS['segment-engineering'][scene]?.animate
+                    }>
+                    engineering
+                  </motion.p>
+                  <motion.span
+                    key="segment-slash-1"
+                    animate={SCENE_ANIMATIONS['segment-slash'][scene]?.animate}>
+                    /
+                  </motion.span>
+                  <motion.p
+                    key="segment-setup"
+                    animate={SCENE_ANIMATIONS['segment-setup'][scene]?.animate}>
+                    setup
+                  </motion.p>
+                  <motion.span
+                    key="segment-slash-2"
+                    animate={SCENE_ANIMATIONS['segment-slash'][scene]?.animate}>
+                    /
+                  </motion.span>
+                  <motion.p
+                    key="segment-frontend"
+                    animate={
+                      SCENE_ANIMATIONS['segment-frontend'][scene]?.animate
+                    }>
+                    frontend
+                  </motion.p>
+                </motion.div>
               </motion.div>
             </motion.div>
-          </motion.div>
+            {validateActiveScene(
+              BACKTRACKING_PREVIEW_STATE.SHOW_FOLDER_TREE_NODE,
+            ) ||
+            validateActiveScene(
+              BACKTRACKING_PREVIEW_STATE.HIGHLIGHT_NESTED_SEGMENT_AS_TREE_NODES,
+            ) ? (
+              <></>
+            ) : null}
+          </>
         )}
         {validateActiveScene(BACKTRACKING_PREVIEW_STATE.END_SCENE) ||
         isUndefined ? (
