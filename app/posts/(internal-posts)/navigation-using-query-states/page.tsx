@@ -103,7 +103,7 @@ export default function BreadcrumbComponentPage() {
         </p>
       </div>
       <div className="space-y-12">
-        <h2>Writing breadcrumb and sidebar content tree component</h2>
+        <h2>Breadcrumb component</h2>
         <p className="text">
           The breadcrumb segments are rendered with a truncation strategy to
           maintain a clean interface when navigating deep nested paths. When
@@ -117,6 +117,7 @@ export default function BreadcrumbComponentPage() {
           nested paths, while still providing full navigation context when
           needed.
         </p>
+        <BreadcrumbPreviewComponent />
       </div>
       <div className="space-y-12">
         <h2>Making the navigation support backward compatibility</h2>
@@ -184,6 +185,82 @@ export default function BreadcrumbComponentPage() {
         </p>
       </div>
     </InternalPostContainer>
+  );
+}
+
+function BreadcrumbPreviewComponent() {
+  const [middleSegmentsDropdownOpen, setMiddleSegmentsDropdownOpen] =
+    useState<boolean>(false);
+
+  const handleMiddleSegmentsDropdownOpenStateChange = (open: boolean) => {
+    setMiddleSegmentsDropdownOpen(open);
+  };
+
+  return (
+    <ComponentPreviewContainer className="h-[320px] flex items-center justify-center select-none">
+      <div className="flex items-center justify-center gap-2">
+        <p className="font-medium">Home</p>
+        <IconChevronRight
+          size={DASHBOARD_SIDEBAR_TREE_NODE_ICON}
+          className="shrink-0"
+        />
+        <p className="font-medium">Settings</p>
+        <IconChevronRight
+          size={DASHBOARD_SIDEBAR_TREE_NODE_ICON}
+          className="shrink-0"
+        />
+        <DropdownMenu
+          open={middleSegmentsDropdownOpen}
+          onOpenChange={handleMiddleSegmentsDropdownOpenStateChange}>
+          <DropdownMenuTrigger asChild>
+            <button
+              className={cn(
+                'size-7 rounded-lg flex items-center justify-center hover:bg-foreground/10 cursor-pointer',
+                middleSegmentsDropdownOpen && 'bg-foreground/10',
+              )}>
+              <IconDots size={DASHBOARD_SIDEBAR_TREE_NODE_ICON} />
+            </button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent
+            className="min-w-56 max-w-80 rounded-xl"
+            align="start"
+            alignOffset={-24}>
+            <DropdownMenuItem
+              className="first:rounded-t-lg last:rounded-b-lg cursor-pointer font-medium pr-8"
+              style={{ paddingLeft: '12px' }}>
+              <IconCornerDownRight
+                size={DASHBOARD_SIDEBAR_TREE_NODE_ICON}
+                className="text-foreground/40"
+              />
+              Setup
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              className="first:rounded-t-lg last:rounded-b-lg cursor-pointer font-medium pr-8"
+              style={{ paddingLeft: '24px' }}>
+              <IconCornerDownRight
+                size={DASHBOARD_SIDEBAR_TREE_NODE_ICON}
+                className="text-foreground/40"
+              />
+              Configuration
+            </DropdownMenuItem>
+            <DropdownMenuItem
+              className="first:rounded-t-lg last:rounded-b-lg cursor-pointer font-medium pr-8"
+              style={{ paddingLeft: '36px' }}>
+              <IconCornerDownRight
+                size={DASHBOARD_SIDEBAR_TREE_NODE_ICON}
+                className="text-foreground/40"
+              />
+              RBAC
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+        <IconChevronRight
+          size={DASHBOARD_SIDEBAR_TREE_NODE_ICON}
+          className="shrink-0"
+        />
+        <p className="font-medium">Profiles</p>
+      </div>
+    </ComponentPreviewContainer>
   );
 }
 
