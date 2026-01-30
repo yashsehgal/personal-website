@@ -10,6 +10,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { cn } from '@/helpers/cn';
 import {
+  IconChevronDown,
   IconChevronRight,
   IconCornerDownRight,
   IconDots,
@@ -125,7 +126,6 @@ enum BACKTRACKING_PREVIEW_STATE {
   HIGHLIGHT_SEGMENTS = 'HIGHLIGHT_SEGMENTS',
   ZOOM_SEGMENTS = 'ZOOM_SEGMENTS',
   SHOW_FOLDER_TREE_NODE = 'SHOW_PARENT_FOLDER_TREE_NODE',
-  HIGHLIGHT_NESTED_SEGMENT_AS_TREE_NODES = 'HIGHLIGHT_NESTED_SEGMENT_AS_TREE_NODES',
   END_SCENE = 'END_SCENE',
 }
 
@@ -134,7 +134,6 @@ const BACKTRACKING_SCENE_ORDER: BACKTRACKING_PREVIEW_STATE[] = [
   BACKTRACKING_PREVIEW_STATE.HIGHLIGHT_SEGMENTS,
   BACKTRACKING_PREVIEW_STATE.ZOOM_SEGMENTS,
   BACKTRACKING_PREVIEW_STATE.SHOW_FOLDER_TREE_NODE,
-  BACKTRACKING_PREVIEW_STATE.HIGHLIGHT_NESTED_SEGMENT_AS_TREE_NODES,
   BACKTRACKING_PREVIEW_STATE.END_SCENE,
 ];
 
@@ -157,7 +156,8 @@ function BacktrackingPreviewComponent() {
     | 'segment-engineering'
     | 'segment-setup'
     | 'segment-frontend'
-    | 'segment-slash';
+    | 'segment-slash'
+    | 'show-folder';
 
   const SCENE_ANIMATIONS: Record<
     SceneAnimationItems,
@@ -185,15 +185,11 @@ function BacktrackingPreviewComponent() {
 
       [BACKTRACKING_PREVIEW_STATE.SHOW_FOLDER_TREE_NODE]: {
         initial: {},
-        animate: { y: -160, scale: 0.6, x: -85 },
-      },
-      [BACKTRACKING_PREVIEW_STATE.HIGHLIGHT_NESTED_SEGMENT_AS_TREE_NODES]: {
-        initial: {},
-        animate: { y: -160, scale: 0.6, x: -85 },
+        animate: { y: -120, scale: 0.6, x: -85 },
       },
       [BACKTRACKING_PREVIEW_STATE.END_SCENE]: {
         initial: {},
-        animate: { y: -160, scale: 0.6, x: -85 },
+        animate: { y: -120, scale: 0.6, x: -85 },
       },
     },
     'base-url-path': {
@@ -211,10 +207,6 @@ function BacktrackingPreviewComponent() {
       },
 
       [BACKTRACKING_PREVIEW_STATE.SHOW_FOLDER_TREE_NODE]: {
-        initial: {},
-        animate: { opacity: 0, display: 'hidden' },
-      },
-      [BACKTRACKING_PREVIEW_STATE.HIGHLIGHT_NESTED_SEGMENT_AS_TREE_NODES]: {
         initial: {},
         animate: { opacity: 0, display: 'hidden' },
       },
@@ -238,10 +230,6 @@ function BacktrackingPreviewComponent() {
         initial: {},
         animate: {},
       },
-      [BACKTRACKING_PREVIEW_STATE.HIGHLIGHT_NESTED_SEGMENT_AS_TREE_NODES]: {
-        initial: {},
-        animate: {},
-      },
       [BACKTRACKING_PREVIEW_STATE.END_SCENE]: { initial: {}, animate: {} },
     },
     'segment-setup': {
@@ -256,10 +244,6 @@ function BacktrackingPreviewComponent() {
       [BACKTRACKING_PREVIEW_STATE.ZOOM_SEGMENTS]: { initial: {}, animate: {} },
 
       [BACKTRACKING_PREVIEW_STATE.SHOW_FOLDER_TREE_NODE]: {
-        initial: {},
-        animate: {},
-      },
-      [BACKTRACKING_PREVIEW_STATE.HIGHLIGHT_NESTED_SEGMENT_AS_TREE_NODES]: {
         initial: {},
         animate: {},
       },
@@ -280,10 +264,6 @@ function BacktrackingPreviewComponent() {
         initial: {},
         animate: {},
       },
-      [BACKTRACKING_PREVIEW_STATE.HIGHLIGHT_NESTED_SEGMENT_AS_TREE_NODES]: {
-        initial: {},
-        animate: {},
-      },
       [BACKTRACKING_PREVIEW_STATE.END_SCENE]: { initial: {}, animate: {} },
     },
     'segment-slash': {
@@ -301,11 +281,38 @@ function BacktrackingPreviewComponent() {
         initial: {},
         animate: {},
       },
-      [BACKTRACKING_PREVIEW_STATE.HIGHLIGHT_NESTED_SEGMENT_AS_TREE_NODES]: {
-        initial: {},
-        animate: {},
-      },
       [BACKTRACKING_PREVIEW_STATE.END_SCENE]: { initial: {}, animate: {} },
+    },
+    'show-folder': {
+      [BACKTRACKING_PREVIEW_STATE.SHOW_URL_IN_BROWSER]: {
+        initial: {},
+        animate: { opacity: 0, scale: 0.3, y: 56 },
+      },
+      [BACKTRACKING_PREVIEW_STATE.HIGHLIGHT_SEGMENTS]: {
+        initial: {},
+        animate: { opacity: 0, scale: 0.3, y: 56 },
+      },
+      [BACKTRACKING_PREVIEW_STATE.ZOOM_SEGMENTS]: {
+        initial: {},
+        animate: { opacity: 0, scale: 0.3, y: 56 },
+      },
+
+      [BACKTRACKING_PREVIEW_STATE.SHOW_FOLDER_TREE_NODE]: {
+        initial: {},
+        animate: {
+          opacity: 1,
+          scale: 1.2,
+          y: 0,
+        },
+      },
+      [BACKTRACKING_PREVIEW_STATE.END_SCENE]: {
+        initial: {},
+        animate: {
+          opacity: 1,
+          scale: 1.2,
+          y: 0,
+        },
+      },
     },
   } as const;
 
@@ -400,14 +407,61 @@ function BacktrackingPreviewComponent() {
                 </motion.div>
               </motion.div>
             </motion.div>
-            {validateActiveScene(
-              BACKTRACKING_PREVIEW_STATE.SHOW_FOLDER_TREE_NODE,
-            ) ||
-            validateActiveScene(
-              BACKTRACKING_PREVIEW_STATE.HIGHLIGHT_NESTED_SEGMENT_AS_TREE_NODES,
-            ) ? (
-              <></>
-            ) : null}
+            <motion.div
+              key="folder-container"
+              className="bg-foreground/5 rounded-t-xl h-64 w-64 absolute bottom-0 left-1/2 -translate-x-1/2 px-5 py-2"
+              initial={{ opacity: 0, scale: 0.3, y: 56 }}
+              animate={SCENE_ANIMATIONS['show-folder'][scene]?.animate}>
+              <div className="h-8 flex items-center justify-start gap-2">
+                <IconChevronDown
+                  size={DASHBOARD_SIDEBAR_TREE_NODE_ICON}
+                  strokeWidth={1.5}
+                />
+                <IconFolderFilled
+                  size={DASHBOARD_SIDEBAR_TREE_NODE_ICON}
+                  className="text-blue-400"
+                />
+                <p className="text-foreground text-xs">Engineering</p>
+              </div>
+              <div className="h-8 flex items-center justify-start gap-2 pl-[25px]">
+                <IconChevronRight
+                  size={DASHBOARD_SIDEBAR_TREE_NODE_ICON}
+                  strokeWidth={1.5}
+                />
+                <IconFolderFilled
+                  size={DASHBOARD_SIDEBAR_TREE_NODE_ICON}
+                  className="text-blue-400"
+                />
+                <p className="text-foreground text-xs">Guidelines</p>
+              </div>
+              <div className="h-8 flex items-center justify-start gap-2 pl-[25px]">
+                <IconChevronDown
+                  size={DASHBOARD_SIDEBAR_TREE_NODE_ICON}
+                  strokeWidth={1.5}
+                />
+                <IconFolderFilled
+                  size={DASHBOARD_SIDEBAR_TREE_NODE_ICON}
+                  className="text-blue-400"
+                />
+                <p className="text-foreground text-xs">Setup</p>
+              </div>
+              <div className="h-8 flex items-center justify-start gap-2 pl-[50px] bg-foreground/5 rounded-lg">
+                <IconPointFilled size={DASHBOARD_SIDEBAR_TREE_NODE_ICON} />
+                <p className="text-foreground text-xs">Frontend</p>
+              </div>
+              <div className="h-8 flex items-center justify-start gap-2 pl-[50px] text-secondary">
+                <IconPointFilled size={DASHBOARD_SIDEBAR_TREE_NODE_ICON} />
+                <p className="text-foreground text-xs">Backend</p>
+              </div>
+              <div className="h-8 flex items-center justify-start gap-2 pl-[50px] text-secondary">
+                <IconPointFilled size={DASHBOARD_SIDEBAR_TREE_NODE_ICON} />
+                <p className="text-foreground text-xs">DevOps</p>
+              </div>
+              <div className="h-8 flex items-center justify-start gap-2 pl-[50px] text-secondary">
+                <IconPointFilled size={DASHBOARD_SIDEBAR_TREE_NODE_ICON} />
+                <p className="text-foreground text-xs">Tools</p>
+              </div>
+            </motion.div>
           </>
         )}
         {validateActiveScene(BACKTRACKING_PREVIEW_STATE.END_SCENE) ||
