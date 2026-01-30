@@ -459,7 +459,9 @@ function DashboardComponentPreview() {
 }
 
 function DashboardBreadcrumbComponent() {
-  const [selectedFileNodeId] = useQueryState(NUQS_SELECTED_NODE_ITEM);
+  const [selectedFileNodeId, setSelectedFileNodeId] = useQueryState(
+    NUQS_SELECTED_NODE_ITEM,
+  );
   const segmentParts = selectedFileNodeId?.split('/');
   const segments = segmentParts?.map((part, index) => {
     const id = segmentParts.slice(0, index + 1).join('/');
@@ -472,6 +474,11 @@ function DashboardBreadcrumbComponent() {
 
   const handleMiddleSegmentsDropdownOpenStateChange = (open: boolean) => {
     setMiddleSegmentsDropdownOpen(open);
+  };
+
+  const handleMiddleSegmentClick = (segmentId: string) => {
+    setSelectedFileNodeId(segmentId);
+    setMiddleSegmentsDropdownOpen(false);
   };
 
   const middleSegments =
@@ -512,7 +519,8 @@ function DashboardBreadcrumbComponent() {
                   <DropdownMenuItem
                     key={middleSegment.id}
                     className="first:rounded-t-lg last:rounded-b-lg cursor-pointer font-medium pr-8"
-                    style={{ paddingLeft: `${(index + 1) * 12}px` }}>
+                    style={{ paddingLeft: `${(index + 1) * 12}px` }}
+                    onClick={() => handleMiddleSegmentClick(middleSegment.id)}>
                     <IconCornerDownRight
                       size={DASHBOARD_SIDEBAR_TREE_NODE_ICON}
                       className="text-foreground/40"
