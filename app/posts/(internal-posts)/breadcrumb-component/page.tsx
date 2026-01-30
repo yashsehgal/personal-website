@@ -409,57 +409,59 @@ function BacktrackingPreviewComponent() {
             </motion.div>
             <motion.div
               key="folder-container"
-              className="bg-foreground/5 rounded-t-xl h-64 w-64 absolute bottom-0 left-1/2 -translate-x-1/2 px-5 py-2"
+              className="border border-foreground/10 absolute bottom-0 left-1/2 -translate-x-1/2 rounded-2xl p-2 bg-foreground/2"
               initial={{ opacity: 0, scale: 0.3, y: 56 }}
               animate={SCENE_ANIMATIONS['show-folder'][scene]?.animate}>
-              <div className="h-8 flex items-center justify-start gap-2">
-                <IconChevronDown
-                  size={DASHBOARD_SIDEBAR_TREE_NODE_ICON}
-                  strokeWidth={1.5}
-                />
-                <IconFolderFilled
-                  size={DASHBOARD_SIDEBAR_TREE_NODE_ICON}
-                  className="text-blue-400"
-                />
-                <p className="text-foreground text-xs">Engineering</p>
-              </div>
-              <div className="h-8 flex items-center justify-start gap-2 pl-[25px]">
-                <IconChevronRight
-                  size={DASHBOARD_SIDEBAR_TREE_NODE_ICON}
-                  strokeWidth={1.5}
-                />
-                <IconFolderFilled
-                  size={DASHBOARD_SIDEBAR_TREE_NODE_ICON}
-                  className="text-blue-400"
-                />
-                <p className="text-foreground text-xs">Guidelines</p>
-              </div>
-              <div className="h-8 flex items-center justify-start gap-2 pl-[25px]">
-                <IconChevronDown
-                  size={DASHBOARD_SIDEBAR_TREE_NODE_ICON}
-                  strokeWidth={1.5}
-                />
-                <IconFolderFilled
-                  size={DASHBOARD_SIDEBAR_TREE_NODE_ICON}
-                  className="text-blue-400"
-                />
-                <p className="text-foreground text-xs">Setup</p>
-              </div>
-              <div className="h-8 flex items-center justify-start gap-2 pl-[50px] bg-foreground/5 rounded-lg">
-                <IconPointFilled size={DASHBOARD_SIDEBAR_TREE_NODE_ICON} />
-                <p className="text-foreground text-xs">Frontend</p>
-              </div>
-              <div className="h-8 flex items-center justify-start gap-2 pl-[50px] text-secondary">
-                <IconPointFilled size={DASHBOARD_SIDEBAR_TREE_NODE_ICON} />
-                <p className="text-foreground text-xs">Backend</p>
-              </div>
-              <div className="h-8 flex items-center justify-start gap-2 pl-[50px] text-secondary">
-                <IconPointFilled size={DASHBOARD_SIDEBAR_TREE_NODE_ICON} />
-                <p className="text-foreground text-xs">DevOps</p>
-              </div>
-              <div className="h-8 flex items-center justify-start gap-2 pl-[50px] text-secondary">
-                <IconPointFilled size={DASHBOARD_SIDEBAR_TREE_NODE_ICON} />
-                <p className="text-foreground text-xs">Tools</p>
+              <div className="px-5 py-2 border border-foreground/12 rounded-t-xl h-64 w-64 bg-background">
+                <div className="h-8 flex items-center justify-start gap-2">
+                  <IconChevronDown
+                    size={DASHBOARD_SIDEBAR_TREE_NODE_ICON}
+                    strokeWidth={1.5}
+                  />
+                  <IconFolderFilled
+                    size={DASHBOARD_SIDEBAR_TREE_NODE_ICON}
+                    className="text-blue-400"
+                  />
+                  <p className="text-foreground text-xs">Engineering</p>
+                </div>
+                <div className="h-8 flex items-center justify-start gap-2 pl-[25px]">
+                  <IconChevronRight
+                    size={DASHBOARD_SIDEBAR_TREE_NODE_ICON}
+                    strokeWidth={1.5}
+                  />
+                  <IconFolderFilled
+                    size={DASHBOARD_SIDEBAR_TREE_NODE_ICON}
+                    className="text-blue-400"
+                  />
+                  <p className="text-foreground text-xs">Guidelines</p>
+                </div>
+                <div className="h-8 flex items-center justify-start gap-2 pl-[25px]">
+                  <IconChevronDown
+                    size={DASHBOARD_SIDEBAR_TREE_NODE_ICON}
+                    strokeWidth={1.5}
+                  />
+                  <IconFolderFilled
+                    size={DASHBOARD_SIDEBAR_TREE_NODE_ICON}
+                    className="text-blue-400"
+                  />
+                  <p className="text-foreground text-xs">Setup</p>
+                </div>
+                <div className="h-8 flex items-center justify-start gap-2 pl-[50px] bg-foreground/5 rounded-lg">
+                  <IconPointFilled size={DASHBOARD_SIDEBAR_TREE_NODE_ICON} />
+                  <p className="text-foreground text-xs">Frontend</p>
+                </div>
+                <div className="h-8 flex items-center justify-start gap-2 pl-[50px] text-secondary">
+                  <IconPointFilled size={DASHBOARD_SIDEBAR_TREE_NODE_ICON} />
+                  <p className="text-foreground text-xs">Backend</p>
+                </div>
+                <div className="h-8 flex items-center justify-start gap-2 pl-[50px] text-secondary">
+                  <IconPointFilled size={DASHBOARD_SIDEBAR_TREE_NODE_ICON} />
+                  <p className="text-foreground text-xs">DevOps</p>
+                </div>
+                <div className="h-8 flex items-center justify-start gap-2 pl-[50px] text-secondary">
+                  <IconPointFilled size={DASHBOARD_SIDEBAR_TREE_NODE_ICON} />
+                  <p className="text-foreground text-xs">Tools</p>
+                </div>
               </div>
             </motion.div>
           </>
