@@ -104,6 +104,19 @@ export default function BreadcrumbComponentPage() {
       </div>
       <div className="space-y-12">
         <h2>Writing breadcrumb and sidebar content tree component</h2>
+        <p className="text">
+          The breadcrumb segments are rendered with a truncation strategy to
+          maintain a clean interface when navigating deep nested paths. When
+          there are more than two segments, the breadcrumb automatically
+          collapses the middle segments into a dropdown menu, keeping the{' '}
+          <span className="font-serif italic">&quot;Home&quot;</span> label and
+          the current page segment always visible. The middle segments are
+          accessible through a dropdown button and displayed with progressive
+          indentation to reflect their hierarchical nesting. This approach
+          ensures the breadcrumb remains compact and readable, even with deeply
+          nested paths, while still providing full navigation context when
+          needed.
+        </p>
       </div>
       <div className="space-y-12">
         <h2>Making the navigation support backward compatibility</h2>
