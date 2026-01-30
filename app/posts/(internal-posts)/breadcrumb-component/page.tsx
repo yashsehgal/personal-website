@@ -137,7 +137,7 @@ const BACKTRACKING_SCENE_ORDER: BACKTRACKING_PREVIEW_STATE[] = [
   BACKTRACKING_PREVIEW_STATE.END_SCENE,
 ];
 
-const SCENE_INTERVAL_MS: number = 2000 as const;
+const SCENE_INTERVAL_MS: number = 1200 as const;
 
 function BacktrackingPreviewComponent() {
   const [scene, setScene] = useState<BACKTRACKING_PREVIEW_STATE>(
@@ -150,14 +150,7 @@ function BacktrackingPreviewComponent() {
     return scene === checkScene;
   };
 
-  type SceneAnimationItems =
-    | 'full-url'
-    | 'base-url-path'
-    | 'segment-engineering'
-    | 'segment-setup'
-    | 'segment-frontend'
-    | 'segment-slash'
-    | 'show-folder';
+  type SceneAnimationItems = 'full-url' | 'base-url-path' | 'show-folder';
 
   const SCENE_ANIMATIONS: Record<
     SceneAnimationItems,
@@ -214,74 +207,6 @@ function BacktrackingPreviewComponent() {
         initial: {},
         animate: { opacity: 0, display: 'hidden' },
       },
-    },
-    'segment-engineering': {
-      [BACKTRACKING_PREVIEW_STATE.SHOW_URL_IN_BROWSER]: {
-        initial: {},
-        animate: {},
-      },
-      [BACKTRACKING_PREVIEW_STATE.HIGHLIGHT_SEGMENTS]: {
-        initial: {},
-        animate: {},
-      },
-      [BACKTRACKING_PREVIEW_STATE.ZOOM_SEGMENTS]: { initial: {}, animate: {} },
-
-      [BACKTRACKING_PREVIEW_STATE.SHOW_FOLDER_TREE_NODE]: {
-        initial: {},
-        animate: {},
-      },
-      [BACKTRACKING_PREVIEW_STATE.END_SCENE]: { initial: {}, animate: {} },
-    },
-    'segment-setup': {
-      [BACKTRACKING_PREVIEW_STATE.SHOW_URL_IN_BROWSER]: {
-        initial: {},
-        animate: {},
-      },
-      [BACKTRACKING_PREVIEW_STATE.HIGHLIGHT_SEGMENTS]: {
-        initial: {},
-        animate: {},
-      },
-      [BACKTRACKING_PREVIEW_STATE.ZOOM_SEGMENTS]: { initial: {}, animate: {} },
-
-      [BACKTRACKING_PREVIEW_STATE.SHOW_FOLDER_TREE_NODE]: {
-        initial: {},
-        animate: {},
-      },
-      [BACKTRACKING_PREVIEW_STATE.END_SCENE]: { initial: {}, animate: {} },
-    },
-    'segment-frontend': {
-      [BACKTRACKING_PREVIEW_STATE.SHOW_URL_IN_BROWSER]: {
-        initial: {},
-        animate: {},
-      },
-      [BACKTRACKING_PREVIEW_STATE.HIGHLIGHT_SEGMENTS]: {
-        initial: {},
-        animate: {},
-      },
-      [BACKTRACKING_PREVIEW_STATE.ZOOM_SEGMENTS]: { initial: {}, animate: {} },
-
-      [BACKTRACKING_PREVIEW_STATE.SHOW_FOLDER_TREE_NODE]: {
-        initial: {},
-        animate: {},
-      },
-      [BACKTRACKING_PREVIEW_STATE.END_SCENE]: { initial: {}, animate: {} },
-    },
-    'segment-slash': {
-      [BACKTRACKING_PREVIEW_STATE.SHOW_URL_IN_BROWSER]: {
-        initial: {},
-        animate: {},
-      },
-      [BACKTRACKING_PREVIEW_STATE.HIGHLIGHT_SEGMENTS]: {
-        initial: {},
-        animate: {},
-      },
-      [BACKTRACKING_PREVIEW_STATE.ZOOM_SEGMENTS]: { initial: {}, animate: {} },
-
-      [BACKTRACKING_PREVIEW_STATE.SHOW_FOLDER_TREE_NODE]: {
-        initial: {},
-        animate: {},
-      },
-      [BACKTRACKING_PREVIEW_STATE.END_SCENE]: { initial: {}, animate: {} },
     },
     'show-folder': {
       [BACKTRACKING_PREVIEW_STATE.SHOW_URL_IN_BROWSER]: {
@@ -375,35 +300,7 @@ function BacktrackingPreviewComponent() {
                     ) &&
                       'px-3 py-1 rounded-xl border border-blue-300 bg-blue-50 text-blue-400 dark:bg-blue-950 dark:text-blue-200 dark:border-blue-600',
                   )}>
-                  <motion.p
-                    key="segment-engineering"
-                    animate={
-                      SCENE_ANIMATIONS['segment-engineering'][scene]?.animate
-                    }>
-                    engineering
-                  </motion.p>
-                  <motion.span
-                    key="segment-slash-1"
-                    animate={SCENE_ANIMATIONS['segment-slash'][scene]?.animate}>
-                    /
-                  </motion.span>
-                  <motion.p
-                    key="segment-setup"
-                    animate={SCENE_ANIMATIONS['segment-setup'][scene]?.animate}>
-                    setup
-                  </motion.p>
-                  <motion.span
-                    key="segment-slash-2"
-                    animate={SCENE_ANIMATIONS['segment-slash'][scene]?.animate}>
-                    /
-                  </motion.span>
-                  <motion.p
-                    key="segment-frontend"
-                    animate={
-                      SCENE_ANIMATIONS['segment-frontend'][scene]?.animate
-                    }>
-                    frontend
-                  </motion.p>
+                  engineering/setup/frontend
                 </motion.div>
               </motion.div>
             </motion.div>
