@@ -306,7 +306,7 @@ function BacktrackingPreviewComponent() {
             </motion.div>
             <motion.div
               key="folder-container"
-              className="border border-foreground/10 absolute bottom-0 left-1/2 -translate-x-1/2 rounded-2xl p-2 bg-foreground/2"
+              className="border border-foreground/10 absolute bottom-0 left-1/2 -translate-x-1/2 rounded-3xl p-2 bg-foreground/2"
               initial={{ opacity: 0, scale: 0.3, y: 56 }}
               animate={SCENE_ANIMATIONS['show-folder'][scene]?.animate}>
               <div className="px-5 py-2 border border-foreground/12 rounded-t-xl h-64 w-64 bg-background">
