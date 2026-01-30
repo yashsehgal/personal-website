@@ -1,5 +1,5 @@
 'use client';
-import { DIRECTORY } from '@/app/posts/(internal-posts)/breadcrumb-component/constants';
+import { DIRECTORY } from '@/app/posts/(internal-posts)/navigation-using-query-states/constants';
 import { ComponentPreviewContainer } from '@/components/component-preview-container';
 import { InternalPostContainer } from '@/components/sections/internal-post-container';
 import {

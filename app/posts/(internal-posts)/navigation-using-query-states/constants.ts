@@ -1,4 +1,4 @@
-import type { Directory } from '@/app/posts/(internal-posts)/breadcrumb-component/page';
+import type { Directory } from '@/app/posts/(internal-posts)/navigation-using-query-states/page';
 
 export const DIRECTORY: Directory[] = [
   {
