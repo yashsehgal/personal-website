@@ -487,7 +487,7 @@ function BacktrackingPreviewComponent() {
                   />
                   <p className="text-foreground text-xs">Setup</p>
                 </div>
-                <div className="h-8 flex items-center justify-start gap-2 pl-[50px] bg-foreground/5 rounded-lg">
+                <div className="h-8 flex items-center justify-start gap-2 pl-[50px] bg-foreground/5 rounded-md">
                   <IconPointFilled size={DASHBOARD_SIDEBAR_TREE_NODE_ICON} />
                   <p className="text-foreground text-xs">Frontend</p>
                 </div>
