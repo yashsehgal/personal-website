@@ -108,13 +108,31 @@ export default function BreadcrumbComponentPage() {
       <div className="space-y-12">
         <h2>Making the navigation support backward compatibility</h2>
         <p className="text">
-          One of the important edge-cases when making a state system like this,
-          is to persist or show active state on the UI as per the state
-          available in the query state when a page freshly loads. To implement
-          this user experience, we need to back track the parent segments and
-          auto-expand the nested tree nodes to show the current active page.
+          One of the most important edge cases when designing a state system
+          like this is ensuring that the active state is correctly shown on the
+          UI based on the query state when a page loads. To achieve this user
+          experience, we need to backtrack the parent segments and automatically
+          expand the nested tree nodes so the current active page is visible.
         </p>
         <BacktrackingPreviewComponent />
+        <p className="text">
+          The backtracking logic works by parsing the selected node ID from the
+          query state (e.g.,{' '}
+          <span className="font-serif italic">engineering/setup/frontend</span>)
+          and splitting it by the forward slash delimiter. Starting from the
+          root, we incrementally build parent paths by joining segments: first{' '}
+          <span className="font-serif italic">engineering</span>, then{' '}
+          <span className="font-serif italic">engineering/setup</span>, and
+          finally{' '}
+          <span className="font-serif italic">engineering/setup/frontend</span>.
+          These parent paths are collected into a Set and used to automatically
+          expand the corresponding tree nodes in the sidebar. This ensures that
+          when a page loads with a deep nested path, all parent nodes are
+          expanded automatically, making the active page visible without
+          requiring manual expansion.
+        </p>
+        <p className="text"></p>
+        <p className="text"></p>
       </div>
     </InternalPostContainer>
   );
