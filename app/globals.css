@@ -209,6 +209,17 @@ code {
   scroll-behavior: smooth;
 }
 
-code.code-block {
-  @apply p-4 font-normal bg-background shadow-2xs;
+pre.code-block {
+  @apply p-6 font-normal bg-background shadow-2xs block whitespace-pre-wrap;
+}
+
+pre.code-block code {
+  @apply font-mono text-sm;
+  background: transparent;
+  border: none;
+  padding: 12px;
+}
+
+pre {
+  @apply border border-foreground/10 rounded-xl shadow-2xs;
 }

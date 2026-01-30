@@ -114,7 +114,6 @@ export default function BreadcrumbComponentPage() {
           experience, we need to backtrack the parent segments and automatically
           expand the nested tree nodes so the current active page is visible.
         </p>
-        <BacktrackingPreviewComponent />
         <p className="text">
           The backtracking logic works by parsing the selected node ID from the
           query state (e.g.,{' '}
@@ -131,8 +130,45 @@ export default function BreadcrumbComponentPage() {
           expanded automatically, making the active page visible without
           requiring manual expansion.
         </p>
-        <p className="text"></p>
-        <p className="text"></p>
+        <p className="text">
+          The auto-expand functionality in{' '}
+          <code>DashboardSidebarComponent</code> works by computing required
+          expanded nodes from the query state and merging them with manual user
+          interactions. First, the component calculates which nodes must be
+          expanded based on the selected file node ID:
+        </p>
+        <pre className="code-block">
+          <code>{`const requiredExpandedNodes = useMemo(
+  () => computeExpandedNodes(selectedFileNodeId),
+  [selectedFileNodeId],
+);`}</code>
+        </pre>
+        <p className="text">
+          These required nodes are then merged with manually expanded nodes,
+          while respecting user preferences for collapsed nodes:
+        </p>
+        <pre className="code-block">
+          <code>{`const expandedNodes = useMemo(() => {
+  const merged = new Set<string>();
+  // Add all required nodes (from query state) except manually collapsed ones
+  requiredExpandedNodes.forEach((nodeId) => {
+    if (!manuallyCollapsedNodes.has(nodeId)) {
+      merged.add(nodeId);
+    }
+  });
+  // Add all manually expanded nodes
+  manuallyExpandedNodes.forEach((nodeId) => merged.add(nodeId));
+  return merged;
+}, [requiredExpandedNodes, manuallyExpandedNodes, manuallyCollapsedNodes]);`}</code>
+        </pre>
+        <BacktrackingPreviewComponent />
+        <p className="text">
+          This approach ensures that when a page loads with a selected node ID
+          in the query state, all parent nodes automatically expand to reveal
+          the active page. However, if a user manually collapses a required
+          node, that preference is remembered and prevents auto-expansion until
+          the user expands it again or the selected node changes.
+        </p>
       </div>
     </InternalPostContainer>
   );
