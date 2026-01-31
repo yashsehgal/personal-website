@@ -630,14 +630,24 @@ function DashboardBreadcrumbComponent() {
           {lastSegment ? <p className="text-sm">{lastSegment.name}</p> : null}
         </>
       ) : (
-        segments?.map((segment) => {
+        segments?.map((segment, index) => {
+          const isLastSegment = index === (segments?.length ?? 0) - 1;
           return (
             <div key={segment.id} className="flex items-center gap-2">
               <IconChevronRight
                 size={DASHBOARD_SIDEBAR_TREE_NODE_ICON}
                 className="shrink-0"
               />
-              <p className="text-sm">{segment.name}</p>
+              {isLastSegment ? (
+                <p className="text-sm">{segment.name}</p>
+              ) : (
+                <button
+                  type="button"
+                  className="text-sm hover:underline cursor-pointer text-left"
+                  onClick={() => setSelectedFileNodeId(segment.id)}>
+                  {segment.name}
+                </button>
+              )}
             </div>
           );
         })
