@@ -70,7 +70,7 @@ export default function AboutPage() {
           </LinkButton>
         </p>
         {/* DESKTOP VIEW SOCIAL LINKS */}
-        <div className="space-y-4 max-xl:hidden">
+        <div className="space-y-4 max-xl:hidden mt-24">
           <p className="text-foreground font-medium text-2xl w-4/5 leading-9 max-lg:text-lg max-md:text-base max-lg:leading-8 max-md:leading-6 inline-flex items-center gap-1">
             To find me on socials, I share about my work{' '}
             <LinkButton
