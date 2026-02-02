@@ -40,6 +40,7 @@ export default function AboutPage() {
           alt="Profile image"
           width={600}
           height={600}
+          priority
           className="size-42 object-cover object-center ml-1.5 pointer-events-none cursor-default select-none"
         />
       </motion.div>
