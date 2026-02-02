@@ -3,7 +3,7 @@ import { ART_ITEMS } from '@/constants/art-items';
 
 export default function ArtPage() {
   return (
-    <div className="art-page space-y-16 pt-24 max-lg:pt-0">
+    <div className="art-page space-y-16 pt-32 max-lg:pt-0">
       <h1 className="text-xl font-semibold ml-1.5">Art work</h1>
       <div className="art-list-container grid grid-cols-2 items-start gap-12 w-5/6 max-xl:w-full max-xl:grid-cols-1">
         {ART_ITEMS.map((art, index) => {
