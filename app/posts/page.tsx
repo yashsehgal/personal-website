@@ -5,7 +5,7 @@ import { POST_ITEMS } from '@/constants/post-items';
 
 export default function PostsPage() {
   return (
-    <div className="post-page space-y-16 pt-16 max-lg:pt-0">
+    <div className="post-page space-y-16 pt-24 max-lg:pt-0">
       <h1 className="text-xl font-semibold ml-1.5">
         Collection of my posts, designs and threads
       </h1>
