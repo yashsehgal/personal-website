@@ -49,7 +49,7 @@ export function OpenForWorkWidget() {
             <span>Write me a mail</span>
           </Link>
         </div>
-        <div className="p-6 flex items-center justify-between gap-3 max-lg:justify-start bg-foreground/2">
+        <div className="p-6 flex items-center justify-between gap-3 max-lg:justify-start bg-foreground/2 max-lg:hidden">
           <div className="flex items-center justify-start gap-3">
             <Link
               href={SOCIALS.X}

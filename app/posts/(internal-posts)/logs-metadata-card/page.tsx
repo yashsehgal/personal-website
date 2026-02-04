@@ -58,8 +58,11 @@ const COPIED_TO_CLIPBOARD_MESSAGE_DURATION_MS: number = 1200 as const;
 export default function LogsPage() {
   return (
     <InternalPostContainer>
-      <ComponentPreviewContainer className="h-fit py-16 flex items-center justify-center flex-col gap-12 select-none">
+      <ComponentPreviewContainer className="h-fit py-16 flex items-center justify-center flex-col gap-12 select-none max-lg:hidden">
         <LogsCardComponent />
+      </ComponentPreviewContainer>
+      <ComponentPreviewContainer className="lg:hidden p-4 text-center">
+        Use desktop to use component preview
       </ComponentPreviewContainer>
     </InternalPostContainer>
   );
@@ -67,7 +70,7 @@ export default function LogsPage() {
 
 function LogsCardComponent() {
   return (
-    <div className="shadow-2xs border border-foreground/10 rounded-2xl w-fit h-fit bg-foreground/5 overflow-hidden max-md:scale-90">
+    <div className="shadow-2xs border border-foreground/10 rounded-2xl w-fit h-fit bg-foreground/5 overflow-hidden">
       <div className="px-5 py-2">
         <p className="text-secondary text-sm font-medium flex items-center gap-3">
           <IconTrendingUp size={16} />
