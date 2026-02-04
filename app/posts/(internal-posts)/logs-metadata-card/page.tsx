@@ -7,6 +7,7 @@ import {
   IconTrendingUp,
 } from '@tabler/icons-react';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import { ReactNode, useState } from 'react';
 
 interface LogsItem {
@@ -26,18 +27,50 @@ const LOGS: LogsItem[] = [
     value: 'Marketing Assets',
     copyValue: 'Marketing Assets',
   },
-  { title: 'Created By', value: 'Yash Sehgal', copyValue: 'Yash Sehgal' },
+  {
+    title: 'Created By',
+    value: (
+      <span className="flex items-center gap-1.5">
+        <Image
+          src="https://github.com/yashsehgal.png"
+          alt="Yash Sehgal"
+          width={120}
+          height={120}
+          className="rounded-full size-4 object-cover shrink-0"
+          priority
+        />
+        <span>Yash Sehgal</span>
+      </span>
+    ),
+    copyValue: 'Yash Sehgal',
+  },
   {
     title: 'Created At',
     value: '2026-02-04 10:00:00',
     copyValue: '2026-02-04 10:00:00',
   },
   {
+    title: 'Last Modified By',
+    value: (
+      <span className="flex items-center gap-1.5">
+        <Image
+          src="https://github.com/yashsehgal.png"
+          alt="Yash Sehgal"
+          width={120}
+          height={120}
+          className="rounded-full size-4 object-cover shrink-0"
+          priority
+        />
+        <span>Yash Sehgal</span>
+      </span>
+    ),
+    copyValue: 'Yash Sehgal',
+  },
+  {
     title: 'Last Modified',
     value: '2026-02-04 10:00:00',
     copyValue: '2026-02-04 10:00:00',
   },
-  { title: 'Last Modified By', value: 'Yash Sehgal', copyValue: 'Yash Sehgal' },
   {
     title: 'Status',
     value: (
