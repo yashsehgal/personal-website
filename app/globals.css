@@ -223,3 +223,7 @@ pre.code-block code {
 pre {
   @apply border border-foreground/10 rounded-xl shadow-2xs;
 }
+
+html::-webkit-scrollbar {
+  width: 0px;
+}

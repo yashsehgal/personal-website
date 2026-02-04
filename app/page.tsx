@@ -1,5 +1,4 @@
 import { ROUTES } from '@/common/route';
-import { Button } from '@/components/button';
 import { LinkButton } from '@/components/link-button';
 import { POST_ITEMS, PostItem } from '@/constants/post-items';
 import { WORK_ITEMS, WorkItem } from '@/constants/work-items';
@@ -25,7 +24,22 @@ export default function Page() {
 
   return (
     <div className="home-page space-y-16">
-      <h1 className="text-2xl font-semibold ml-1.5">Hi, I am Yash</h1>
+      <h1 className="text-2xl font-semibold tracking-tight ml-1.5">
+        Hi, I am Yash
+      </h1>
+      <div className="flex flex-col items-start gap-8 ml-1.5">
+        <p className="text-foreground text-base w-4/5 leading-7 max-lg:w-full">
+          I am design engineer based out of India. My recent work experience
+          includes designing dashboards, workflow builders, improving user
+          experiences of different AI agent tools, and implementing design
+          systems.
+        </p>
+        <p className="text-foreground text-base w-4/5 leading-7 max-lg:w-full">
+          I focus on accessible, usable experiences, with a balanced layout,
+          clear typography, and micro-interactions. I build UI with TypeScript
+          and React and handle animations with framer-motion.
+        </p>
+      </div>
       <div className="grid grid-cols-2 items-start justify-start w-fit gap-24 max-lg:flex max-lg:flex-col max-xl:gap-12">
         <div className="post-container w-72 flex flex-col items-start gap-12">
           <LinkButton size="lg" href={ROUTES.POSTS}>
