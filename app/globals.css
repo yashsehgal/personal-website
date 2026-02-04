@@ -225,5 +225,6 @@ pre {
 }
 
 html::-webkit-scrollbar {
-  width: 0px;
+  display: none;
+  scroll-behavior: smooth;
 }
