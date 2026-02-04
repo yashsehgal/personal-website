@@ -1,5 +1,4 @@
 import { ROUTES } from '@/common/route';
-import { Button } from '@/components/button';
 import { LinkButton } from '@/components/link-button';
 import { POST_ITEMS, PostItem } from '@/constants/post-items';
 import { WORK_ITEMS, WorkItem } from '@/constants/work-items';

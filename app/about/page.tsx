@@ -9,7 +9,7 @@ const PROFILE_IMAGE_URL: string = '/yash.jpg' as const;
 
 export default function AboutPage() {
   return (
-    <div className="about-page space-y-16 pt-8 max-lg:pt-0">
+    <div className="about-page space-y-16">
       <h1 className="text-xl font-semibold ml-1.5">Hi,</h1>
       <div className="size-42">
         <motion.div
