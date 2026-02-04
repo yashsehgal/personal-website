@@ -28,13 +28,13 @@ export default function Page() {
         Hi, I am Yash
       </h1>
       <div className="flex flex-col items-start gap-8 ml-1.5">
-        <p className="text-foreground text-base w-4/5 leading-7 max-lg:w-full">
+        <p className="text-secondary text-base w-4/5 leading-7 max-lg:w-full">
           I am design engineer based out of India. My recent work experience
           includes designing dashboards, workflow builders, improving user
           experiences of different AI agent tools, and implementing design
           systems.
         </p>
-        <p className="text-foreground text-base w-4/5 leading-7 max-lg:w-full">
+        <p className="text-secondary text-base w-4/5 leading-7 max-lg:w-full">
           I focus on accessible, usable experiences, with a balanced layout,
           clear typography, and micro-interactions. I build UI with TypeScript
           and React and handle animations with framer-motion.
