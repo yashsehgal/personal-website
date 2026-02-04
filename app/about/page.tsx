@@ -3,22 +3,9 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { LinkButton } from '@/components/link-button';
 import { ROUTES } from '@/common/route';
-import {
-  IconBrandGithub,
-  IconBrandX,
-  IconMail,
-  IconMusic,
-} from '@tabler/icons-react';
+import { IconMusic } from '@tabler/icons-react';
 
 const PROFILE_IMAGE_URL: string = '/yash.jpg' as const;
-
-const SOCIAL_LINKS = {
-  X: 'https://x.com/yashsehgaldev',
-  GITHUB: 'https://github.com/yashsehgal',
-  LINKEDIN: 'https://www.linkedin.com/in/sehgalyash/',
-  INSTAGRAM: 'https://www.instagram.com/sehgalyash_/',
-  EMAIL: 'mailto:yashsehgal.work@gmail.com',
-} as const;
 
 export default function AboutPage() {
   return (
