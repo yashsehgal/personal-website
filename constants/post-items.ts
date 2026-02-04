@@ -21,7 +21,7 @@ export const POST_ITEMS: PostItem[] = [
       getInternalPostData(ROUTES.INTERNAL_POST_BREADCRUMB_COMPONENT)?.title ??
       '',
     description:
-      'Dashboard navigation with the URL: sidebar and breadcrumb stay in sync using query params (nuqs), links open to the right place, and the tree auto-expands so the current page shows on load or refresh.',
+      'Sidebar and breadcrumb navigation sync using query params; tree auto-expands for the current page.',
     link: ROUTES.INTERNAL_POST_BREADCRUMB_COMPONENT,
     isInternal: true,
   },
