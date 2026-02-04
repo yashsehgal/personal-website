@@ -1,6 +1,7 @@
 'use client';
 import { ApplicationRoute, ROUTES } from '@/common/route';
 import { LinkButton } from '@/components/link-button';
+import { OpenForWorkWidget } from '@/components/sections/open-for-work-widget';
 import { getInternalPostData } from '@/constants/interal-posts';
 import { cn } from '@/helpers/cn';
 import { IconArrowLeft } from '@tabler/icons-react';
@@ -38,6 +39,7 @@ export function InternalPostContainer({
       <main className="internal-post-container-main-content [&_.text]:leading-7 [&_h2]:font-medium space-y-24">
         {children}
       </main>
+      <OpenForWorkWidget />
     </div>
   );
 }
