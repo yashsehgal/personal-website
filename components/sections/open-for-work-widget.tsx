@@ -25,7 +25,7 @@ export function OpenForWorkWidget() {
   return (
     <div className="open-for-work-widget space-y-12 flex flex-col items-center justify-center mt-24 w-full">
       <div className="w-56 h-px bg-foreground/10" />
-      <div className="bg-background w-full divide-y border border-foreground/10 rounded-2xl overflow-hidden">
+      <div className="bg-background w-full divide-y divide-foreground/10 border border-foreground/10 rounded-2xl overflow-hidden">
         <div className="p-6 flex items-center justify-between gap-4 max-lg:flex-col max-lg:items-start">
           <div className="space-y-1">
             <div className="flex items-center justify-start gap-2.5">
