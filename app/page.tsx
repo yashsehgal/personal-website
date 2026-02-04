@@ -24,7 +24,7 @@ export default function Page() {
 
   return (
     <div className="home-page space-y-16">
-      <h1 className="text-2xl font-semibold tracking-tight ml-1.5">
+      <h1 className="text-xl font-semibold tracking-tight ml-1.5">
         Hi, I am Yash
       </h1>
       <div className="flex flex-col items-start gap-8 ml-1.5">
