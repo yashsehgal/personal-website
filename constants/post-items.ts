@@ -10,6 +10,13 @@ export interface PostItem {
 
 export const POST_ITEMS: PostItem[] = [
   {
+    title: getInternalPostData(ROUTES.INTERNAL_POST_LOGS)?.title ?? '',
+    description:
+      'A card component to show project activity with a metadata card',
+    link: ROUTES.INTERNAL_POST_LOGS,
+    isInternal: true,
+  },
+  {
     title:
       getInternalPostData(ROUTES.INTERNAL_POST_BREADCRUMB_COMPONENT)?.title ??
       '',

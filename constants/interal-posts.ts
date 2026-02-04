@@ -9,6 +9,10 @@ export const INTERNAL_POSTS: { route: ApplicationRoute; title: string }[] = [
     route: ROUTES.INTERNAL_POST_BREADCRUMB_COMPONENT,
     title: 'Navigation using query states',
   },
+  {
+    route: ROUTES.INTERNAL_POST_LOGS,
+    title: 'Logs metadata card',
+  },
 ] as const;
 
 export const getInternalPostData = (pathname: ApplicationRoute) => {
