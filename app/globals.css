@@ -228,3 +228,7 @@ html::-webkit-scrollbar {
   display: none;
   scroll-behavior: smooth;
 }
+
+body::selection {
+  @apply bg-foreground text-background;
+}
