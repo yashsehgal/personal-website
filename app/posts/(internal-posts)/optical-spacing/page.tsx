@@ -59,18 +59,18 @@ export default function SpacingAndOpticalAlignmentPage() {
           there is some extra leading space coming from headings and paragraph
           texts, that will be included in the total optical spacing as well.
         </p>
-        <ComponentPreviewContainer className="p-12 space-y-12 bg-white">
+        <ComponentPreviewContainer className="p-12 space-y-12 bg-white dark:bg-black">
           <Image
             src="/optical-spacing-with-leading-example.svg"
             alt="total-optical-spacing"
-            className="w-full"
+            className="w-full dark:invert"
             width={400}
             height={300}
           />
           <Image
             src="/optical-spacing-with-leading-calculation.svg"
             alt="total-optical-spacing"
-            className="w-full"
+            className="w-full dark:invert"
             width={400}
             height={300}
           />
