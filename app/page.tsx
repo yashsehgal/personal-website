@@ -56,7 +56,7 @@ export default function Page() {
           </Link>
         </div>
       </header>
-      <div className="space-y-4 w-2/5 max-xl:w-3/5 max-lg:w-full text-base text-foreground leading-7 max-md:text-wrap">
+      <div className="space-y-4 w-2/5 max-xl:w-3/5 max-lg:w-full text-base text-secondary leading-7 max-md:text-wrap">
         <p>
           I am a design engineer based out of India, who loves to create
           clean-looking and accessible interfaces. I use TypeScript and React to
@@ -76,29 +76,23 @@ export default function Page() {
           engineer.
         </p>
         <p>
-          I worked at{' '}
+          Before that, I worked at{' '}
           <Link
             href="https://rocketium.ai/"
             target="_blank"
             className="underline underline-offset-2">
             Rocketium
           </Link>{' '}
-          as a design engineer, where I worked on the dashboard user experience
-          for a creative automation platform. I implemented components like
-          dynamic islands, widgets and tools for the in-built AI chat assistant.
-          Along with this, I built the internal design system and design
-          guidelines.
-        </p>
-        <p>
-          Before that, I worked at{' '}
+          as a design engineer on dashboard UX and AI chat components for a
+          creative automation platform, and built their internal design system.
+          Earlier, I was a frontend engineer at{' '}
           <Link
             href="https://github.com/home"
             target="_blank"
             className="underline underline-offset-2">
             GitHub
           </Link>{' '}
-          as a frontend engineer, where I worked on several internal projects
-          with some landing page designs for marketing.
+          on internal projects and marketing landing pages.
         </p>
       </div>
       <div className="flex gap-4 items-center">
