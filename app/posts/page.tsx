@@ -7,12 +7,12 @@ export default function PostsPage() {
   return (
     <div className="post-page space-y-8">
       <div className="grid grid-cols-1 divide-y divide-foreground/10 items-center justify-start border border-foreground/10 rounded-md">
-        <div className="py-2 px-4 flex items-center justify-between w-full bg-foreground/2 select-none cursor-default">
-          <p className="text-base text-foreground">
+        <div className="px-4 flex items-center justify-between w-full select-none cursor-default max-lg:py-2">
+          <p className="text-base text-foreground py-2 max-lg:py-0">
             <span className="max-lg:hidden">Post</span>
             <span className="lg:hidden">All posts</span>
           </p>
-          <p className="text-foreground w-3/5 text-wrap max-lg:hidden">
+          <p className="text-foreground w-3/5 text-wrap max-lg:hidden border-l border-foreground/10 pl-4 py-2 max-lg:border-none max-lg:p-0">
             Description
           </p>
         </div>
@@ -22,12 +22,12 @@ export default function PostsPage() {
               href={post.link}
               key={index}
               target={post.isInternal ? undefined : '_blank'}
-              className="last:rounded-b-lg overflow-hidden">
-              <div className="py-2 px-4 flex items-start justify-between w-full group/post-item hover:bg-foreground/5 max-lg:flex-col max-lg:gap-2 max-lg:p-4">
-                <p className="text-base font-medium text-foreground group-hover/post-item:text-foreground">
+              className="last:rounded-b-md overflow-hidden">
+              <div className="px-4 flex items-stretch justify-between w-full group/post-item hover:bg-foreground/5 max-lg:flex-col max-lg:gap-2 max-lg:p-4">
+                <p className="text-base font-medium text-foreground group-hover/post-item:text-foreground py-2 max-lg:p-0">
                   {post.title}
                 </p>
-                <p className="text-secondary w-3/5 text-wrap max-lg:w-full">
+                <p className="text-secondary w-3/5 text-wrap max-lg:w-full border-l border-foreground/10 pl-4 py-2 max-lg:border-none max-lg:p-0">
                   {post.description}
                 </p>
               </div>

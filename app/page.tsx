@@ -20,7 +20,7 @@ export default function Page() {
 
   return (
     <div className="home-page space-y-8">
-      <div className="space-y-4 w-2/5 max-xl:w-3/5 max-lg:w-full text-base text-secondary leading-7 max-md:text-wrap">
+      <div className="space-y-4 w-2/5 max-xl:w-3/5 max-lg:w-full text-base text-secondary leading-7 max-md:text-wrap font-medium">
         <p>
           I am a design engineer based out of India, who loves to create
           clean-looking and accessible interfaces. I use TypeScript and React to
@@ -31,7 +31,7 @@ export default function Page() {
           <Link
             href="https://stack.ai/"
             target="_blank"
-            className="underline underline-offset-2">
+            className="underline underline-offset-2 hover:text-foreground">
             StackAI
           </Link>
           , where I worked on the platform dashboard and the workflow builder.
@@ -44,7 +44,7 @@ export default function Page() {
           <Link
             href="https://rocketium.ai/"
             target="_blank"
-            className="underline underline-offset-2">
+            className="underline underline-offset-2 hover:text-foreground">
             Rocketium
           </Link>{' '}
           as a design engineer on dashboard UX and AI chat components for a
@@ -53,7 +53,7 @@ export default function Page() {
           <Link
             href="https://github.com/home"
             target="_blank"
-            className="underline underline-offset-2">
+            className="underline underline-offset-2 hover:text-foreground">
             GitHub
           </Link>{' '}
           on internal projects and marketing landing pages.

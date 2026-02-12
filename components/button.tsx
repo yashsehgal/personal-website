@@ -18,7 +18,7 @@ export function Button({
   return (
     <button
       className={cn(
-        'button cursor-pointer flex items-center',
+        'button cursor-pointer flex items-center select-none',
         variant === 'default' && 'text-foreground hover:bg-foreground/10',
         variant === 'outline' &&
           'text-foreground border border-foreground/10 hover:bg-foreground/5',
