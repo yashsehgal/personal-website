@@ -41,21 +41,6 @@ export default function Page() {
 
   return (
     <div className="home-page space-y-8">
-      <header className="flex items-center gap-4 justify-start">
-        <h1 className="text-base font-semibold">Yash Sehgal</h1>
-        <div className="flex items-center gap-2">
-          <Link
-            href={ROUTES.POSTS}
-            className="text-secondary hover:text-foreground">
-            Posts
-          </Link>
-          <Link
-            href={ROUTES.ABOUT}
-            className="text-secondary hover:text-foreground">
-            About
-          </Link>
-        </div>
-      </header>
       <div className="space-y-4 w-2/5 max-xl:w-3/5 max-lg:w-full text-base text-secondary leading-7 max-md:text-wrap">
         <p>
           I am a design engineer based out of India, who loves to create

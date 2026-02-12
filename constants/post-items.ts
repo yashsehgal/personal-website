@@ -74,6 +74,24 @@ export const POST_ITEMS: PostItem[] = [
     link: 'https://x.com/yashsehgaldev/status/1976250373339021719',
   },
   {
+    title: 'Cookies',
+    description:
+      'Built a small collection of cookies as in components including base components like Buttons, Toasts and pre-designed examples like Empty States, Cards and etc.',
+    link: 'https://github.com/with-tw/cookies',
+  },
+  {
+    title: 'useGitHub()',
+    description:
+      'React hook for fetching activities and information via GitHub API',
+    link: 'https://github.com/yashsehgal/use-github-react',
+  },
+  {
+    title: 'Background score: Kingdom Introduction',
+    description:
+      'Epic themed score. Instruments used: String Ensemble, French Horns, Trombones, Harp, Taiko Drums',
+    link: 'https://x.com/yashsehgaldev/status/2013026621897523684',
+  },
+  {
     title: 'Book recommendations',
     description: 'List of books I read in the year 2025 in various genres',
     link: 'https://x.com/yashsehgaldev/status/2006262558446285044',
