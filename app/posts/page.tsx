@@ -9,7 +9,7 @@ export default function PostsPage() {
       <div className="grid grid-cols-1 divide-y divide-foreground/10 items-center justify-start border border-foreground/10 rounded-md">
         <div className="py-2 px-4 flex items-center justify-between w-full bg-foreground/2 select-none cursor-default">
           <p className="text-base text-foreground">
-            <span className="max-lg:hidden">Title</span>
+            <span className="max-lg:hidden">Post</span>
             <span className="lg:hidden">All posts</span>
           </p>
           <p className="text-foreground w-3/5 text-wrap max-lg:hidden">
