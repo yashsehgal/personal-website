@@ -31,7 +31,7 @@ export function MainLayout({ className, children, ...props }: MainLayoutProps) {
             className,
           )}
           {...props}>
-          {shouldShowNavigation && <MainLayoutNavigation />}
+          {/* {shouldShowNavigation && <MainLayoutNavigation />} */}
           <div className="main-layout-children-container flex-1">
             {children}
           </div>

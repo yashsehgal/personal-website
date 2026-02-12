@@ -1,13 +1,22 @@
+'use client';
 import { ROUTES } from '@/common/route';
+import { Button } from '@/components/button';
 import { LinkButton } from '@/components/link-button';
 import { POST_ITEMS, PostItem } from '@/constants/post-items';
 import { WORK_ITEMS, WorkItem } from '@/constants/work-items';
-import { IconArrowRight } from '@tabler/icons-react';
+import { IconCheck } from '@tabler/icons-react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useState } from 'react';
 
 const MAX_POST_ITEMS_TO_SHOW: number = 4 as const;
 const MAX_WORK_ITEMS_TO_SHOW: number = 3 as const;
+const EMAIL_ADDRESS: string = 'yashsehgal@gmail.com' as const;
 
 export default function Page() {
+  const [isEmailAddressCopied, setIsEmailAddressCopied] =
+    useState<boolean>(false);
+
   const slicedPostItems: PostItem[] = POST_ITEMS.slice(
     0,
     MAX_POST_ITEMS_TO_SHOW,
@@ -22,83 +31,94 @@ export default function Page() {
   const showMoreWorkItems: boolean = WORK_ITEMS.length > MAX_WORK_ITEMS_TO_SHOW;
   const remainingWorkItems: number = WORK_ITEMS.length - slicedWorkItems.length;
 
+  const handleCopyEmailAddress = () => {
+    navigator.clipboard.writeText(EMAIL_ADDRESS);
+    setIsEmailAddressCopied(true);
+    setTimeout(() => {
+      setIsEmailAddressCopied(false);
+    }, 2000);
+  };
+
   return (
-    <div className="home-page space-y-16">
-      <h1 className="text-xl font-semibold tracking-tight ml-1.5">
-        Hi, I am Yash
-      </h1>
-      <div className="flex flex-col items-start gap-8 ml-1.5">
-        <p className="text-secondary text-lg w-4/5 leading-7 max-lg:w-full">
-          I am design engineer based out of India. My recent work experience
-          includes designing dashboards, workflow builders, improving user
-          experiences of different AI agent tools, and implementing design
-          systems.
+    <div className="home-page space-y-8">
+      <header className="flex items-center gap-4 justify-start">
+        <h1 className="text-base font-semibold">Yash Sehgal</h1>
+        <div className="flex items-center gap-2">
+          <Link
+            href={ROUTES.POSTS}
+            className="text-secondary hover:text-foreground">
+            Posts
+          </Link>
+          <Link
+            href={ROUTES.ABOUT}
+            className="text-secondary hover:text-foreground">
+            About
+          </Link>
+        </div>
+      </header>
+      <div className="space-y-4 w-2/5 max-xl:w-3/5 max-lg:w-full text-base text-foreground leading-7 max-md:text-wrap">
+        <p>
+          I am a design engineer based out of India, who loves to create
+          clean-looking and accessible interfaces. I use TypeScript and React to
+          build UI and handle animations with Framer Motion.
         </p>
-        <p className="text-secondary text-lg w-4/5 leading-7 max-lg:w-full">
-          I focus on accessible, usable experiences, with a balanced layout,
-          clear typography, and micro-interactions. I build UI with TypeScript
-          and React and handle animations with framer-motion.
+        <p>
+          Me recent work experience was at{' '}
+          <Link
+            href="https://stack.ai/"
+            target="_blank"
+            className="underline underline-offset-2">
+            StackAI
+          </Link>
+          , where I worked on the platform dashboard and the workflow builder.
+          My focus was to improve the user experience and add a bunch of
+          quality-of-life features. I joined the team as a founding design
+          engineer.
+        </p>
+        <p>
+          I worked at{' '}
+          <Link
+            href="https://rocketium.ai/"
+            target="_blank"
+            className="underline underline-offset-2">
+            Rocketium
+          </Link>{' '}
+          as a design engineer, where I worked on the dashboard user experience
+          for a creative automation platform. I implemented components like
+          dynamic islands, widgets and tools for the in-built AI chat assistant.
+          Along with this, I built the internal design system and design
+          guidelines.
+        </p>
+        <p>
+          Before that, I worked at{' '}
+          <Link
+            href="https://github.com/home"
+            target="_blank"
+            className="underline underline-offset-2">
+            GitHub
+          </Link>{' '}
+          as a frontend engineer, where I worked on several internal projects
+          with some landing page designs for marketing.
         </p>
       </div>
-      <div className="grid grid-cols-2 items-start justify-start w-fit gap-24 max-lg:flex max-lg:flex-col max-xl:gap-12">
-        <div className="post-container w-72 flex flex-col items-start gap-12">
-          <LinkButton size="lg" href={ROUTES.POSTS}>
-            Posts
-          </LinkButton>
-          <div className="post-list-container gap-8 flex items-start flex-col">
-            {slicedPostItems.map((post, index) => {
-              return (
-                <div key={index} className="flex flex-col items-start gap-1">
-                  <LinkButton
-                    href={post.link}
-                    target={post.isInternal ? undefined : '_blank'}>
-                    {post.title}
-                  </LinkButton>
-                  <p className="font-medium text-secondary ml-1.5">
-                    {post.description}
-                  </p>
-                </div>
-              );
-            })}
-            {showMorePostItems && (
-              <LinkButton href={ROUTES.POSTS} className="text-secondary">
-                <span>
-                  Show {remainingPostItems} more{' '}
-                  {remainingPostItems > 1 ? 'posts' : 'post'}
-                </span>
-                <IconArrowRight size={16} />
-              </LinkButton>
-            )}
-          </div>
-        </div>
-        <div className="work-and-projects--container w-72 flex flex-col items-start gap-12">
-          <LinkButton size="lg" href={ROUTES.WORK}>
-            Work and projects
-          </LinkButton>
-          <div className="work-and-projects-list-container gap-8 flex items-start flex-col">
-            {slicedWorkItems.map((work, index) => {
-              return (
-                <div key={index} className="flex flex-col items-start gap-1">
-                  <LinkButton href={work.link} target="_blank">
-                    {work.title}
-                  </LinkButton>
-                  <p className="font-medium text-secondary ml-1.5">
-                    {work.description}
-                  </p>
-                </div>
-              );
-            })}
-            {showMoreWorkItems && (
-              <LinkButton href={ROUTES.WORK} className="text-secondary">
-                <span>
-                  Show {remainingWorkItems} more{' '}
-                  {remainingWorkItems > 1 ? 'experiences' : 'experience'}
-                </span>
-                <IconArrowRight size={16} />
-              </LinkButton>
-            )}
-          </div>
-        </div>
+      <div className="flex gap-4 items-center">
+        <LinkButton
+          variant="solid"
+          href="mailto:yashsehgal@gmail.com"
+          target="_blank">
+          Write me an email
+        </LinkButton>
+        <Button
+          variant="outline"
+          onClick={handleCopyEmailAddress}
+          className="gap-2">
+          {isEmailAddressCopied ? (
+            <IconCheck size={16} className="shrink-0" />
+          ) : null}
+          {isEmailAddressCopied
+            ? 'Email address copied'
+            : 'Copy my email address'}
+        </Button>
       </div>
     </div>
   );
