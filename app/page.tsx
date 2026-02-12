@@ -1,35 +1,14 @@
 'use client';
-import { ROUTES } from '@/common/route';
 import { Button } from '@/components/button';
 import { LinkButton } from '@/components/link-button';
-import { POST_ITEMS, PostItem } from '@/constants/post-items';
-import { WORK_ITEMS, WorkItem } from '@/constants/work-items';
 import { IconCheck } from '@tabler/icons-react';
-import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
-
-const MAX_POST_ITEMS_TO_SHOW: number = 4 as const;
-const MAX_WORK_ITEMS_TO_SHOW: number = 3 as const;
 const EMAIL_ADDRESS: string = 'yashsehgal@gmail.com' as const;
 
 export default function Page() {
   const [isEmailAddressCopied, setIsEmailAddressCopied] =
     useState<boolean>(false);
-
-  const slicedPostItems: PostItem[] = POST_ITEMS.slice(
-    0,
-    MAX_POST_ITEMS_TO_SHOW,
-  );
-  const showMorePostItems: boolean = POST_ITEMS.length > MAX_POST_ITEMS_TO_SHOW;
-  const remainingPostItems: number = POST_ITEMS.length - slicedPostItems.length;
-
-  const slicedWorkItems: WorkItem[] = WORK_ITEMS.slice(
-    0,
-    MAX_WORK_ITEMS_TO_SHOW,
-  );
-  const showMoreWorkItems: boolean = WORK_ITEMS.length > MAX_WORK_ITEMS_TO_SHOW;
-  const remainingWorkItems: number = WORK_ITEMS.length - slicedWorkItems.length;
 
   const handleCopyEmailAddress = () => {
     navigator.clipboard.writeText(EMAIL_ADDRESS);
