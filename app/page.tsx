@@ -2,6 +2,7 @@
 
 import { POST_ITEMS } from '@/constants/post-items';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
 
 export default function Page() {
   return (
@@ -16,22 +17,33 @@ export default function Page() {
         <div className="grid grid-cols-1 divide-y divide-foreground/10">
           {POST_ITEMS.map((post, index) => {
             return (
-              <Link
-                href={post.link}
-                target={post.isInternal ? '_self' : '_blank'}
+              <motion.div
                 key={index}
-                className="block py-2 group/post-item">
-                <div className="flex items-center justify-between text-sm font-medium">
-                  <p className="text-foreground group-hover/post-item:text-foreground/50">
-                    {post.title}
-                  </p>
-                  <div>
-                    <p className="font-mono text-foreground/40 uppercase tracking-wide">
-                      {post.tag} / {post.year}
+                initial={{ opacity: 0, filter: 'blur(2px)' }}
+                animate={{ opacity: 1, filter: 'blur(0px)' }}
+                transition={{
+                  delay: 0.04 * (index + 1),
+                  type: 'spring',
+                  bounce: 0,
+                  duration: 0.5,
+                  ease: 'easeOut',
+                }}>
+                <Link
+                  href={post.link}
+                  target={post.isInternal ? '_self' : '_blank'}
+                  className="block py-2 group/post-item">
+                  <div className="flex items-center justify-between text-sm font-medium">
+                    <p className="text-foreground group-hover/post-item:text-foreground/50">
+                      {post.title}
                     </p>
+                    <div>
+                      <p className="font-mono text-foreground/40 uppercase tracking-wide">
+                        {post.tag} / {post.year}
+                      </p>
+                    </div>
                   </div>
-                </div>
-              </Link>
+                </Link>
+              </motion.div>
             );
           })}
         </div>
