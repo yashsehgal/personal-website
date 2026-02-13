@@ -8,12 +8,12 @@ export default function Page() {
   return (
     <div className="home-page space-y-16">
       <header className="flex items-center gap-4">
-        <h1 className="text-lg font-medium">I am Yash – Design Engineer</h1>
+        <h1 className="text-5xl font-medium w-2/3 text-balance leading-14 tracking-tighter font-mono max-lg:w-full max-md:text-3xl max-md:leading-10">
+          Hi, I am Yash. I help companies build clean and easy to use
+          interfaces.
+        </h1>
       </header>
       <main aria-description="Posts" className="space-y-8">
-        <div>
-          <h2 className="text-sm font-medium">Posts ({POST_ITEMS.length})</h2>
-        </div>
         <div className="grid grid-cols-1 divide-y divide-foreground/10">
           {POST_ITEMS.map((post, index) => {
             return (
