@@ -1,5 +1,5 @@
 'use client';
-import { ApplicationRoute, ROUTES } from '@/common/route';
+import { ROUTES } from '@/common/route';
 import { MainLayoutNavigation } from '@/components/sections/main-layout-navigation';
 import { cn } from '@/helpers/cn';
 import { usePathname } from 'next/navigation';
@@ -8,30 +8,22 @@ import { Suspense } from 'react';
 
 type MainLayoutProps = React.HTMLAttributes<HTMLDivElement>;
 
-const SHOW_NAVIGATION_ON_ROUTES: ApplicationRoute[] = [
-  ROUTES.HOME,
-  ROUTES.ABOUT,
-  ROUTES.ART,
-  ROUTES.WORK,
-  ROUTES.POSTS,
-] as const;
-
 export function MainLayout({ className, children, ...props }: MainLayoutProps) {
   const pathname = usePathname();
-  const shouldShowNavigation: boolean = SHOW_NAVIGATION_ON_ROUTES.includes(
-    pathname as unknown as ApplicationRoute,
-  );
+
+  const isInsidePost: boolean = pathname.includes(ROUTES.POSTS);
 
   return (
     <Suspense>
       <NuqsAdapter>
         <div
           className={cn(
-            'main-layout min-h-screen mx-auto max-w-7xl content-container p-12 max-lg:p-8 space-y-8',
+            'main-layout min-h-screen mx-auto max-w-7xl content-container px-12 py-8 max-lg:p-6 space-y-16',
+            isInsidePost && 'space-y-24',
             className,
           )}
           {...props}>
-          {shouldShowNavigation && <MainLayoutNavigation />}
+          <MainLayoutNavigation />
           <div className="main-layout-children-container flex-1">
             {children}
           </div>
