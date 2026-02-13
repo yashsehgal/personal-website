@@ -1,10 +1,7 @@
 'use client';
-import { ApplicationRoute, ROUTES } from '@/common/route';
-import { LinkButton } from '@/components/link-button';
-import { OpenForWorkWidget } from '@/components/sections/open-for-work-widget';
+import { ApplicationRoute } from '@/common/route';
 import { getInternalPostData } from '@/constants/interal-posts';
 import { cn } from '@/helpers/cn';
-import { IconArrowLeft } from '@tabler/icons-react';
 import { usePathname } from 'next/navigation';
 
 type InternalPostContainerProps = React.HTMLAttributes<HTMLDivElement>;
