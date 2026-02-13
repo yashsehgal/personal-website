@@ -40,21 +40,21 @@ export default function Page() {
           engineer.
         </p>
         <p>
-          Before that, design engineer at{' '}
+          Before that, I worked at{' '}
           <Link
             href="https://rocketium.ai/"
             target="_blank"
             className="underline underline-offset-2 hover:text-foreground">
             Rocketium
           </Link>{' '}
-          (dashboard UX, AI chat, design system) and frontend engineer at{' '}
+          as a design engineer and at{' '}
           <Link
             href="https://github.com/home"
             target="_blank"
             className="underline underline-offset-2 hover:text-foreground">
             GitHub
           </Link>{' '}
-          (internal projects, marketing pages).
+          as a frontend engineer.
         </p>
       </div>
       <div className="flex gap-4 items-center">
