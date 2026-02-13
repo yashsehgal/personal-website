@@ -20,7 +20,7 @@ export default function Page() {
 
   return (
     <div className="home-page space-y-8">
-      <div className="space-y-4 w-2/5 max-xl:w-3/5 max-lg:w-full text-base text-secondary leading-7 max-md:text-wrap font-medium">
+      <div className="space-y-4 w-2/5 max-xl:w-3/5 max-lg:w-full text-base text-secondary leading-7 max-md:text-wrap">
         {/* <p>
           I am a design engineer based out of India, who loves to create
           clean-looking and accessible interfaces. I use TypeScript and React to
