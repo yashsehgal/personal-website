@@ -1,6 +1,8 @@
 'use client';
 import { Button } from '@/components/button';
 import { LinkButton } from '@/components/link-button';
+import { POST_ITEMS } from '@/constants/post-items';
+import { SOCIALS } from '@/constants/socials';
 import { IconCheck } from '@tabler/icons-react';
 import Link from 'next/link';
 import { useState } from 'react';
@@ -57,6 +59,27 @@ export default function Page() {
           as a frontend engineer.
         </p>
       </div>
+      <div className="text-foreground/50 flex items-center justify-start gap-2">
+        <p>Social Platforms –</p>
+        <Link
+          href={SOCIALS.X}
+          className="hover:text-foreground"
+          target="_blank">
+          X
+        </Link>
+        <Link
+          href={SOCIALS.GITHUB}
+          className="hover:text-foreground"
+          target="_blank">
+          GitHub
+        </Link>
+        <Link
+          href={SOCIALS.LINKEDIN}
+          className="hover:text-foreground"
+          target="_blank">
+          LinkedIn
+        </Link>
+      </div>
       <div className="flex gap-4 items-center">
         <LinkButton
           variant="solid"
@@ -75,6 +98,24 @@ export default function Page() {
             ? 'Email address copied'
             : 'Copy my email address'}
         </Button>
+      </div>
+      <div className="grid grid-cols-1 divide-y divide-foreground/10 mt-24">
+        {POST_ITEMS.map((post, index) => {
+          return (
+            <Link
+              href={post.link}
+              key={index}
+              target={post.isInternal ? undefined : '_blank'}
+              className="last:rounded-b-md overflow-hidden">
+              <div className="flex items-center justify-between py-2 px-4 text-sm hover:text-secondary">
+                <p className="font-medium">{post.title}</p>
+                <div className="flex items-center justify-end gap-2 font-mono text-foreground/40 font-medium">
+                  <p className="uppercase">{post.tag}</p>
+                </div>
+              </div>
+            </Link>
+          );
+        })}
       </div>
     </div>
   );

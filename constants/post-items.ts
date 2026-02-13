@@ -1,11 +1,18 @@
 import { ROUTES } from '@/common/route';
 import { getInternalPostData } from '@/constants/interal-posts';
 
+enum POST_TAGS {
+  COMPONENT = 'COMPONENT',
+  ARTICLE = 'ARTICLE',
+  MUSIC = 'MUSIC',
+}
+
 export interface PostItem {
   title: string;
   description: string;
   link: string;
   isInternal?: boolean;
+  tag: POST_TAGS;
 }
 
 export const POST_ITEMS: PostItem[] = [
@@ -15,6 +22,7 @@ export const POST_ITEMS: PostItem[] = [
       'A card component to show project activity with a metadata card',
     link: ROUTES.INTERNAL_POST_LOGS,
     isInternal: true,
+    tag: POST_TAGS.COMPONENT,
   },
   {
     title:
@@ -24,6 +32,7 @@ export const POST_ITEMS: PostItem[] = [
       'Sidebar and breadcrumb navigation sync using query params; tree auto-expands for the current page.',
     link: ROUTES.INTERNAL_POST_BREADCRUMB_COMPONENT,
     isInternal: true,
+    tag: POST_TAGS.ARTICLE,
   },
   {
     title:
@@ -32,68 +41,81 @@ export const POST_ITEMS: PostItem[] = [
       'Has an example of a hero section to explain the guidelines for better consistent and optical spacing',
     link: ROUTES.INTERNAL_POST_OPTICAL_SPACING,
     isInternal: true,
+    tag: POST_TAGS.ARTICLE,
   },
   {
     title: 'Automation flow',
     description: 'Component design to show automated action logs',
     link: 'https://x.com/yashsehgaldev/status/1861593300823875738',
+    tag: POST_TAGS.COMPONENT,
   },
   {
     title: 'Integrations',
     description:
       'Modern popup design with framer motion for showing apps to integrate',
     link: 'https://x.com/yashsehgaldev/status/1878349925114949835',
+    tag: POST_TAGS.COMPONENT,
   },
   {
     title: 'Knowledge Base CTA',
     description:
       'A CTA card component to create a knowledge base with micro-interactions',
     link: 'https://x.com/yashsehgaldev/status/1872315527550669240',
+    tag: POST_TAGS.COMPONENT,
   },
   {
     title: 'Dynamic Island',
     description: 'Made an iOS-inspired dynamic island component',
     link: 'https://x.com/yashsehgaldev/status/1852582622528155984',
+    tag: POST_TAGS.COMPONENT,
   },
   {
     title: 'Calendar and event widgets',
     description:
       'Widget components for meeting cards and calendar with details',
     link: 'https://x.com/yashsehgaldev/status/1898621497528467803',
+    tag: POST_TAGS.COMPONENT,
   },
   {
     title: 'Floating call status component',
     description:
       'Concept component for a floating widget showing an active call status with actions',
     link: 'https://x.com/yashsehgaldev/status/1887402029338997040',
+    tag: POST_TAGS.COMPONENT,
   },
   {
     title: 'LLM Tools in StackAI',
     description:
       'Made this component to improve the LLM tool addition and creation UX when I was working at StackAI',
     link: 'https://x.com/yashsehgaldev/status/1976250373339021719',
+    tag: POST_TAGS.COMPONENT,
   },
+
   {
     title: 'Cookies',
     description:
       'Built a small collection of cookies as in components including base components like Buttons, Toasts and pre-designed examples like Empty States, Cards and etc.',
     link: 'https://github.com/with-tw/cookies',
+    tag: POST_TAGS.COMPONENT,
   },
   {
     title: 'useGitHub()',
     description:
       'React hook for fetching activities and information via GitHub API',
     link: 'https://github.com/yashsehgal/use-github-react',
+    tag: POST_TAGS.COMPONENT,
   },
   {
     title: 'Background score: Kingdom Introduction',
     description:
       'Epic themed score. Instruments used: String Ensemble, French Horns, Trombones, Harp, Taiko Drums',
     link: 'https://x.com/yashsehgaldev/status/2013026621897523684',
+    tag: POST_TAGS.MUSIC,
   },
   {
     title: 'Book recommendations',
     description: 'List of books I read in the year 2025 in various genres',
     link: 'https://x.com/yashsehgaldev/status/2006262558446285044',
+    tag: POST_TAGS.ARTICLE,
   },
 ] as const;
