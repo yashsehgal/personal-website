@@ -21,13 +21,13 @@ export default function Page() {
   return (
     <div className="home-page space-y-8">
       <div className="space-y-4 w-2/5 max-xl:w-3/5 max-lg:w-full text-base text-secondary leading-7 max-md:text-wrap font-medium">
-        <p>
+        {/* <p>
           I am a design engineer based out of India, who loves to create
           clean-looking and accessible interfaces. I use TypeScript and React to
           build UI and handle animations with Framer Motion.
-        </p>
+        </p> */}
         <p>
-          Me recent work experience was at{' '}
+          My recent work experience was at{' '}
           <Link
             href="https://stack.ai/"
             target="_blank"
@@ -40,23 +40,21 @@ export default function Page() {
           engineer.
         </p>
         <p>
-          Before that, I worked at{' '}
+          Before that, design engineer at{' '}
           <Link
             href="https://rocketium.ai/"
             target="_blank"
             className="underline underline-offset-2 hover:text-foreground">
             Rocketium
           </Link>{' '}
-          as a design engineer on dashboard UX and AI chat components for a
-          creative automation platform, and built their internal design system.
-          Earlier, I was a frontend engineer at{' '}
+          (dashboard UX, AI chat, design system) and frontend engineer at{' '}
           <Link
             href="https://github.com/home"
             target="_blank"
             className="underline underline-offset-2 hover:text-foreground">
             GitHub
           </Link>{' '}
-          on internal projects and marketing landing pages.
+          (internal projects, marketing pages).
         </p>
       </div>
       <div className="flex gap-4 items-center">
