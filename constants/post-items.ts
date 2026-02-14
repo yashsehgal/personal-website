@@ -135,4 +135,20 @@ export const POST_ITEMS: PostItem[] = [
     tag: POST_TAGS.COMPONENT,
     year: 2024,
   },
+  {
+    title: 'VSCode-like editor layout',
+    description:
+      'A VSCode-like editor layout with a sidebar and a main content area',
+    link: 'https://x.com/yashsehgaldev/status/1845536318211916102',
+    tag: POST_TAGS.ARTICLE,
+    year: 2024,
+  },
+  {
+    title: 'Query-based content selection using window.getSelection()',
+    description:
+      'A tool to select and copy content from a page based on a query',
+    link: 'https://x.com/yashsehgaldev/status/1776016441860321399',
+    tag: POST_TAGS.ARTICLE,
+    year: 2024,
+  },
 ] as const;
