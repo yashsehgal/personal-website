@@ -1,40 +1,68 @@
 'use client';
-
-import { ApplicationRoute, ROUTES } from '@/common/route';
-import { cn } from '@/helpers/cn';
+import { ROUTES } from '@/common/route';
+import { LinkButton } from '@/components/link-button';
+import { SOCIALS } from '@/constants/socials';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-
-const NAVIGATION_OPTIONS: { title: string; route: ApplicationRoute }[] = [
-  { title: 'Home', route: ROUTES.HOME },
-  //   Not adding this in the initial deployment
-  { title: 'About', route: ROUTES.ABOUT },
-  { title: 'Work', route: ROUTES.WORK },
-  { title: 'Posts', route: ROUTES.POSTS },
-  { title: 'Art', route: ROUTES.ART },
-] as const;
+import { useEffect, useRef } from 'react';
+import { motion } from 'framer-motion';
 
 export function MainLayoutNavigation() {
-  const pathname = usePathname();
-  const isPathActive = (route: ApplicationRoute): boolean => route === pathname;
+  const clickSoundRef = useRef<HTMLAudioElement | null>(null);
+
+  useEffect(() => {
+    const audio = new Audio('/sounds/main.mp3');
+    audio.preload = 'auto';
+    audio.volume = 1;
+    audio.load();
+    clickSoundRef.current = audio;
+  }, []);
+
+  const playClickSound = () => {
+    const audio = clickSoundRef.current;
+    if (audio) {
+      audio.currentTime = 0;
+      audio.play().catch(() => {});
+    }
+  };
 
   return (
-    <div className="main-layout-navigation flex flex-col items-start gap-1 w-80 max-lg:w-fit">
-      {NAVIGATION_OPTIONS.map((option, index) => {
-        return (
-          <Link
-            key={index}
-            href={option.route}
-            className={cn(
-              'text-xl font-semibold',
-              isPathActive(option.route)
-                ? 'text-foreground'
-                : 'text-secondary hover:text-foreground',
-            )}>
-            {option.title}
-          </Link>
-        );
-      })}
-    </div>
+    <header className="flex items-center gap-4 justify-between">
+      <div className="flex items-center gap-4">
+        <Link href={ROUTES.HOME}>
+          <motion.div
+            whileTap={{ scale: 0.95 }}
+            className="size-5 rounded-full bg-orange-500 hover:bg-orange-600 active:bg-orange-700 cursor-pointer"
+            onClick={playClickSound}
+          />
+        </Link>
+        <LinkButton
+          href={SOCIALS.MAIL}
+          target="_blank"
+          variant="outline"
+          className="max-md:hidden">
+          Write to me via email
+        </LinkButton>
+      </div>
+      <div className="flex items-center justify-end gap-4">
+        <Link
+          href={SOCIALS.X}
+          className="text-base font-medium text-secondary hover:text-foreground"
+          target="_blank">
+          Follow me on X
+        </Link>
+        <Link
+          href={SOCIALS.GITHUB}
+          className="text-base font-medium text-secondary hover:text-foreground"
+          target="_blank">
+          GitHub
+        </Link>
+        <Link
+          href={SOCIALS.LINKEDIN}
+          className="text-base font-medium text-secondary hover:text-foreground"
+          target="_blank">
+          LinkedIn
+        </Link>
+      </div>
+    </header>
   );
 }
