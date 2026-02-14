@@ -4,6 +4,7 @@ import { LinkButton } from '@/components/link-button';
 import { SOCIALS } from '@/constants/socials';
 import Link from 'next/link';
 import { useEffect, useRef } from 'react';
+import { motion } from 'framer-motion';
 
 export function MainLayoutNavigation() {
   const clickSoundRef = useRef<HTMLAudioElement | null>(null);
@@ -28,7 +29,8 @@ export function MainLayoutNavigation() {
     <header className="flex items-center gap-4 justify-between">
       <div className="flex items-center gap-4">
         <Link href={ROUTES.HOME}>
-          <div
+          <motion.div
+            whileTap={{ scale: 0.95 }}
             className="size-5 rounded-full bg-orange-500 hover:bg-orange-600 active:bg-orange-700 cursor-pointer"
             onClick={playClickSound}
           />
