@@ -32,12 +32,12 @@ export default function Page() {
                   href={post.link}
                   target={post.isInternal ? '_self' : '_blank'}
                   className="block py-2 group/post-item">
-                  <div className="flex items-center justify-between text-sm font-medium">
-                    <p className="text-foreground group-hover/post-item:text-foreground/50">
+                  <div className="flex items-center justify-between text-sm font-medium truncate gap-4">
+                    <p className="text-foreground group-hover/post-item:text-foreground/50 truncate">
                       {post.title}
                     </p>
                     <div>
-                      <p className="font-mono text-foreground/40 uppercase tracking-wide">
+                      <p className="font-mono text-foreground/40 uppercase tracking-wide shrink-0">
                         {post.tag} / {post.year}
                       </p>
                     </div>
