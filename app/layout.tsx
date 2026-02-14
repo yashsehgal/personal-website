@@ -18,6 +18,9 @@ export const metadata: Metadata = {
   description: 'Yash is a design engineer based out of India.',
 };
 
+const META_IMAGE_URL: string =
+  'https://ik.imagekit.io/eawrckp8wfi/personal%20website/meta_0IaDxeW2A.png' as const;
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -27,6 +30,12 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <link rel="preload" href="/yash.jpg" as="image" />
+
+        <meta property="og:type" content="website" />
+        <meta property="og:image" content={META_IMAGE_URL} />
+
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:image" content={META_IMAGE_URL} />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
