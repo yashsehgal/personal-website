@@ -17,6 +17,14 @@ export interface PostItem {
 }
 
 export const POST_ITEMS: PostItem[] = [
+  {
+    title: 'User avatar micro interaction widget',
+    description: 'A widget  to show a user avatar with a micro interaction',
+    link: ROUTES.INTERNAL_POST_USER_AVATAR_MICRO_INTERACTION_WIDGET,
+    isInternal: true,
+    tag: POST_TAGS.COMPONENT,
+    year: 2026,
+  },
   // 2026
   {
     title: getInternalPostData(ROUTES.INTERNAL_POST_LOGS)?.title ?? '',

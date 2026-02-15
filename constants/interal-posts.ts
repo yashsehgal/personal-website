@@ -13,6 +13,10 @@ export const INTERNAL_POSTS: { route: ApplicationRoute; title: string }[] = [
     route: ROUTES.INTERNAL_POST_LOGS,
     title: 'Logs metadata card',
   },
+  {
+    route: ROUTES.INTERNAL_POST_USER_AVATAR_MICRO_INTERACTION_WIDGET,
+    title: 'User avatar micro interaction widget',
+  },
 ] as const;
 
 export const getInternalPostData = (pathname: ApplicationRoute) => {
