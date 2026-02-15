@@ -47,7 +47,7 @@ function UserAvatarMicroInteractionWidgetPreview() {
           setShowCompletedContent(true);
           return 100;
         }
-        return prev + 100 / (FILL_DURATION_MS / FILL_TICK_MS);
+        return prev + 200 / (FILL_DURATION_MS / FILL_TICK_MS);
       });
     }, FILL_TICK_MS);
   };
