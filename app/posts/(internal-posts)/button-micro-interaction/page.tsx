@@ -71,7 +71,7 @@ function UserAvatarMicroInteractionWidgetPreview() {
         className={`rounded-full px-6 py-2 text-base font-medium flex items-center justify-center cursor-pointer relative overflow-hidden ${
           showCompletedContent
             ? 'bg-green-600 text-green-100'
-            : 'bg-blue-50 text-blue-500'
+            : 'bg-blue-50 text-blue-500 dark:bg-blue-950'
         }`}
         onMouseDown={startProgress}
         onMouseUp={resetProgress}
