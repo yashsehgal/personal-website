@@ -14,8 +14,8 @@ export const INTERNAL_POSTS: { route: ApplicationRoute; title: string }[] = [
     title: 'Logs metadata card',
   },
   {
-    route: ROUTES.INTERNAL_POST_USER_AVATAR_MICRO_INTERACTION_WIDGET,
-    title: 'User avatar micro interaction widget',
+    route: ROUTES.INTERNAL_POST_BUTTON_MICRO_INTERACTION,
+    title: 'Button micro interaction',
   },
 ] as const;
 
