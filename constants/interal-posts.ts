@@ -17,6 +17,10 @@ export const INTERNAL_POSTS: { route: ApplicationRoute; title: string }[] = [
     route: ROUTES.INTERNAL_POST_BUTTON_MICRO_INTERACTION,
     title: 'Button micro interaction',
   },
+  {
+    route: ROUTES.INTERNAL_POST_PHOTOGRAPHY,
+    title: 'Photography',
+  },
 ] as const;
 
 export const getInternalPostData = (pathname: ApplicationRoute) => {
