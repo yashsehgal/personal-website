@@ -23,11 +23,11 @@ export default function PhotographyPage() {
         {Array.from({ length: PHOTOGRAPHY_IMAGES }).map((_, index) => (
           <div key={index} className="space-y-4">
             <Image
-              src={`/photography/${index + 1}.jpg`}
+              src={`/photography/${index + 1}.JPG`}
               alt={`Photography ${index + 1}`}
               width={1200}
               height={800}
-              className="select-none pointer-events-none"
+              className="select-none pointer-events-none w-full h-full object-contain"
             />
             <p className="text-sm text-center font-medium">
               {`${index + 1}. ${PHOTOGRAPHY_IMAGES_CAPTIONS[index]}`}
