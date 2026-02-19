@@ -4,6 +4,7 @@ import { POST_ITEMS } from '@/constants/post-items';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { WORK_EXPERIENCE } from '@/constants/work-experience';
+import { WRITING_ITEMS } from '@/constants/writing-items';
 
 export default function Page() {
   return (
@@ -77,6 +78,34 @@ export default function Page() {
           })}
         </div>
       </main>
+      {WRITING_ITEMS.length > 0 && (
+        <div aria-description="Writing" className="space-y-8">
+          <h2 className="text-base font-semibold">
+            Writing ({WRITING_ITEMS.length})
+          </h2>
+          <div className="grid grid-cols-1 divide-y divide-foreground/10">
+            {WRITING_ITEMS.map((writing, index) => {
+              return (
+                <Link
+                  key={index}
+                  href={writing.path}
+                  className="block py-2 group/writing-item">
+                  <div className="flex items-center justify-between text-sm font-medium truncate gap-4">
+                    <p className="text-foreground group-hover/writing-item:text-foreground/50 truncate">
+                      {writing.title}
+                    </p>
+                    <div className="flex items-center justify-end gap-2">
+                      <p className="font-mono text-foreground/40 uppercase tracking-wide shrink-0">
+                        {writing.year}
+                      </p>
+                    </div>
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
