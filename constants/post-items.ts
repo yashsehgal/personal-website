@@ -18,14 +18,6 @@ export interface PostItem {
 
 export const POST_ITEMS: PostItem[] = [
   {
-    title: 'Photography',
-    description: '',
-    link: ROUTES.INTERNAL_POST_PHOTOGRAPHY,
-    isInternal: true,
-    tag: POST_TAGS.ARTICLE,
-    year: 2026,
-  },
-  {
     title: 'Button micro interaction',
     description: 'A button with a micro interaction',
     link: ROUTES.INTERNAL_POST_BUTTON_MICRO_INTERACTION,
@@ -87,6 +79,14 @@ export const POST_ITEMS: PostItem[] = [
     link: 'https://x.com/yashsehgaldev/status/1878349925114949835',
     tag: POST_TAGS.COMPONENT,
     year: 2025,
+  },
+  {
+    title: 'Photography',
+    description: '',
+    link: ROUTES.INTERNAL_POST_PHOTOGRAPHY,
+    isInternal: true,
+    tag: POST_TAGS.ARTICLE,
+    year: 2026,
   },
   {
     title: 'Calendar and event widgets',
