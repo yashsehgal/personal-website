@@ -15,6 +15,17 @@ export default function Page() {
           interfaces.
         </h1>
       </header>
+      <div
+        aria-description="Recent-work-experience"
+        className="space-y-8 my-24">
+        <h2 className="font-semibold">Recent Work Experience</h2>
+        <p className="text-secondary leading-7 w-2/3 max-lg:w-full">
+          My most recent role was at StackAI, where I worked as a Founding
+          Design Engineer. I led the redesign of the product&apos;s overall
+          experience, including the agent workflow builder - a core tool that
+          enables users to create and manage agent workflows.
+        </p>
+      </div>
       <div aria-description="Work portfolio" className="space-y-8">
         <h2 className="text-base font-semibold">
           Work experience ({WORK_EXPERIENCE.length})
