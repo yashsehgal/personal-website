@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { WORK_EXPERIENCE } from '@/constants/work-experience';
 import { WRITING_ITEMS } from '@/constants/writing-items';
+import { cn } from '@/lib/utils';
 
 export default function Page() {
   return (
@@ -99,15 +100,26 @@ export default function Page() {
               return (
                 <Link
                   key={index}
-                  href={writing.path}
-                  className="block py-2 group/writing-item">
+                  href={writing.draftMode ? '#' : writing.path}
+                  className={cn(
+                    'block py-2 group/writing-item',
+                    writing.draftMode
+                      ? 'opacity-50 pointer-events-none select-none'
+                      : '',
+                  )}>
                   <div className="flex items-center justify-between text-sm font-medium truncate gap-4">
-                    <p className="text-foreground group-hover/writing-item:text-foreground/50 truncate">
+                    <p
+                      className={cn(
+                        'text-foreground truncate',
+                        !writing.draftMode
+                          ? 'group-hover/writing-item:text-foreground/50'
+                          : '',
+                      )}>
                       {writing.title}
                     </p>
                     <div className="flex items-center justify-end gap-2">
                       <p className="font-mono text-foreground/40 uppercase tracking-wide shrink-0">
-                        {writing.year}
+                        {writing.draftMode ? 'Draft' : writing.year}
                       </p>
                     </div>
                   </div>
