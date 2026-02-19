@@ -2,6 +2,7 @@ import { ROUTES } from '@/common/route';
 import { getInternalPostData } from '@/constants/interal-posts';
 
 enum POST_TAGS {
+  PROJECT = 'PROJECT',
   COMPONENT = 'DESIGN',
   ARTICLE = 'ARTICLE',
   MUSIC = 'MUSIC',
@@ -140,7 +141,7 @@ export const POST_ITEMS: PostItem[] = [
     description:
       'Built a small collection of cookies as in components including base components like Buttons, Toasts and pre-designed examples like Empty States, Cards and etc.',
     link: 'https://github.com/with-tw/cookies',
-    tag: POST_TAGS.COMPONENT,
+    tag: POST_TAGS.PROJECT,
     year: 2024,
   },
   {
@@ -148,7 +149,7 @@ export const POST_ITEMS: PostItem[] = [
     description:
       'React hook for fetching activities and information via GitHub API',
     link: 'https://github.com/yashsehgal/use-github-react',
-    tag: POST_TAGS.COMPONENT,
+    tag: POST_TAGS.PROJECT,
     year: 2024,
   },
   {
