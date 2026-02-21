@@ -24,7 +24,7 @@ export default function UsingAIToWriteCodeAsADesignEngineerPage() {
       <p>
         Build taste in design over time: Learn about micro-interactions, optical
         alignment and spacing. Everything should feel intentional. Now that
-        every other platform uses shadcn or Base UI (built on Radix), it&apos;s
+        every other platform uses shadcn (built on Radix) or Base UI, it&apos;s
         important to have your platform&apos;s own design language.
       </p>
       <ul className="list-disc list-inside space-y-4 [&_li]:pl-4">
