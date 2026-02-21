@@ -26,7 +26,7 @@ export function InternalWritingContainer({
       <header className="internal-writing-container-header">
         <h1 className="font-semibold">{internalWritingTitle}</h1>
       </header>
-      <main className="internal-writing-container-main-content [&_.text]:leading-7 [&_h2]:font-medium space-y-24">
+      <main className="internal-writing-container-main-content [&_h2]:font-medium space-y-8 [&_p]:text-justify [&_p]:font-serif">
         {children}
       </main>
     </div>
