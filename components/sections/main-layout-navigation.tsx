@@ -1,12 +1,15 @@
 'use client';
 import { ROUTES } from '@/common/route';
-import { LinkButton } from '@/components/link-button';
 import { SOCIALS } from '@/constants/socials';
 import Link from 'next/link';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
+import { Button } from '@/components/button';
+
+const COPIED_TO_CLIPBOARD_MESSAGE_DURATION_MS: number = 1200 as const;
 
 export function MainLayoutNavigation() {
+  const [showCopied, setShowCopied] = useState<boolean>(false);
   const clickSoundRef = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
@@ -25,6 +28,14 @@ export function MainLayoutNavigation() {
     }
   };
 
+  const handleCopy = () => {
+    setShowCopied(true);
+    navigator.clipboard.writeText(SOCIALS.MAIL);
+    setTimeout(() => {
+      setShowCopied(false);
+    }, COPIED_TO_CLIPBOARD_MESSAGE_DURATION_MS);
+  };
+
   return (
     <header className="flex items-center gap-4 justify-between">
       <div className="flex items-center gap-4">
@@ -35,13 +46,28 @@ export function MainLayoutNavigation() {
             onClick={playClickSound}
           />
         </Link>
-        <LinkButton
-          href={SOCIALS.MAIL}
-          target="_blank"
+        <Button
           variant="outline"
-          className="max-md:hidden">
-          Write to me via email
-        </LinkButton>
+          className="max-md:hidden w-42 flex items-center justify-center"
+          onClick={handleCopy}>
+          {showCopied ? (
+            <motion.p
+              key="copied-to-clipboard-message"
+              initial={{ opacity: 0, y: 12, scale: 0.97 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ type: 'spring', bounce: 0, duration: 0.25 }}>
+              Email copied!
+            </motion.p>
+          ) : (
+            <motion.p
+              key="write-to-me-via-email"
+              initial={{ opacity: 0, y: -12, scale: 0.97 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ type: 'spring', bounce: 0, duration: 0.25 }}>
+              Write to me via email
+            </motion.p>
+          )}
+        </Button>
       </div>
       <div className="flex items-center justify-end gap-4">
         <Link
