@@ -9,7 +9,7 @@ export interface WritingItem {
 
 export const WRITING_ITEMS: WritingItem[] = [
   {
-    title: 'Using AI to write code as a design engineer',
+    title: 'Working patterns to follow as a design engineer',
     path: ROUTES.INTERNAL_WRITING_USING_AI_TO_WRITE_CODE_AS_A_DESIGN_ENGINEER,
     year: 2026,
     draftMode: false,
