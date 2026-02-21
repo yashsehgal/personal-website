@@ -93,7 +93,7 @@ export default function Page() {
       {WRITING_ITEMS.length > 0 && (
         <div aria-description="Writing" className="space-y-8">
           <h2 className="text-base font-semibold">
-            Writing ({WRITING_ITEMS.length})
+            Writings ({WRITING_ITEMS.length})
           </h2>
           <div className="grid grid-cols-1 divide-y divide-foreground/10">
             {WRITING_ITEMS.map((writing, index) => {
