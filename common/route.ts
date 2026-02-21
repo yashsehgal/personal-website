@@ -13,6 +13,8 @@ export const ROUTES = {
     '/writing/execution-based-optimization',
   INTERNAL_WRITING_USING_AI_TO_WRITE_CODE_AS_A_DESIGN_ENGINEER:
     '/writing/working-patterns-to-follow-as-a-design-engineer',
+  INTERNAL_WRITING_PAPER_PATTERN_IN_LINEAR_SYSTEMS__CONSTANT_RATIO_OF_SUMS_OF_NUMERATORS_AND_DENOMINATORS:
+    '/writing/pattern-in-linear-systems-constant-ratio-of-sums-of-numerators-and-denominators',
 } as const;
 
 export type ApplicationRoute = (typeof ROUTES)[keyof typeof ROUTES];

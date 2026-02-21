@@ -14,6 +14,13 @@ export const WRITING_ITEMS: WritingItem[] = [
     year: 2026,
     draftMode: false,
   },
+  {
+    title:
+      'Pattern in linear systems: constant ratio of sums of numerators and denominators',
+    path: ROUTES.INTERNAL_WRITING_PAPER_PATTERN_IN_LINEAR_SYSTEMS__CONSTANT_RATIO_OF_SUMS_OF_NUMERATORS_AND_DENOMINATORS,
+    year: 2025,
+    draftMode: false,
+  },
   // {
   //   title: 'Execution-based optimization',
   //   path: ROUTES.INTERNAL_WRITING_EXECUTION_BASED_OPTIMIZATION,
