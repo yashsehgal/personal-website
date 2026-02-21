@@ -12,7 +12,7 @@ export const ROUTES = {
   INTERNAL_WRITING_EXECUTION_BASED_OPTIMIZATION:
     '/writing/execution-based-optimization',
   INTERNAL_WRITING_USING_AI_TO_WRITE_CODE_AS_A_DESIGN_ENGINEER:
-    '/writing/using-ai-to-write-code-as-a-design-engineer',
+    '/writing/working-patterns-to-follow-as-a-design-engineer',
 } as const;
 
 export type ApplicationRoute = (typeof ROUTES)[keyof typeof ROUTES];
