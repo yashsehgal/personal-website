@@ -27,27 +27,25 @@ export default function UsingAIToWriteCodeAsADesignEngineerPage() {
         every other platform uses shadcn or Base UI (built on Radix), it&apos;s
         important to have your platform&apos;s own design language.
       </p>
-      <p>
-        <ul className="list-disc list-inside space-y-4 [&_li]:pl-4">
-          <li>
-            You can use micro-interactions to improve the feel. Avoid
-            over-animating things. Learn the basics of Bézier curves so that you
-            can make animations feel a certain way.
-          </li>
-          <li>
-            Focus on improving the user experience - you would not want users to
-            get distracted while using your platform.
-          </li>
-          <li>
-            Work on the intuitiveness of the platform. For example, in Linear,
-            if a new user randomly tries to right-click on a ticket, it shows
-            the context menu with the same options that you see when clicking
-            the more options button (…) inside the ticket page. This adds a
-            layer of “comfort” when a user uses your product, and it&apos;s
-            really important.
-          </li>
-        </ul>
-      </p>
+      <ul className="list-disc list-inside space-y-4 [&_li]:pl-4">
+        <li>
+          You can use micro-interactions to improve the feel. Avoid
+          over-animating things. Learn the basics of Bézier curves so that you
+          can make animations feel a certain way.
+        </li>
+        <li>
+          Focus on improving the user experience - you would not want users to
+          get distracted while using your platform.
+        </li>
+        <li>
+          Work on the intuitiveness of the platform. For example, in Linear, if
+          a new user randomly tries to right-click on a ticket, it shows the
+          context menu with the same options that you see when clicking the more
+          options button (…) inside the ticket page. This adds a layer of
+          “comfort” when a user uses your product, and it&apos;s really
+          important.
+        </li>
+      </ul>
       <p>
         Vibe-code features for your platform: It&apos;s a great way to
         experiment and try building a feature. Create vibe-coding PRs within
