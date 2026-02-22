@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 import { WORK_EXPERIENCE } from '@/constants/work-experience';
 import { WRITING_ITEMS } from '@/constants/writing-items';
 import { cn } from '@/lib/utils';
+import Image from 'next/image';
 
 export default function Page() {
   return (
@@ -21,10 +22,20 @@ export default function Page() {
         className="space-y-8 my-24">
         <h2 className="font-semibold">Recent Work Experience</h2>
         <p className="text-secondary leading-7 w-2/3 max-lg:w-full">
-          My most recent role was at StackAI, where I worked as a Founding
-          Design Engineer. I led the redesign of the product&apos;s overall
-          experience, including the agent workflow builder - a core tool that
-          enables users to create and manage agent workflows.
+          My most recent role was at{' '}
+          <Image
+            src="/company/stackai-logo.png"
+            alt="stackai-logo"
+            width={100}
+            height={100}
+            className="size-4 object-contain inline mb-1 ml-0.5 dark:invert"
+            priority
+          />{' '}
+          <span className="text-foreground font-medium">StackAI</span> where I
+          worked as a Founding Design Engineer. I led the redesign of the
+          product&apos;s overall experience, including the agent workflow
+          builder - a core tool that enables users to create and manage agent
+          workflows.
         </p>
       </div>
       <div aria-description="Work portfolio" className="space-y-8">
