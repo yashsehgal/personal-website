@@ -7,8 +7,21 @@ import { WORK_EXPERIENCE } from '@/constants/work-experience';
 import { WRITING_ITEMS } from '@/constants/writing-items';
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
+import { useState } from 'react';
+
+enum TABS {
+  WORK_EXPERIENCE = 'work-experience',
+  POSTS = 'posts',
+  WRITING = 'writing',
+}
 
 export default function Page() {
+  const [activeTab, setActiveTab] = useState<TABS>(TABS.POSTS);
+
+  const handleTabChange = (tab: TABS) => {
+    setActiveTab(tab);
+  };
+
   return (
     <div className="home-page space-y-16">
       <header className="flex items-center gap-4">
@@ -38,74 +51,105 @@ export default function Page() {
           workflows.
         </p>
       </div>
-      <div aria-description="Work portfolio" className="space-y-8">
-        <h2 className="text-base font-semibold">
-          Work experience ({WORK_EXPERIENCE.length})
-        </h2>
-        <div className="grid grid-cols-1 divide-y divide-foreground/10">
-          {WORK_EXPERIENCE.map((work, index) => {
-            return (
-              <Link
-                key={index}
-                href={work.companyWebsite}
-                target="_blank"
-                className="block py-2 group/work-item">
-                <div className="flex items-center justify-between text-sm font-medium truncate gap-4">
-                  <p className="text-foreground group-hover/work-item:text-foreground/50 truncate">
-                    {work.companyName}
-                  </p>
-                  <div className="flex items-center justify-end gap-2">
-                    <p className="font-mono text-foreground/40 uppercase tracking-wide shrink-0">
-                      {work.role} / {work.year}
-                    </p>
-                  </div>
-                </div>
-              </Link>
-            );
-          })}
-        </div>
+      <div className="flex items-center gap-12 justify-start max-md:gap-6">
+        <button
+          className={cn(
+            'text-base font-semibold cursor-pointer max-md:text-sm',
+            activeTab === TABS.POSTS
+              ? 'text-foreground'
+              : 'text-secondary/80 hover:text-secondary',
+          )}
+          onClick={() => handleTabChange(TABS.POSTS)}>
+          Posts <span className="max-sm:hidden">({POST_ITEMS.length})</span>
+        </button>
+        <button
+          className={cn(
+            'text-base font-semibold cursor-pointer max-md:text-sm',
+            activeTab === TABS.WORK_EXPERIENCE
+              ? 'text-foreground'
+              : 'text-secondary/80 hover:text-secondary',
+          )}
+          onClick={() => handleTabChange(TABS.WORK_EXPERIENCE)}>
+          Work experience{' '}
+          <span className="max-sm:hidden">({WORK_EXPERIENCE.length})</span>
+        </button>
+        <button
+          className={cn(
+            'text-base font-semibold cursor-pointer max-md:text-sm',
+            activeTab === TABS.WRITING
+              ? 'text-foreground'
+              : 'text-secondary/80 hover:text-secondary',
+          )}
+          onClick={() => handleTabChange(TABS.WRITING)}>
+          Writings{' '}
+          <span className="max-sm:hidden">({WRITING_ITEMS.length})</span>
+        </button>
       </div>
-      <main aria-description="Posts" className="space-y-8">
-        <h2 className="text-base font-semibold">Posts ({POST_ITEMS.length})</h2>
-        <div className="grid grid-cols-1 divide-y divide-foreground/10">
-          {POST_ITEMS.map((post, index) => {
-            return (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, filter: 'blur(2px)' }}
-                animate={{ opacity: 1, filter: 'blur(0px)' }}
-                transition={{
-                  delay: 0.04 * (index + 1),
-                  type: 'spring',
-                  bounce: 0,
-                  duration: 0.5,
-                  ease: 'easeOut',
-                }}>
+      {activeTab === TABS.WORK_EXPERIENCE ? (
+        <div aria-description="Work portfolio" className="space-y-8">
+          <div className="grid grid-cols-1 divide-y divide-foreground/10">
+            {WORK_EXPERIENCE.map((work, index) => {
+              return (
                 <Link
-                  href={post.link}
-                  target={post.isInternal ? '_self' : '_blank'}
-                  className="block py-2 group/post-item">
+                  key={index}
+                  href={work.companyWebsite}
+                  target="_blank"
+                  className="block py-2 group/work-item">
                   <div className="flex items-center justify-between text-sm font-medium truncate gap-4">
-                    <p className="text-foreground group-hover/post-item:text-foreground/50 truncate">
-                      {post.title}
+                    <p className="text-foreground group-hover/work-item:text-foreground/50 truncate">
+                      {work.companyName}
                     </p>
-                    <div>
+                    <div className="flex items-center justify-end gap-2">
                       <p className="font-mono text-foreground/40 uppercase tracking-wide shrink-0">
-                        {post.tag} / {post.year}
+                        {work.role} / {work.year}
                       </p>
                     </div>
                   </div>
                 </Link>
-              </motion.div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
-      </main>
-      {WRITING_ITEMS.length > 0 && (
+      ) : null}
+      {activeTab === TABS.POSTS ? (
+        <main aria-description="Posts" className="space-y-8">
+          <div className="grid grid-cols-1 divide-y divide-foreground/10">
+            {POST_ITEMS.map((post, index) => {
+              return (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, filter: 'blur(2px)' }}
+                  animate={{ opacity: 1, filter: 'blur(0px)' }}
+                  transition={{
+                    delay: 0.04 * (index + 1),
+                    type: 'spring',
+                    bounce: 0,
+                    duration: 0.5,
+                    ease: 'easeOut',
+                  }}>
+                  <Link
+                    href={post.link}
+                    target={post.isInternal ? '_self' : '_blank'}
+                    className="block py-2 group/post-item">
+                    <div className="flex items-center justify-between text-sm font-medium truncate gap-4">
+                      <p className="text-foreground group-hover/post-item:text-foreground/50 truncate">
+                        {post.title}
+                      </p>
+                      <div>
+                        <p className="font-mono text-foreground/40 uppercase tracking-wide shrink-0">
+                          {post.tag} / {post.year}
+                        </p>
+                      </div>
+                    </div>
+                  </Link>
+                </motion.div>
+              );
+            })}
+          </div>
+        </main>
+      ) : null}
+      {activeTab === TABS.WRITING ? (
         <div aria-description="Writing" className="space-y-8">
-          <h2 className="text-base font-semibold">
-            Writings ({WRITING_ITEMS.length})
-          </h2>
           <div className="grid grid-cols-1 divide-y divide-foreground/10">
             {WRITING_ITEMS.map((writing, index) => {
               return (
@@ -139,7 +183,7 @@ export default function Page() {
             })}
           </div>
         </div>
-      )}
+      ) : null}
     </div>
   );
 }
