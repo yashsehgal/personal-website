@@ -18,7 +18,7 @@ export function MainLayout({ className, children, ...props }: MainLayoutProps) {
       <NuqsAdapter>
         <div
           className={cn(
-            'main-layout min-h-screen mx-auto max-w-7xl content-container px-12 py-8 max-lg:p-6 space-y-16',
+            'main-layout min-h-screen mx-auto max-w-7xl content-container px-12 pt-8 pb-24 max-lg:p-6 space-y-16',
             isInsidePost && 'space-y-24',
             className,
           )}
