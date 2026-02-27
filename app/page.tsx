@@ -121,10 +121,9 @@ export default function Page() {
                   initial={{ opacity: 0, filter: 'blur(2px)' }}
                   animate={{ opacity: 1, filter: 'blur(0px)' }}
                   transition={{
-                    delay: 0.04 * (index + 1),
+                    delay: 0.02 * (index + 1),
                     type: 'spring',
                     bounce: 0,
-                    duration: 0.5,
                     ease: 'easeOut',
                   }}>
                   <Link
