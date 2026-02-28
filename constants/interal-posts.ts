@@ -21,6 +21,10 @@ export const INTERNAL_POSTS: { route: ApplicationRoute; title: string }[] = [
     route: ROUTES.INTERNAL_POST_PHOTOGRAPHY,
     title: 'Photography',
   },
+  {
+    route: ROUTES.INTERNAL_POST_ANIMATED_WAVE_FORMS,
+    title: 'Animated wave forms',
+  },
 ] as const;
 
 export const getInternalPostData = (pathname: ApplicationRoute) => {
