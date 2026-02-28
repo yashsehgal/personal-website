@@ -4,7 +4,7 @@ import { InternalPostContainer } from '@/components/sections/internal-post-conta
 import { IconReload } from '@tabler/icons-react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const SEGMENTS: number = 20 as const;
 
@@ -20,6 +20,19 @@ export default function Page() {
 
 function DemoPreview() {
   const [animationKey, setAnimationKey] = useState(0);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  useEffect(() => {
+    const audio = new Audio('/sounds/image.mp3');
+    audio.preload = 'auto';
+    audio.load();
+    audioRef.current = audio;
+    return () => {
+      audio.pause();
+      audio.src = '';
+      audioRef.current = null;
+    };
+  }, []);
 
   return (
     <div className="h-full w-full flex items-center justify-start relative">
@@ -63,7 +76,11 @@ function DemoPreview() {
           delay: 2.1,
         }}
         onClick={() => {
-          new Audio('/sounds/image.mp3').play();
+          const audio = audioRef.current;
+          if (audio) {
+            audio.currentTime = 0;
+            audio.play();
+          }
           setAnimationKey((k) => k + 1);
         }}>
         <IconReload size={20} />
