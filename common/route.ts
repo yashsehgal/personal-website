@@ -15,6 +15,7 @@ export const ROUTES = {
     '/writing/working-patterns-to-follow-as-a-design-engineer',
   INTERNAL_WRITING_PAPER_PATTERN_IN_LINEAR_SYSTEMS__CONSTANT_RATIO_OF_SUMS_OF_NUMERATORS_AND_DENOMINATORS:
     '/writing/pattern-in-linear-systems-constant-ratio-of-sums-of-numerators-and-denominators',
+  INTERNAL_POST_ANIMATED_WAVE_FORMS: '/posts/animated-wave-forms',
 } as const;
 
 export type ApplicationRoute = (typeof ROUTES)[keyof typeof ROUTES];

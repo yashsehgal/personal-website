@@ -65,6 +65,14 @@ export const POST_ITEMS: PostItem[] = [
     tag: POST_TAGS.MUSIC,
     year: 2026,
   },
+  {
+    title: 'Animated wave forms',
+    description: 'An animated wave form component',
+    link: ROUTES.INTERNAL_POST_ANIMATED_WAVE_FORMS,
+    isInternal: true,
+    tag: POST_TAGS.COMPONENT,
+    year: 2026,
+  },
   // 2025
   {
     title: 'Automation flow',
