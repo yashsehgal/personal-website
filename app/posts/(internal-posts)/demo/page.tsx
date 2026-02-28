@@ -1,8 +1,10 @@
 'use client';
 import { ComponentPreviewContainer } from '@/components/component-preview-container';
 import { InternalPostContainer } from '@/components/sections/internal-post-container';
+import { IconReload } from '@tabler/icons-react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import { useState } from 'react';
 
 const SEGMENTS: number = 20 as const;
 
@@ -17,9 +19,12 @@ export default function Page() {
 }
 
 function DemoPreview() {
+  const [animationKey, setAnimationKey] = useState(0);
+
   return (
     <div className="h-full w-full flex items-center justify-start relative">
       <Image
+        preload
         src="/demo.png"
         alt="demo"
         width={1000}
@@ -29,7 +34,7 @@ function DemoPreview() {
       {Array.from({ length: SEGMENTS }).map((_, index) => {
         return (
           <motion.div
-            key={index}
+            key={`${animationKey}-${index}`}
             initial={{ filter: 'brightness(10)' }}
             animate={{
               filter: 'brightness(1)',
@@ -46,6 +51,20 @@ function DemoPreview() {
           />
         );
       })}
+      <motion.button
+        key={animationKey}
+        className="bg-background rounded-full size-11 flex items-center justify-center absolute top-4 right-4 shadow-xl"
+        initial={{ opacity: 0, y: -120 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{
+          type: 'spring',
+          bounce: 0,
+          duration: 0.5,
+          delay: 2.1,
+        }}
+        onClick={() => setAnimationKey((k) => k + 1)}>
+        <IconReload size={20} />
+      </motion.button>
     </div>
   );
 }
