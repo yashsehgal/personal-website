@@ -31,14 +31,20 @@ const getWaveAmplitude = (
   amplitude: number,
   index: number,
 ) => {
+  let value: number;
   switch (waveType) {
     case 'sin':
-      return Math.sin(index) * amplitude;
+      value = Math.sin(index) * amplitude;
+      break;
     case 'cos':
-      return Math.cos(index) * amplitude;
+      value = Math.cos(index) * amplitude;
+      break;
     case 'tan':
-      return Math.tan(index) * amplitude;
+      value = Math.tan(index) * amplitude;
+      break;
   }
+  // Round to avoid hydration mismatch (server/client floating-point precision differences)
+  return Math.round(value * 10000) / 10000;
 };
 
 function Preview() {
