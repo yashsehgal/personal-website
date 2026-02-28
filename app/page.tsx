@@ -8,11 +8,13 @@ import { WRITING_ITEMS } from '@/constants/writing-items';
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
 import { useState } from 'react';
+import { PROJECTS } from '@/constants/project-items';
 
 enum TABS {
   WORK_EXPERIENCE = 'work-experience',
   POSTS = 'posts',
   WRITING = 'writing',
+  PROJECTS = 'projects',
 }
 
 export default function Page() {
@@ -51,10 +53,10 @@ export default function Page() {
           workflows.
         </p>
       </div>
-      <div className="flex items-center gap-12 justify-start max-md:gap-6">
+      <div className="flex items-center gap-8 justify-start max-md:gap-6 font-mono">
         <button
           className={cn(
-            'text-base font-semibold cursor-pointer max-md:text-sm',
+            'text-base font-medium cursor-pointer max-md:text-sm',
             activeTab === TABS.POSTS
               ? 'text-foreground'
               : 'text-secondary/80 hover:text-secondary',
@@ -64,7 +66,7 @@ export default function Page() {
         </button>
         <button
           className={cn(
-            'text-base font-semibold cursor-pointer max-md:text-sm',
+            'text-base font-medium cursor-pointer max-md:text-sm',
             activeTab === TABS.WORK_EXPERIENCE
               ? 'text-foreground'
               : 'text-secondary/80 hover:text-secondary',
@@ -75,7 +77,7 @@ export default function Page() {
         </button>
         <button
           className={cn(
-            'text-base font-semibold cursor-pointer max-md:text-sm',
+            'text-base font-medium cursor-pointer max-md:text-sm',
             activeTab === TABS.WRITING
               ? 'text-foreground'
               : 'text-secondary/80 hover:text-secondary',
@@ -84,28 +86,97 @@ export default function Page() {
           Writings{' '}
           <span className="max-sm:hidden">({WRITING_ITEMS.length})</span>
         </button>
+        <button
+          className={cn(
+            'text-base font-medium cursor-pointer max-md:text-sm',
+            activeTab === TABS.PROJECTS
+              ? 'text-foreground'
+              : 'text-secondary/80 hover:text-secondary',
+          )}
+          onClick={() => handleTabChange(TABS.PROJECTS)}>
+          Projects <span className="max-sm:hidden">({PROJECTS.length})</span>
+        </button>
       </div>
+      {activeTab === TABS.PROJECTS ? (
+        <div aria-description="Projects" className="space-y-8">
+          <div className="grid grid-cols-1 divide-y divide-foreground/10">
+            {PROJECTS.map((project, index) => {
+              return (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, filter: 'blur(2px)' }}
+                  animate={{ opacity: 1, filter: 'blur(0px)' }}
+                  transition={{
+                    delay: 0.02 * (index + 1),
+                    type: 'spring',
+                    bounce: 0,
+                    ease: 'easeOut',
+                  }}>
+                  <Link
+                    key={index}
+                    href={project.link}
+                    target="_blank"
+                    className={cn(
+                      'block py-2 group/project-item',
+                      project.draftMode
+                        ? 'opacity-50 pointer-events-none select-none'
+                        : '',
+                    )}>
+                    <div className="flex items-center justify-between text-sm font-medium truncate gap-4">
+                      <p
+                        className={cn(
+                          'text-foreground truncate',
+                          !project.draftMode
+                            ? 'group-hover/project-item:text-foreground/50'
+                            : '',
+                        )}>
+                        {project.title}
+                      </p>
+                      <div className="flex items-center justify-end gap-2">
+                        <p className="font-mono text-foreground/40 uppercase tracking-wide shrink-0">
+                          {project.draftMode ? 'In progress' : project.year}
+                        </p>
+                      </div>
+                    </div>
+                  </Link>
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
+      ) : null}
       {activeTab === TABS.WORK_EXPERIENCE ? (
         <div aria-description="Work portfolio" className="space-y-8">
           <div className="grid grid-cols-1 divide-y divide-foreground/10">
             {WORK_EXPERIENCE.map((work, index) => {
               return (
-                <Link
+                <motion.div
                   key={index}
-                  href={work.companyWebsite}
-                  target="_blank"
-                  className="block py-2 group/work-item">
-                  <div className="flex items-center justify-between text-sm font-medium truncate gap-4">
-                    <p className="text-foreground group-hover/work-item:text-foreground/50 truncate">
-                      {work.companyName}
-                    </p>
-                    <div className="flex items-center justify-end gap-2">
-                      <p className="font-mono text-foreground/40 uppercase tracking-wide shrink-0">
-                        {work.role} / {work.year}
+                  initial={{ opacity: 0, filter: 'blur(2px)' }}
+                  animate={{ opacity: 1, filter: 'blur(0px)' }}
+                  transition={{
+                    delay: 0.02 * (index + 1),
+                    type: 'spring',
+                    bounce: 0,
+                    ease: 'easeOut',
+                  }}>
+                  <Link
+                    key={index}
+                    href={work.companyWebsite}
+                    target="_blank"
+                    className="block py-2 group/work-item">
+                    <div className="flex items-center justify-between text-sm font-medium truncate gap-4">
+                      <p className="text-foreground group-hover/work-item:text-foreground/50 truncate">
+                        {work.companyName}
                       </p>
+                      <div className="flex items-center justify-end gap-2">
+                        <p className="font-mono text-foreground/40 uppercase tracking-wide shrink-0">
+                          {work.role} / {work.year}
+                        </p>
+                      </div>
                     </div>
-                  </div>
-                </Link>
+                  </Link>
+                </motion.div>
               );
             })}
           </div>
@@ -152,32 +223,43 @@ export default function Page() {
           <div className="grid grid-cols-1 divide-y divide-foreground/10">
             {WRITING_ITEMS.map((writing, index) => {
               return (
-                <Link
+                <motion.div
                   key={index}
-                  href={writing.draftMode ? '#' : writing.path}
-                  className={cn(
-                    'block py-2 group/writing-item',
-                    writing.draftMode
-                      ? 'opacity-50 pointer-events-none select-none'
-                      : '',
-                  )}>
-                  <div className="flex items-center justify-between text-sm font-medium truncate gap-4">
-                    <p
-                      className={cn(
-                        'text-foreground truncate',
-                        !writing.draftMode
-                          ? 'group-hover/writing-item:text-foreground/50'
-                          : '',
-                      )}>
-                      {writing.title}
-                    </p>
-                    <div className="flex items-center justify-end gap-2">
-                      <p className="font-mono text-foreground/40 uppercase tracking-wide shrink-0">
-                        {writing.draftMode ? 'Draft' : writing.year}
+                  initial={{ opacity: 0, filter: 'blur(2px)' }}
+                  animate={{ opacity: 1, filter: 'blur(0px)' }}
+                  transition={{
+                    delay: 0.02 * (index + 1),
+                    type: 'spring',
+                    bounce: 0,
+                    ease: 'easeOut',
+                  }}>
+                  <Link
+                    key={index}
+                    href={writing.draftMode ? '#' : writing.path}
+                    className={cn(
+                      'block py-2 group/writing-item',
+                      writing.draftMode
+                        ? 'opacity-50 pointer-events-none select-none'
+                        : '',
+                    )}>
+                    <div className="flex items-center justify-between text-sm font-medium truncate gap-4">
+                      <p
+                        className={cn(
+                          'text-foreground truncate',
+                          !writing.draftMode
+                            ? 'group-hover/writing-item:text-foreground/50'
+                            : '',
+                        )}>
+                        {writing.title}
                       </p>
+                      <div className="flex items-center justify-end gap-2">
+                        <p className="font-mono text-foreground/40 uppercase tracking-wide shrink-0">
+                          {writing.draftMode ? 'Draft' : writing.year}
+                        </p>
+                      </div>
                     </div>
-                  </div>
-                </Link>
+                  </Link>
+                </motion.div>
               );
             })}
           </div>
