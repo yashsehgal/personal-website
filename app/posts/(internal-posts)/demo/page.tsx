@@ -53,7 +53,7 @@ function DemoPreview() {
       })}
       <motion.button
         key={animationKey}
-        className="bg-background rounded-full size-11 flex items-center justify-center absolute top-4 right-4 shadow-xl"
+        className="bg-background/5 hover:bg-background/10 transition-colors backdrop-blur-md rounded-full size-11 flex items-center justify-center absolute top-4 right-4 shadow-xl text-background border border-background/10 cursor-pointer"
         initial={{ opacity: 0, y: -120 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{
@@ -62,7 +62,10 @@ function DemoPreview() {
           duration: 0.5,
           delay: 2.1,
         }}
-        onClick={() => setAnimationKey((k) => k + 1)}>
+        onClick={() => {
+          new Audio('/sounds/image.mp3').play();
+          setAnimationKey((k) => k + 1);
+        }}>
         <IconReload size={20} />
       </motion.button>
     </div>
