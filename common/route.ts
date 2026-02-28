@@ -16,6 +16,8 @@ export const ROUTES = {
   INTERNAL_WRITING_PAPER_PATTERN_IN_LINEAR_SYSTEMS__CONSTANT_RATIO_OF_SUMS_OF_NUMERATORS_AND_DENOMINATORS:
     '/writing/pattern-in-linear-systems-constant-ratio-of-sums-of-numerators-and-denominators',
   INTERNAL_POST_ANIMATED_WAVE_FORMS: '/posts/animated-wave-forms',
+  INTERNAL_POST_IMAGE_LOADING_WITH_TRANSITION:
+    '/posts/image-loading-with-transition',
 } as const;
 
 export type ApplicationRoute = (typeof ROUTES)[keyof typeof ROUTES];

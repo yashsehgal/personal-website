@@ -18,20 +18,11 @@ export interface PostItem {
 }
 
 export const POST_ITEMS: PostItem[] = [
-  {
-    title: 'Button micro interaction',
-    description: 'A button with a micro interaction',
-    link: ROUTES.INTERNAL_POST_BUTTON_MICRO_INTERACTION,
-    isInternal: true,
-    tag: POST_TAGS.COMPONENT,
-    year: 2026,
-  },
   // 2026
   {
-    title: getInternalPostData(ROUTES.INTERNAL_POST_LOGS)?.title ?? '',
-    description:
-      'A card component to show project activity with a metadata card',
-    link: ROUTES.INTERNAL_POST_LOGS,
+    title: 'Image loading with transition',
+    description: 'A component to show an image loading with a transition',
+    link: ROUTES.INTERNAL_POST_IMAGE_LOADING_WITH_TRANSITION,
     isInternal: true,
     tag: POST_TAGS.COMPONENT,
     year: 2026,
@@ -55,6 +46,23 @@ export const POST_ITEMS: PostItem[] = [
     link: ROUTES.INTERNAL_POST_OPTICAL_SPACING,
     isInternal: true,
     tag: POST_TAGS.ARTICLE,
+    year: 2026,
+  },
+  {
+    title: 'Button micro interaction',
+    description: 'A button with a micro interaction',
+    link: ROUTES.INTERNAL_POST_BUTTON_MICRO_INTERACTION,
+    isInternal: true,
+    tag: POST_TAGS.COMPONENT,
+    year: 2026,
+  },
+  {
+    title: getInternalPostData(ROUTES.INTERNAL_POST_LOGS)?.title ?? '',
+    description:
+      'A card component to show project activity with a metadata card',
+    link: ROUTES.INTERNAL_POST_LOGS,
+    isInternal: true,
+    tag: POST_TAGS.COMPONENT,
     year: 2026,
   },
   {
