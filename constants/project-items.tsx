@@ -8,10 +8,10 @@ interface ProjectItem {
 
 export const PROJECTS: ProjectItem[] = [
   {
-    title: 'Harbour',
+    title: 'Harbour (Work in progress)',
     description: 'Personal and article writing platform',
-    link: 'https://github.com/yashsehgal/harbour',
-    draftMode: true,
+    link: 'https://threads-app-ten-kohl.vercel.app/',
+    draftMode: false,
     year: 2026,
   },
   {
