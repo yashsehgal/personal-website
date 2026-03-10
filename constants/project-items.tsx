@@ -10,7 +10,7 @@ export const PROJECTS: ProjectItem[] = [
   {
     title: 'Compile (Work in progress)',
     description: 'Personal and article writing platform',
-    link: 'https://threads-app-ten-kohl.vercel.app/',
+    link: 'https://compile.so/',
     draftMode: false,
     year: 2026,
   },
