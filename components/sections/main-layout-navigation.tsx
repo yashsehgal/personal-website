@@ -74,7 +74,7 @@ export function MainLayoutNavigation() {
           href={SOCIALS.X}
           className="text-base font-medium text-secondary hover:text-foreground"
           target="_blank">
-          Follow me on X
+          X (Twitter)
         </Link>
         <Link
           href={SOCIALS.GITHUB}
