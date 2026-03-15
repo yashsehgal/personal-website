@@ -29,8 +29,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link rel="preload" href="/yash.jpg" as="image" />
-
+        <link rel="preload" href="/demo.png" as="image" />
         <meta property="og:type" content="website" />
         <meta property="og:image" content={META_IMAGE_URL} />
 
