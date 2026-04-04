@@ -1,6 +1,17 @@
+"use client";
+
 import { BasicLink } from "@/components/ui/basic-link";
+import { Button } from "@/components/ui/button";
+import { MailIcon } from "lucide-react";
 
 export default function Home() {
+  const handleWriteToMeViaEmail = () => {
+    const emailAddress = "yashsehgal.work@gmail.com";
+    const subject = "Hello, Yash!";
+    const emailLink = `mailto:${emailAddress}?subject=${subject}`;
+    window.location.href = emailLink;
+  };
+
   return (
     <div className="home">
       <div className="space-y-8">
@@ -58,6 +69,12 @@ export default function Home() {
             .
           </p>
         </div>
+      </div>
+      <div className="flex items-center justify-start gap-2 mt-6">
+        <Button variant="default" onClick={handleWriteToMeViaEmail} size="lg">
+          <MailIcon className="size-4 shrink-0" />
+          Write to me via email
+        </Button>
       </div>
     </div>
   );
