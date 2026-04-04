@@ -7,8 +7,6 @@ const NAVIGATION_HIGHLIGHTED_LINKS: {
   title: string;
   route: ApplicationRoute;
 }[] = [
-  // { title: "Study", route: ROUTES.STUDY },
-  { title: "Writings", route: ROUTES.WRITINGS },
   { title: "About", route: ROUTES.ABOUT },
   { title: "Feed", route: ROUTES.FEED },
 ] as const;
