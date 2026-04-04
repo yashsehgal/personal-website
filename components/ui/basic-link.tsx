@@ -1,10 +1,10 @@
 import { cn } from "@/lib/utils";
 import Link, { LinkProps } from "next/link";
 
-interface BasicLinkProps
-  extends React.HTMLAttributes<HTMLAnchorElement>, LinkProps {
-  withoutHighlight?: boolean;
-}
+type BasicLinkProps = React.AnchorHTMLAttributes<HTMLAnchorElement> &
+  LinkProps & {
+    withoutHighlight?: boolean;
+  };
 
 export function BasicLink({
   className,
