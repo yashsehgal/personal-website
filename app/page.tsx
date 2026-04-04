@@ -15,7 +15,7 @@ export default function Home() {
   return (
     <div className="home">
       <div className="space-y-8">
-        <div className="w-md text-muted-foreground text-base tracking-tight space-y-4 max-md:w-full">
+        <div className="w-md text-base tracking-tight space-y-4 max-md:w-full">
           <p className="leading-relaxed">
             Hi, I am Yash. I am a design engineer based out of India, also
             working from San Francisco, CA.
@@ -49,7 +49,7 @@ export default function Home() {
             .
           </p>
         </div>
-        <div className="w-md text-muted-foreground text-base tracking-tight space-y-4 max-md:w-full">
+        <div className="w-md text-base tracking-tight space-y-4 max-md:w-full">
           <p className="leading-relaxed">
             You can connect with me on{" "}
             <BasicLink href="https://x.com/yashsehgaldev" target="_blank">
