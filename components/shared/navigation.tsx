@@ -7,7 +7,7 @@ const NAVIGATION_HIGHLIGHTED_LINKS: {
   title: string;
   route: ApplicationRoute;
 }[] = [
-  { title: "Now", route: ROUTES.NOW },
+  { title: "Study", route: ROUTES.STUDY },
   { title: "Writings", route: ROUTES.WRITINGS },
   { title: "About", route: ROUTES.ABOUT },
   { title: "Feed", route: ROUTES.FEED },
