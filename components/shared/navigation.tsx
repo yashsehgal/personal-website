@@ -1,3 +1,5 @@
+"use client";
+
 import { ApplicationRoute, ROUTES } from "@/common/routes";
 import { BasicLink } from "@/components/ui/basic-link";
 

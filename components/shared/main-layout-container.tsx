@@ -1,3 +1,5 @@
+"use client";
+
 import { Navigation } from "@/components/shared/navigation";
 import { cn } from "@/lib/utils";
 
