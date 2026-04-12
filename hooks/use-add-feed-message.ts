@@ -13,7 +13,9 @@ export function useAddFeedMessage() {
     mutationFn: (vars: { feedId: string; content: string }) =>
       addMessageToFeed(supabase, vars.feedId, vars.content),
     onSuccess: (_, vars) => {
-      void queryClient.invalidateQueries({ queryKey: feedMessageKeys.forFeed(vars.feedId) });
+      void queryClient.invalidateQueries({
+        queryKey: feedMessageKeys.forFeed(vars.feedId),
+      });
     },
   });
 }
