@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Inter } from "next/font/google";
 import "./globals.css";
+import { ReactQueryProvider } from "@/components/providers/react-query-provider";
 import { cn } from "@/lib/utils";
 import { MainLayoutContainer } from "@/components/shared/main-layout-container";
 
@@ -39,7 +40,9 @@ export default function RootLayout({
       )}
     >
       <body className="min-h-screen">
-        <MainLayoutContainer>{children}</MainLayoutContainer>
+        <ReactQueryProvider>
+          <MainLayoutContainer>{children}</MainLayoutContainer>
+        </ReactQueryProvider>
       </body>
     </html>
   );
