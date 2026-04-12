@@ -16,7 +16,7 @@ export function Navigation() {
     <nav className="flex items-center justify-between py-4 px-8 border-b">
       <div className="flex items-center justify-start gap-2">
         <BasicLink href={ROUTES.HOME} withoutHighlight>
-          <div className="flex items-center gap-2 text-sm">
+          <div className="flex items-center gap-1.5 text-sm">
             <p className="tracking-tight font-medium">Yash Sehgal</p>
             <p className="tracking-tight text-muted-foreground">
               Design Engineer
