@@ -1,5 +1,6 @@
 "use client";
 import { Button } from "@/components/ui/button";
+import { useSignInWithOAuth } from "@/hooks/use-sign-in-with-oauth";
 import {
   Drawer,
   DrawerClose,
@@ -22,6 +23,8 @@ const GOOGLE_LOGO: string = "/logo/google.svg";
 export function FeedAuthenticationManager({
   children,
 }: FeedAuthenticationManagerProps) {
+  const signIn = useSignInWithOAuth();
+
   return (
     <Drawer>
       <DrawerTrigger asChild>{children}</DrawerTrigger>
@@ -34,27 +37,50 @@ export function FeedAuthenticationManager({
           </DrawerDescription>
         </DrawerHeader>
         <div className="grid grid-cols-2 gap-4 px-4">
-          <Button variant="outline" size="lg" className="gap-2">
+          {signIn.error ? (
+            <p className="col-span-2 text-sm text-destructive" role="alert">
+              {signIn.error.message}
+            </p>
+          ) : null}
+          <Button
+            type="button"
+            variant="outline"
+            size="lg"
+            className="gap-2"
+            disabled={signIn.isPending}
+            onClick={() => signIn.mutate("google")}
+          >
             <Image
               src={GOOGLE_LOGO}
               priority
-              alt="Google Logo"
+              alt=""
               width={20}
               height={20}
               className="size-4 shrink-0 pointer-events-none select-none"
             />
-            Sign in with Google
+            {signIn.isPending && signIn.variables === "google"
+              ? "Redirecting…"
+              : "Sign in with Google"}
           </Button>
-          <Button variant="outline" size="lg" className="gap-2">
+          <Button
+            type="button"
+            variant="outline"
+            size="lg"
+            className="gap-2"
+            disabled={signIn.isPending}
+            onClick={() => signIn.mutate("github")}
+          >
             <Image
               src={GITHUB_LOGO}
               priority
-              alt="GitHub Logo"
+              alt=""
               width={20}
               height={20}
               className="size-4 shrink-0 pointer-events-none select-none mb-px"
             />
-            Continue with GitHub
+            {signIn.isPending && signIn.variables === "github"
+              ? "Redirecting…"
+              : "Continue with GitHub"}
           </Button>
         </div>
         <DrawerFooter>

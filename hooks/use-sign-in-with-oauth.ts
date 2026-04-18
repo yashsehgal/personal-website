@@ -13,7 +13,8 @@ export function useSignInWithOAuth() {
 
   return useMutation({
     mutationFn: async (provider: OAuthProvider) => {
-      const redirectTo = getOAuthCallbackUrl(window.location.origin);
+      const next = `${window.location.pathname}${window.location.search}`;
+      const redirectTo = getOAuthCallbackUrl(window.location.origin, next);
       const { data, error } = await signInWithOAuth(
         supabase,
         provider,

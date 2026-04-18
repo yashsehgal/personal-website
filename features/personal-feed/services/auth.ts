@@ -3,9 +3,16 @@ import type { AuthError, Session, SupabaseClient } from "@supabase/supabase-js";
 export type OAuthProvider = "github" | "google";
 
 /** Builds the browser redirect URL Supabase should send users back to after OAuth. */
-export function getOAuthCallbackUrl(origin: string): string {
+export function getOAuthCallbackUrl(origin: string, nextPath?: string): string {
   const base = origin.replace(/\/$/, "");
-  return `${base}/auth/callback`;
+  const url = new URL(`${base}/auth/callback`);
+  if (nextPath) {
+    url.searchParams.set(
+      "next",
+      nextPath.startsWith("/") ? nextPath : `/${nextPath}`,
+    );
+  }
+  return url.toString();
 }
 
 export async function signInWithOAuth(
