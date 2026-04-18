@@ -6,6 +6,7 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { FeedAuthenticationManager } from "@/features/personal-feed/components/feed-authentication-manager";
 import { useManageFeedSessionQueryState } from "@/features/personal-feed/hooks/use-manage-feed-session-query-state";
 import { IFeed } from "@/features/personal-feed/interfaces";
 import { useFeeds } from "@/hooks/use-feeds";
@@ -65,6 +66,12 @@ export function FeedSidebar() {
       {safeShowFeedsLoading ? (
         <div className="flex flex-col items-stretch w-full gap-px"></div>
       ) : null}
+
+      <FeedAuthenticationManager>
+        <Button variant="outline" size="sm">
+          Sign in to chat
+        </Button>
+      </FeedAuthenticationManager>
     </aside>
   );
 }
