@@ -4,6 +4,8 @@ import "./globals.css";
 import { ReactQueryProvider } from "@/components/providers/react-query-provider";
 import { cn } from "@/lib/utils";
 import { MainLayoutContainer } from "@/components/shared/main-layout-container";
+import { NuqsAdapter } from "nuqs/adapters/next";
+import { TooltipProvider } from "@/components/ui/tooltip";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -40,9 +42,13 @@ export default function RootLayout({
       )}
     >
       <body className="min-h-screen">
-        <ReactQueryProvider>
-          <MainLayoutContainer>{children}</MainLayoutContainer>
-        </ReactQueryProvider>
+        <NuqsAdapter>
+          <ReactQueryProvider>
+            <TooltipProvider>
+              <MainLayoutContainer>{children}</MainLayoutContainer>
+            </TooltipProvider>
+          </ReactQueryProvider>
+        </NuqsAdapter>
       </body>
     </html>
   );
