@@ -11,5 +11,7 @@ export const feedMessageKeys = {
 };
 
 export const authKeys = {
-  session: () => ["auth", "session"] as const,
+  all: ["auth"] as const,
+  session: () => [...authKeys.all, "session"] as const,
+  sessionWithProfile: () => [...authKeys.all, "session-with-profile"] as const,
 };

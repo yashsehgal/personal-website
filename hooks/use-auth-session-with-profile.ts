@@ -3,10 +3,10 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { authKeys } from "@/features/personal-feed/query-keys";
-import { getSession } from "@/features/personal-feed/services/auth";
+import { getSessionWithUserProfile } from "@/features/personal-feed/services/auth";
 import { useSupabaseBrowser } from "@/hooks/use-supabase-browser";
 
-export function useAuthSession() {
+export function useAuthSessionWithProfile() {
   const supabase = useSupabaseBrowser();
   const queryClient = useQueryClient();
 
@@ -20,7 +20,7 @@ export function useAuthSession() {
   }, [supabase, queryClient]);
 
   return useQuery({
-    queryKey: authKeys.session(),
-    queryFn: () => getSession(supabase),
+    queryKey: authKeys.sessionWithProfile(),
+    queryFn: () => getSessionWithUserProfile(supabase),
   });
 }
