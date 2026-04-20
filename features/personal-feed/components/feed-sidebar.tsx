@@ -7,6 +7,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { FeedAuthenticationCTA } from "@/features/personal-feed/components/feed-authentication-cta";
+import { FeedCreateNewFeedManager } from "@/features/personal-feed/components/feed-create-new-feed-manager";
 import { useManageFeedSessionQueryState } from "@/features/personal-feed/hooks/use-manage-feed-session-query-state";
 import { IFeed } from "@/features/personal-feed/interfaces";
 import { useFeeds } from "@/hooks/use-feeds";
@@ -43,9 +44,11 @@ export function FeedSidebar() {
           <Tooltip>
             <TooltipTrigger
               render={
-                <Button variant="ghost" size="icon-xs">
-                  <Plus className="size-3 shrink-0" />
-                </Button>
+                <FeedCreateNewFeedManager>
+                  <Button variant="ghost" size="icon-xs">
+                    <Plus className="size-3 shrink-0" />
+                  </Button>
+                </FeedCreateNewFeedManager>
               }
             />
             <TooltipContent>Start new chat</TooltipContent>
