@@ -1,14 +1,41 @@
 "use client";
 
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
 import { Textarea } from "@/components/ui/textarea";
 import { useManageFeedSessionQueryState } from "@/features/personal-feed/hooks/use-manage-feed-session-query-state";
+import { userToProfile } from "@/features/personal-feed/services/auth";
+import { useAuthSession } from "@/hooks/use-auth-session";
 import { useFeed } from "@/hooks/use-feed";
-import { useEffect, useMemo, useRef } from "react";
+import { cn } from "@/lib/utils";
+import { Send } from "lucide-react";
+import {
+  ChangeEvent,
+  InputEvent,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 
 export function FeedMessageBox() {
+  const {
+    data: session,
+    isError: isAuthSessionError,
+    isLoading: isAuthSessionLoading,
+  } = useAuthSession();
+
   const { feedSession } = useManageFeedSessionQueryState();
   const { data: feed, isLoading: isFeedLoading } = useFeed(feedSession);
+
+  // UI STATES AND REFERENCES
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const [isMessageBoxTextareaFocused, setIsMessageBoxTextareaFocused] =
+    useState<boolean>(false);
+  const [messageBoxTextareaInputValue, setMessageBoxTextareaInputValue] =
+    useState<string>("");
 
   const safeFeedName = useMemo(() => {
     if (isFeedLoading) {
@@ -17,6 +44,49 @@ export function FeedMessageBox() {
 
     return feed?.name ?? "Untitled Feed";
   }, [feed, isFeedLoading]);
+
+  const profile = useMemo(() => {
+    if (isAuthSessionError || !session) {
+      return null;
+    }
+
+    return userToProfile(session.user);
+  }, [session, isAuthSessionError]);
+
+  const safeIsAuthenticated = useMemo(() => {
+    if (isAuthSessionError) {
+      return false;
+    }
+
+    return session !== null && !isAuthSessionError;
+  }, [session, isAuthSessionError]);
+
+  const safeUserDisplayName = useMemo(() => {
+    if (isAuthSessionError || !profile) {
+      return "";
+    }
+
+    return profile.displayName ?? profile.email ?? "User";
+  }, [profile, isAuthSessionError]);
+
+  const handleMessageBoxTextareaFocusEvent = () => {
+    setIsMessageBoxTextareaFocused(true);
+  };
+
+  const handleMessageBoxTextareaBlurEvent = () => {
+    setIsMessageBoxTextareaFocused(false);
+  };
+
+  const handleMessageBoxTextareaInputValueChangeEvent = (
+    event: ChangeEvent<HTMLTextAreaElement>,
+  ) => {
+    setMessageBoxTextareaInputValue(event.target.value);
+  };
+
+  const safeMessageBoxTextareaInputValueHasSomeText = useMemo(() => {
+    const trimmed = messageBoxTextareaInputValue.trim();
+    return Boolean(trimmed);
+  }, [messageBoxTextareaInputValue]);
 
   useEffect(() => {
     if (isFeedLoading) return;
@@ -29,15 +99,63 @@ export function FeedMessageBox() {
   }, [isFeedLoading]);
 
   return (
-    <div className="w-full h-fit border border-border rounded-lg divide-y divide-border">
-      <div className="w-full p-2"></div>
+    <div
+      className={cn(
+        "w-full h-fit border border-border rounded-xl divide-y divide-border transition-all",
+        isMessageBoxTextareaFocused
+          ? "border-primary/50 ring-4 ring-primary/20"
+          : "",
+      )}
+    >
+      <div className="w-full py-2.5 px-3 flex items-center justify-between">
+        {isAuthSessionLoading ? (
+          <Skeleton className="h-5 w-56" />
+        ) : (
+          <>
+            {safeIsAuthenticated ? (
+              <div className="flex items-center justify-start gap-1.5">
+                <Avatar className="size-5!">
+                  <AvatarImage
+                    src={profile?.avatarUrl ?? undefined}
+                    alt={safeUserDisplayName}
+                  />
+                  <AvatarFallback>
+                    {safeUserDisplayName.charAt(0)}
+                  </AvatarFallback>
+                </Avatar>
+                <p className="text-sm font-medium">{safeUserDisplayName}</p>
+              </div>
+            ) : (
+              <p className="text-xs text-muted-foreground">
+                Your messages are going to be public and anonymous.
+              </p>
+            )}
+          </>
+        )}
+      </div>
       <Textarea
         ref={textareaRef}
+        value={messageBoxTextareaInputValue}
+        onChange={handleMessageBoxTextareaInputValueChangeEvent}
         disabled={isFeedLoading}
+        onFocus={handleMessageBoxTextareaFocusEvent}
+        onBlur={handleMessageBoxTextareaBlurEvent}
         aria-busy={isFeedLoading}
-        className="resize-none min-h-24 max-h-64 w-full rounded-md bg-transparent focus-visible:outline-none focus-visible:ring-0 focus-visible:border-transparent"
+        className="resize-none min-h-24 max-h-64 w-full rounded-md bg-transparent focus-visible:outline-none focus-visible:ring-0 focus-visible:border-transparent leading-6"
         placeholder={`Write a message to #${safeFeedName}`}
       />
+      <div className="px-3 pb-3 flex items-center justify-between">
+        <div />
+        <div className="flex items-center justify-end gap-2">
+          <Button
+            className="gap-2"
+            disabled={!safeMessageBoxTextareaInputValueHasSomeText}
+          >
+            <Send className="shrink-0" />
+            Send
+          </Button>
+        </div>
+      </div>
     </div>
   );
 }
