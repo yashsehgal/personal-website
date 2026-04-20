@@ -2,8 +2,14 @@
 
 import { Button } from "@/components/ui/button";
 import { FeedAuthenticationManager } from "@/features/personal-feed/components/feed-authentication-manager";
+import { useAuthSession } from "@/hooks/use-auth-session";
 
 export function FeedAuthenticationCTA() {
+  const { data: session, isPending } = useAuthSession();
+
+  if (isPending) return null;
+  if (session) return null;
+
   return (
     <div className="flex flex-col items-start w-full gap-2.5 select-none">
       <div className="px-1.5 flex flex-col items-start w-full gap-1">
