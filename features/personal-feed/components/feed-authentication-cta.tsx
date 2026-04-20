@@ -5,9 +5,8 @@ import { FeedAuthenticationManager } from "@/features/personal-feed/components/f
 import { useAuthSession } from "@/hooks/use-auth-session";
 
 export function FeedAuthenticationCTA() {
-  const { data: session, isPending } = useAuthSession();
+  const { data: session } = useAuthSession();
 
-  if (isPending) return null;
   if (session) return null;
 
   return (

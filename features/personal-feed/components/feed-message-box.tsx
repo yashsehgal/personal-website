@@ -6,10 +6,11 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { Textarea } from "@/components/ui/textarea";
 import { useManageFeedSessionQueryState } from "@/features/personal-feed/hooks/use-manage-feed-session-query-state";
 import { userToProfile } from "@/features/personal-feed/services/auth";
+import { useAddFeedMessage } from "@/hooks/use-add-feed-message";
 import { useAuthSession } from "@/hooks/use-auth-session";
 import { useFeed } from "@/hooks/use-feed";
 import { cn } from "@/lib/utils";
-import { Send } from "lucide-react";
+import { Loader2, Send } from "lucide-react";
 import { ChangeEvent, useEffect, useMemo, useRef, useState } from "react";
 
 export function FeedMessageBox() {
@@ -21,6 +22,7 @@ export function FeedMessageBox() {
 
   const { feedSession } = useManageFeedSessionQueryState();
   const { data: feed, isLoading: isFeedLoading } = useFeed(feedSession);
+  const addFeedMessage = useAddFeedMessage();
 
   // UI STATES AND REFERENCES
   const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -80,6 +82,28 @@ export function FeedMessageBox() {
     return Boolean(trimmed);
   }, [messageBoxTextareaInputValue]);
 
+  const canSendMessage =
+    Boolean(feedSession) &&
+    safeMessageBoxTextareaInputValueHasSomeText &&
+    !isFeedLoading &&
+    !addFeedMessage.isPending;
+
+  const handleSendMessage = () => {
+    if (!feedSession || !safeMessageBoxTextareaInputValueHasSomeText) return;
+    const content = messageBoxTextareaInputValue.trim();
+    addFeedMessage.mutate(
+      { feed_id: feedSession, content },
+      {
+        onSuccess: () => {
+          setMessageBoxTextareaInputValue("");
+          requestAnimationFrame(() => {
+            textareaRef.current?.focus({ preventScroll: true });
+          });
+        },
+      },
+    );
+  };
+
   useEffect(() => {
     if (isFeedLoading) return;
     const el = textareaRef.current;
@@ -136,17 +160,21 @@ export function FeedMessageBox() {
         className="resize-none min-h-24 max-h-64 w-full rounded-md bg-transparent focus-visible:outline-none focus-visible:ring-0 focus-visible:border-transparent leading-6"
         placeholder={`Write a message to #${safeFeedName}`}
       />
-      <div className="px-3 pb-3 flex items-center justify-between">
+      <div className="px-3 pb-3 flex items-center justify-between gap-2">
         <div />
-        <div className="flex items-center justify-end gap-2">
-          <Button
-            className="gap-2"
-            disabled={!safeMessageBoxTextareaInputValueHasSomeText}
-          >
+        <Button
+          type="button"
+          className="gap-2"
+          disabled={!canSendMessage}
+          onClick={handleSendMessage}
+        >
+          {addFeedMessage.isPending ? (
+            <Loader2 className="shrink-0 animate-spin" />
+          ) : (
             <Send className="shrink-0" />
-            Send
-          </Button>
-        </div>
+          )}
+          Send
+        </Button>
       </div>
     </div>
   );
