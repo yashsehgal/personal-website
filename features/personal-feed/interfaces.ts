@@ -11,10 +11,24 @@ export interface IFeedMessage {
   created_at: string;
   feed_id: string;
   content: string;
-  user_id: string;
+  /** Present when posted signed-in; null for anonymous posts. */
+  user_id: string | null;
+  /** Parent message id for replies; null for top-level channel messages. */
+  reply_to_message_id: string | null;
 }
 
 export interface ICreateFeedInput {
   name: string;
   is_public: boolean;
+}
+
+export interface ICreateFeedMessageInput {
+  feed_id: string;
+  content: string;
+  /** When set, message is a reply in the same feed as the parent. */
+  reply_to_message_id?: string | null;
+}
+
+export interface IUpdateFeedMessageInput {
+  content: string;
 }

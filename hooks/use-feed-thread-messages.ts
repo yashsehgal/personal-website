@@ -9,28 +9,31 @@ import {
 } from "@/features/personal-feed/services/feed-messages";
 import { useSupabaseBrowser } from "@/hooks/use-supabase-browser";
 
-export function useFeedMessages(
+/** Messages that are replies to a specific parent message (thread). */
+export function useFeedThreadMessages(
   feedId: string | undefined,
-  options: IListFeedMessagesOptions = {},
+  parentMessageId: string | undefined,
+  options: Omit<
+    IListFeedMessagesOptions,
+    "reply_to_message_id" | "roots_only"
+  > = {},
 ) {
   const supabase = useSupabaseBrowser();
   const limit = options.limit ?? FEED_MESSAGES_DEFAULT_PAGE_SIZE;
   const before = options.before ?? null;
-  const rootsOnly = options.roots_only ?? false;
-  const replyTo = options.reply_to_message_id ?? null;
 
   return useQuery({
-    queryKey: feedId
-      ? [...feedMessageKeys.forFeed(feedId), limit, before, rootsOnly, replyTo]
-      : [...feedMessageKeys.all, "disabled"],
+    queryKey:
+      feedId && parentMessageId
+        ? [...feedMessageKeys.thread(feedId, parentMessageId), limit, before]
+        : [...feedMessageKeys.all, "thread", "disabled"],
     queryFn: () =>
       listMessagesForFeed(supabase, feedId!, {
         ...options,
         limit,
         before: before ?? undefined,
-        roots_only: rootsOnly,
-        reply_to_message_id: options.reply_to_message_id,
+        reply_to_message_id: parentMessageId!,
       }),
-    enabled: Boolean(feedId),
+    enabled: Boolean(feedId && parentMessageId),
   });
 }

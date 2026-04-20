@@ -10,12 +10,28 @@ export function useDeleteFeedMessage() {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (vars: { messageId: string; feedId: string }) =>
-      deleteFeedMessage(supabase, vars.messageId),
-    onSuccess: (_, vars) => {
+    mutationFn: async (vars: { messageId: string; feedId: string }) => {
+      const deleted = await deleteFeedMessage(supabase, vars.messageId);
+      return {
+        ...vars,
+        replyToMessageId: deleted.reply_to_message_id,
+      };
+    },
+    onSuccess: (result) => {
       void queryClient.invalidateQueries({
-        queryKey: feedMessageKeys.forFeed(vars.feedId),
+        queryKey: feedMessageKeys.forFeed(result.feedId),
       });
+      void queryClient.invalidateQueries({
+        queryKey: feedMessageKeys.detail(result.messageId),
+      });
+      if (result.replyToMessageId) {
+        void queryClient.invalidateQueries({
+          queryKey: feedMessageKeys.thread(
+            result.feedId,
+            result.replyToMessageId,
+          ),
+        });
+      }
     },
   });
 }
