@@ -117,7 +117,7 @@ export function FeedMessageBox() {
   return (
     <div
       className={cn(
-        "w-full h-fit border border-border rounded-xl divide-y divide-border transition-all",
+        "w-full h-fit border border-border rounded-xl divide-y divide-border transition-all bg-background",
         isMessageBoxTextareaFocused
           ? "border-primary/50 ring-4 ring-primary/20"
           : "",

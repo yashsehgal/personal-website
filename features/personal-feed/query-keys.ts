@@ -20,3 +20,10 @@ export const authKeys = {
   session: () => [...authKeys.all, "session"] as const,
   sessionWithProfile: () => [...authKeys.all, "session-with-profile"] as const,
 };
+
+export const profileKeys = {
+  all: ["profiles"] as const,
+  detail: (userId: string) => [...profileKeys.all, "detail", userId] as const,
+  byUserIds: (userIds: string[]) =>
+    [...profileKeys.all, "by-user-ids", [...userIds].sort().join(",")] as const,
+};
