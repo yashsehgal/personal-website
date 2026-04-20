@@ -9,11 +9,11 @@ import { cn } from "@/lib/utils";
 import { formatDate } from "date-fns";
 import { useMemo } from "react";
 
-interface FeedMessageBlockProps {
+interface FeedMessageProps {
   message: IFeedMessage;
 }
 
-export function FeedMessageBlock({ message }: FeedMessageBlockProps) {
+export function FeedMessage({ message }: FeedMessageProps) {
   const sender = message.sender_profile;
   const isAnonymous = message.user_id == null;
 

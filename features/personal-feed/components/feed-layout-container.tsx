@@ -1,5 +1,5 @@
 import { FeedMobileNavigation } from "@/features/personal-feed/components/feed-mobile-navigation";
-import { FeedSessionContainer } from "@/features/personal-feed/components/feed-session-container";
+import { FeedSessionContainer } from "@/features/personal-feed/components/feed-messages-view/feed-session-container";
 import { FeedSidebar } from "@/features/personal-feed/components/feed-sidebar";
 
 export function FeedLayoutContainer() {

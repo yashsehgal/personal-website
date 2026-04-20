@@ -1,6 +1,6 @@
 "use client";
 
-import { FeedSessionMessagesContainer } from "@/features/personal-feed/components/feed-session-messages-container";
+import { FeedSessionMessagesContainer } from "@/features/personal-feed/components/feed-messages-view/feed-session-messages-container";
 import { useManageFeedSessionQueryState } from "@/features/personal-feed/hooks/use-manage-feed-session-query-state";
 
 export function FeedSessionContainer() {

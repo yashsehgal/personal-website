@@ -1,11 +1,11 @@
 "use client";
 
-import { FeedMessageBlock } from "@/features/personal-feed/components/feed-message-block";
+import { FeedMessage } from "@/features/personal-feed/components/feed-messages-view/feed-message-block";
 import { useManageFeedSessionQueryState } from "@/features/personal-feed/hooks/use-manage-feed-session-query-state";
 import { useFeedMessagesWithSenderProfiles } from "@/hooks/use-feed-messages-with-sender-profiles";
 import { useLayoutEffect, useMemo, useRef } from "react";
 
-export function FeedMessagesContentCollectionContainer() {
+export function FeedMessagesListContainer() {
   const { feedSession } = useManageFeedSessionQueryState();
 
   const { data: feedMessages, isLoading: isFeedMessagesLoading } =
@@ -31,7 +31,7 @@ export function FeedMessagesContentCollectionContainer() {
       className="h-[calc(100vh-17rem)] overflow-y-auto no-scrollbar scroll-smooth pt-3 pb-1"
     >
       {safeFeedMessages.map((message) => {
-        return <FeedMessageBlock key={message.id} message={message} />;
+        return <FeedMessage key={message.id} message={message} />;
       })}
     </div>
   );
