@@ -10,15 +10,7 @@ import { useAuthSession } from "@/hooks/use-auth-session";
 import { useFeed } from "@/hooks/use-feed";
 import { cn } from "@/lib/utils";
 import { Send } from "lucide-react";
-import {
-  ChangeEvent,
-  InputEvent,
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import { ChangeEvent, useEffect, useMemo, useRef, useState } from "react";
 
 export function FeedMessageBox() {
   const {
