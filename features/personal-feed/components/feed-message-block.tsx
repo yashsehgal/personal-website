@@ -51,7 +51,7 @@ export function FeedMessageBlock({ message }: FeedMessageBlockProps) {
   return (
     <div
       className={cn(
-        "w-full h-fit relative px-8 py-4 items-start flex justify-start gap-3 rounded-lg",
+        "w-full h-fit relative px-4 py-4 items-start flex justify-start gap-3 rounded-lg",
         "hover:bg-muted",
       )}
       aria-description={message.content}
