@@ -22,7 +22,7 @@ export function FeedMessagesContentCollectionContainer() {
   useLayoutEffect(() => {
     const el = scrollRootRef.current;
     if (!el) return;
-    el.scrollTo({ top: el.scrollHeight, behavior: "smooth" });
+    el.scrollTo({ top: el.scrollHeight, behavior: "instant" });
   }, [lastMessageId, safeFeedMessages.length, feedSession]);
 
   return (
