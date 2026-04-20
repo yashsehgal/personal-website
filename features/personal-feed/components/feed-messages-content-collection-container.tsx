@@ -28,7 +28,7 @@ export function FeedMessagesContentCollectionContainer() {
   return (
     <div
       ref={scrollRootRef}
-      className="h-[calc(100vh-20rem)] overflow-y-auto no-scrollbar scroll-smooth pt-3 pb-1"
+      className="h-[calc(100vh-17rem)] overflow-y-auto no-scrollbar scroll-smooth pt-3 pb-1"
     >
       {safeFeedMessages.map((message) => {
         return <FeedMessageBlock key={message.id} message={message} />;

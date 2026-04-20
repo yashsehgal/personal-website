@@ -51,41 +51,39 @@ export function FeedMessageBlock({ message }: FeedMessageBlockProps) {
   return (
     <div
       className={cn(
-        "w-full h-fit relative px-8 py-4 items-start flex justify-start gap-3",
+        "w-full h-fit relative px-8 py-2 items-start flex justify-start gap-3",
         "hover:bg-muted/50",
       )}
       aria-description={message.content}
     >
-      <Avatar size="default" className="rounded-md shrink-0">
-        <AvatarImage
-          src={safeAvatarUrl ?? undefined}
-          alt={primaryLabel}
-          className="rounded-md shrink-0"
-        />
-        <AvatarFallback className="shrink-0">
-          {primaryLabel.charAt(0)}
-        </AvatarFallback>
-      </Avatar>
-      <div className="flex-1 space-y-1.5">
-        <div className="flex gap-2 items-center justify-start">
-          <p className="font-semibold text-sm">{primaryLabel}</p>
-          <Tooltip>
-            <TooltipTrigger
-              render={
-                <p className="text-xs text-muted-foreground mt-px cursor-default">
-                  {safeMessageTimestamp}
-                </p>
-              }
-            />
-            <TooltipContent>
-              {formatDate(message.created_at, "MMM d, yyyy, h:mm a")}
-            </TooltipContent>
-          </Tooltip>
-        </div>
-        <pre className="text-sm whitespace-pre-wrap font-sans">
-          {message.content}
-        </pre>
+      <div className="flex items-center gap-2">
+        <Avatar size="sm" className="rounded-md shrink-0">
+          <AvatarImage
+            src={safeAvatarUrl ?? undefined}
+            alt={primaryLabel}
+            className="rounded-md shrink-0"
+          />
+          <AvatarFallback className="shrink-0">
+            {primaryLabel.charAt(0)}
+          </AvatarFallback>
+        </Avatar>
+        <p className="font-semibold text-sm shrink-0">{primaryLabel}</p>
+        <Tooltip>
+          <TooltipTrigger
+            render={
+              <p className="text-xs text-muted-foreground mt-px cursor-default shrink-0">
+                {safeMessageTimestamp}
+              </p>
+            }
+          />
+          <TooltipContent>
+            {formatDate(message.created_at, "MMM d, yyyy, h:mm a")}
+          </TooltipContent>
+        </Tooltip>
       </div>
+      <pre className="text-sm whitespace-pre-wrap font-sans mt-0.5 flex-1">
+        {message.content}
+      </pre>
     </div>
   );
 }
