@@ -123,7 +123,7 @@ export function FeedMessageBox() {
           : "",
       )}
     >
-      <div className="w-full py-2.5 px-3 flex items-center justify-between">
+      <div className="w-full py-2.5 px-3 flex items-center justify-between bg-muted rounded-t-xl">
         <div />
         {isAuthSessionLoading ? (
           <Skeleton className="h-5 w-56" />
