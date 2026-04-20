@@ -1,7 +1,9 @@
+"use client";
+
 import { FeedMessageBlock } from "@/features/personal-feed/components/feed-message-block";
 import { useManageFeedSessionQueryState } from "@/features/personal-feed/hooks/use-manage-feed-session-query-state";
 import { useFeedMessagesWithSenderProfiles } from "@/hooks/use-feed-messages-with-sender-profiles";
-import { useMemo } from "react";
+import { useLayoutEffect, useMemo, useRef } from "react";
 
 export function FeedMessagesContentCollectionContainer() {
   const { feedSession } = useManageFeedSessionQueryState();
@@ -14,8 +16,20 @@ export function FeedMessagesContentCollectionContainer() {
     return feedMessages?.slice().reverse() ?? [];
   }, [feedMessages, isFeedMessagesLoading]);
 
+  const scrollRootRef = useRef<HTMLDivElement>(null);
+  const lastMessageId = safeFeedMessages.at(-1)?.id;
+
+  useLayoutEffect(() => {
+    const el = scrollRootRef.current;
+    if (!el) return;
+    el.scrollTo({ top: el.scrollHeight, behavior: "smooth" });
+  }, [lastMessageId, safeFeedMessages.length, feedSession]);
+
   return (
-    <div className="h-[calc(100vh-20rem)] overflow-y-auto no-scrollbar scroll-smooth px-3 pt-3 pb-1">
+    <div
+      ref={scrollRootRef}
+      className="h-[calc(100vh-20rem)] overflow-y-auto no-scrollbar scroll-smooth px-3 pt-3 pb-1"
+    >
       {safeFeedMessages.map((message) => {
         return <FeedMessageBlock key={message.id} message={message} />;
       })}
