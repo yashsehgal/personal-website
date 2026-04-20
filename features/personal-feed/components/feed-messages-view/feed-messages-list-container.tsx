@@ -1,8 +1,11 @@
 "use client";
 
 import { FeedMessage } from "@/features/personal-feed/components/feed-messages-view/feed-message-block";
+import { FeedMessagesDayDateGroup } from "@/features/personal-feed/components/feed-messages-view/feed-messages-daydate-group";
+import type { IFeedMessage } from "@/features/personal-feed/interfaces";
 import { useManageFeedSessionQueryState } from "@/features/personal-feed/hooks/use-manage-feed-session-query-state";
 import { useFeedMessagesWithSenderProfiles } from "@/hooks/use-feed-messages-with-sender-profiles";
+import { startOfDay, parseISO } from "date-fns";
 import { useLayoutEffect, useMemo, useRef } from "react";
 
 export function FeedMessagesListContainer() {
@@ -16,6 +19,20 @@ export function FeedMessagesListContainer() {
     return feedMessages?.slice().reverse() ?? [];
   }, [feedMessages, isFeedMessagesLoading]);
 
+  const messagesGroupedByDay = useMemo(() => {
+    const groups: { day: Date; messages: IFeedMessage[] }[] = [];
+    for (const message of safeFeedMessages) {
+      const dayStart = startOfDay(parseISO(message.created_at));
+      const last = groups.at(-1);
+      if (last && last.day.getTime() === dayStart.getTime()) {
+        last.messages.push(message);
+      } else {
+        groups.push({ day: dayStart, messages: [message] });
+      }
+    }
+    return groups;
+  }, [safeFeedMessages]);
+
   const scrollRootRef = useRef<HTMLDivElement>(null);
   const lastMessageId = safeFeedMessages.at(-1)?.id;
 
@@ -28,11 +45,18 @@ export function FeedMessagesListContainer() {
   return (
     <div
       ref={scrollRootRef}
-      className="h-[calc(100vh-17rem)] overflow-y-auto no-scrollbar scroll-smooth pt-3 pb-1"
+      className="h-[calc(100vh-17rem)] overflow-y-auto no-scrollbar scroll-smooth pt-6 pb-1"
     >
-      {safeFeedMessages.map((message) => {
-        return <FeedMessage key={message.id} message={message} />;
-      })}
+      {messagesGroupedByDay.map((group) => (
+        <FeedMessagesDayDateGroup
+          key={group.day.toISOString()}
+          timestamp={group.day}
+        >
+          {group.messages.map((message) => (
+            <FeedMessage key={message.id} message={message} />
+          ))}
+        </FeedMessagesDayDateGroup>
+      ))}
     </div>
   );
 }

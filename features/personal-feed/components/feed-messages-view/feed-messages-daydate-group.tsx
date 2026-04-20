@@ -15,7 +15,7 @@ export function FeedMessagesDayDateGroup({
   }, [timestamp]);
 
   return (
-    <div className="border-t py-8 relative w-full h-fit">
+    <div className="border-t py-5 relative w-full h-fit">
       <div className="absolute -top-4 right-1/2 translate-x-1/2 w-fit h-fit px-3 py-1 border border-border rounded-full bg-background">
         <p className="text-xs text-muted-foreground font-medium">
           {safeTimestamp}
