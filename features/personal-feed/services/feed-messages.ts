@@ -137,12 +137,15 @@ export async function createFeedMessage(
   const trimmed = input.content.trim();
   if (!trimmed) throw new Error("Message cannot be empty");
 
+  // Use getSession (local session) so anonymous visitors are not blocked by getUser()
+  // validation errors when no user is signed in.
   const {
-    data: { user },
-    error: userError,
-  } = await supabase.auth.getUser();
-  if (userError) throw userError;
+    data: { session },
+    error: sessionError,
+  } = await supabase.auth.getSession();
+  if (sessionError) throw sessionError;
 
+  const user = session?.user ?? null;
   let user_id: string | null = null;
   if (user) {
     user_id = user.id;
