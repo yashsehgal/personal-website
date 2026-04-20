@@ -123,7 +123,7 @@ export function FeedMessageBox() {
           : "",
       )}
     >
-      <div className="w-full py-2.5 px-3 flex items-center justify-between bg-muted rounded-t-xl">
+      <div className="w-full py-2 px-2.5 flex items-center justify-between bg-muted rounded-t-xl">
         <div />
         {isAuthSessionLoading ? (
           <Skeleton className="h-5 w-56" />
@@ -160,7 +160,7 @@ export function FeedMessageBox() {
         onFocus={handleMessageBoxTextareaFocusEvent}
         onBlur={handleMessageBoxTextareaBlurEvent}
         aria-busy={isFeedLoading}
-        className="resize-none min-h-24 max-h-64 w-full rounded-md bg-transparent focus-visible:outline-none focus-visible:ring-0 focus-visible:border-transparent leading-6"
+        className="resize-none min-h-12 max-h-64 w-full rounded-md bg-transparent focus-visible:outline-none focus-visible:ring-0 focus-visible:border-transparent leading-6"
         placeholder={`Write a message to #${safeFeedName}`}
       />
       <div className="px-3 pb-3 flex items-center justify-between gap-2">
