@@ -30,8 +30,8 @@ export function MainLayoutContainer({
       </div>
       <main
         className={cn(
-          "flex min-h-0 flex-1 flex-col overflow-y-auto p-8",
-          isPageWithoutPadding && "p-0",
+          "flex min-h-0 min-w-0 flex-1 flex-col overflow-y-auto p-8",
+          isPageWithoutPadding && "overflow-hidden p-0",
         )}
       >
         {children}

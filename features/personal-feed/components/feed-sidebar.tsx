@@ -32,7 +32,7 @@ export function FeedSidebar() {
   }, [feeds, safeShowFeedsLoading]);
 
   return (
-    <aside className="w-1/6 p-2.5 space-y-2">
+    <aside className="w-1/6 shrink-0 p-2.5 space-y-2">
       {/* FEEDS SIDEBAR HEADER CONTAINER */}
       <div className="flex items-center justify-between px-2 pt-1 pb-0">
         <div className="flex items-center justify-start gap-2 text-muted-foreground">
