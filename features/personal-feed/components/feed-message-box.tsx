@@ -124,12 +124,13 @@ export function FeedMessageBox() {
       )}
     >
       <div className="w-full py-2.5 px-3 flex items-center justify-between">
+        <div />
         {isAuthSessionLoading ? (
           <Skeleton className="h-5 w-56" />
         ) : (
           <>
             {safeIsAuthenticated ? (
-              <div className="flex items-center justify-start gap-1.5">
+              <div className="flex items-center flex-row-reverse justify-start gap-2">
                 <Avatar className="size-5!">
                   <AvatarImage
                     src={profile?.avatarUrl ?? undefined}
@@ -139,7 +140,9 @@ export function FeedMessageBox() {
                     {safeUserDisplayName.charAt(0)}
                   </AvatarFallback>
                 </Avatar>
-                <p className="text-sm font-medium">{safeUserDisplayName}</p>
+                <p className="text-xs text-muted-foreground">
+                  In conversation as {safeUserDisplayName}
+                </p>
               </div>
             ) : (
               <p className="text-xs text-muted-foreground">
