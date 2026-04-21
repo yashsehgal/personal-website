@@ -124,7 +124,7 @@ function FeedSidebarItem({ feed, className, ...props }: FeedSidebarItemProps) {
       className={cn(
         "w-full flex items-center justify-between transition-transform",
         isFeedSessionActive
-          ? "bg-foreground text-background hover:bg-foreground hover:text-background"
+          ? "bg-muted text-foreground hover:bg-muted hover:text-foreground"
           : "",
         className,
       )}
@@ -134,7 +134,7 @@ function FeedSidebarItem({ feed, className, ...props }: FeedSidebarItemProps) {
         <Hash
           className={cn(
             "size-4 shrink-0",
-            isFeedSessionActive ? "text-background" : "text-muted-foreground",
+            isFeedSessionActive ? "text-foreground" : "text-muted-foreground",
           )}
         />
         <p className="text-sm font-normal truncate">{feed.name}</p>
