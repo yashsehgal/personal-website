@@ -5,6 +5,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import type { IFeedMessage } from "@/features/personal-feed/interfaces";
+import { useManageFeedMessageThreadQueryState } from "@/features/personal-feed/hooks/use-manage-feed-message-thread-query-state";
 import { cn } from "@/lib/utils";
 import { formatDate } from "date-fns";
 import {
@@ -22,6 +23,7 @@ interface FeedMessageProps {
 export function FeedMessage({ message }: FeedMessageProps) {
   const [isMessageBlockHovered, setIsMessageBlockHovered] =
     useState<boolean>(false);
+  const { openThread } = useManageFeedMessageThreadQueryState();
 
   const sender = message.sender_profile;
   const isAnonymous = message.user_id == null;
@@ -104,7 +106,15 @@ export function FeedMessage({ message }: FeedMessageProps) {
           <Tooltip>
             <TooltipTrigger
               render={
-                <Button size="icon-xs" variant="ghost">
+                <Button
+                  type="button"
+                  size="icon-xs"
+                  variant="ghost"
+                  aria-label="Reply in thread"
+                  onClick={() => {
+                    openThread(message.id);
+                  }}
+                >
                   <MessageCircleReply />
                 </Button>
               }

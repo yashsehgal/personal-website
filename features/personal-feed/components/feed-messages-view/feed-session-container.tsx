@@ -1,19 +1,27 @@
 "use client";
 
 import { FeedSessionMessagesContainer } from "@/features/personal-feed/components/feed-messages-view/feed-session-messages-container";
+import { useManageFeedMessageThreadQueryState } from "@/features/personal-feed/hooks/use-manage-feed-message-thread-query-state";
 import { useManageFeedSessionQueryState } from "@/features/personal-feed/hooks/use-manage-feed-session-query-state";
+import { cn } from "@/lib/utils";
 
 export function FeedSessionContainer() {
   const { isAnyFeedSessionActive } = useManageFeedSessionQueryState();
+  const { isActiveThread } = useManageFeedMessageThreadQueryState();
 
   if (!isAnyFeedSessionActive) {
     return null;
   }
 
   return (
-    <div className="flex min-h-0 w-full min-w-0 flex-1 flex-row items-stretch divide-x divide-border">
+    <div
+      className={cn(
+        "flex min-h-0 w-full min-w-0 flex-1 flex-row items-stretch",
+        isActiveThread && "divide-x divide-border",
+      )}
+    >
       <FeedSessionMessagesContainer />
-      <div className="min-h-0 min-w-0 flex-1" />
+      {isActiveThread ? <div className="min-h-0 min-w-0 flex-1" /> : null}
     </div>
   );
 }
