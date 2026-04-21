@@ -17,6 +17,11 @@ import {
   InputGroupInput,
 } from "@/components/ui/input-group";
 import { Label } from "@/components/ui/label";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { useManageFeedSessionQueryState } from "@/features/personal-feed/hooks/use-manage-feed-session-query-state";
 import { useAuthSession } from "@/hooks/use-auth-session";
 import { useCreateFeed } from "@/hooks/use-create-feed";
@@ -78,7 +83,14 @@ export function FeedCreateNewFeedManager({
 
   return (
     <Dialog open={open} onOpenChange={handleOpenChange}>
-      <DialogTrigger render={children as unknown as ReactElement} />
+      <Tooltip>
+        <TooltipTrigger
+          render={
+            <DialogTrigger render={children as unknown as ReactElement} />
+          }
+        />
+        <TooltipContent>New feed</TooltipContent>
+      </Tooltip>
       <DialogContent>
         <form onSubmit={handleSubmit}>
           <DialogHeader>
