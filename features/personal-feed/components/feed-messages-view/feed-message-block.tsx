@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { FeedMessageMoreActionsDropdown } from "@/features/personal-feed/components/feed-messages-view/feed-message-more-actions-dropdown";
 import {
   Tooltip,
   TooltipContent,
@@ -8,7 +9,7 @@ import type { IFeedMessage } from "@/features/personal-feed/interfaces";
 import { useManageFeedMessageThreadQueryState } from "@/features/personal-feed/hooks/use-manage-feed-message-thread-query-state";
 import { cn } from "@/lib/utils";
 import { formatDate } from "date-fns";
-import { Bookmark, CornerDownRight, Ellipsis, TextQuote } from "lucide-react";
+import { Bookmark, CornerDownRight, TextQuote } from "lucide-react";
 import { useCallback, useMemo, useState } from "react";
 
 interface FeedMessageProps {
@@ -113,29 +114,12 @@ export function FeedMessage({
           <Tooltip>
             <TooltipTrigger
               render={
-                <Button size="icon-sm" variant="ghost">
-                  <TextQuote />
-                </Button>
-              }
-            />
-            <TooltipContent>Quote in a new message</TooltipContent>
-          </Tooltip>
-          <Tooltip>
-            <TooltipTrigger
-              render={
-                <Button size="icon-sm" variant="ghost">
-                  <Bookmark />
-                </Button>
-              }
-            />
-            <TooltipContent>Save this message</TooltipContent>
-          </Tooltip>
-          <Tooltip>
-            <TooltipTrigger
-              render={
-                <Button size="icon-sm" variant="ghost">
-                  <Ellipsis />
-                </Button>
+                <FeedMessageMoreActionsDropdown
+                  message={message}
+                  onReplyInThread={() => {
+                    openThread(message.id);
+                  }}
+                />
               }
             />
             <TooltipContent>More options</TooltipContent>
