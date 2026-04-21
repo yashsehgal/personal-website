@@ -8,13 +8,7 @@ import type { IFeedMessage } from "@/features/personal-feed/interfaces";
 import { useManageFeedMessageThreadQueryState } from "@/features/personal-feed/hooks/use-manage-feed-message-thread-query-state";
 import { cn } from "@/lib/utils";
 import { formatDate } from "date-fns";
-import {
-  Bookmark,
-  CornerDownRight,
-  Ellipsis,
-  MessageCircleReply,
-  TextQuote,
-} from "lucide-react";
+import { Bookmark, CornerDownRight, Ellipsis, TextQuote } from "lucide-react";
 import { useCallback, useMemo, useState } from "react";
 
 interface FeedMessageProps {
@@ -38,22 +32,6 @@ export function FeedMessage({ message }: FeedMessageProps) {
     if (email) return email;
     return "Member";
   })();
-
-  const showEmail =
-    Boolean(sender?.email?.trim()) &&
-    Boolean(sender?.full_name?.trim()) &&
-    sender!.full_name!.trim() !== sender!.email!.trim();
-
-  const safeAvatarUrl = useMemo(() => {
-    if (isAnonymous) return undefined;
-    if (!sender) return undefined;
-    return sender.avatar_url ?? undefined;
-  }, [isAnonymous, sender]);
-
-  const safeEmail = useMemo(() => {
-    if (!sender) return undefined;
-    return sender.email?.trim() ?? undefined;
-  }, [sender]);
 
   const safeMessageTimestamp = useMemo(() => {
     const date = formatDate(message.created_at, "h:mm a");
