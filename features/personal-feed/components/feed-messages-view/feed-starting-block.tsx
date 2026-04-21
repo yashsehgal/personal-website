@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { FeedActionsManager } from "@/features/personal-feed/components/feed-actions-manager";
 import { IFeed } from "@/features/personal-feed/interfaces";
 import { useProfilesByUserIds } from "@/hooks/use-profiles-by-user-ids";
-import { Lock, MessageSquareLock } from "lucide-react";
+import { Brackets, Link, Lock, MessageSquareLock } from "lucide-react";
 import { useMemo } from "react";
 
 interface FeedStartingBlockProps {
@@ -30,9 +30,11 @@ export function FeedStartingBlock({ feed }: FeedStartingBlockProps) {
       </header>
       <div className="flex items-center justify-around gap-3 w-fit">
         <Button variant="outline" size="sm">
+          <Link />
           Copy feed link
         </Button>
         <Button variant="outline" size="sm">
+          <Brackets />
           Copy feed ID
         </Button>
         <FeedActionsManager feed={feed} withoutTooltip>
