@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-import { FeedActionsManager } from "@/features/personal-feed/components/feed-actions-manager";
 import { IFeed } from "@/features/personal-feed/interfaces";
 import { Brackets, Link, Lock } from "lucide-react";
 
@@ -9,7 +8,7 @@ interface FeedStartingBlockProps {
 
 export function FeedStartingBlock({ feed }: FeedStartingBlockProps) {
   return (
-    <div className="w-full pb-6 px-6 space-y-4">
+    <div className="w-full pb-10 px-6 flex items-start justify-between">
       <header className="space-y-3 px-1">
         <div className="flex items-center justify-start gap-2">
           <Lock className="shrink-0 size-4" />
@@ -31,11 +30,6 @@ export function FeedStartingBlock({ feed }: FeedStartingBlockProps) {
           <Brackets />
           Copy feed ID
         </Button>
-        <FeedActionsManager feed={feed} withoutTooltip>
-          <Button variant="outline" size="xs">
-            More options...
-          </Button>
-        </FeedActionsManager>
       </div>
     </div>
   );

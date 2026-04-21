@@ -58,7 +58,7 @@ export function FeedMessageMoreActionsDropdown({
           render={
             <Button
               type="button"
-              size="icon-sm"
+              size="icon-xs"
               variant="ghost"
               aria-label="More options"
             >

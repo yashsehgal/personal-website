@@ -11,6 +11,7 @@ import { cn } from "@/lib/utils";
 import { formatDate } from "date-fns";
 import { Bookmark, CornerDownRight, TextQuote } from "lucide-react";
 import { useCallback, useMemo, useState } from "react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 interface FeedMessageProps {
   message: IFeedMessage;
@@ -55,26 +56,40 @@ export function FeedMessage({
     return Boolean(!insideThread && isMessageBlockHovered);
   }, [insideThread, isMessageBlockHovered]);
 
+  const safeAvatarFallback = useMemo(() => {
+    if (isAnonymous) return "A";
+    if (!sender) return "M";
+    return sender.full_name?.charAt(0) ?? "M";
+  }, [isAnonymous, sender]);
+
+  const safeAvatarImageUrl = useMemo(() => {
+    if (isAnonymous) return undefined;
+    if (!sender) return undefined;
+    return sender.avatar_url ?? undefined;
+  }, [isAnonymous, sender]);
+
   return (
     <div
       key={message.id}
       aria-description={message.content}
       className={cn(
-        "w-full h-fit relative px-10 py-2.5 items-start flex flex-col justify-start gap-2",
+        "w-full h-fit relative px-6 py-2.5 items-start flex flex-col justify-start gap-2",
         "hover:bg-muted",
         insideThread && "px-5 py-2",
       )}
       onMouseEnter={handleMessageBlockMouseEnter}
       onMouseLeave={handleMessageBlockMouseLeave}
     >
-      <div className="flex items-center gap-2 justify-start">
-        <p className="font-semibold text-sm shrink-0 text-pink-600">
-          {primaryLabel}
-        </p>
+      <div className="flex items-center gap-1.5 justify-start">
+        <Avatar size="sm" className="size-5!">
+          <AvatarImage src={safeAvatarImageUrl} alt={safeAvatarFallback} />
+          <AvatarFallback>{safeAvatarFallback}</AvatarFallback>
+        </Avatar>
+        <p className="font-semibold text-sm shrink-0">{primaryLabel}</p>
         <Tooltip>
           <TooltipTrigger
             render={
-              <p className="text-xs text-muted-foreground mt-px cursor-default shrink-0">
+              <p className="text-xs text-muted-foreground mt-px cursor-default shrink-0 ml-1">
                 {safeMessageTimestamp}
               </p>
             }
@@ -98,14 +113,16 @@ export function FeedMessage({
               render={
                 <Button
                   type="button"
-                  size="icon-sm"
+                  size="xs"
                   variant="ghost"
                   aria-label="Reply in thread"
+                  className="gap-2"
                   onClick={() => {
                     openThread(message.id);
                   }}
                 >
                   <CornerDownRight />
+                  Reply
                 </Button>
               }
             />

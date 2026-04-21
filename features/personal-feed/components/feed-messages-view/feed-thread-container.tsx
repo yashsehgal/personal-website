@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
 import { FeedMessage } from "@/features/personal-feed/components/feed-messages-view/feed-message-block";
 import { FeedMessageBox } from "@/features/personal-feed/components/feed-messages-view/feed-message-box";
 import { useManageFeedMessageThreadQueryState } from "@/features/personal-feed/hooks/use-manage-feed-message-thread-query-state";
@@ -49,6 +50,12 @@ export function FeedThreadContainer() {
           {threadRootMessage ? (
             <FeedMessage message={threadRootMessage} insideThread />
           ) : null}
+          <div className="flex items-center justify-start gap-3 px-3.5 my-2 select-none">
+            <p className="text-xs text-muted-foreground">
+              {`${safeThreadMessages.length} ${safeThreadMessages.length === 1 ? "reply" : "replies"} in this thread`}
+            </p>
+            <Separator orientation="horizontal" className="flex-1" />
+          </div>
           {safeThreadMessages.map((message) => (
             <FeedMessage key={message.id} message={message} insideThread />
           ))}
