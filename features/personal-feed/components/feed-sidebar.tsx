@@ -40,27 +40,13 @@ export function FeedSidebar() {
   }, [isLoading]);
 
   return (
-    <aside className="w-1/6 shrink-0 space-y-2 p-2.5">
+    <aside className="w-1/6 shrink-0 space-y-2 p-2.5 bg-muted/20">
       {/* FEEDS SIDEBAR HEADER CONTAINER */}
       <div className="flex items-center justify-between px-2 pt-1 pb-0">
         <div className="flex items-center justify-start gap-2 text-muted-foreground">
           <MessagesSquare className="size-3 shrink-0" />
           <p className="text-xs font-medium select-none">General</p>
         </div>
-        {safeShowStartNewChatButton ? (
-          <Tooltip>
-            <TooltipTrigger
-              render={
-                <FeedCreateNewFeedManager>
-                  <Button variant="ghost" size="icon-xs">
-                    <Plus className="size-3 shrink-0" />
-                  </Button>
-                </FeedCreateNewFeedManager>
-              }
-            />
-            <TooltipContent>Start new chat</TooltipContent>
-          </Tooltip>
-        ) : null}
       </div>
 
       {/* FEED SESSIONS LIST CONTAINER */}
@@ -82,6 +68,20 @@ export function FeedSidebar() {
                     Private feeds
                   </p>
                 </div>
+                {safeShowStartNewChatButton ? (
+                  <Tooltip>
+                    <TooltipTrigger
+                      render={
+                        <FeedCreateNewFeedManager>
+                          <Button variant="ghost" size="icon-xs">
+                            <Plus className="size-3 shrink-0" />
+                          </Button>
+                        </FeedCreateNewFeedManager>
+                      }
+                    />
+                    <TooltipContent>Start new chat</TooltipContent>
+                  </Tooltip>
+                ) : null}
               </div>
               <div className="flex flex-col items-stretch w-full gap-px">
                 {privateFeeds.map((feed) => {
