@@ -23,6 +23,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { useManageFeedSessionQueryState } from "@/features/personal-feed/hooks/use-manage-feed-session-query-state";
+import { handleFeedNameInputChange } from "@/features/personal-feed/utils/format-feed-name-input";
 import { useAuthSession } from "@/hooks/use-auth-session";
 import { useCreateFeed } from "@/hooks/use-create-feed";
 import { Hash, Loader2 } from "lucide-react";
@@ -55,7 +56,7 @@ export function FeedCreateNewFeedManager({
 
   const handleFeedNameChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
-      setFeedName(event.target.value);
+      handleFeedNameInputChange(event, setFeedName);
     },
     [],
   );

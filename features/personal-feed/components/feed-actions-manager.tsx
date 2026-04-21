@@ -109,6 +109,7 @@ export function FeedActionsManager({
       </DropdownMenu>
 
       <FeedRenameFeedDialog
+        key={`${feed.id}-${renameOpen ? "open" : "closed"}`}
         feed={feed}
         open={renameOpen}
         onOpenChange={setRenameOpen}

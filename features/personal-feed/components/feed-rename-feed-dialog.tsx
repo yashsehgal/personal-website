@@ -17,15 +17,13 @@ import {
 } from "@/components/ui/input-group";
 import { Label } from "@/components/ui/label";
 import type { IFeed } from "@/features/personal-feed/interfaces";
+import {
+  formatFeedNameInput,
+  handleFeedNameInputChange,
+} from "@/features/personal-feed/utils/format-feed-name-input";
 import { useUpdateFeed } from "@/hooks/use-update-feed";
 import { Hash, Loader2 } from "lucide-react";
-import {
-  ChangeEvent,
-  FormEvent,
-  useCallback,
-  useEffect,
-  useState,
-} from "react";
+import { ChangeEvent, FormEvent, useCallback, useState } from "react";
 
 interface FeedRenameFeedDialogProps {
   feed: IFeed;
@@ -39,26 +37,25 @@ export function FeedRenameFeedDialog({
   onOpenChange,
 }: FeedRenameFeedDialogProps) {
   const updateFeed = useUpdateFeed();
-  const [feedName, setFeedName] = useState("");
-
-  useEffect(() => {
-    if (open) setFeedName(feed.name);
-    else setFeedName("");
-  }, [open, feed.name]);
+  const [feedName, setFeedName] = useState(() =>
+    formatFeedNameInput(feed.name),
+  );
 
   const handleFeedNameChange = useCallback(
     (event: ChangeEvent<HTMLInputElement>) => {
-      setFeedName(event.target.value);
+      handleFeedNameInputChange(event, setFeedName);
     },
     [],
   );
+
+  const normalizedFeedName = formatFeedNameInput(feed.name);
 
   const handleSubmit = useCallback(
     (event: FormEvent<HTMLFormElement>) => {
       event.preventDefault();
       const name = feedName.trim();
-      if (!name || updateFeed.isPending || name === feed.name) {
-        if (name === feed.name) onOpenChange(false);
+      if (!name || updateFeed.isPending || name === normalizedFeedName) {
+        if (name === normalizedFeedName) onOpenChange(false);
         return;
       }
       updateFeed.mutate(
@@ -66,7 +63,7 @@ export function FeedRenameFeedDialog({
         { onSuccess: () => onOpenChange(false) },
       );
     },
-    [feed.id, feed.name, feedName, onOpenChange, updateFeed],
+    [feed.id, feedName, normalizedFeedName, onOpenChange, updateFeed],
   );
 
   return (
@@ -111,7 +108,7 @@ export function FeedRenameFeedDialog({
               disabled={
                 !feedName.trim() ||
                 updateFeed.isPending ||
-                feedName.trim() === feed.name
+                feedName.trim() === normalizedFeedName
               }
             >
               {updateFeed.isPending ? (
