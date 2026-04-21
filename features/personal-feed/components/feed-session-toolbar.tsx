@@ -1,7 +1,9 @@
+import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
+import { FeedActionsManager } from "@/features/personal-feed/components/feed-actions-manager";
 import { useManageFeedSessionQueryState } from "@/features/personal-feed/hooks/use-manage-feed-session-query-state";
 import { useFeed } from "@/hooks/use-feed";
-import { Globe, Hash, Lock } from "lucide-react";
+import { Ellipsis, Globe, Hash, Lock } from "lucide-react";
 import { useMemo } from "react";
 
 export function FeedSessionToolbar() {
@@ -39,6 +41,13 @@ export function FeedSessionToolbar() {
           <Hash className="size-4 shrink-0" />
           <p className="text-sm font-medium select-none">{safeFeedName}</p>
         </div>
+        {feed ? (
+          <FeedActionsManager feed={feed}>
+            <Button variant="outline" size="icon-xs">
+              <Ellipsis />
+            </Button>
+          </FeedActionsManager>
+        ) : null}
       </div>
       <div className="flex items-center justify-end gap-2">
         {Boolean(feed?.is_public) ? (
