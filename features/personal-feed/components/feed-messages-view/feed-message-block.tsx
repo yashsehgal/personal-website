@@ -51,12 +51,12 @@ export function FeedMessage({ message }: FeedMessageProps) {
   return (
     <div
       className={cn(
-        "w-full h-fit relative px-8 py-2 items-start flex justify-start gap-3",
+        "w-full h-fit relative px-8 py-4 items-start flex flex-col justify-start gap-4",
         "hover:bg-muted/50",
       )}
       aria-description={message.content}
     >
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-2 justify-start">
         <Avatar size="sm" className="rounded-md shrink-0">
           <AvatarImage
             src={safeAvatarUrl ?? undefined}
@@ -81,7 +81,7 @@ export function FeedMessage({ message }: FeedMessageProps) {
           </TooltipContent>
         </Tooltip>
       </div>
-      <pre className="text-sm whitespace-pre-wrap font-sans mt-0.5 flex-1">
+      <pre className="text-sm whitespace-pre-wrap font-sans mt-0.5 flex-1 px-px">
         {message.content}
       </pre>
     </div>

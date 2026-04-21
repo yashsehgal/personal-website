@@ -11,34 +11,30 @@ interface FeedStartingBlockProps {
 
 export function FeedStartingBlock({ feed }: FeedStartingBlockProps) {
   return (
-    <div className="w-full pb-4 px-6 space-y-5">
+    <div className="w-full pb-6 px-6 space-y-4">
       <header className="space-y-3 px-1">
         <div className="flex items-center justify-start gap-2">
-          <MessageSquareLock className="shrink-0 size-5" />
-          <p className="text-lg font-medium">{feed.name}</p>
+          <MessageSquareLock className="shrink-0 size-4" />
+          <p className="text-sm font-medium">{feed.name}</p>
         </div>
         <div>
-          <p className="">
-            This is the very beginning of this feed channel{" "}
-            <span className="py-1 px-2 rounded-md bg-blue-100 text-blue-600">
-              # {feed.name}
-            </span>
-            . This is where you can introduce yourself and get to know each
-            other.
+          <p className="text-sm text-muted-foreground">
+            This is the very beginning of this channel. You can chat here with
+            Yash, say hello, ask questions, tell about yourself.
           </p>
         </div>
       </header>
       <div className="flex items-center justify-around gap-3 w-fit">
-        <Button variant="outline" size="sm">
+        <Button variant="outline" size="xs">
           <Link />
           Copy feed link
         </Button>
-        <Button variant="outline" size="sm">
+        <Button variant="outline" size="xs">
           <Brackets />
           Copy feed ID
         </Button>
         <FeedActionsManager feed={feed} withoutTooltip>
-          <Button variant="outline" size="sm">
+          <Button variant="outline" size="xs">
             More options...
           </Button>
         </FeedActionsManager>

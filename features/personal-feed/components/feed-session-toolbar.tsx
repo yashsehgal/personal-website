@@ -41,6 +41,8 @@ export function FeedSessionToolbar() {
           <Hash className="size-4 shrink-0" />
           <p className="text-sm font-medium select-none">{safeFeedName}</p>
         </div>
+      </div>
+      <div className="flex items-center justify-end gap-2">
         {feed ? (
           <FeedActionsManager feed={feed}>
             <Button variant="outline" size="icon-xs">
@@ -48,19 +50,6 @@ export function FeedSessionToolbar() {
             </Button>
           </FeedActionsManager>
         ) : null}
-      </div>
-      <div className="flex items-center justify-end gap-2">
-        {Boolean(feed?.is_public) ? (
-          <div className="flex items-center justify-end gap-1.5 text-muted-foreground">
-            <Globe className="size-3.5 shrink-0" />
-            <p className="text-sm select-none">Public</p>
-          </div>
-        ) : (
-          <div className="flex items-center justify-end gap-1.5 text-muted-foreground">
-            <Lock className="size-3.5 shrink-0" />
-            <p className="text-sm select-none">Private channel</p>
-          </div>
-        )}
       </div>
     </header>
   );
