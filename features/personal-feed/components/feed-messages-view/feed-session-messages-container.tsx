@@ -2,7 +2,6 @@
 
 import { FeedMessageBox } from "@/features/personal-feed/components/feed-messages-view/feed-message-box";
 import { FeedMessagesListContainer } from "@/features/personal-feed/components/feed-messages-view/feed-messages-list-container";
-import { FeedStartingBlock } from "@/features/personal-feed/components/feed-messages-view/feed-starting-block";
 import { FeedSessionToolbar } from "@/features/personal-feed/components/feed-session-toolbar";
 import { useManageFeedSessionQueryState } from "@/features/personal-feed/hooks/use-manage-feed-session-query-state";
 

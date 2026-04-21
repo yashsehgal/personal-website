@@ -3,7 +3,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { FeedActionsManager } from "@/features/personal-feed/components/feed-actions-manager";
 import { useManageFeedSessionQueryState } from "@/features/personal-feed/hooks/use-manage-feed-session-query-state";
 import { useFeed } from "@/hooks/use-feed";
-import { Ellipsis, Globe, Hash, Lock } from "lucide-react";
+import { Ellipsis, Hash } from "lucide-react";
 import { useMemo } from "react";
 
 export function FeedSessionToolbar() {

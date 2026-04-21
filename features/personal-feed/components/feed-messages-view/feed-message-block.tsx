@@ -1,4 +1,4 @@
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
 import {
   Tooltip,
   TooltipContent,
@@ -7,13 +7,22 @@ import {
 import type { IFeedMessage } from "@/features/personal-feed/interfaces";
 import { cn } from "@/lib/utils";
 import { formatDate } from "date-fns";
-import { useMemo } from "react";
+import {
+  Bookmark,
+  Ellipsis,
+  MessageCircleReply,
+  TextQuote,
+} from "lucide-react";
+import { useCallback, useMemo, useState } from "react";
 
 interface FeedMessageProps {
   message: IFeedMessage;
 }
 
 export function FeedMessage({ message }: FeedMessageProps) {
+  const [isMessageBlockHovered, setIsMessageBlockHovered] =
+    useState<boolean>(false);
+
   const sender = message.sender_profile;
   const isAnonymous = message.user_id == null;
 
@@ -48,15 +57,28 @@ export function FeedMessage({ message }: FeedMessageProps) {
     return date;
   }, [message.created_at]);
 
+  const handleMessageBlockMouseEnter = useCallback((): void => {
+    setIsMessageBlockHovered(true);
+  }, []);
+
+  const handleMessageBlockMouseLeave = useCallback((): void => {
+    setIsMessageBlockHovered(false);
+  }, []);
+
   return (
     <div
       className={cn(
-        "w-full h-fit relative px-8 py-2 items-start flex justify-start gap-3",
+        "w-full h-fit relative px-10 py-2.5 items-start flex flex-col justify-start gap-2",
         "hover:bg-muted/50",
       )}
       aria-description={message.content}
+      onMouseEnter={handleMessageBlockMouseEnter}
+      onMouseLeave={handleMessageBlockMouseLeave}
     >
       <div className="flex items-center gap-2 justify-start">
+        <p className="font-semibold text-sm shrink-0 text-pink-600">
+          {primaryLabel}
+        </p>
         <Tooltip>
           <TooltipTrigger
             render={
@@ -69,11 +91,58 @@ export function FeedMessage({ message }: FeedMessageProps) {
             {formatDate(message.created_at, "MMM d, yyyy, h:mm a")}
           </TooltipContent>
         </Tooltip>
-        <p className="font-semibold text-sm shrink-0">{primaryLabel}</p>
       </div>
-      <pre className="text-sm whitespace-pre-wrap font-sans flex-1 px-px">
+      <pre className="text-sm whitespace-pre-wrap font-sans flex-1 px-px leading-6">
         {message.content}
       </pre>
+      {isMessageBlockHovered ? (
+        <div
+          className={cn(
+            "size-fit p-1 rounded-full bg-background border border-border absolute -top-4 right-6 flex items-center",
+          )}
+        >
+          <Tooltip>
+            <TooltipTrigger
+              render={
+                <Button size="icon-xs" variant="ghost">
+                  <MessageCircleReply />
+                </Button>
+              }
+            />
+            <TooltipContent>Reply in thread</TooltipContent>
+          </Tooltip>
+          <Tooltip>
+            <TooltipTrigger
+              render={
+                <Button size="icon-xs" variant="ghost">
+                  <TextQuote />
+                </Button>
+              }
+            />
+            <TooltipContent>Quote in a new message</TooltipContent>
+          </Tooltip>
+          <Tooltip>
+            <TooltipTrigger
+              render={
+                <Button size="icon-xs" variant="ghost">
+                  <Bookmark />
+                </Button>
+              }
+            />
+            <TooltipContent>Save this message</TooltipContent>
+          </Tooltip>
+          <Tooltip>
+            <TooltipTrigger
+              render={
+                <Button size="icon-xs" variant="ghost">
+                  <Ellipsis />
+                </Button>
+              }
+            />
+            <TooltipContent>More options</TooltipContent>
+          </Tooltip>
+        </div>
+      ) : null}
     </div>
   );
 }

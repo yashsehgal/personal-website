@@ -21,7 +21,7 @@ export function FeedMessagesDayDateGroup({
           {safeTimestamp}
         </p>
       </div>
-      <div className="space-y-2">{children}</div>
+      {children}
     </div>
   );
 }
