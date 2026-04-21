@@ -16,7 +16,7 @@ export function FeedMessagesListContainer() {
   const { data: feed } = useFeed(feedSession);
 
   const { data: feedMessages, isLoading: isFeedMessagesLoading } =
-    useFeedMessagesWithSenderProfiles(feedSession);
+    useFeedMessagesWithSenderProfiles(feedSession, { roots_only: true });
 
   const safeFeedMessages = useMemo(() => {
     if (isFeedMessagesLoading) return [];

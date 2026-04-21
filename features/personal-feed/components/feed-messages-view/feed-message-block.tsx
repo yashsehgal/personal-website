@@ -56,12 +56,13 @@ export function FeedMessage({
 
   return (
     <div
+      key={message.id}
+      aria-description={message.content}
       className={cn(
         "w-full h-fit relative px-10 py-2.5 items-start flex flex-col justify-start gap-2",
         "hover:bg-muted",
-        insideThread && "p-5",
+        insideThread && "px-5 py-2",
       )}
-      aria-description={message.content}
       onMouseEnter={handleMessageBlockMouseEnter}
       onMouseLeave={handleMessageBlockMouseLeave}
     >

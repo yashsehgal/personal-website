@@ -15,9 +15,13 @@ import { ChangeEvent, useEffect, useMemo, useRef, useState } from "react";
 
 interface FeedMessageBoxProps {
   insideThread?: boolean;
+  replyToMessageId?: string;
 }
 
-export function FeedMessageBox({ insideThread = false }: FeedMessageBoxProps) {
+export function FeedMessageBox({
+  insideThread = false,
+  replyToMessageId,
+}: FeedMessageBoxProps) {
   const {
     data: session,
     isError: isAuthSessionError,
@@ -90,13 +94,18 @@ export function FeedMessageBox({ insideThread = false }: FeedMessageBoxProps) {
     Boolean(feedSession) &&
     safeMessageBoxTextareaInputValueHasSomeText &&
     !isFeedLoading &&
+    (!insideThread || Boolean(replyToMessageId)) &&
     !addFeedMessage.isPending;
 
   const handleSendMessage = () => {
     if (!feedSession || !safeMessageBoxTextareaInputValueHasSomeText) return;
     const content = messageBoxTextareaInputValue.trim();
     addFeedMessage.mutate(
-      { feed_id: feedSession, content },
+      {
+        feed_id: feedSession,
+        content,
+        reply_to_message_id: insideThread ? replyToMessageId ?? null : null,
+      },
       {
         onSuccess: () => {
           setMessageBoxTextareaInputValue("");

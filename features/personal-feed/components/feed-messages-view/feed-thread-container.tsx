@@ -4,15 +4,27 @@ import { Button } from "@/components/ui/button";
 import { FeedMessage } from "@/features/personal-feed/components/feed-messages-view/feed-message-block";
 import { FeedMessageBox } from "@/features/personal-feed/components/feed-messages-view/feed-message-box";
 import { useManageFeedMessageThreadQueryState } from "@/features/personal-feed/hooks/use-manage-feed-message-thread-query-state";
+import { useManageFeedSessionQueryState } from "@/features/personal-feed/hooks/use-manage-feed-session-query-state";
 import { useFeedMessage } from "@/hooks/use-feed-message";
+import { useFeedThreadMessagesWithSenderProfiles } from "@/hooks/use-feed-thread-messages-with-sender-profiles";
 import { X } from "lucide-react";
+import { useMemo } from "react";
 
 export function FeedThreadContainer() {
   const { activeThreadMessageId, closeThread } =
     useManageFeedMessageThreadQueryState();
+  const { feedSession } = useManageFeedSessionQueryState();
   const { data: threadRootMessage } = useFeedMessage(
     activeThreadMessageId || undefined,
   );
+  const { data: threadMessages } = useFeedThreadMessagesWithSenderProfiles(
+    feedSession || undefined,
+    activeThreadMessageId || undefined,
+  );
+
+  const safeThreadMessages = useMemo(() => {
+    return threadMessages?.slice().reverse() ?? [];
+  }, [threadMessages]);
 
   return (
     <div className="min-h-0 min-w-0 flex-1 divide-y divide-border flex flex-col justify-start items-stretch">
@@ -33,13 +45,20 @@ export function FeedThreadContainer() {
         </div>
       </div>
       <div className="min-h-0 min-w-0 h-full relative">
-        <div className="min-h-0 min-w-0 overflow-y-auto no-scrollbar scroll-smooth">
+        <div className="min-h-0 min-w-0 overflow-y-auto no-scrollbar scroll-smooth py-2.5">
           {threadRootMessage ? (
             <FeedMessage message={threadRootMessage} insideThread />
           ) : null}
+          {safeThreadMessages.map((message) => (
+            <FeedMessage key={message.id} message={message} insideThread />
+          ))}
         </div>
         <div className="h-fit w-full pb-6 px-3 absolute bottom-0">
-          <FeedMessageBox key={activeThreadMessageId} insideThread />
+          <FeedMessageBox
+            key={activeThreadMessageId}
+            insideThread
+            replyToMessageId={activeThreadMessageId}
+          />
         </div>
       </div>
     </div>
