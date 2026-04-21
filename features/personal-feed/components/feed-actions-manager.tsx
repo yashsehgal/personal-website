@@ -44,7 +44,7 @@ import { useAuthSession } from "@/hooks/use-auth-session";
 import { useDeleteFeed } from "@/hooks/use-delete-feed";
 import { useUpdateFeed } from "@/hooks/use-update-feed";
 import { getYashMailtoHref } from "@/common/contact";
-import { Archive, Bell, Hash, Loader2, Mail, Pencil } from "lucide-react";
+import { Archive, Hash, Loader2, Mail, Pencil } from "lucide-react";
 import {
   ChangeEvent,
   FormEvent,
@@ -133,18 +133,6 @@ export function FeedActionsManager({
           <TooltipContent>More options...</TooltipContent>
         </Tooltip>
         <DropdownMenuContent className="w-80">
-          <DropdownMenuItem
-            onClick={() =>
-              window.location.assign(
-                getYashMailtoHref({
-                  subject: "Reminder: check your inbox",
-                }),
-              )
-            }
-          >
-            <Bell />
-            Remind him to check his inbox
-          </DropdownMenuItem>
           <DropdownMenuItem
             onClick={() => window.location.assign(getYashMailtoHref())}
           >
