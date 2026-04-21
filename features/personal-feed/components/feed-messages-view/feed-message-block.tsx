@@ -10,6 +10,7 @@ import { cn } from "@/lib/utils";
 import { formatDate } from "date-fns";
 import {
   Bookmark,
+  CornerDownRight,
   Ellipsis,
   MessageCircleReply,
   TextQuote,
@@ -108,14 +109,14 @@ export function FeedMessage({ message }: FeedMessageProps) {
               render={
                 <Button
                   type="button"
-                  size="icon-xs"
+                  size="icon-sm"
                   variant="ghost"
                   aria-label="Reply in thread"
                   onClick={() => {
                     openThread(message.id);
                   }}
                 >
-                  <MessageCircleReply />
+                  <CornerDownRight />
                 </Button>
               }
             />
@@ -124,7 +125,7 @@ export function FeedMessage({ message }: FeedMessageProps) {
           <Tooltip>
             <TooltipTrigger
               render={
-                <Button size="icon-xs" variant="ghost">
+                <Button size="icon-sm" variant="ghost">
                   <TextQuote />
                 </Button>
               }
@@ -134,7 +135,7 @@ export function FeedMessage({ message }: FeedMessageProps) {
           <Tooltip>
             <TooltipTrigger
               render={
-                <Button size="icon-xs" variant="ghost">
+                <Button size="icon-sm" variant="ghost">
                   <Bookmark />
                 </Button>
               }
@@ -144,7 +145,7 @@ export function FeedMessage({ message }: FeedMessageProps) {
           <Tooltip>
             <TooltipTrigger
               render={
-                <Button size="icon-xs" variant="ghost">
+                <Button size="icon-sm" variant="ghost">
                   <Ellipsis />
                 </Button>
               }
