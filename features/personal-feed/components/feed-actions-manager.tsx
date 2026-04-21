@@ -10,16 +10,6 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from "@/components/ui/alert-dialog";
-import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -28,30 +18,18 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import {
-  InputGroup,
-  InputGroupAddon,
-  InputGroupInput,
-} from "@/components/ui/input-group";
-import { Label } from "@/components/ui/label";
-import {
   Tooltip,
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { FeedRenameFeedDialog } from "@/features/personal-feed/components/feed-rename-feed-dialog";
 import { useManageFeedSessionQueryState } from "@/features/personal-feed/hooks/use-manage-feed-session-query-state";
 import { IFeed } from "@/features/personal-feed/interfaces";
 import { useAuthSession } from "@/hooks/use-auth-session";
 import { useDeleteFeed } from "@/hooks/use-delete-feed";
-import { useUpdateFeed } from "@/hooks/use-update-feed";
 import { getYashMailtoHref } from "@/common/contact";
-import { Archive, Hash, Loader2, Mail, Pencil } from "lucide-react";
-import {
-  ChangeEvent,
-  FormEvent,
-  ReactElement,
-  useCallback,
-  useState,
-} from "react";
+import { Archive, Loader2, Mail, Pencil } from "lucide-react";
+import { ReactElement, useCallback, useState } from "react";
 
 interface FeedActionsManagerProps {
   children: React.ReactNode;
@@ -66,47 +44,13 @@ export function FeedActionsManager({
 }: FeedActionsManagerProps) {
   const { data: session } = useAuthSession();
   const { feedSession, closeFeedSession } = useManageFeedSessionQueryState();
-  const updateFeed = useUpdateFeed();
   const deleteFeedMutation = useDeleteFeed();
 
   const [renameOpen, setRenameOpen] = useState(false);
   const [deleteAlertOpen, setDeleteAlertOpen] = useState(false);
-  const [feedName, setFeedName] = useState("");
 
   const isFeedOwner = Boolean(
     session && feed.created_by_user_id === session.user.id,
-  );
-
-  const handleRenameOpenChange = useCallback(
-    (next: boolean) => {
-      setRenameOpen(next);
-      if (next) setFeedName(feed.name);
-      else setFeedName("");
-    },
-    [feed.name],
-  );
-
-  const handleFeedNameChange = useCallback(
-    (event: ChangeEvent<HTMLInputElement>) => {
-      setFeedName(event.target.value);
-    },
-    [],
-  );
-
-  const handleRenameSubmit = useCallback(
-    (event: FormEvent<HTMLFormElement>) => {
-      event.preventDefault();
-      const name = feedName.trim();
-      if (!name || updateFeed.isPending || name === feed.name) {
-        if (name === feed.name) setRenameOpen(false);
-        return;
-      }
-      updateFeed.mutate(
-        { feedId: feed.id, patch: { name } },
-        { onSuccess: () => setRenameOpen(false) },
-      );
-    },
-    [feed.id, feed.name, feedName, updateFeed],
   );
 
   const handleConfirmDelete = useCallback(() => {
@@ -148,7 +92,7 @@ export function FeedActionsManager({
           {isFeedOwner ? (
             <>
               <DropdownMenuSeparator />
-              <DropdownMenuItem onClick={() => handleRenameOpenChange(true)}>
+              <DropdownMenuItem onClick={() => setRenameOpen(true)}>
                 <Pencil />
                 Rename...
               </DropdownMenuItem>
@@ -164,59 +108,11 @@ export function FeedActionsManager({
         </DropdownMenuContent>
       </DropdownMenu>
 
-      <Dialog open={renameOpen} onOpenChange={handleRenameOpenChange}>
-        <DialogContent>
-          <form onSubmit={handleRenameSubmit}>
-            <DialogHeader>
-              <DialogTitle>Rename feed</DialogTitle>
-              <DialogDescription>
-                Choose a new name for this feed. It will be updated everywhere
-                it appears.
-              </DialogDescription>
-            </DialogHeader>
-            <div className="my-8">
-              <div className="flex flex-col items-start gap-3">
-                <Label htmlFor={`feed-rename-${feed.id}`}>Feed name</Label>
-                <InputGroup>
-                  <InputGroupInput
-                    id={`feed-rename-${feed.id}`}
-                    name="feedName"
-                    placeholder="e.g. My first feed"
-                    value={feedName}
-                    onChange={handleFeedNameChange}
-                    autoComplete="off"
-                  />
-                  <InputGroupAddon>
-                    <Hash />
-                  </InputGroupAddon>
-                </InputGroup>
-              </div>
-            </div>
-            <DialogFooter>
-              <DialogClose
-                render={
-                  <Button type="button" variant="outline">
-                    Cancel
-                  </Button>
-                }
-              />
-              <Button
-                type="submit"
-                disabled={
-                  !feedName.trim() ||
-                  updateFeed.isPending ||
-                  feedName.trim() === feed.name
-                }
-              >
-                {updateFeed.isPending ? (
-                  <Loader2 className="size-4 shrink-0" />
-                ) : null}
-                Save name
-              </Button>
-            </DialogFooter>
-          </form>
-        </DialogContent>
-      </Dialog>
+      <FeedRenameFeedDialog
+        feed={feed}
+        open={renameOpen}
+        onOpenChange={setRenameOpen}
+      />
 
       <AlertDialog open={deleteAlertOpen} onOpenChange={setDeleteAlertOpen}>
         <AlertDialogContent>
