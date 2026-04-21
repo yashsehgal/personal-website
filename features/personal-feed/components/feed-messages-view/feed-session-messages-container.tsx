@@ -17,7 +17,7 @@ export function FeedSessionMessagesContainer() {
       <div className="min-h-0 min-w-0 flex-2 relative">
         <FeedMessagesListContainer key={feedSession} />
         {showMessageBox ? (
-          <div className="h-fit w-full absolute bottom-0 left-0 p-6">
+          <div className="h-fit w-full absolute bottom-0 left-0 pb-6 px-3">
             <FeedMessageBox key={feedSession} />
           </div>
         ) : null}

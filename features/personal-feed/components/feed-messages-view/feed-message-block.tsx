@@ -13,9 +13,13 @@ import { useCallback, useMemo, useState } from "react";
 
 interface FeedMessageProps {
   message: IFeedMessage;
+  insideThread?: boolean;
 }
 
-export function FeedMessage({ message }: FeedMessageProps) {
+export function FeedMessage({
+  message,
+  insideThread = false,
+}: FeedMessageProps) {
   const [isMessageBlockHovered, setIsMessageBlockHovered] =
     useState<boolean>(false);
   const { openThread } = useManageFeedMessageThreadQueryState();
@@ -46,11 +50,16 @@ export function FeedMessage({ message }: FeedMessageProps) {
     setIsMessageBlockHovered(false);
   }, []);
 
+  const safeShowMessageBlockHoverActions = useMemo(() => {
+    return Boolean(!insideThread && isMessageBlockHovered);
+  }, [insideThread, isMessageBlockHovered]);
+
   return (
     <div
       className={cn(
         "w-full h-fit relative px-10 py-2.5 items-start flex flex-col justify-start gap-2",
         "hover:bg-muted",
+        insideThread && "p-5",
       )}
       aria-description={message.content}
       onMouseEnter={handleMessageBlockMouseEnter}
@@ -76,7 +85,7 @@ export function FeedMessage({ message }: FeedMessageProps) {
       <pre className="text-sm whitespace-pre-wrap font-sans flex-1 px-px leading-6">
         {message.content}
       </pre>
-      {isMessageBlockHovered ? (
+      {safeShowMessageBlockHoverActions ? (
         <div
           className={cn(
             "size-fit p-1 rounded-full bg-background border border-border absolute -top-4 right-6 flex items-center",

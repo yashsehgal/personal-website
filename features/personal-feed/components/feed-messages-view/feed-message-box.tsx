@@ -13,7 +13,11 @@ import { cn } from "@/lib/utils";
 import { Loader2, Send } from "lucide-react";
 import { ChangeEvent, useEffect, useMemo, useRef, useState } from "react";
 
-export function FeedMessageBox() {
+interface FeedMessageBoxProps {
+  insideThread?: boolean;
+}
+
+export function FeedMessageBox({ insideThread = false }: FeedMessageBoxProps) {
   const {
     data: session,
     isError: isAuthSessionError,
@@ -161,7 +165,9 @@ export function FeedMessageBox() {
         onBlur={handleMessageBoxTextareaBlurEvent}
         aria-busy={isFeedLoading}
         className="resize-none min-h-12 max-h-64 w-full rounded-md bg-transparent focus-visible:outline-none focus-visible:ring-0 focus-visible:border-transparent leading-6"
-        placeholder={`Write a message to #${safeFeedName}`}
+        placeholder={
+          insideThread ? "Reply..." : `Write a message to #${safeFeedName}`
+        }
       />
       <div className="px-3 pb-3 flex items-center justify-between gap-2">
         <div />
