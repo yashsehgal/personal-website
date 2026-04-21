@@ -44,12 +44,21 @@ function Button({
   className,
   variant = "default",
   size = "default",
+  withoutMicroInteractions = false,
   ...props
-}: ButtonPrimitive.Props & VariantProps<typeof buttonVariants>) {
+}: ButtonPrimitive.Props &
+  VariantProps<typeof buttonVariants> & {
+    withoutMicroInteractions?: boolean;
+  }) {
   return (
     <ButtonPrimitive
       data-slot="button"
-      className={cn(buttonVariants({ variant, size, className }))}
+      className={cn(
+        buttonVariants({ variant, size, className }),
+        withoutMicroInteractions
+          ? "active:not-aria-[haspopup]:scale-none active:not-aria-[haspopup]:translate-y-0"
+          : "",
+      )}
       {...props}
     />
   );
