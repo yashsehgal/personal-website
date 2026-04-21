@@ -56,11 +56,13 @@ import {
 interface FeedActionsManagerProps {
   children: React.ReactNode;
   feed: IFeed;
+  withoutTooltip?: boolean;
 }
 
 export function FeedActionsManager({
   children,
   feed,
+  withoutTooltip = false,
 }: FeedActionsManagerProps) {
   const { data: session } = useAuthSession();
   const { feedSession, closeFeedSession } = useManageFeedSessionQueryState();
@@ -122,16 +124,20 @@ export function FeedActionsManager({
   return (
     <>
       <DropdownMenu>
-        <Tooltip>
-          <TooltipTrigger
-            render={
-              <DropdownMenuTrigger
-                render={children as unknown as ReactElement}
-              />
-            }
-          />
-          <TooltipContent>More options...</TooltipContent>
-        </Tooltip>
+        {withoutTooltip ? (
+          <DropdownMenuTrigger render={children as unknown as ReactElement} />
+        ) : (
+          <Tooltip>
+            <TooltipTrigger
+              render={
+                <DropdownMenuTrigger
+                  render={children as unknown as ReactElement}
+                />
+              }
+            />
+            <TooltipContent>More options...</TooltipContent>
+          </Tooltip>
+        )}
         <DropdownMenuContent className="w-80">
           <DropdownMenuItem
             onClick={() => window.location.assign(getYashMailtoHref())}

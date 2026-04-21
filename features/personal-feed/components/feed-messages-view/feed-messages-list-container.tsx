@@ -7,9 +7,13 @@ import { useManageFeedSessionQueryState } from "@/features/personal-feed/hooks/u
 import { useFeedMessagesWithSenderProfiles } from "@/hooks/use-feed-messages-with-sender-profiles";
 import { startOfDay, parseISO } from "date-fns";
 import { useLayoutEffect, useMemo, useRef } from "react";
+import { FeedStartingBlock } from "@/features/personal-feed/components/feed-messages-view/feed-starting-block";
+import { useFeed } from "@/hooks/use-feed";
 
 export function FeedMessagesListContainer() {
   const { feedSession } = useManageFeedSessionQueryState();
+
+  const { data: feed } = useFeed(feedSession);
 
   const { data: feedMessages, isLoading: isFeedMessagesLoading } =
     useFeedMessagesWithSenderProfiles(feedSession);
@@ -47,6 +51,7 @@ export function FeedMessagesListContainer() {
       ref={scrollRootRef}
       className="h-[calc(100vh-17rem)] overflow-y-auto no-scrollbar scroll-smooth pt-6 pb-1"
     >
+      {feed ? <FeedStartingBlock feed={feed} /> : null}
       {messagesGroupedByDay.map((group) => (
         <FeedMessagesDayDateGroup
           key={group.day.toISOString()}

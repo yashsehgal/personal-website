@@ -14,7 +14,7 @@ import { useAuthSession } from "@/hooks/use-auth-session";
 import { useFeeds } from "@/hooks/use-feeds";
 import { cn } from "@/lib/utils";
 import { ButtonProps } from "@base-ui/react";
-import { Hash, MessagesSquare, Plus } from "lucide-react";
+import { Hash, MessageSquareLock, MessagesSquare, Plus } from "lucide-react";
 import { useCallback, useMemo } from "react";
 
 export function FeedSidebar() {
@@ -77,7 +77,7 @@ export function FeedSidebar() {
             <div className="space-y-2">
               <div className="flex items-center justify-between px-2 pt-1 pb-0">
                 <div className="flex items-center justify-start gap-2 text-muted-foreground">
-                  <MessagesSquare className="size-3 shrink-0" />
+                  <MessageSquareLock className="size-3 shrink-0" />
                   <p className="text-xs font-medium select-none">
                     Private feeds
                   </p>
