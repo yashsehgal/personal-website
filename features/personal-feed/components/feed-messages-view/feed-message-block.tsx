@@ -72,7 +72,7 @@ export function FeedMessage({ message }: FeedMessageProps) {
     <div
       className={cn(
         "w-full h-fit relative px-10 py-2.5 items-start flex flex-col justify-start gap-2",
-        "hover:bg-muted/50",
+        "hover:bg-muted",
       )}
       aria-description={message.content}
       onMouseEnter={handleMessageBlockMouseEnter}
