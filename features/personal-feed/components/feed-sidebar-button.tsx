@@ -26,11 +26,26 @@ export function FeedSidebarButton({ feed }: FeedSidebarButtonProps) {
     playSoundEffect("SINGLE_KEYBOARD_KEY_PRESS");
   }, [playSoundEffect]);
 
+  const handleSidebarButtonMousrDown = useCallback(() => {
+    playSoundOnMouseDown();
+  }, [playSoundOnMouseDown]);
+
+  const handleSidebarButtonKeyDown = useCallback(
+    (event: React.KeyboardEvent<HTMLButtonElement>) => {
+      if (event.key === "Enter" || event.key === " ") {
+        openFeedSession(feed.id);
+        playSoundOnMouseDown();
+      }
+    },
+    [feed.id, openFeedSession, playSoundOnMouseDown],
+  );
+
   return (
     <Button
       withoutMicroInteractions={isFeedSelected}
       onClick={handleSidebarButtonClick}
-      onMouseDown={playSoundOnMouseDown}
+      onMouseDown={handleSidebarButtonMousrDown}
+      onKeyDown={handleSidebarButtonKeyDown}
       className={cn(
         "w-full justify-start truncate h-7 px-2 gap-1.5",
         isFeedSelected &&
@@ -39,7 +54,12 @@ export function FeedSidebarButton({ feed }: FeedSidebarButtonProps) {
       variant="ghost"
       size="sm"
     >
-      <Hash className="size-3.5 text-muted-foreground" />
+      <Hash
+        className={cn(
+          "size-3.5 text-muted-foreground",
+          isFeedSelected && "text-primary",
+        )}
+      />
       <p className="text-xs leading-0">{feed.name}</p>
     </Button>
   );
