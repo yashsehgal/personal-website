@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Inter } from "next/font/google";
 import "./globals.css";
-import { ReactQueryProvider } from "@/components/providers/react-query-provider";
+import { ReactQueryProvider } from "@/providers/react-query-provider";
 import { cn } from "@/lib/utils";
 import { MainLayoutContainer } from "@/components/shared/main-layout-container";
 import { NuqsAdapter } from "nuqs/adapters/next";
