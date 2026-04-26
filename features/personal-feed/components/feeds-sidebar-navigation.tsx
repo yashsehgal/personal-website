@@ -21,7 +21,7 @@ export function FeedsSidebarNavigation() {
   );
 
   return (
-    <aside className="shrink-0 w-64 py-3 px-6">
+    <aside className="shrink-0 w-64 py-3 px-4 space-y-3">
       {/* GLOBAL FEEDS CONTAINER */}
       <FeedsSidebarGroup label="Global feeds">
         {globalFeeds.map((feed) => (

@@ -19,17 +19,22 @@ export function FeedSidebarButton({ feed }: FeedSidebarButtonProps) {
   const isFeedSelected = checkIfFeedSessionIsActive(feed.id);
 
   const handleSidebarButtonClick = useCallback(() => {
-    playSoundEffect("SINGLE_KEYBOARD_KEY_PRESS");
     openFeedSession(feed.id);
-  }, [feed.id, openFeedSession, playSoundEffect]);
+  }, [feed.id, openFeedSession]);
+
+  const playSoundOnMouseDown = useCallback(() => {
+    playSoundEffect("SINGLE_KEYBOARD_KEY_PRESS");
+  }, [playSoundEffect]);
 
   return (
     <Button
+      withoutMicroInteractions={isFeedSelected}
       onClick={handleSidebarButtonClick}
+      onMouseDown={playSoundOnMouseDown}
       className={cn(
         "w-full justify-start truncate h-7 px-2 gap-1.5",
         isFeedSelected &&
-          "bg-background hover:bg-background border-border shadow-2xs",
+          "bg-background hover:bg-background border-border shadow-2xs pl-3.5 transition-[padding]",
       )}
       variant="ghost"
       size="sm"

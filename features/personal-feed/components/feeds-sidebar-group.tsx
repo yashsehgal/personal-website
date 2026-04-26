@@ -11,16 +11,16 @@ interface FeedsSidebarGroupProps {
 }
 
 export function FeedsSidebarGroup({ children, label }: FeedsSidebarGroupProps) {
-  const [isGroupOpen, setIsGroupOpen] = useState(false);
+  const [isGroupOpen, setIsGroupOpen] = useState(true);
 
   const handleGroupToggle = useCallback(() => {
     setIsGroupOpen((prev) => !prev);
   }, []);
 
   return (
-    <section className={cn("")}>
+    <section className="space-y-1">
       <Button
-        className={cn("justify-start text-muted-foreground px-2 w-fit")}
+        className="justify-start text-muted-foreground px-2 w-fit"
         withoutMicroInteractions
         variant="ghost"
         size="xs"
@@ -34,9 +34,7 @@ export function FeedsSidebarGroup({ children, label }: FeedsSidebarGroupProps) {
           )}
         />
       </Button>
-      <div
-        className={cn("px-1 hidden mt-1 space-y-0.5", isGroupOpen && "block")}
-      >
+      <div className={cn("px-1 hidden space-y-0.5", isGroupOpen && "block")}>
         {children}
       </div>
     </section>
