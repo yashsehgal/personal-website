@@ -3,7 +3,7 @@ import { FeedsSidebarNavigation } from "@/features/personal-feed/components/feed
 
 export function FeedsPageContainer() {
   return (
-    <div className="flex-1 min-h-0 w-full flex items-stretch justify-start divide-x">
+    <div className="flex-1 min-h-0 w-full flex items-stretch justify-start divide-x overflow-hidden">
       <FeedsSidebarNavigation />
       <FeedsContentViewContainer />
     </div>

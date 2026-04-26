@@ -20,7 +20,7 @@ export function MainLayoutContainer({
   return (
     <div
       className={cn(
-        "flex min-h-screen flex-col items-stretch justify-start overflow-hidden",
+        "flex h-screen min-h-0 flex-col items-stretch justify-start overflow-hidden",
         className,
       )}
       {...props}

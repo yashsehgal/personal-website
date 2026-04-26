@@ -34,7 +34,6 @@ export default function RootLayout({
     <html
       lang="en"
       className={cn(
-        "h-full",
         "antialiased",
         geistSans.variable,
         geistMono.variable,
@@ -42,7 +41,7 @@ export default function RootLayout({
         inter.variable,
       )}
     >
-      <body className="min-h-screen">
+      <body className="overflow-hidden h-screen">
         <NuqsAdapter>
           <ReactQueryProvider>
             <SoundEffectsProvider>
