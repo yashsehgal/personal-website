@@ -62,12 +62,12 @@ export function FeedMessageBlock({
   }, [feedMessages, message.id]);
 
   const safeShowRepliesManager = useMemo(() => {
-    return safeRepliesUnderThisMessage.length > 0 && !isMessageReply;
-  }, [safeRepliesUnderThisMessage, isMessageReply]);
-
-  const safeShowPreviewReplies = useMemo(() => {
     return !isMessageReply;
   }, [isMessageReply]);
+
+  const safeShowPreviewReplies = useMemo(() => {
+    return safeRepliesUnderThisMessage.length > 0 && !isMessageReply;
+  }, [isMessageReply, safeRepliesUnderThisMessage]);
 
   return (
     <div
