@@ -49,7 +49,7 @@ export function FeedSidebarButton({ feed }: FeedSidebarButtonProps) {
       className={cn(
         "w-full justify-start truncate h-7 px-2 gap-1.5",
         isFeedSelected &&
-          "bg-background hover:bg-background border-border shadow-2xs pl-3.5 transition-[padding]",
+          "bg-background hover:bg-background border-border shadow-2xs",
       )}
       variant="ghost"
       size="sm"
