@@ -23,6 +23,10 @@ export function FeedMessageBlockPreviewReplies({
     return replies.length;
   }, [replies]);
 
+  const safeHasRepliesAvatarURLs = useMemo(() => {
+    return replies.some((reply) => !!reply.sender_profile?.avatar_url);
+  }, [replies]);
+
   const handleExpandAllReplies = useCallback(() => {
     setAreAllRepliesExpanded(true);
   }, []);
@@ -46,7 +50,13 @@ export function FeedMessageBlockPreviewReplies({
         </motion.p>
       ) : null}
       {areAllRepliesExpanded ? (
-        <div>
+        <motion.div
+          className="mt-2 overflow-hidden"
+          initial={{ height: 0 }}
+          animate={{ height: "auto" }}
+          exit={{ height: 0 }}
+          transition={{ ease: "easeOut", duration: 0.2 }}
+        >
           {replies.map((reply) => {
             return (
               <FeedMessageBlock
@@ -56,7 +66,7 @@ export function FeedMessageBlockPreviewReplies({
               />
             );
           })}
-        </div>
+        </motion.div>
       ) : null}
       {areAllRepliesExpanded ? (
         <Button
@@ -79,7 +89,9 @@ export function FeedMessageBlockPreviewReplies({
         >
           <div className="flex items-center justify-start gap-2">
             <CornerDownRight className="size-3" />
-            <SafeRepliesAvatarContainer replies={replies} />
+            {safeHasRepliesAvatarURLs ? (
+              <SafeRepliesAvatarContainer replies={replies} />
+            ) : null}
             <p className="text-xs leading-0">{safeRepliesCount} replies</p>
           </div>
           <p className="text-xs group-hover/message-block-preview-replies-button:visible invisible leading-0 text-muted-foreground">
