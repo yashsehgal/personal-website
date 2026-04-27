@@ -132,3 +132,8 @@
 * {
   @apply selection:bg-foreground/10 selection:text-foreground;
 }
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}

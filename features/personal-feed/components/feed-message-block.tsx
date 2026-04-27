@@ -13,9 +13,13 @@ import { FeedReplyManager } from "@/features/personal-feed/components/feed-reply
 
 interface FeedMessageBlockProps {
   message: IFeedMessage;
+  isMessageReply?: boolean;
 }
 
-export function FeedMessageBlock({ message }: FeedMessageBlockProps) {
+export function FeedMessageBlock({
+  message,
+  isMessageReply = false,
+}: FeedMessageBlockProps) {
   const { feedSession } = useManageFeedSessionQueryState();
   const { data: feedMessages = [] } = useFeedMessages(feedSession);
 
@@ -57,15 +61,31 @@ export function FeedMessageBlock({ message }: FeedMessageBlockProps) {
       );
   }, [feedMessages, message.id]);
 
-  const safeHasRepliesUnderThisMessage = useMemo(() => {
-    return safeRepliesUnderThisMessage.length > 0;
-  }, [safeRepliesUnderThisMessage]);
+  const safeShowRepliesManager = useMemo(() => {
+    return safeRepliesUnderThisMessage.length > 0 && !isMessageReply;
+  }, [safeRepliesUnderThisMessage, isMessageReply]);
+
+  const safeShowPreviewReplies = useMemo(() => {
+    return !isMessageReply;
+  }, [isMessageReply]);
 
   return (
-    <div className="drop-shadow-xs border border-border/30 rounded-md bg-background overflow-hidden divide-y divide-border/40">
-      <div className={cn("w-full px-4 py-4", "space-y-2")}>
+    <div
+      className={cn(
+        "rounded-md bg-background overflow-hidden divide-y divide-border/40",
+        isMessageReply
+          ? "border-none"
+          : "border border-border/30 drop-shadow-xs divide-y divide-border/40",
+      )}
+    >
+      <div
+        className={cn(
+          "w-full px-4 py-4 space-y-2",
+          isMessageReply && "px-4 py-2.5",
+        )}
+      >
         <div className="w-full flex items-center justify-start gap-2">
-          <Avatar size="sm">
+          <Avatar size="sm" className={cn(isMessageReply && "size-5!")}>
             <AvatarImage
               src={safeSenderProfileAvatar}
               alt={safeSenderDisplayName}
@@ -83,16 +103,18 @@ export function FeedMessageBlock({ message }: FeedMessageBlockProps) {
           {message.content}
         </pre>
       </div>
-      {safeHasRepliesUnderThisMessage ? (
-        <div className="h-9 px-1 flex items-center">
+      {safeShowPreviewReplies ? (
+        <div className="p-1 flex items-center">
           <FeedMessageBlockPreviewReplies
             replies={safeRepliesUnderThisMessage}
           />
         </div>
       ) : null}
-      <div className="p-1">
-        <FeedReplyManager message={message} />
-      </div>
+      {safeShowRepliesManager ? (
+        <div className="p-1">
+          <FeedReplyManager message={message} />
+        </div>
+      ) : null}
     </div>
   );
 }
