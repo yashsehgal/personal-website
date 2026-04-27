@@ -9,9 +9,10 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { IFeedMessage } from "@/features/personal-feed/interfaces";
+import { useAddFeedMessage } from "@/hooks/use-add-feed-message";
 import { useAuthSessionWithProfile } from "@/hooks/use-auth-session-with-profile";
 import { ArrowUp } from "lucide-react";
-import { useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 
 interface FeedReplyManagerProps {
   message: IFeedMessage;
@@ -20,6 +21,8 @@ interface FeedReplyManagerProps {
 export function FeedReplyManager({ message }: FeedReplyManagerProps) {
   const [replyContent, setReplyContent] = useState<string>("");
   const { data: authSessionWithProfile } = useAuthSessionWithProfile();
+  const { mutateAsync: addFeedMessage, isPending: isReplySubmitting } =
+    useAddFeedMessage();
 
   const handleReplyContentChange = (
     event: React.ChangeEvent<HTMLTextAreaElement>,
@@ -46,6 +49,19 @@ export function FeedReplyManager({ message }: FeedReplyManagerProps) {
   const safeHasReplyContent = useMemo(() => {
     return replyContent.trim() !== "";
   }, [replyContent]);
+
+  const handleSendReply = useCallback(async () => {
+    const trimmedReplyContent = replyContent.trim();
+    if (!trimmedReplyContent) return;
+
+    await addFeedMessage({
+      feed_id: message.feed_id,
+      content: trimmedReplyContent,
+      reply_to_message_id: message.id,
+    });
+
+    setReplyContent("");
+  }, [addFeedMessage, message.feed_id, message.id, replyContent]);
 
   return (
     <div className="flex items-center justify-between px-3 py-2">
@@ -75,6 +91,8 @@ export function FeedReplyManager({ message }: FeedReplyManagerProps) {
       <Button
         size="icon-xs"
         variant={safeHasReplyContent ? "default" : "ghost"}
+        disabled={!safeHasReplyContent || isReplySubmitting}
+        onClick={handleSendReply}
       >
         <ArrowUp />
       </Button>
