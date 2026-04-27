@@ -10,9 +10,11 @@ export function FeedsContentViewContainer() {
   const { data: feedMessages } = useFeedMessages(feedSession);
 
   const feedMessageBlocks = useMemo(() => {
-    return feedMessages?.map((message) => (
-      <FeedMessageBlock key={message.id} message={message} />
-    ));
+    return feedMessages
+      ?.filter((message) => message.reply_to_message_id === null)
+      .map((message) => (
+        <FeedMessageBlock key={message.id} message={message} />
+      ));
   }, [feedMessages]);
 
   return (
