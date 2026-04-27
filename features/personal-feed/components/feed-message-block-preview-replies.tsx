@@ -7,7 +7,7 @@ import { IFeedMessage } from "@/features/personal-feed/interfaces";
 import { useProfilesByUserIds } from "@/hooks/use-profiles-by-user-ids";
 import { ChevronsDownUp, CornerDownRight } from "lucide-react";
 import { useCallback, useMemo, useState } from "react";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
 interface FeedMessageBlockPreviewRepliesProps {
   replies: IFeedMessage[];
@@ -49,25 +49,29 @@ export function FeedMessageBlockPreviewReplies({
           {safeRepliesCount} replies
         </motion.p>
       ) : null}
-      {areAllRepliesExpanded ? (
-        <motion.div
-          className="mt-2 overflow-hidden"
-          initial={{ height: 0 }}
-          animate={{ height: "auto" }}
-          exit={{ height: 0 }}
-          transition={{ ease: "easeOut", duration: 0.2 }}
-        >
-          {replies.map((reply) => {
-            return (
-              <FeedMessageBlock
-                key={reply.id}
-                message={reply}
-                isMessageReply={true}
-              />
-            );
-          })}
-        </motion.div>
-      ) : null}
+      <AnimatePresence initial={false}>
+        {areAllRepliesExpanded ? (
+          <motion.div
+            key="expanded-replies"
+            className="mt-2 overflow-hidden shrink-0"
+            style={{ transformOrigin: "top" }}
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ ease: "easeOut", duration: 0.22 }}
+          >
+            {replies.map((reply) => {
+              return (
+                <FeedMessageBlock
+                  key={reply.id}
+                  message={reply}
+                  isMessageReply={true}
+                />
+              );
+            })}
+          </motion.div>
+        ) : null}
+      </AnimatePresence>
       {areAllRepliesExpanded ? (
         <Button
           onClick={handleCollapseAllReplies}
