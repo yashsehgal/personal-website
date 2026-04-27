@@ -11,6 +11,7 @@ import {
 import { IFeedMessage } from "@/features/personal-feed/interfaces";
 import { useAddFeedMessage } from "@/hooks/use-add-feed-message";
 import { useAuthSessionWithProfile } from "@/hooks/use-auth-session-with-profile";
+import { useSoundEffect } from "@/hooks/use-sound-effect";
 import { ArrowUp } from "lucide-react";
 import { useCallback, useMemo, useState } from "react";
 
@@ -23,6 +24,7 @@ export function FeedReplyManager({ message }: FeedReplyManagerProps) {
   const { data: authSessionWithProfile } = useAuthSessionWithProfile();
   const { mutateAsync: addFeedMessage, isPending: isReplySubmitting } =
     useAddFeedMessage();
+  const { playSoundEffect } = useSoundEffect();
 
   const handleReplyContentChange = (
     event: React.ChangeEvent<HTMLTextAreaElement>,
@@ -60,8 +62,15 @@ export function FeedReplyManager({ message }: FeedReplyManagerProps) {
       reply_to_message_id: message.id,
     });
 
+    playSoundEffect("MESSAGE_REPLY_SEND");
     setReplyContent("");
-  }, [addFeedMessage, message.feed_id, message.id, replyContent]);
+  }, [
+    addFeedMessage,
+    message.feed_id,
+    message.id,
+    playSoundEffect,
+    replyContent,
+  ]);
 
   return (
     <div className="flex items-center justify-between px-3 py-2">
