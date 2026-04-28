@@ -99,7 +99,12 @@ export function FeedMessageBlock({
             {safeCreatedAt}
           </p>
         </div>
-        <pre className="text-sm whitespace-pre-wrap font-sans leading-6">
+        <pre
+          className={cn(
+            "text-sm whitespace-pre-wrap font-sans leading-6",
+            isMessageReply ? "ml-[30px]" : "ml-[34px]",
+          )}
+        >
           {message.content}
         </pre>
       </div>
