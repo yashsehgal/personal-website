@@ -75,7 +75,7 @@ export function FeedMessageBlock({
         "rounded-md bg-background overflow-hidden divide-y divide-border/40",
         isMessageReply
           ? "border-none"
-          : "border border-border/30 drop-shadow-xs divide-y divide-border/40",
+          : "border border-border/30 divide-y divide-border/40",
       )}
     >
       <div

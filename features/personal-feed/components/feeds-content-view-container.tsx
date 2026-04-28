@@ -18,7 +18,7 @@ export function FeedsContentViewContainer() {
   }, [feedMessages]);
 
   return (
-    <div className="flex-1 h-full min-h-0 min-w-0 w-full overflow-y-scroll bg-foreground/2">
+    <div className="flex-1 h-full min-h-0 min-w-0 w-full overflow-y-scroll bg-background border border-border/50 shadow-2xs rounded-lg">
       <div className="w-3xl mx-auto">
         {/* FEED MESSAGE BLOCKS CONTAINER */}
         <div className="space-y-4">{feedMessageBlocks}</div>

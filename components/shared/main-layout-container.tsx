@@ -13,7 +13,7 @@ export function MainLayoutContainer({
   ...props
 }: React.HTMLAttributes<HTMLDivElement>) {
   const pathname = usePathname();
-  const isPageWithoutPadding = PAGES_WITHOUT_PADDING.includes(
+  const isPageEmpty = PAGES_WITHOUT_PADDING.includes(
     pathname as ApplicationRoute,
   );
 
@@ -25,13 +25,11 @@ export function MainLayoutContainer({
       )}
       {...props}
     >
-      <div className="shrink-0">
-        <Navigation />
-      </div>
+      <div className="shrink-0">{isPageEmpty ? null : <Navigation />}</div>
       <main
         className={cn(
           "flex min-h-0 min-w-0 flex-1 flex-col overflow-y-auto p-8",
-          isPageWithoutPadding && "overflow-hidden p-0",
+          isPageEmpty && "overflow-hidden p-0",
         )}
       >
         {children}
