@@ -6,8 +6,18 @@ import { BasicLink } from "@/components/ui/basic-link";
 import { Button } from "@/components/ui/button";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { MailIcon } from "@hugeicons/core-free-icons";
+import { YASH_CONTACT_EMAIL } from "@/common/contact";
 
 export default function Home() {
+  const handleEmailButtonClick = () => {
+    const mailConfig = {
+      to: YASH_CONTACT_EMAIL,
+      subject: "Hello Yash",
+    };
+
+    window.location.href = `mailto:${mailConfig.to}?subject=${encodeURIComponent(mailConfig.subject)}`;
+  };
+
   return (
     <div className="p-8 space-y-12">
       <div className="flex flex-col items-start justify-start gap-6">
@@ -84,7 +94,7 @@ export default function Home() {
         </div>
       </div>
       <div className="flex items-center justify-start gap-2 -mt-4">
-        <Button className="">
+        <Button onClick={handleEmailButtonClick}>
           <HugeiconsIcon icon={MailIcon} className="size-4" />
           Write to me via email
         </Button>
