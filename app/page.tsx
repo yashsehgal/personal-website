@@ -20,24 +20,32 @@ export default function Home() {
 
   return (
     <div className="p-8 space-y-12">
-      <div className="flex flex-col items-start justify-start gap-6">
-        <div className="size-32 overflow-hidden">
-          <Image
-            preload
-            src={IMAGE_PROFILE_MAIN}
-            alt="Profile"
-            className="object-cover size-auto select-none pointer-events-none"
-            width={400}
-            height={400}
-          />
-        </div>
+      <header className="flex items-start justify-between">
+        {/* PROFILE SECTION */}
         <div className="flex flex-col items-start justify-start gap-6">
-          <p className="text-base leading-0">Yash Sehgal</p>
-          <p className="text-base text-muted-foreground leading-0">
-            Design Engineer
-          </p>
+          <div className="size-32 overflow-hidden">
+            <Image
+              preload
+              src={IMAGE_PROFILE_MAIN}
+              alt="Profile"
+              className="object-cover size-auto select-none pointer-events-none"
+              width={400}
+              height={400}
+            />
+          </div>
+          <div className="flex flex-col items-start justify-start gap-6">
+            <p className="text-base leading-0">Yash Sehgal</p>
+            <p className="text-base text-muted-foreground leading-0">
+              Design Engineer
+            </p>
+          </div>
         </div>
-      </div>
+        {/* NAVIGATION SECTION */}
+        <div className="flex items-center justify-end gap-2">
+          <Button variant="ghost">About</Button>
+          <Button variant="secondary">Explore feed</Button>
+        </div>
+      </header>
       <div className="space-y-8">
         <div className="w-sm text-base space-y-4 max-md:w-full">
           <p className="leading-relaxed">
