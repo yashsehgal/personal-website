@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 import { NuqsAdapter } from "nuqs/adapters/next";
 import { SoundEffectsProvider } from "@/providers/sound-effects-provider";
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
+const geist = Geist({subsets:['latin'],variable:'--font-sans'});
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -36,7 +36,7 @@ export default function RootLayout({
         geistSans.variable,
         geistMono.variable,
         "font-sans",
-        inter.variable,
+        geist.variable,
       )}
     >
       <body>
