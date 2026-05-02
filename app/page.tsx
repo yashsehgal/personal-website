@@ -7,8 +7,12 @@ import { Button } from "@/components/ui/button";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { MailIcon } from "@hugeicons/core-free-icons";
 import { YASH_CONTACT_EMAIL } from "@/common/contact";
+import { useRouter } from "next/navigation";
+import { ROUTES } from "@/common/routes";
 
 export default function Home() {
+  const router = useRouter();
+
   const handleEmailButtonClick = () => {
     const mailConfig = {
       to: YASH_CONTACT_EMAIL,
@@ -16,6 +20,10 @@ export default function Home() {
     };
 
     window.location.href = `mailto:${mailConfig.to}?subject=${encodeURIComponent(mailConfig.subject)}`;
+  };
+
+  const handleExploreFeedButtonClick = (): void => {
+    router.push(ROUTES.FEED);
   };
 
   return (
@@ -43,7 +51,9 @@ export default function Home() {
         {/* NAVIGATION SECTION */}
         <div className="flex items-center justify-end gap-2">
           <Button variant="ghost">About</Button>
-          <Button variant="secondary">Explore feed</Button>
+          <Button variant="secondary" onClick={handleExploreFeedButtonClick}>
+            Explore feed
+          </Button>
         </div>
       </header>
       <div className="space-y-8">

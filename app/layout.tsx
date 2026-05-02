@@ -9,6 +9,7 @@ import { ReactQueryProvider } from "@/providers/react-query-provider";
 import { cn } from "@/lib/utils";
 import { NuqsAdapter } from "nuqs/adapters/next";
 import { SoundEffectsProvider } from "@/providers/sound-effects-provider";
+import { TooltipProvider } from "@/components/ui/tooltip";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -49,12 +50,14 @@ export default function RootLayout({
         "font-sans",
       )}
     >
-      <body>
-        <NuqsAdapter>
-          <ReactQueryProvider>
-            <SoundEffectsProvider>{children}</SoundEffectsProvider>
-          </ReactQueryProvider>
-        </NuqsAdapter>
+      <body className="min-h-screen flex flex-col overflow-hidden">
+        <TooltipProvider>
+          <NuqsAdapter>
+            <ReactQueryProvider>
+              <SoundEffectsProvider>{children}</SoundEffectsProvider>
+            </ReactQueryProvider>
+          </NuqsAdapter>
+        </TooltipProvider>
       </body>
     </html>
   );
