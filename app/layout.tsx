@@ -3,9 +3,7 @@ import { Geist, Geist_Mono, Inter } from "next/font/google";
 import "./globals.css";
 import { ReactQueryProvider } from "@/providers/react-query-provider";
 import { cn } from "@/lib/utils";
-import { MainLayoutContainer } from "@/components/shared/main-layout-container";
 import { NuqsAdapter } from "nuqs/adapters/next";
-import { TooltipProvider } from "@/components/ui/tooltip";
 import { SoundEffectsProvider } from "@/providers/sound-effects-provider";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
@@ -41,14 +39,10 @@ export default function RootLayout({
         inter.variable,
       )}
     >
-      <body className="overflow-hidden h-screen">
+      <body>
         <NuqsAdapter>
           <ReactQueryProvider>
-            <SoundEffectsProvider>
-              <TooltipProvider>
-                <MainLayoutContainer>{children}</MainLayoutContainer>
-              </TooltipProvider>
-            </SoundEffectsProvider>
+            <SoundEffectsProvider>{children}</SoundEffectsProvider>
           </ReactQueryProvider>
         </NuqsAdapter>
       </body>
