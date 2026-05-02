@@ -131,3 +131,7 @@
     @apply font-sans;
   }
 }
+
+* {
+  @apply selection:bg-red-600 selection:text-white;
+}

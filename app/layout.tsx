@@ -1,21 +1,31 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import {
+  Lato as FontSans,
+  PT_Serif as FontSerif,
+  Cascadia_Code as FontMono,
+} from "next/font/google";
 import "./globals.css";
 import { ReactQueryProvider } from "@/providers/react-query-provider";
 import { cn } from "@/lib/utils";
 import { NuqsAdapter } from "nuqs/adapters/next";
 import { SoundEffectsProvider } from "@/providers/sound-effects-provider";
 
-const geist = Geist({ subsets: ["latin"], variable: "--font-sans" });
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const fontSans = FontSans({
   subsets: ["latin"],
+  weight: ["400", "700"],
+  variable: "--font-sans",
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const fontSerif = FontSerif({
   subsets: ["latin"],
+  weight: ["400", "700"],
+  variable: "--font-serif",
+});
+
+const fontMono = FontMono({
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  variable: "--font-mono",
 });
 
 export const metadata: Metadata = {
@@ -33,10 +43,10 @@ export default function RootLayout({
       lang="en"
       className={cn(
         "antialiased",
-        geistSans.variable,
-        geistMono.variable,
+        fontSans.variable,
+        fontSerif.variable,
+        fontMono.variable,
         "font-sans",
-        geist.variable,
       )}
     >
       <body>
