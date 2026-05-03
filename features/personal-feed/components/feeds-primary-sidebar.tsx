@@ -4,7 +4,7 @@ import { IMAGE_PROFILE_MAIN } from "@/common/assets";
 import { ROUTES } from "@/common/routes";
 import { Separator } from "@/components/ui/separator";
 import { FeedPrimaryOption } from "@/features/personal-feed/components/feed-primary-option";
-import { ArrowLeftBigIcon, Chat01Icon } from "@hugeicons/core-free-icons";
+import { Chat01Icon, Home03Icon } from "@hugeicons/core-free-icons";
 import { usePathname, useRouter } from "next/navigation";
 import { useMemo } from "react";
 
@@ -24,16 +24,16 @@ export function FeedsPrimarySidebar() {
     <aside className="flex items-center justify-start flex-col px-3 gap-1">
       <FeedPrimaryOption
         onClick={handleGoToHome}
-        optionName="Back to home"
-        optionContent={{ icon: ArrowLeftBigIcon }}
+        optionName="Back to home page"
+        optionContent={{ icon: Home03Icon }}
       />
       <Separator
         orientation="horizontal"
-        className="data-horizontal:w-[85%] self-center my-0.5"
+        className="data-horizontal:w-[85%] self-center my-px"
       />
       <div className="gap-2 flex flex-col items-center justify-start">
         <FeedPrimaryOption
-          optionName="General Channel"
+          optionName="General Feed"
           optionContent={{ imageSrc: IMAGE_PROFILE_MAIN }}
           isOptionActive={isGeneralChannelActive}
         />
