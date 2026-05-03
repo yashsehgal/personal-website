@@ -18,7 +18,7 @@ export function FeedListnavigationHeader() {
   }, [isGeneralChannelActive]);
 
   return (
-    <header className="py-2.5 flex items-center justify-between px-4">
+    <header className="h-12 flex items-center justify-between px-4">
       <div className="flex items-center justify-start gap-2">
         <p className="text-sm font-medium">{safeFeedName}</p>
       </div>

@@ -2,7 +2,6 @@
 
 import { IMAGE_PROFILE_MAIN } from "@/common/assets";
 import { ROUTES } from "@/common/routes";
-import { Separator } from "@/components/ui/separator";
 import { FeedPrimaryOption } from "@/features/personal-feed/components/feed-primary-option";
 import { Chat01Icon, Home03Icon } from "@hugeicons/core-free-icons";
 import { usePathname, useRouter } from "next/navigation";
@@ -22,15 +21,13 @@ export function FeedsPrimarySidebar() {
 
   return (
     <aside className="flex items-center justify-start flex-col px-3 gap-1">
-      <FeedPrimaryOption
-        onClick={handleGoToHome}
-        optionName="Back to home page"
-        optionContent={{ icon: Home03Icon }}
-      />
-      <Separator
-        orientation="horizontal"
-        className="data-horizontal:w-[85%] self-center my-px"
-      />
+      <div className="h-12 mt-0.5">
+        <FeedPrimaryOption
+          onClick={handleGoToHome}
+          optionName="Back to home page"
+          optionContent={{ icon: Home03Icon }}
+        />
+      </div>
       <div className="gap-2 flex flex-col items-center justify-start">
         <FeedPrimaryOption
           optionName="General Feed"
