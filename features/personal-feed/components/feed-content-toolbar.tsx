@@ -14,7 +14,7 @@ export function FeedContentToolbar() {
 
   if (isFeedLoading) {
     return (
-      <header className="h-12 flex items-center justify-between px-4">
+      <header className="h-12 shrink-0 flex items-center justify-between px-4">
         <div className="flex items-center justify-start gap-2">
           <Skeleton className="w-24 h-6" />
         </div>
@@ -23,7 +23,7 @@ export function FeedContentToolbar() {
   }
 
   return (
-    <header className="h-12 flex items-center justify-between px-4">
+    <header className="h-12 shrink-0 flex items-center justify-between px-4">
       <div className="flex items-center justify-start gap-2">
         <div className="flex items-center justify-start gap-1.5">
           <HugeiconsIcon
