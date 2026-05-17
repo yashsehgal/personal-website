@@ -8,7 +8,7 @@ export function FeedsPageContainer() {
       <FeedsPrimarySidebar />
       <div className="flex-1 min-h-0 flex items-stretch justify-start overflow-hidden border border-border rounded-lg">
         <FeedsListNavigation />
-        <main className="flex-1 min-h-0 flex flex-col items-stretch justify-start overflow-hidden divide-y divide-border bg-background">
+        <main className="flex-1 min-h-0 flex flex-col items-stretch justify-start overflow-hidden divide-y divide-border bg-background shadow-xs">
           <FeedContentToolbar />
           <div></div>
         </main>
