@@ -9,7 +9,7 @@ import { MouseEventHandler, useCallback, useMemo } from "react";
 
 export function PublicFeedsListContainer() {
   const { data: allFeeds, isLoading: areAllFeedsLoading } = useFeeds();
-  const { feedSession, checkIfFeedSessionIsActive, openFeedSession } =
+  const { checkIfFeedSessionIsActive, openFeedSession } =
     useManageFeedSessionQueryState();
 
   const safePublicFeeds = useMemo(() => {
