@@ -1,5 +1,6 @@
 "use client";
 
+import { FeedMessageBlock } from "@/features/personal-feed/components/feed-message-block";
 import { FeedMessageBox } from "@/features/personal-feed/components/feed-message-box";
 import { useManageFeedSessionQueryState } from "@/features/personal-feed/hooks/use-manage-feed-session-query-state";
 import { useFeedMessages } from "@/hooks/use-feed-messages";
@@ -10,9 +11,9 @@ export function FeedContentMessagesContainer() {
     useFeedMessages(feedSession);
 
   return (
-    <div className="flex-1 min-h-0 w-full overflow-y-auto overscroll-y-contain relative">
+    <div className="flex-1 min-h-0 w-full overflow-y-auto overscroll-y-contain relative space-y-2">
       {feedMessages?.map((message) => {
-        return <div key={message.id}>{message.content}</div>;
+        return <FeedMessageBlock key={message.id} message={message} />;
       })}
 
       {/* Feed Messagbox Component */}
