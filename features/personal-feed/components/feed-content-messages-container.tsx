@@ -15,13 +15,17 @@ export function FeedContentMessagesContainer() {
     return <div></div>;
   }
 
+  const messagesOldestFirst = feedMessages
+    ? [...feedMessages].reverse()
+    : undefined;
+
   return (
     <div className="flex-1 min-h-0 w-full overflow-y-auto overscroll-y-contain relative space-y-2">
       {/* Feed Welcome Block Component */}
       <FeedWelcomeBlock />
 
       {/* Feed Messages List Container */}
-      {feedMessages?.map((message) => {
+      {messagesOldestFirst?.map((message) => {
         return <FeedMessageBlock key={message.id} message={message} />;
       })}
 

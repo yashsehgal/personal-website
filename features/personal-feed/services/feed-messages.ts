@@ -39,6 +39,7 @@ export interface IListFeedMessagesOptions {
   reply_to_message_id?: string | null;
 }
 
+/** Newest-first (descending `created_at`). Reverse for chronological UI (oldest at top). */
 export async function listMessagesForFeed(
   supabase: SupabaseClient,
   feedId: string,
