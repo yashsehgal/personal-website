@@ -10,7 +10,10 @@ export function FeedContentToolbar() {
   const { feedSession } = useManageFeedSessionQueryState();
   const { data: feed, isLoading: isFeedLoading } = useFeed(feedSession);
 
-  if (!feed) return;
+  if (!feed)
+    return (
+      <header className="h-12 shrink-0 flex items-center justify-between px-4"></header>
+    );
 
   if (isFeedLoading) {
     return (
