@@ -1,6 +1,5 @@
 "use client";
 
-import { Skeleton } from "@/components/ui/skeleton";
 import { FeedMessageBlock } from "@/features/personal-feed/components/feed-message-block";
 import { FeedMessageBox } from "@/features/personal-feed/components/feed-message-box";
 import { FeedWelcomeBlock } from "@/features/personal-feed/components/feed-welcome-block";
@@ -20,6 +19,7 @@ export function FeedContentMessagesContainer() {
     <div className="flex-1 min-h-0 w-full overflow-y-auto overscroll-y-contain relative space-y-2">
       {/* Feed Welcome Block Component */}
       <FeedWelcomeBlock />
+
       {/* Feed Messages List Container */}
       {feedMessages?.map((message) => {
         return <FeedMessageBlock key={message.id} message={message} />;
