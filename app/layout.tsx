@@ -5,10 +5,7 @@ import {
   Cascadia_Code as FontMono,
 } from "next/font/google";
 import "./globals.css";
-import { ReactQueryProvider } from "@/providers/react-query-provider";
 import { cn } from "@/lib/utils";
-import { NuqsAdapter } from "nuqs/adapters/next";
-import { SoundEffectsProvider } from "@/providers/sound-effects-provider";
 import { TooltipProvider } from "@/components/ui/tooltip";
 
 const fontSans = FontSans({
@@ -51,13 +48,7 @@ export default function RootLayout({
       )}
     >
       <body className="min-h-screen flex flex-col overflow-hidden">
-        <TooltipProvider>
-          <NuqsAdapter>
-            <ReactQueryProvider>
-              <SoundEffectsProvider>{children}</SoundEffectsProvider>
-            </ReactQueryProvider>
-          </NuqsAdapter>
-        </TooltipProvider>
+        <TooltipProvider>{children}</TooltipProvider>
       </body>
     </html>
   );
