@@ -5,7 +5,7 @@ import { HomeHeader } from "@/features/home/components/home-header";
 
 export function HomePageContainer() {
   return (
-    <div className="p-8 space-y-12">
+    <div className="space-y-12">
       <HomeHeader />
       <div className="space-y-8">
         <HomeBio />

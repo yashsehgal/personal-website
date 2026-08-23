@@ -24,13 +24,17 @@ export function HomeNavigation() {
     router.push(getRouteWithParams(route, {}));
   };
 
+  const handleAboutClick = () => {
+    router.push(getRouteWithParams(ROUTES.ABOUT, {}));
+  };
+
   return (
     <div className="flex items-center justify-end gap-2">
-      <DropdownMenu>
+      <DropdownMenu modal={false}>
         <DropdownMenuTrigger asChild>
           <Button variant="ghost">Elsewhere</Button>
         </DropdownMenuTrigger>
-        <DropdownMenuContent>
+        <DropdownMenuContent align="end" className="w-auto">
           {ELSEWHERE_ITEMS.map((item) => (
             <DropdownMenuItem
               key={item.route}
@@ -41,7 +45,9 @@ export function HomeNavigation() {
           ))}
         </DropdownMenuContent>
       </DropdownMenu>
-      <Button variant="ghost">About</Button>
+      <Button variant="ghost" onClick={handleAboutClick}>
+        About
+      </Button>
     </div>
   );
 }
