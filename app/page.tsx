@@ -61,7 +61,7 @@ export default function Home() {
       <div className="space-y-8">
         <div className="w-lg text-2xl text-balance space-y-4 max-md:w-full max-md:text-base max-md:text-left">
           <p className="leading-relaxed">
-            Hi, I am Yash. I am a design engineer based out of Bombay, India.
+            Hi, I am Yash. I am a design engineer based in Bombay, India.
           </p>
           <p className="leading-relaxed">
             In my experience, I have worked with various web-based technologies
