@@ -34,7 +34,7 @@ export default function Home() {
     <div className="p-8 space-y-12">
       <header className="flex items-start justify-between">
         {/* PROFILE SECTION */}
-        <div className="flex flex-col items-start justify-start gap-6">
+        <div className="flex flex-col items-start justify-start gap-7">
           <div className="size-32 overflow-hidden">
             <Image
               preload
@@ -45,22 +45,23 @@ export default function Home() {
               height={400}
             />
           </div>
-          <div className="flex flex-col items-start justify-start gap-6">
-            <p className="text-base leading-0">Yash Sehgal</p>
-            <p className="text-base text-muted-foreground leading-0">
+          <div className="flex flex-col items-start justify-start gap-7">
+            <p className="text-lg leading-0">Yash Sehgal</p>
+            <p className="text-lg text-muted-foreground leading-0">
               Design Engineer
             </p>
           </div>
         </div>
         {/* NAVIGATION SECTION */}
         <div className="flex items-center justify-end gap-2">
+          <Button variant="ghost">Gallery</Button>
           <Button variant="ghost">About</Button>
         </div>
       </header>
       <div className="space-y-8">
-        <div className="w-sm text-base space-y-4 max-md:w-full">
+        <div className="w-lg text-2xl text-balance space-y-4 max-md:w-full max-md:text-base max-md:text-left">
           <p className="leading-relaxed">
-            Hi, I am Yash. I am a design engineer based out of India.
+            Hi, I am Yash. I am a design engineer based out of Bombay, India.
           </p>
           <p className="leading-relaxed">
             In my experience, I have worked with various web-based technologies
@@ -75,7 +76,7 @@ export default function Home() {
             where I work on the design system and the design language of the
             platform.
           </p>
-          <p>
+          <p className="leading-relaxed">
             Before this, I was at{" "}
             <BasicLink href="https://stackai.com" target="_blank">
               StackAI
@@ -91,7 +92,7 @@ export default function Home() {
             .
           </p>
         </div>
-        <div className="w-md text-base space-y-4 max-md:w-full">
+        <div className="w-lg text-xl text-balance space-y-4 max-md:w-full max-md:text-base max-md:text-left">
           <p className="leading-relaxed">
             You can connect with me on{" "}
             <BasicLink href="https://x.com/yashsehgaldev" target="_blank">
@@ -114,6 +115,7 @@ export default function Home() {
       </div>
       <div className="flex items-center justify-start gap-2 -mt-4">
         <Button
+          size="lg"
           onClick={handleEmailButtonClick}
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
