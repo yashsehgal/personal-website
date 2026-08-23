@@ -1,8 +1,10 @@
 export const ROUTES = {
-  HOME: "/",
-  STUDY: "/study",
   ABOUT: "/about",
+  CAFES: "/cafes",
+  HOME: "/",
+  GALLERY: "/gallery",
   WRITINGS: "/writings",
+  MUSIC: "/music",
 } as const;
 
 export type ApplicationRoute = (typeof ROUTES)[keyof typeof ROUTES];
