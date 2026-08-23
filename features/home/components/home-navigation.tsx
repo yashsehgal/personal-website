@@ -8,13 +8,25 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import {
+  ChevronDown,
+  Coffee,
+  Music,
+  Pen,
+  Picture,
+} from "@hugeicons/core-free-icons";
+import { HugeiconsIcon, HugeiconsIconProps } from "@hugeicons/react";
 import { useRouter } from "next/navigation";
 
-const ELSEWHERE_ITEMS: { label: string; route: ApplicationRoute }[] = [
-  { label: "Cafes", route: ROUTES.CAFES },
-  { label: "Gallery", route: ROUTES.GALLERY },
-  { label: "Music", route: ROUTES.MUSIC },
-  { label: "Writings", route: ROUTES.WRITINGS },
+const ELSEWHERE_ITEMS: {
+  label: string;
+  route: ApplicationRoute;
+  icon: HugeiconsIconProps["icon"];
+}[] = [
+  { label: "Cafes", route: ROUTES.CAFES, icon: Coffee },
+  { label: "Gallery", route: ROUTES.GALLERY, icon: Picture },
+  { label: "Music", route: ROUTES.MUSIC, icon: Music },
+  { label: "Writings", route: ROUTES.WRITINGS, icon: Pen },
 ] as const;
 
 export function HomeNavigation() {
@@ -32,7 +44,9 @@ export function HomeNavigation() {
     <div className="flex items-center justify-end gap-2">
       <DropdownMenu modal={false}>
         <DropdownMenuTrigger asChild>
-          <Button variant="ghost">Elsewhere</Button>
+          <Button variant="ghost">
+            Elsewhere <HugeiconsIcon icon={ChevronDown} className="w-4 h-4" />
+          </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="w-auto">
           {ELSEWHERE_ITEMS.map((item) => (
@@ -40,6 +54,7 @@ export function HomeNavigation() {
               key={item.route}
               onClick={() => handleElsewhereClick(item.route)}
             >
+              <HugeiconsIcon icon={item.icon} className="w-4 h-4" />
               {item.label}
             </DropdownMenuItem>
           ))}
