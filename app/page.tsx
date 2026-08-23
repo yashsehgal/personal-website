@@ -9,6 +9,12 @@ import { MailIcon } from "@hugeicons/core-free-icons";
 import { YASH_CONTACT_EMAIL } from "@/common/contact";
 import { motion } from "framer-motion";
 import { useState } from "react";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 export default function Home() {
   const [isHovered, setIsHovered] = useState<boolean>(false);
@@ -54,7 +60,17 @@ export default function Home() {
         </div>
         {/* NAVIGATION SECTION */}
         <div className="flex items-center justify-end gap-2">
-          <Button variant="ghost">Gallery</Button>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost">Elsewhere</Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent>
+              <DropdownMenuItem>Cafes</DropdownMenuItem>
+              <DropdownMenuItem>Gallery</DropdownMenuItem>
+              <DropdownMenuItem>Music</DropdownMenuItem>
+              <DropdownMenuItem>Writings</DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
           <Button variant="ghost">About</Button>
         </div>
       </header>
