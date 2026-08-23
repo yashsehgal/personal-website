@@ -8,6 +8,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { cn } from "@/lib/utils";
 import {
   ChevronDown,
   Coffee,
@@ -17,6 +18,7 @@ import {
 } from "@hugeicons/core-free-icons";
 import { HugeiconsIcon, HugeiconsIconProps } from "@hugeicons/react";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 const ELSEWHERE_ITEMS: {
   label: string;
@@ -30,6 +32,7 @@ const ELSEWHERE_ITEMS: {
 ] as const;
 
 export function HomeNavigation() {
+  const [open, setOpen] = useState(false);
   const router = useRouter();
 
   const handleElsewhereClick = (route: ApplicationRoute) => {
@@ -42,10 +45,20 @@ export function HomeNavigation() {
 
   return (
     <div className="flex items-center justify-end gap-2">
-      <DropdownMenu modal={false}>
+      <Button variant="ghost" onClick={handleAboutClick}>
+        About
+      </Button>
+      <DropdownMenu modal={false} open={open} onOpenChange={setOpen}>
         <DropdownMenuTrigger asChild>
           <Button variant="ghost">
-            Elsewhere <HugeiconsIcon icon={ChevronDown} className="w-4 h-4" />
+            Elsewhere{" "}
+            <HugeiconsIcon
+              icon={ChevronDown}
+              className={cn(
+                "w-4 h-4 transition-transform duration-200 ease-in-out",
+                open && "rotate-180",
+              )}
+            />
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="w-auto">
@@ -54,15 +67,12 @@ export function HomeNavigation() {
               key={item.route}
               onClick={() => handleElsewhereClick(item.route)}
             >
-              <HugeiconsIcon icon={item.icon} className="w-4 h-4" />
+              <HugeiconsIcon icon={item.icon} className="w-4 h-4 mr-0.5" />
               {item.label}
             </DropdownMenuItem>
           ))}
         </DropdownMenuContent>
       </DropdownMenu>
-      <Button variant="ghost" onClick={handleAboutClick}>
-        About
-      </Button>
     </div>
   );
 }
