@@ -7,8 +7,12 @@ import { Button } from "@/components/ui/button";
 import { HugeiconsIcon } from "@hugeicons/react";
 import { MailIcon } from "@hugeicons/core-free-icons";
 import { YASH_CONTACT_EMAIL } from "@/common/contact";
+import { motion } from "framer-motion";
+import { useState } from "react";
 
 export default function Home() {
+  const [isHovered, setIsHovered] = useState<boolean>(false);
+
   const handleEmailButtonClick = () => {
     const mailConfig = {
       to: YASH_CONTACT_EMAIL,
@@ -16,6 +20,14 @@ export default function Home() {
     };
 
     window.location.href = `mailto:${mailConfig.to}?subject=${encodeURIComponent(mailConfig.subject)}`;
+  };
+
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
   };
 
   return (
@@ -101,8 +113,26 @@ export default function Home() {
         </div>
       </div>
       <div className="flex items-center justify-start gap-2 -mt-4">
-        <Button onClick={handleEmailButtonClick}>
-          <HugeiconsIcon icon={MailIcon} className="size-4" />
+        <Button
+          onClick={handleEmailButtonClick}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+          className="gap-0"
+        >
+          <motion.span
+            animate={{
+              scale: isHovered ? 1 : 0,
+              width: isHovered ? "auto" : 0,
+            }}
+            transition={{
+              duration: 0.2,
+              bounce: 0,
+              type: "spring",
+              ease: "circOut",
+            }}
+          >
+            <HugeiconsIcon icon={MailIcon} className="size-4 mr-1.5" />
+          </motion.span>
           Write to me via email
         </Button>
       </div>
