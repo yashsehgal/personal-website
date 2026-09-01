@@ -1,3 +1,5 @@
+import { HomeScreen } from "@/screens/home/components/home-screen";
+
 export default function Home() {
-  return <div className=""></div>;
+  return <HomeScreen />;
 }
