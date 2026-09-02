@@ -7,10 +7,10 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-inter);
-  --font-heading: var(--font-inter);
-  --font-mono: var(--font-inter);
-  --font-serif: var(--font-inter);
+  --font-sans: var(--font-google-sans-flex);
+  --font-heading: var(--font-google-sans-flex);
+  --font-mono: var(--font-google-sans-flex);
+  --font-serif: var(--font-crimson-pro);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -50,7 +50,8 @@
 }
 
 body {
-  font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  font-family:
+    var(--font-google-sans-flex), ui-sans-serif, system-ui, sans-serif;
 }
 
 :root {
@@ -132,4 +133,8 @@ body {
   html {
     @apply font-sans;
   }
+}
+
+a {
+  @apply hover:bg-neutral-200 py-0.5 rounded-sm transition-colors hover:text-black;
 }

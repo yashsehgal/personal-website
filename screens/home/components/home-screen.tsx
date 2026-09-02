@@ -1,11 +1,11 @@
+import { HomeScreenAboutSummarySection } from "@/screens/home/components/home-screen-about-summary-section";
+import { HomeScreenHeader } from "@/screens/home/components/home-screen-header";
+
 export function HomeScreen() {
   return (
-    <div className="">
-      <header className="p-12">
-        <h1 className="text-3xl font-semibold tracking-tight">
-          Hello, I am Yash
-        </h1>
-      </header>
+    <div className="flex flex-col gap-12 p-24">
+      <HomeScreenHeader />
+      <HomeScreenAboutSummarySection />
     </div>
   );
 }
