@@ -11,43 +11,34 @@ const COMPANY_LINKS: Record<string, string> = {
 
 export function HomeScreenAboutSummarySection() {
   return (
-    <section className="space-y-4 w-md">
-      <p className="text-lg font-medium leading-relaxed">
-        Lately, my work has been focused on designing AI products with good
-        experiences and user interactions. I&apos;m based in Bombay, India.
-      </p>
-      <p className="text-lg font-medium leading-relaxed">
-        Working as a Design Engineer at{" "}
-        <Link href={COMPANY_LINKS.OCTOLANE} target="_blank">
+    <section className="space-y-4 w-lg">
+      <p className="text-base text-muted-foreground">
+        Design Engineer at{" "}
+        <Link href="https://octolane.com" target="_blank">
           Octolane
         </Link>
-        , where we are building a system that handles customers, revenue
-        pipelines, email interactions, everything for you by itself.
+        , a superintelligence platform for making human decisions quicker by
+        managing and automating business operations by itself.
       </p>
-      <p className="text-lg font-medium leading-relaxed">
-        In my experience as a designer and an engineer, I have worked with
-        companies including{" "}
-        <Link href={COMPANY_LINKS.STACKAI} target="_blank">
-          StackAI
+      <p className="text-base text-muted-foreground">
+        Previously, I was at{" "}
+        <Link href="https://stackai.com" target="_blank">
+          StackAI (acquired by Asana)
         </Link>
-        ,{" "}
-        <Link href={COMPANY_LINKS.GITHUB} target="_blank">
+        , where I led design engineering. We worked on building a platform for
+        building AI agents.
+      </p>
+      <p className="text-base text-muted-foreground">
+        In my experience of doing design and engineering, I had a chance to work
+        with some nice people and companies such as{" "}
+        <Link href="https://github.com" target="_blank">
           GitHub
-        </Link>{" "}
-        and{" "}
-        <Link href={COMPANY_LINKS.ROCKETIUM} target="_blank">
+        </Link>
+        {" and "}
+        <Link href="https://rocketium.com" target="_blank">
           Rocketium
         </Link>
         .
-      </p>
-      <p className="text-lg font-medium leading-relaxed">
-        Previously, I was at{" "}
-        <Link href={COMPANY_LINKS.STACK_ASANA_ACQUIRED} target="_blank">
-          StackAI (now acquired by Asana)
-        </Link>
-        , where I lead the overall design and experience of the platform for
-        building AI agents quickly and in the most easy manner. I joined them as
-        a founding engineer.
       </p>
     </section>
   );

@@ -1,9 +1,7 @@
 export function HomeScreenHeader() {
   return (
     <header>
-      <h1 className="text-3xl font-medium tracking-tight">
-        Hello, I&apos;m Yash
-      </h1>
+      <h1 className="text-2xl font-serif">Yash Sehgal</h1>
     </header>
   );
 }

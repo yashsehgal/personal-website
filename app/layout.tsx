@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Crimson_Pro, Google_Sans_Flex } from "next/font/google";
+import { Google_Sans_Flex } from "next/font/google";
 import "./globals.css";
 
 const googleSansFlex = Google_Sans_Flex({
@@ -8,13 +8,6 @@ const googleSansFlex = Google_Sans_Flex({
   weight: "variable",
   adjustFontFallback: false,
   fallback: ["ui-sans-serif", "system-ui", "sans-serif"],
-});
-
-const crimsonPro = Crimson_Pro({
-  variable: "--font-crimson-pro",
-  subsets: ["latin"],
-  weight: "variable",
-  style: ["normal", "italic"],
 });
 
 export const metadata: Metadata = {
@@ -26,7 +19,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${googleSansFlex.variable} ${googleSansFlex.className} ${crimsonPro.variable} h-full antialiased`}
+      className={`${googleSansFlex.variable} ${googleSansFlex.className} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col font-sans">{children}</body>
     </html>
