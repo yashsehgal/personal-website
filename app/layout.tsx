@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Google_Sans_Flex } from "next/font/google";
+import { Google_Sans_Flex, Reenie_Beanie } from "next/font/google";
 import "./globals.css";
 
 const googleSansFlex = Google_Sans_Flex({
@@ -8,6 +8,12 @@ const googleSansFlex = Google_Sans_Flex({
   weight: "variable",
   adjustFontFallback: false,
   fallback: ["ui-sans-serif", "system-ui", "sans-serif"],
+});
+
+const reenieBeanie = Reenie_Beanie({
+  variable: "--font-reenie-beanie",
+  subsets: ["latin"],
+  weight: "400",
 });
 
 export const metadata: Metadata = {
@@ -19,7 +25,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${googleSansFlex.variable} ${googleSansFlex.className} h-full antialiased`}
+      className={`${googleSansFlex.variable} ${googleSansFlex.className} ${reenieBeanie.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col font-sans">{children}</body>
     </html>
