@@ -29,12 +29,12 @@ export function HomeScreenAboutSummarySection() {
       <p className="text-base text-muted-foreground">
         In my experience of doing design and engineering, I had a chance to work
         with some nice people and companies such as{" "}
-        <Link href={COMPANY_LINKS.ROCKETIUM} target="_blank">
-          Rocketium
-        </Link>
-        {" and "}
         <Link href={COMPANY_LINKS.GITHUB} target="_blank">
           GitHub
+        </Link>
+        {" and "}
+        <Link href={COMPANY_LINKS.ROCKETIUM} target="_blank">
+          Rocketium
         </Link>
         .
       </p>
