@@ -10,8 +10,8 @@ const COMPANY_LINKS: Record<string, string> = {
 export function HomeScreenAboutSummarySection() {
   return (
     <>
-      <header>
-        <h1 className="text-6xl font-medium px-3 font-handwriting">Yash</h1>
+      <header className="px-3">
+        <h1 className="text-6xl font-medium font-handwriting">Yash</h1>
       </header>
       <section className="space-y-4 w-xl text-balance px-3">
         <p className="text-base text-muted-foreground">

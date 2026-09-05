@@ -7,16 +7,24 @@ const MICRO_APPS: { title: string; description: string; path: string }[] = [
     path: "/messages",
   },
   {
-    title: "Songs",
+    title: "Music",
     description: "A collection of songs I like",
-    path: "/songs",
+    path: "/music",
+  },
+  {
+    title: "Photos",
+    description: "A gallery of pictures I've taken over the years",
+    path: "/photos",
   },
 ];
 
 export function HomeScreenAppsListSection() {
   return (
-    <>
-      <section className="space-y-4 w-lg">
+    <section className="space-y-3">
+      <header className="px-3">
+        <h2 className="text-sm font-medium text-primary/40">Apps</h2>
+      </header>
+      <div className="space-y-4 w-lg">
         {MICRO_APPS.map((app, index) => {
           return (
             <Link key={index} href={app.path}>
@@ -29,7 +37,7 @@ export function HomeScreenAppsListSection() {
             </Link>
           );
         })}
-      </section>
-    </>
+      </div>
+    </section>
   );
 }
