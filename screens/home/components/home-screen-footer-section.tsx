@@ -19,7 +19,8 @@ export function HomeScreenFooterSection() {
   return (
     <footer className="px-3">
       <p className="text-base text-primary/40 font-medium">
-        {formattedSanitizedDate} in Bombay, India
+        <span className="tabular-nums">{formattedSanitizedDate}</span> in
+        Bombay, India
       </p>
     </footer>
   );
