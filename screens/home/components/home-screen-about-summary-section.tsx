@@ -14,7 +14,7 @@ export function HomeScreenAboutSummarySection() {
         <h1 className="text-6xl font-medium font-handwriting">Yash</h1>
       </header>
       <section className="space-y-4 w-xl text-balance px-3">
-        <p className="text-base text-muted-foreground">
+        <p className="text-base text-muted-foreground leading-7">
           Design Engineer at{" "}
           <Link href={COMPANY_LINKS.OCTOLANE} target="_blank">
             Octolane
@@ -28,7 +28,7 @@ export function HomeScreenAboutSummarySection() {
           , where I led design engineering. We worked on building a platform for
           building AI agents.
         </p>
-        <p className="text-base text-muted-foreground">
+        <p className="text-base text-muted-foreground leading-7">
           In my experience of doing design and engineering, I had a chance to
           work with some nice people and companies such as{" "}
           <Link href={COMPANY_LINKS.GITHUB} target="_blank">

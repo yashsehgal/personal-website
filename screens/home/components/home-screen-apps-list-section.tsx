@@ -28,11 +28,9 @@ export function HomeScreenAppsListSection() {
         {MICRO_APPS.map((app, index) => {
           return (
             <Link key={index} href={app.path}>
-              <div className="p-3 rounded-lg space-y-1.5 hover:bg-accent">
-                <h3 className="text-base font-medium">{app.title}</h3>
-                <p className="text-sm text-muted-foreground">
-                  {app.description}
-                </p>
+              <div className="p-3 rounded-lg space-y-1.5 hover:bg-accent text-base">
+                <h3 className="font-medium">{app.title}</h3>
+                <p className="text-muted-foreground">{app.description}</p>
               </div>
             </Link>
           );
