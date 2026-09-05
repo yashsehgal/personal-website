@@ -2,6 +2,22 @@ import { useMemo } from "react";
 
 const INDIA_TIMEZONE: string = "IST" as const;
 
+function HoppingBunny() {
+  return (
+    <span
+      aria-hidden="true"
+      className="ml-1.5 inline-flex select-none flex-col items-center justify-center leading-[0.85] mb-1.5"
+    >
+      <span className="inline-flex origin-bottom flex-col items-center group-hover:animate-bunny-hop motion-reduce:group-hover:animate-none">
+        <span className="origin-bottom text-[0.7em] font-semibold tracking-[0.16em] group-hover:animate-bunny-ears motion-reduce:group-hover:animate-none">
+          {"//"}
+        </span>
+        <span className="text-[0.78em] font-semibold tracking-wide">(• •)</span>
+      </span>
+    </span>
+  );
+}
+
 export function HomeScreenFooterSection() {
   const currentDate = useMemo(() => new Date(), []);
   const sanitizedDate = useMemo(() => {
@@ -18,9 +34,10 @@ export function HomeScreenFooterSection() {
 
   return (
     <footer className="px-3">
-      <p className="text-base text-primary/40 font-medium">
-        <span className="tabular-nums">{formattedSanitizedDate}</span> in
+      <p className="group inline-flex items-center text-base text-primary/40 font-medium">
         Bombay, India
+        <span className="tabular-nums ml-1">{formattedSanitizedDate}</span>
+        <HoppingBunny />
       </p>
     </footer>
   );

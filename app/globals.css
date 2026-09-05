@@ -48,6 +48,8 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
+  --animate-bunny-hop: bunny-hop 1.8s cubic-bezier(0.45, 0.2, 0.4, 1) infinite;
+  --animate-bunny-ears: bunny-ears 1.8s cubic-bezier(0.45, 0.2, 0.4, 1) infinite;
 }
 
 body {
@@ -116,4 +118,39 @@ body {
 
 a {
   @apply py-0.5 rounded-sm transition-colors text-primary hover:bg-accent hover:text-accent-foreground;
+}
+
+@keyframes bunny-hop {
+  0%,
+  22%,
+  100% {
+    transform: translateY(0);
+  }
+  32% {
+    transform: translateY(0.03em);
+  }
+  48% {
+    transform: translateY(-0.14em);
+  }
+  58% {
+    transform: translateY(-0.11em);
+  }
+  74% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes bunny-ears {
+  0%,
+  32%,
+  74%,
+  100% {
+    transform: rotate(0deg);
+  }
+  48% {
+    transform: rotate(-6deg);
+  }
+  58% {
+    transform: rotate(4deg);
+  }
 }
