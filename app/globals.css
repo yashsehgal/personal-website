@@ -48,8 +48,8 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
-  --animate-bunny-hop: bunny-hop 1.8s cubic-bezier(0.45, 0.2, 0.4, 1) infinite;
-  --animate-bunny-ears: bunny-ears 1.8s cubic-bezier(0.45, 0.2, 0.4, 1) infinite;
+  --animate-bunny-hop: bunny-hop 1.35s cubic-bezier(0.45, 0.2, 0.4, 1) infinite;
+  --animate-bunny-ears: bunny-ears 1.35s cubic-bezier(0.45, 0.2, 0.4, 1) infinite;
 }
 
 body {

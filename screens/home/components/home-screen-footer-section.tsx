@@ -33,10 +33,10 @@ export function HomeScreenFooterSection() {
   }, [sanitizedDate]);
 
   return (
-    <footer className="px-3">
+    <footer className="px-3 cursor-default select-none">
       <p className="group inline-flex items-center text-base text-primary/40 font-medium">
+        <span className="tabular-nums mr-1">{formattedSanitizedDate}</span> in
         Bombay, India
-        <span className="tabular-nums ml-1">{formattedSanitizedDate}</span>
         <HoppingBunny />
       </p>
     </footer>
