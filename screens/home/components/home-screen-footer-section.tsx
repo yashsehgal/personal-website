@@ -1,6 +1,18 @@
-import { useMemo } from "react";
+"use client";
 
-const INDIA_TIMEZONE: string = "IST" as const;
+import { useEffect, useState } from "react";
+
+const INDIA_TIMEZONE = "Asia/Kolkata";
+
+function formatBombayTime(date: Date) {
+  return date
+    .toLocaleString("en-IN", {
+      timeZone: INDIA_TIMEZONE,
+      hour: "2-digit",
+      minute: "2-digit",
+    })
+    .replace(/\s/g, "");
+}
 
 function HoppingBunny() {
   return (
@@ -19,24 +31,28 @@ function HoppingBunny() {
 }
 
 export function HomeScreenFooterSection() {
-  const currentDate = useMemo(() => new Date(), []);
-  const sanitizedDate = useMemo(() => {
-    return currentDate.toLocaleString("en-IN", {
-      timeZone: INDIA_TIMEZONE,
-      hour: "2-digit",
-      minute: "2-digit",
-    });
-  }, [currentDate]);
+  const [formattedSanitizedDate, setFormattedSanitizedDate] = useState(() =>
+    formatBombayTime(new Date()),
+  );
 
-  const formattedSanitizedDate = useMemo(() => {
-    return sanitizedDate.replace(/\s/g, "");
-  }, [sanitizedDate]);
+  useEffect(() => {
+    const updateTime = () => {
+      setFormattedSanitizedDate(formatBombayTime(new Date()));
+    };
+
+    updateTime();
+    const intervalId = window.setInterval(updateTime, 1000);
+
+    return () => window.clearInterval(intervalId);
+  }, []);
 
   return (
     <footer className="px-3 cursor-default select-none">
       <p className="group inline-flex items-center text-base text-primary/40 font-medium">
-        <span className="tabular-nums mr-1">{formattedSanitizedDate}</span> in
-        Bombay, India
+        <span className="tabular-nums mr-1" suppressHydrationWarning>
+          {formattedSanitizedDate}
+        </span>{" "}
+        in Bombay, India
         <HoppingBunny />
       </p>
     </footer>
