@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Google_Sans_Flex, Reenie_Beanie } from "next/font/google";
 import "./globals.css";
+import { SidebarNavigationContainer } from "@/components/shared/sidebar-navigation-container";
 
 const googleSansFlex = Google_Sans_Flex({
   variable: "--font-google-sans-flex",
@@ -27,7 +28,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${googleSansFlex.variable} ${googleSansFlex.className} ${reenieBeanie.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col font-sans">{children}</body>
+      <body className="min-h-full flex flex-row font-sans items-start justify-start p-24 gap-24">
+        <SidebarNavigationContainer />
+        <main className="flex-1 pt-2">{children}</main>
+      </body>
     </html>
   );
 }

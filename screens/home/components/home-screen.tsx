@@ -4,7 +4,7 @@ import { HomeScreenFooterSection } from "@/screens/home/components/home-screen-f
 
 export function HomeScreen() {
   return (
-    <div className="flex flex-col gap-8 p-20">
+    <div className="flex flex-col gap-8">
       <HomeScreenAboutSummarySection />
       <HomeScreenAppsListSection />
       <div className="mt-12">
