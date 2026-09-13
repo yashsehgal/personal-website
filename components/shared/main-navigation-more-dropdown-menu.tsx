@@ -7,6 +7,13 @@ import {
 import { cn } from "cn";
 import { useState } from "react";
 
+const MoreDropdownMenuItems: string[] = [
+  "Gallery",
+  "Music",
+  "Books",
+  "Archives",
+];
+
 export function MainNavigationMoreDropdownMenu() {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -20,15 +27,14 @@ export function MainNavigationMoreDropdownMenu() {
               isOpen && "text-orange-600 cursor-default",
             )}
           >
-            More
+            More ({MoreDropdownMenuItems.length})
           </button>
         }
       />
       <DropdownMenuContent>
-        <DropdownMenuItem>Gallery</DropdownMenuItem>
-        <DropdownMenuItem>Music</DropdownMenuItem>
-        <DropdownMenuItem>Books</DropdownMenuItem>
-        <DropdownMenuItem>Archives</DropdownMenuItem>
+        {MoreDropdownMenuItems.map((item) => (
+          <DropdownMenuItem key={item}>{item}</DropdownMenuItem>
+        ))}
       </DropdownMenuContent>
     </DropdownMenu>
   );
