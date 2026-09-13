@@ -22,19 +22,21 @@ export function MainNavigation() {
 
   return (
     <div className="border-b border-border py-4">
-      <ResponsiveControl className="flex items-center justify-start gap-4">
-        {Object.values(NAVIGATION).map(({ label, href }) => (
-          <Link
-            key={href}
-            href={href}
-            className={cn(
-              "text-sm uppercase font-mono text-muted-foreground hover:text-foreground",
-              isActive?.href === href && "text-foreground",
-            )}
-          >
-            {label}
-          </Link>
-        ))}
+      <ResponsiveControl className="flex items-center justify-between">
+        <div className="flex items-center justify-start gap-4">
+          {Object.values(NAVIGATION).map(({ label, href }) => (
+            <Link
+              key={href}
+              href={href}
+              className={cn(
+                "text-sm uppercase font-mono text-muted-foreground hover:text-foreground",
+                isActive?.href === href && "text-foreground",
+              )}
+            >
+              {label}
+            </Link>
+          ))}
+        </div>
         <MainNavigationMoreDropdownMenu />
       </ResponsiveControl>
     </div>

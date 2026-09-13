@@ -23,11 +23,11 @@ export function MainNavigationMoreDropdownMenu() {
         render={
           <button
             className={cn(
-              "text-sm uppercase font-mono text-muted-foreground hover:text-orange-600 cursor-pointer",
-              isOpen && "text-orange-600 cursor-default",
+              "text-sm uppercase font-mono text-muted-foreground hover:text-blue-600 cursor-pointer",
+              isOpen && "text-blue-600 cursor-default",
             )}
           >
-            More ({MoreDropdownMenuItems.length})
+            More [{MoreDropdownMenuItems.length}]
           </button>
         }
       />
