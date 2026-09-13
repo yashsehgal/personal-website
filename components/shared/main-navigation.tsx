@@ -2,6 +2,7 @@
 
 import { ROUTES, RouteType } from "@/common/routes";
 import { ResponsiveControl } from "@/components/layouts/responsive-control";
+import { MainNavigationMoreDropdownMenu } from "@/components/shared/main-navigation-more-dropdown-menu";
 import { cn } from "cn";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -34,6 +35,7 @@ export function MainNavigation() {
             {label}
           </Link>
         ))}
+        <MainNavigationMoreDropdownMenu />
       </ResponsiveControl>
     </div>
   );
