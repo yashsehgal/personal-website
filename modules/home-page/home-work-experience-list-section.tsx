@@ -39,15 +39,38 @@ export function HomeWorkExperienceListSection() {
     >
       {WORK_EXPERIENCE_LIST.map((workExperience) => {
         return (
+          //   <div
+          //     key={workExperience.id}
+          //     className="flex items-start justify-start flex-col gap-2"
+          //   >
+          //     <p className="font-light tabular-nums tracking-tight">
+          //       {workExperience.year}
+          //     </p>
+          //     <div className="flex items-center justify-start">
+          //       <div className="w-50 shrink-0">
+          //         <Link
+          //           href={workExperience.href}
+          //           rel="noopener noreferrer"
+          //           target="_blank"
+          //           className="font-medium tracking-tight uppercase hover:bg-foreground hover:text-background"
+          //         >
+          //           {workExperience.title}
+          //         </Link>
+          //       </div>
+          //       <p className="font-medium uppercase text-muted-foreground tracking-tight">
+          //         {workExperience.designation}
+          //       </p>
+          //     </div>
+          //   </div>
           <div
             key={workExperience.id}
-            className="flex items-start justify-start flex-col gap-2"
+            className="flex items-start justify-start gap-6"
           >
             <p className="font-light tabular-nums tracking-tight">
               {workExperience.year}
             </p>
             <div className="flex items-center justify-start">
-              <div className="w-50 shrink-0">
+              <div className="w-34 shrink-0">
                 <Link
                   href={workExperience.href}
                   rel="noopener noreferrer"
