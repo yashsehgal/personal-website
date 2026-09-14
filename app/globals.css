@@ -129,6 +129,6 @@
     cursor: pointer;
   }
   html {
-    @apply font-mono;
+    @apply font-mono overscroll-none;
   }
 }
