@@ -2,7 +2,7 @@ export function WorkExperienceSummarySection() {
   return (
     <section
       aria-label="Work experience summary"
-      className="text-sm font-medium text-justify columns-2 space-y-8 space-x-4 leading-relaxed font-serif italic"
+      className="text-sm font-medium text-balance columns-3 space-y-8 space-x-4 leading-relaxed font-sans"
     >
       <article>
         <p>
