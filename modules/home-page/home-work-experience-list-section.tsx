@@ -52,7 +52,7 @@ export function HomeWorkExperienceListSection() {
                   href={workExperience.href}
                   rel="noopener noreferrer"
                   target="_blank"
-                  className="font-medium tracking-tight uppercase hover:text-blue-700"
+                  className="font-medium tracking-tight uppercase hover:bg-foreground hover:text-background"
                 >
                   {workExperience.title}
                 </Link>
