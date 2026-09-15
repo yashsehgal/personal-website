@@ -4,18 +4,18 @@ export function WorkExperienceSummarySection() {
       aria-label="Work experience summary"
       className="text-sm font-medium text-balance columns-3 space-y-8 space-x-4 leading-relaxed font-sans"
     >
-      <article>
+      <article className="space-y-4">
         <p>
-          My career started as a UI designer right after high school. Before
-          that, I spent a lot of time exploring tech and design on my own,
-          outside of what I was studying. I loved the idea of making something
-          from scratch that other people could actually use and appreciate.
+          I started as a UI designer right after high school. Before that I
+          spent a lot of time exploring tech and design on my own. I loved
+          making things from scratch that other people could actually use.
           During the 2020 lockdown I switched from UI design to code—Python,
-          system automations, data analysis, and small CLI apps. In college I
-          got my first internship as a frontend engineer. I worked in Vue,
-          implemented a design system, cleaned up legacy components, and added
-          support for a theme engine. That was when I learned how to write code
-          and design as a team.
+          automations, data analysis, and small CLI apps.
+        </p>
+        <p>
+          In college I interned as a frontend engineer. I worked in Vue, built a
+          design system, cleaned up legacy components, and added a theme engine.
+          That&apos;s when I learned to write code and design as a team.
         </p>
       </article>
       <article>
@@ -48,17 +48,21 @@ export function WorkExperienceSummarySection() {
           that work is still in the product today. I had the time of my life.
         </p>
       </article>
-      <article>
+      <article className="space-y-4">
         <p>
           Recently I joined Octolane, where I work on AI chat and other parts of
           the platform—trying to make a traditional CRM feel a little less
           traditional. Still TypeScript, React, and Framer Motion. I&apos;ve
-          been building things like a kanban board for deals, a better view for
-          meeting recordings, and, inside chat, tools, widgets, a message queue,
-          and a cleaner, more accessible questionnaire. I also built a CSV
-          import that lets people bring in multiple files to enrich accounts and
-          contacts—even at two or three hundred thousand rows—with RabbitMQ and
-          Typesense running the work in parallel.
+          been building a kanban board for deals, a better view for meeting
+          recordings, and, inside chat, tools, widgets, a message queue, and a
+          cleaner, more accessible questionnaire.
+        </p>
+        <p>
+          The newest piece is a CSV import: multiple files to enrich accounts
+          and contacts, even at two or three hundred thousand rows, with
+          RabbitMQ and Typesense running the work in parallel. This role is
+          where I learned to think past the interface—queues, indexing, and
+          what it takes to move a lot of data without the product falling over.
         </p>
       </article>
     </section>
