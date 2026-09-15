@@ -50,7 +50,7 @@ export function PhotosGallerySection() {
                   sizes="(max-width: 768px) 50vw, 20vw"
                   quality={80}
                   preload={index < 5 && row === rows[0]}
-                  className="block h-auto w-full"
+                  className="block h-auto w-full grayscale hover:grayscale-0 transition-all duration-300 select-none"
                 />
               </figure>
             );
