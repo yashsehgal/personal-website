@@ -7,7 +7,8 @@ export default function Work() {
       <div className="mt-20 mb-18">
         <WorkHeaderSection />
       </div>
-      <div>
+      <div className="flex flex-col gap-6">
+        <div className="h-px w-full bg-muted" />
         <WorkExperienceSummarySection />
       </div>
     </div>

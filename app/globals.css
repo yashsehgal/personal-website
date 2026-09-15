@@ -120,6 +120,7 @@
 @layer base {
   * {
     @apply border-border outline-ring/50;
+    @apply selection:bg-foreground/10 selection:dark:bg-foreground/15;
   }
   body {
     @apply bg-background text-foreground;
