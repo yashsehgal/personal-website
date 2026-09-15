@@ -10,7 +10,7 @@ const NAVIGATION_ITEMS: { id: RouteKey; label: string; href: Route }[] = [
   { id: "ABOUT", label: "About", href: ROUTES.ABOUT },
   { id: "WORK", label: "Work", href: ROUTES.WORK },
   { id: "WRITINGS", label: "Writings", href: ROUTES.WRITINGS },
-  { id: "APPS", label: "Apps", href: ROUTES.APPS },
+  { id: "PHOTOS", label: "Photos", href: ROUTES.PHOTOS },
   { id: "ARCHIVE", label: "Archive", href: ROUTES.ARCHIVE },
 ] as const;
 

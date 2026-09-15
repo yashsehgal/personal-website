@@ -159,7 +159,7 @@ html[data-theme="work"] {
   --ring: oklch(0.3 0.12 277);
 }
 
-html[data-theme="apps"] {
+html[data-theme="photos"] {
   color-scheme: light;
   --background: oklch(0.95 0.03 350);
   --foreground: oklch(0.35 0.12 350);
@@ -244,7 +244,7 @@ html[data-theme="writings"] {
     --ring: oklch(0.88 0.08 277);
   }
 
-  html[data-theme="apps"] {
+  html[data-theme="photos"] {
     color-scheme: dark;
     --background: oklch(0.24 0.08 350);
     --foreground: oklch(0.9 0.06 350);

@@ -3,7 +3,7 @@ export const ROUTES = {
   WRITINGS: "/writings",
   WORK: "/work",
   ABOUT: "/about",
-  APPS: "/apps",
+  PHOTOS: "/photos",
   ARCHIVE: "/archive",
 } as const;
 
