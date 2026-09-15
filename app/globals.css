@@ -291,6 +291,11 @@ html[data-theme="writings"] {
   * {
     @apply border-border outline-ring/50;
     @apply selection:bg-foreground/10 selection:dark:bg-foreground/15;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  *::-webkit-scrollbar {
+    display: none;
   }
   body {
     @apply bg-background text-foreground;
