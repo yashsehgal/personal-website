@@ -10,7 +10,7 @@ export function MainLayoutController({
   ...props
 }: MainLayoutControllerProps) {
   return (
-    <div className={cn("", className)} {...props}>
+    <div className={cn("pb-24", className)} {...props}>
       <PrimaryNavigation />
       <ResponsiveLayoutController>{children}</ResponsiveLayoutController>
     </div>
