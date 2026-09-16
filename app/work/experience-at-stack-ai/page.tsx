@@ -3,7 +3,7 @@ import { StackAiExperienceHeaderSection } from "@/modules/work-page/stack-ai-exp
 
 export default function StackAiExperience() {
   return (
-    <div>
+    <div className="mx-auto w-full max-w-2xl">
       <div className="mt-20 mb-18">
         <StackAiExperienceHeaderSection />
       </div>
