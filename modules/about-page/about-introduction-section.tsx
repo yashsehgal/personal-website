@@ -6,7 +6,7 @@ export function AboutIntroductionSection() {
   return (
     <section
       aria-label="About introduction"
-      className="font-sans text-2xl leading-relaxed text-muted-foreground"
+      className="font-sans text-xl leading-relaxed text-muted-foreground font-medium tracking-tight w-md"
     >
       <article className="space-y-3">
         <p>Hi, I am Yash Sehgal. As of today, I am living in Bombay, India.</p>
@@ -17,7 +17,7 @@ export function AboutIntroductionSection() {
             href={ROUTES.WORK}
             className="inline-flex items-center gap-1 text-foreground hover:bg-foreground hover:text-background"
           >
-            recent work
+            Recent Work
             <ArrowRight className="size-[0.85em]" />
           </Link>
         </p>

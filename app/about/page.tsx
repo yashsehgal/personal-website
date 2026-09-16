@@ -8,7 +8,6 @@ export default function About() {
         <AboutHeaderSection />
       </div>
       <div className="flex flex-col gap-6">
-        <div className="h-px w-full bg-muted" />
         <AboutIntroductionSection />
       </div>
     </div>
