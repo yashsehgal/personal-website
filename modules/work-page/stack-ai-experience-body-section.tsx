@@ -12,6 +12,9 @@ const NODE_SEARCH_SRC =
   "/work/stack-ai/tools-and-node-search-demos/node-search-inside-workflow-demo.mp4";
 const NODE_SEARCH_POSTER_SRC =
   "/work/stack-ai/tools-and-node-search-demos/node-search-inside-workflow-demo.jpg";
+const KB_EVALS_DEMO_SRC = "/work/stack-ai/kb-evals-demos/kb-evals-demo.png";
+const ARCHIVE_SUGGESTIONS_DEMO_SRC =
+  "/work/stack-ai/archive-suggestions-demos/archive-suggestions-demo.png";
 
 export function StackAiExperienceBodySection() {
   return (
@@ -97,6 +100,9 @@ export function StackAiExperienceBodySection() {
         height={1252}
       />
       <article className="space-y-3">
+        <h2 className="text-sm font-medium leading-relaxed text-foreground">
+          Archive Suggestions
+        </h2>
         <p>
           This began as a weekend side project. It was not highly requested, but
           I believed it was important because it helps customers reduce costs
@@ -113,8 +119,16 @@ export function StackAiExperienceBodySection() {
           them one by one or select all and remove them at once.
         </p>
       </article>
-      <StackAiExperienceMediaSlot />
+      <StackAiExperienceMediaSlot
+        src={ARCHIVE_SUGGESTIONS_DEMO_SRC}
+        alt="Archive suggestions for unused StackAI workflow projects"
+        width={2518}
+        height={746}
+      />
       <article className="space-y-3">
+        <h2 className="text-sm font-medium leading-relaxed text-foreground">
+          Knowledge Base Evaluations
+        </h2>
         <p>
           This was my first project where I actually wrote backend code. I
           focused on evaluating the chunks associated with the keywords that the
@@ -130,6 +144,12 @@ export function StackAiExperienceBodySection() {
           in the chunk.
         </p>
       </article>
+      <StackAiExperienceMediaSlot
+        src={KB_EVALS_DEMO_SRC}
+        alt="Knowledge base evaluation playground with search results and chunk scores"
+        width={3024}
+        height={1598}
+      />
     </section>
   );
 }
