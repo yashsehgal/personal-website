@@ -1,3 +1,4 @@
+import { ROUTES } from "@/common/routes";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 
@@ -16,6 +17,7 @@ const WORK_EXPERIENCE_LIST = [
     designation: "Founding Design Engineer",
     year: 2025,
     href: "https://stackai.com",
+    experienceHref: ROUTES.WORK_EXPERIENCE_STACK_AI,
     hasReadExperience: true,
   },
   {
@@ -67,8 +69,11 @@ export function WorkExperienceCompaniesSection() {
               {workExperience.hasReadExperience ? (
                 <>
                   <Link
-                    href="#"
-                    scroll={false}
+                    href={
+                      "experienceHref" in workExperience
+                        ? workExperience.experienceHref
+                        : "#"
+                    }
                     className="inline-flex items-center gap-1 text-muted-foreground hover:text-foreground"
                   >
                     Read Experience

@@ -11,6 +11,13 @@ export type PageTheme = (typeof PAGE_THEME_MATCHES)[number]["theme"];
 
 export function getPageTheme(pathname: string): PageTheme | null {
   for (const { path, theme } of PAGE_THEME_MATCHES) {
+    if (path === ROUTES.WORK) {
+      if (pathname === path) {
+        return theme;
+      }
+      continue;
+    }
+
     if (pathname === path || pathname.startsWith(`${path}/`)) {
       return theme;
     }
@@ -22,10 +29,13 @@ export function getPageTheme(pathname: string): PageTheme | null {
 export const PAGE_THEME_BOOTSTRAP_SCRIPT = `(function(){
   var p = location.pathname;
   var t = "";
-  ${PAGE_THEME_MATCHES.map(
-    ({ path, theme }, index) =>
-      `${index === 0 ? "if" : "else if"} (p === "${path}" || p.indexOf("${path}/") === 0) t = "${theme}";`,
-  ).join("\n  ")}
+  ${PAGE_THEME_MATCHES.map(({ path, theme }, index) => {
+    const condition =
+      path === ROUTES.WORK
+        ? `p === "${path}"`
+        : `p === "${path}" || p.indexOf("${path}/") === 0`;
+    return `${index === 0 ? "if" : "else if"} (${condition}) t = "${theme}";`;
+  }).join("\n  ")}
   if (t) document.documentElement.setAttribute("data-theme", t);
   else document.documentElement.removeAttribute("data-theme");
 })();`;

@@ -16,7 +16,13 @@ const NAVIGATION_ITEMS: { id: RouteKey; label: string; href: Route }[] = [
 
 export function PrimaryNavigation() {
   const pathname = usePathname();
-  const isActive = (href: Route) => pathname === href;
+  const isActive = (href: Route) => {
+    if (href === ROUTES.HOME) {
+      return pathname === href;
+    }
+
+    return pathname === href || pathname.startsWith(`${href}/`);
+  };
   const getLinkClassName = (href: Route) =>
     cn(
       "font-mono text-muted-foreground uppercase hover:text-foreground",

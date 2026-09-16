@@ -2,6 +2,7 @@ export const ROUTES = {
   HOME: "/",
   WRITINGS: "/writings",
   WORK: "/work",
+  WORK_EXPERIENCE_STACK_AI: "/work/experience-at-stack-ai",
   ABOUT: "/about",
   PHOTOS: "/photos",
   ARCHIVE: "/archive",
