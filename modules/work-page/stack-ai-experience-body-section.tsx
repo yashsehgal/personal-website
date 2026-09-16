@@ -56,24 +56,9 @@ export function StackAiExperienceBodySection() {
         alt="Pasting a copied node into another StackAI workflow"
       />
       <article className="space-y-3">
-        <p>
-          This started with the idea to have a consistent design. We were using
-          Shadcn Data Table, and it was functional, but it was not aligning, and
-          having a custom design on top of it was not really going well. I wrote
-          a component from scratch using the React Data Table package that
-          Shadcn also uses.
-        </p>
-        <p>
-          I added type safety so column types are derived from the data.
-          Developers wrote a constant with the ID, title, and data source of
-          each column, and loading states were handled automatically because we
-          were using React Query. The advanced filters took major inspiration
-          from Notion. Checkboxes supported multi-select, including shift-click
-          to select rows in between, like MacOS Finder.
-        </p>
-      </article>
-      <StackAiExperienceMediaSlot />
-      <article className="space-y-3">
+        <h2 className="text-sm font-medium leading-relaxed text-foreground">
+          Worklfow Node Search
+        </h2>
         <p>
           We offered many options, tools, and node types, but filtering and
           locating nodes by category or type was difficult. I added a way to add
