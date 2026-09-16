@@ -4,6 +4,14 @@ const COPY_NODE_DEMO_SRC =
   "/work/stack-ai/copy-paste-nodes-demos/copy-node-demo.gif";
 const PASTE_NODE_DEMO_SRC =
   "/work/stack-ai/copy-paste-nodes-demos/paste-node-demo.gif";
+const TOOLS_SEARCH_SRC =
+  "/work/stack-ai/tools-and-node-search-demos/tools-search.mp4";
+const TOOLS_SEARCH_POSTER_SRC =
+  "/work/stack-ai/tools-and-node-search-demos/tools-search.jpg";
+const NODE_SEARCH_SRC =
+  "/work/stack-ai/tools-and-node-search-demos/node-search-inside-workflow-demo.mp4";
+const NODE_SEARCH_POSTER_SRC =
+  "/work/stack-ai/tools-and-node-search-demos/node-search-inside-workflow-demo.jpg";
 
 export function StackAiExperienceBodySection() {
   return (
@@ -73,7 +81,20 @@ export function StackAiExperienceBodySection() {
           without being redirected to a settings panel.
         </p>
       </article>
-      <StackAiExperienceMediaSlot />
+      <StackAiExperienceMediaSlot
+        src={TOOLS_SEARCH_SRC}
+        poster={TOOLS_SEARCH_POSTER_SRC}
+        alt="Searching tools and node types in StackAI"
+        width={2540}
+        height={1754}
+      />
+      <StackAiExperienceMediaSlot
+        src={NODE_SEARCH_SRC}
+        poster={NODE_SEARCH_POSTER_SRC}
+        alt="Searching and adding a node inside a StackAI workflow"
+        width={1906}
+        height={1252}
+      />
       <article className="space-y-3">
         <p>
           This began as a weekend side project. It was not highly requested, but
