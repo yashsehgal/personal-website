@@ -45,7 +45,7 @@ export function AboutIntroductionSection() {
       <figure className="relative aspect-[5/7] w-80 shrink-0 overflow-hidden">
         <Image
           priority
-          src="/photos/yash.png"
+          src="/photos/yash-cover.png"
           alt="Yash Sehgal"
           fill
           sizes="320px"
