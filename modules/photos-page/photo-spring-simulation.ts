@@ -2,7 +2,8 @@ import type { PhotoRestRect } from "@/modules/photos-page/photo-layout";
 
 const STIFFNESS = 180;
 const DAMPING = 24;
-const MIN_DRAG_SCALE = 0.82;
+const DRAG_FOLLOW = 72;
+const MIN_DRAG_SCALE = 0.9;
 const FIELD_RADIUS = 280;
 const RIPPLE_SPEED_THRESHOLD = 900;
 const WAVE_SPEED = 1400;
@@ -357,9 +358,25 @@ export function stepSimulation(simulation: Simulation, dt: number) {
     if (dragged && photo.id === dragged.id) {
       targetX = clamp(simulation.pointerX - simulation.grabX, 0, simulation.width);
       targetY = clamp(simulation.pointerY - simulation.grabY, 0, simulation.height);
-      const scale = mix(1, MIN_DRAG_SCALE, intensity);
-      targetSx = scale;
-      targetSy = scale;
+      targetSx = MIN_DRAG_SCALE;
+      targetSy = MIN_DRAG_SCALE;
+
+      const follow = 1 - Math.exp(-DRAG_FOLLOW * step);
+      photo.x = mix(photo.x, targetX, follow);
+      photo.y = mix(photo.y, targetY, follow);
+      photo.vx = simulation.pointerVx;
+      photo.vy = simulation.pointerVy;
+
+      const nextSx = springStep(photo.sx, photo.vsx, targetSx, step);
+      const nextSy = springStep(photo.sy, photo.vsy, targetSy, step);
+      const nextColor = springStep(photo.color, photo.vColor, targetColor, step);
+      photo.sx = nextSx.position;
+      photo.vsx = nextSx.velocity;
+      photo.sy = nextSy.position;
+      photo.vsy = nextSy.velocity;
+      photo.color = nextColor.position;
+      photo.vColor = nextColor.velocity;
+      continue;
     } else if (dragged) {
       const neighbor = neighborTarget(photo, dragged, dragDx, dragDy, intensity);
       targetX = neighbor.x;
