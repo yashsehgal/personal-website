@@ -11,6 +11,7 @@ type StackAiExperienceMediaSlotProps = {
   poster?: string;
   width?: number;
   height?: number;
+  videoClassName?: string;
 };
 
 function isVideoSrc(src: string) {
@@ -37,6 +38,7 @@ export function StackAiExperienceMediaSlot({
   poster,
   width,
   height,
+  videoClassName,
 }: StackAiExperienceMediaSlotProps) {
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -57,6 +59,7 @@ export function StackAiExperienceMediaSlot({
           alt={alt}
           width={width}
           height={height}
+          videoClassName={videoClassName}
         />
       </MediaFrame>
     );

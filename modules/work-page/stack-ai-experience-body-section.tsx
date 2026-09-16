@@ -87,6 +87,7 @@ export function StackAiExperienceBodySection() {
         alt="Searching tools and node types in StackAI"
         width={2540}
         height={1754}
+        videoClassName="scale-[1.03] object-cover"
       />
       <StackAiExperienceMediaSlot
         src={NODE_SEARCH_SRC}

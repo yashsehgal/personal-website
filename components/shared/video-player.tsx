@@ -19,6 +19,7 @@ type VideoPlayerProps = {
   width?: number;
   height?: number;
   className?: string;
+  videoClassName?: string;
 };
 
 function formatTime(seconds: number) {
@@ -40,6 +41,7 @@ export function VideoPlayer({
   width,
   height,
   className,
+  videoClassName,
 }: VideoPlayerProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const isScrubbingRef = useRef(false);
@@ -166,8 +168,9 @@ export function VideoPlayer({
         onDurationChange={syncFromVideo}
         onTimeUpdate={syncFromVideo}
         className={cn(
-          "pointer-events-none absolute inset-0 size-full object-contain",
+          "pointer-events-none absolute inset-0 size-full origin-center object-contain",
           canShow ? "opacity-100" : "opacity-0",
+          videoClassName,
         )}
       />
 
