@@ -42,14 +42,14 @@ export function AboutIntroductionSection() {
           </Link>
         </p>
       </article>
-      <figure className="relative aspect-square w-80 shrink-0">
+      <figure className="relative aspect-[5/7] w-80 shrink-0 overflow-hidden">
         <Image
           priority
           src="/photos/yash.png"
           alt="Yash Sehgal"
-          width={2400}
-          height={2400}
-          className="object-cover object-center"
+          fill
+          sizes="320px"
+          className="object-cover object-top"
           draggable={false}
         />
       </figure>
