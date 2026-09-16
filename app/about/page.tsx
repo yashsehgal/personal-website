@@ -3,7 +3,7 @@ import { AboutIntroductionSection } from "@/modules/about-page/about-introductio
 
 export default function About() {
   return (
-    <div>
+    <div className="mx-auto w-full max-w-5xl">
       <div className="mt-20 mb-18">
         <AboutHeaderSection />
       </div>

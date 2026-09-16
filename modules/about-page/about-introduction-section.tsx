@@ -1,14 +1,17 @@
+"use client";
+
 import { ROUTES } from "@/common/routes";
 import { ArrowRight } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 
 export function AboutIntroductionSection() {
   return (
     <section
       aria-label="About introduction"
-      className="font-sans text-xl leading-relaxed text-muted-foreground font-medium tracking-tight w-md"
+      className="flex flex-col font-sans text-xl leading-relaxed font-medium tracking-tight text-muted-foreground md:flex-row md:items-start md:justify-evenly md:gap-24"
     >
-      <article className="space-y-3">
+      <article className="w-md max-w-full space-y-3">
         <p>Hi, I am Yash Sehgal. As of today, I am living in Bombay, India.</p>
         <p>
           I work as a design engineer with teams and I am currently looking for
@@ -39,6 +42,17 @@ export function AboutIntroductionSection() {
           </Link>
         </p>
       </article>
+      <figure className="relative aspect-square w-80 shrink-0">
+        <Image
+          priority
+          src="/photos/yash.png"
+          alt="Yash Sehgal"
+          width={2400}
+          height={2400}
+          className="object-cover object-center"
+          draggable={false}
+        />
+      </figure>
     </section>
   );
 }
