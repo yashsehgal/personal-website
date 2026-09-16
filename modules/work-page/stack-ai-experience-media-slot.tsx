@@ -1,5 +1,6 @@
 "use client";
 
+import { VideoPlayer } from "@/components/shared/video-player";
 import { cn } from "cn";
 import Image from "next/image";
 import { useState } from "react";
@@ -29,49 +30,41 @@ export function StackAiExperienceMediaSlot({
     return <figure className="aspect-video w-full bg-muted" aria-hidden />;
   }
 
-  const isVideo = isVideoSrc(src);
-  const canShow = isLoaded || Boolean(poster);
+  if (isVideoSrc(src)) {
+    return (
+      <VideoPlayer
+        src={src}
+        poster={poster}
+        alt={alt}
+        width={width}
+        height={height}
+      />
+    );
+  }
 
   return (
     <figure
       className={cn(
         "relative w-full overflow-hidden bg-muted",
-        !(width && height) && (isVideo ? "aspect-video" : "aspect-800/523"),
+        !(width && height) && "aspect-800/523",
       )}
       style={
         width && height ? { aspectRatio: `${width} / ${height}` } : undefined
       }
     >
-      {isVideo ? (
-        <video
-          src={src}
-          poster={poster}
-          controls
-          playsInline
-          muted
-          preload="metadata"
-          aria-label={alt}
-          onLoadedData={() => setIsLoaded(true)}
-          className={cn(
-            "absolute inset-0 size-full object-contain",
-            canShow ? "opacity-100" : "opacity-0",
-          )}
-        />
-      ) : (
-        <Image
-          src={src}
-          alt={alt}
-          fill
-          unoptimized
-          sizes="(max-width: 42rem) 100vw, 42rem"
-          draggable={false}
-          onLoad={() => setIsLoaded(true)}
-          className={cn(
-            "object-contain",
-            isLoaded ? "opacity-100" : "opacity-0",
-          )}
-        />
-      )}
+      <Image
+        src={src}
+        alt={alt}
+        fill
+        unoptimized
+        sizes="(max-width: 42rem) 100vw, 42rem"
+        draggable={false}
+        onLoad={() => setIsLoaded(true)}
+        className={cn(
+          "object-contain",
+          isLoaded ? "opacity-100" : "opacity-0",
+        )}
+      />
     </figure>
   );
 }
