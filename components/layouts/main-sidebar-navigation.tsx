@@ -43,7 +43,7 @@ export function MainSidebarNavigation() {
         alt="Yash Sehgal"
         width={100}
         height={100}
-        className="size-10 select-none pointer-events-none dark:invert mb-6"
+        className="size-10 select-none pointer-events-none dark:invert mb-2"
         draggable={false}
         priority
         quality={100}
