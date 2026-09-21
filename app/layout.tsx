@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Yash",
-  description: "Yash Sehgal, Design Engineer",
+  title: "YS",
+  description: "Yash Sehgal (YS) is a design engineer",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
