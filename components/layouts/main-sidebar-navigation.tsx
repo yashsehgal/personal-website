@@ -2,6 +2,7 @@
 
 import { WEBSITE_ROUTES, WebsiteRouteType } from "@/common/routes";
 import { cn } from "cn";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCallback, useMemo } from "react";
@@ -37,6 +38,19 @@ export function MainSidebarNavigation() {
 
   return (
     <aside className="flex flex-col items-start gap-4">
+      <Image
+        src="/assets/initials.svg"
+        alt="Yash Sehgal"
+        width={100}
+        height={100}
+        className="size-10 select-none pointer-events-none dark:invert mb-6"
+        draggable={false}
+        priority
+        quality={100}
+        unoptimized
+        loading="eager"
+        fetchPriority="high"
+      />
       <header>
         <Link href={WEBSITE_ROUTES.HOME} className="size-fit block">
           <div
