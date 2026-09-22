@@ -12,7 +12,7 @@ export function MainLayoutContainer({
   return (
     <div
       className={cn(
-        "main-layout-container p-8 flex items-start justify-between",
+        "main-layout-container p-8 flex items-start justify-start",
         className,
       )}
       {...props}

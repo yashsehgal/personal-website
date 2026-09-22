@@ -36,7 +36,7 @@ export function MainSidebarNavigation() {
   );
 
   return (
-    <aside className="flex flex-col items-start gap-4">
+    <aside className="flex flex-col items-start gap-4 w-72">
       <header>
         <Link href={WEBSITE_ROUTES.HOME} className="size-fit block">
           <div
