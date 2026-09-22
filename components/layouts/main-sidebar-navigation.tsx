@@ -296,7 +296,7 @@ export function MainSidebarNavigation() {
                   <span
                     id={emailHintId}
                     className={cn(
-                      "absolute top-full left-1 z-10 mt-1.5 flex w-max flex-col gap-1.5 text-xs text-muted-foreground",
+                      "absolute top-full left-1 z-10 mt-3 flex w-max flex-col gap-3 text-xs text-muted-foreground",
                       "transition-[opacity,translate] duration-200 ease-[cubic-bezier(0.2,0,0,1)] motion-reduce:transition-none",
                       isEmailHovered
                         ? "translate-y-0 opacity-100"
