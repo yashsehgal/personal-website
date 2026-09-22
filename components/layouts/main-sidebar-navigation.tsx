@@ -4,7 +4,17 @@ import { WEBSITE_ROUTES, WebsiteRouteType } from "@/common/routes";
 import { cn } from "cn";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useCallback, useMemo } from "react";
+import {
+  useCallback,
+  useEffect,
+  useId,
+  useMemo,
+  useRef,
+  useState,
+  useSyncExternalStore,
+  type MouseEvent,
+  type TransitionEvent,
+} from "react";
 
 const NAVIGATION_ITEMS: { label: string; href: WebsiteRouteType }[] = [
   { label: "Work", href: WEBSITE_ROUTES.WORK },
@@ -44,8 +54,38 @@ const SOCIAL_LINKS: {
   },
 ] as const;
 
+const EMAIL_ADDRESS = "hi@yashsehgal.com";
+const COPY_FEEDBACK_LABEL = "Email copied";
+const COPY_FEEDBACK_DURATION_MS = 2000;
+
+type CopyFeedbackPhase = "idle" | "copied" | "done";
+
+function useIsMac() {
+  return useSyncExternalStore(
+    () => () => {},
+    () => /Mac|iPhone|iPad|iPod/.test(navigator.userAgent),
+    () => false,
+  );
+}
+
+function KeyCap({ children }: { children: string }) {
+  return (
+    <kbd className="inline-flex h-4 min-w-4 items-center justify-center rounded-sm bg-foreground/8 px-1 font-mono text-[11px] leading-none text-muted-foreground uppercase shadow-[inset_0_-1px_0_oklch(0_0_0/0.12)] ring-1 ring-foreground/10 dark:bg-white/14 dark:shadow-[inset_0_1px_0_oklch(1_0_0/0.16)] dark:ring-white/10">
+      {children}
+    </kbd>
+  );
+}
+
 export function MainSidebarNavigation() {
   const pathname = usePathname();
+  const emailHintId = useId();
+  const isMac = useIsMac();
+  const [isEmailHovered, setIsEmailHovered] = useState(false);
+  const [copyFeedbackPhase, setCopyFeedbackPhase] =
+    useState<CopyFeedbackPhase>("idle");
+  const [skipCopyFeedbackTransition, setSkipCopyFeedbackTransition] =
+    useState(false);
+  const copyFeedbackTimerRef = useRef<number | null>(null);
 
   const isHomePageActive = useMemo(
     () => pathname === WEBSITE_ROUTES.HOME,
@@ -59,9 +99,89 @@ export function MainSidebarNavigation() {
     [pathname],
   );
 
+  const clearCopyFeedbackTimer = useCallback(() => {
+    if (copyFeedbackTimerRef.current === null) {
+      return;
+    }
+
+    window.clearTimeout(copyFeedbackTimerRef.current);
+    copyFeedbackTimerRef.current = null;
+  }, []);
+
+  const showCopyFeedback = useCallback(() => {
+    clearCopyFeedbackTimer();
+    setSkipCopyFeedbackTransition(false);
+    setCopyFeedbackPhase("copied");
+    copyFeedbackTimerRef.current = window.setTimeout(() => {
+      const reduceMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+      ).matches;
+
+      if (reduceMotion) {
+        setCopyFeedbackPhase("idle");
+        return;
+      }
+
+      setCopyFeedbackPhase("done");
+    }, COPY_FEEDBACK_DURATION_MS);
+  }, [clearCopyFeedbackTimer]);
+
+  const dismissCopyFeedback = useCallback(() => {
+    clearCopyFeedbackTimer();
+    setCopyFeedbackPhase((phase) => (phase === "copied" ? "idle" : phase));
+  }, [clearCopyFeedbackTimer]);
+
+  const handleCopyFeedbackTransitionEnd = (
+    event: TransitionEvent<HTMLSpanElement>,
+  ) => {
+    if (
+      event.target !== event.currentTarget ||
+      event.propertyName !== "translate" ||
+      copyFeedbackPhase !== "done"
+    ) {
+      return;
+    }
+
+    setSkipCopyFeedbackTransition(true);
+    setCopyFeedbackPhase("idle");
+  };
+
+  useEffect(() => {
+    if (!skipCopyFeedbackTransition) {
+      return;
+    }
+
+    const frame = window.requestAnimationFrame(() => {
+      setSkipCopyFeedbackTransition(false);
+    });
+
+    return () => window.cancelAnimationFrame(frame);
+  }, [skipCopyFeedbackTransition]);
+
+  useEffect(() => clearCopyFeedbackTimer, [clearCopyFeedbackTimer]);
+
+  const handleEmailClick = useCallback(
+    (event: MouseEvent<HTMLAnchorElement>) => {
+      if (!event.metaKey && !event.ctrlKey) {
+        return;
+      }
+
+      event.preventDefault();
+      void navigator.clipboard.writeText(EMAIL_ADDRESS).then(() => {
+        showCopyFeedback();
+      });
+    },
+    [showCopyFeedback],
+  );
+
+  const dimmedClassName = cn(
+    "transition-[opacity,filter] duration-150 ease-[cubic-bezier(0.2,0,0,1)] motion-reduce:transition-none",
+    isEmailHovered && "opacity-60 blur-xs",
+  );
+
   return (
-    <aside className="flex flex-col items-start gap-4 w-72 sticky top-8 shrink-0">
-      <header className="px-1">
+    <aside className="sticky top-8 flex w-72 shrink-0 flex-col items-start gap-4">
+      <header className={cn("px-1", dimmedClassName)}>
         <Link href={WEBSITE_ROUTES.HOME} className="size-fit block">
           <div
             className={cn(
@@ -84,7 +204,7 @@ export function MainSidebarNavigation() {
           </div>
         </Link>
       </header>
-      <nav>
+      <nav className={dimmedClassName}>
         <ul>
           {NAVIGATION_ITEMS.map((item) => (
             <li key={item.href}>
@@ -105,21 +225,105 @@ export function MainSidebarNavigation() {
       </nav>
       <footer>
         <ul>
-          {SOCIAL_LINKS.map((link) => (
-            <li key={link.href}>
-              <Link
-                target="_blank"
-                rel="noopener noreferrer"
-                href={link.href}
-                className={cn(
-                  "font-medium text-sm tracking-tight text-muted-foreground rounded px-1 py-0.5",
-                  link.overrideHoverClassname,
-                )}
+          {SOCIAL_LINKS.map((link) => {
+            const isEmail = link.href === `mailto:${EMAIL_ADDRESS}`;
+
+            return (
+              <li
+                key={link.href}
+                className={cn("relative", !isEmail && dimmedClassName)}
+                onMouseEnter={
+                  isEmail ? () => setIsEmailHovered(true) : undefined
+                }
+                onMouseLeave={
+                  isEmail
+                    ? () => {
+                        setIsEmailHovered(false);
+                        dismissCopyFeedback();
+                      }
+                    : undefined
+                }
               >
-                {link.label}
-              </Link>
-            </li>
-          ))}
+                <Link
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  href={link.href}
+                  aria-describedby={isEmail ? emailHintId : undefined}
+                  onClick={isEmail ? handleEmailClick : undefined}
+                  onFocus={isEmail ? () => setIsEmailHovered(true) : undefined}
+                  onBlur={isEmail ? () => setIsEmailHovered(false) : undefined}
+                  className={cn(
+                    "font-medium text-sm tracking-tight text-muted-foreground rounded px-1 py-0.5",
+                    link.overrideHoverClassname,
+                  )}
+                >
+                  {isEmail ? (
+                    <span className="inline-grid">
+                      <span className="sr-only">
+                        {copyFeedbackPhase === "copied"
+                          ? COPY_FEEDBACK_LABEL
+                          : EMAIL_ADDRESS}
+                      </span>
+                      <span className="col-start-1 row-start-1 h-5 overflow-hidden">
+                        <span
+                          aria-hidden="true"
+                          onTransitionEnd={handleCopyFeedbackTransitionEnd}
+                          className={cn(
+                            "flex flex-col",
+                            !skipCopyFeedbackTransition &&
+                              "transition-[translate] duration-300 ease-[cubic-bezier(0.2,0,0,1)] motion-reduce:transition-none",
+                            copyFeedbackPhase === "copied" && "-translate-y-5",
+                            copyFeedbackPhase === "done" && "-translate-y-10",
+                          )}
+                        >
+                          <span className="h-5 leading-5 whitespace-nowrap">
+                            {EMAIL_ADDRESS}
+                          </span>
+                          <span className="h-5 leading-5 whitespace-nowrap">
+                            {COPY_FEEDBACK_LABEL}
+                          </span>
+                          <span className="h-5 leading-5 whitespace-nowrap">
+                            {EMAIL_ADDRESS}
+                          </span>
+                        </span>
+                      </span>
+                    </span>
+                  ) : (
+                    link.label
+                  )}
+                </Link>
+                {isEmail ? (
+                  <span
+                    id={emailHintId}
+                    className={cn(
+                      "absolute top-full left-1 z-10 mt-1.5 flex w-max flex-col gap-1.5 text-xs text-muted-foreground",
+                      "transition-[opacity,translate] duration-200 ease-[cubic-bezier(0.2,0,0,1)] motion-reduce:transition-none",
+                      isEmailHovered
+                        ? "translate-y-0 opacity-100"
+                        : "pointer-events-none translate-y-1 opacity-0",
+                    )}
+                  >
+                    <span>
+                      <KeyCap>Click</KeyCap> to open mail
+                    </span>
+                    <span className="inline-flex items-center gap-1">
+                      <span className="sr-only">
+                        {isMac ? "Command-click" : "Control-click"}
+                      </span>
+                      <span
+                        aria-hidden="true"
+                        className="inline-flex items-center gap-1"
+                      >
+                        <KeyCap>{isMac ? "⌘" : "Ctrl"}</KeyCap>
+                        <KeyCap>Click</KeyCap>
+                      </span>
+                      to copy the email
+                    </span>
+                  </span>
+                ) : null}
+              </li>
+            );
+          })}
         </ul>
       </footer>
     </aside>
