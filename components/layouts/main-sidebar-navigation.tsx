@@ -2,6 +2,7 @@
 
 import { WEBSITE_ROUTES, WebsiteRouteType } from "@/common/routes";
 import { cn } from "cn";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -185,22 +186,37 @@ export function MainSidebarNavigation() {
         <Link href={WEBSITE_ROUTES.HOME} className="size-fit block">
           <div
             className={cn(
-              "flex flex-col gap-0.5 size-fit",
+              "flex flex-col gap-3 size-fit",
               isHomePageActive
                 ? "text-foreground"
                 : "text-muted-foreground hover:text-foreground",
             )}
             aria-label="Yash Sehgal, Design Engineer"
           >
-            <p
-              className="font-medium tracking-tight text-sm"
-              aria-hidden="true"
-            >
-              Yash Sehgal
-            </p>
-            <p className="tracking-tight text-sm" aria-hidden="true">
-              Design Engineer
-            </p>
+            {isHomePageActive ? (
+              <Image
+                src="/assets/initials.svg"
+                alt=""
+                width={168}
+                height={150}
+                aria-hidden="true"
+                className="size-10 select-none dark:invert"
+                draggable={false}
+                priority
+                unoptimized
+              />
+            ) : null}
+            <div className="flex flex-col gap-0.5">
+              <p
+                className="font-medium tracking-tight text-sm"
+                aria-hidden="true"
+              >
+                Yash Sehgal
+              </p>
+              <p className="tracking-tight text-sm" aria-hidden="true">
+                Design Engineer
+              </p>
+            </div>
           </div>
         </Link>
       </header>
