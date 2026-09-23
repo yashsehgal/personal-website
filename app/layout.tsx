@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { InterfaceSoundListener } from "@/components/interface-sound-listener";
 import { MainLayoutContainer } from "@/components/layouts/main-layout-container";
 
 const inter = Inter({
@@ -25,6 +26,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${inter.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
+        <InterfaceSoundListener />
         <MainLayoutContainer>{children}</MainLayoutContainer>
       </body>
     </html>
