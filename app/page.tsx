@@ -5,7 +5,7 @@ const textLinkClassName =
   "-mx-1 whitespace-nowrap rounded px-1 py-0.5 text-foreground hover:bg-muted focus-visible:bg-muted motion-reduce:transition-none";
 
 const adjacentMarkClassName =
-  "transition-opacity duration-150 ease-[cubic-bezier(0.2,0,0,1)] group-hover:opacity-0 group-focus-within:opacity-0 motion-reduce:transition-none";
+  "group-hover:opacity-0 group-focus-within:opacity-0";
 
 export default function Home() {
   return (
