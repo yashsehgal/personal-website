@@ -72,7 +72,7 @@ export default function Home() {
           </Link>
           <span className={adjacentMarkClassName}>,</span>
         </span>{" "}
-        and designing the overall platform)
+        and more areas within the platform)
       </p>
       <p>
         In my free time, I make music and play the keyboard, and I&apos;m
