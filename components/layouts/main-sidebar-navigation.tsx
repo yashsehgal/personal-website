@@ -211,7 +211,7 @@ export function MainSidebarNavigation() {
   return (
     <aside className="flex w-72 max-w-full shrink-0 flex-col items-start gap-4 wide:sticky wide:top-8">
       <header className={cn("px-1", dimmedClassName)}>
-        <Link href={WEBSITE_ROUTES.HOME} className="size-fit block">
+        <Link href={WEBSITE_ROUTES.HOME} className="group size-fit block">
           <div
             className={cn(
               "flex flex-col gap-3 size-fit",
@@ -227,7 +227,12 @@ export function MainSidebarNavigation() {
               width={168}
               height={150}
               aria-hidden="true"
-              className="size-10 select-none dark:invert"
+              className={cn(
+                "size-10 select-none dark:invert transition-opacity duration-150 ease-[cubic-bezier(0.2,0,0,1)] motion-reduce:transition-none",
+                isHomePageActive
+                  ? "opacity-100"
+                  : "opacity-70 group-hover:opacity-100 group-focus-visible:opacity-100",
+              )}
               draggable={false}
               priority
               unoptimized
