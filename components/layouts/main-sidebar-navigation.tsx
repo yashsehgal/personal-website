@@ -193,19 +193,17 @@ export function MainSidebarNavigation() {
             )}
             aria-label="Yash Sehgal, Design Engineer"
           >
-            {isHomePageActive ? (
-              <Image
-                src="/assets/initials.svg"
-                alt=""
-                width={168}
-                height={150}
-                aria-hidden="true"
-                className="size-10 select-none dark:invert"
-                draggable={false}
-                priority
-                unoptimized
-              />
-            ) : null}
+            <Image
+              src="/assets/initials.svg"
+              alt=""
+              width={168}
+              height={150}
+              aria-hidden="true"
+              className="size-10 select-none dark:invert"
+              draggable={false}
+              priority
+              unoptimized
+            />
             <div className="flex flex-col gap-0.5">
               <p
                 className="font-medium tracking-tight text-sm"
