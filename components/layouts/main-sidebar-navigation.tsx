@@ -51,11 +51,12 @@ const SOCIAL_LINKS: {
   {
     label: "hi@yashsehgal.com",
     href: "mailto:hi@yashsehgal.com",
-    overrideHoverClassname: "hover:bg-rose-500 hover:text-white",
+    overrideHoverClassname: "wide:hover:bg-rose-500 wide:hover:text-white",
   },
 ] as const;
 
 const EMAIL_ADDRESS = "hi@yashsehgal.com";
+const DESKTOP_LAYOUT_QUERY = "(width > 64rem)";
 const COPY_FEEDBACK_LABEL = "Email copied";
 const COPY_FEEDBACK_DURATION_MS = 2000;
 
@@ -163,6 +164,10 @@ export function MainSidebarNavigation() {
 
   const handleEmailClick = useCallback(
     (event: MouseEvent<HTMLAnchorElement>) => {
+      if (!window.matchMedia(DESKTOP_LAYOUT_QUERY).matches) {
+        return;
+      }
+
       if (!event.metaKey && !event.ctrlKey) {
         return;
       }
@@ -175,13 +180,36 @@ export function MainSidebarNavigation() {
     [showCopyFeedback],
   );
 
+  const showEmailHover = useCallback(() => {
+    if (!window.matchMedia(DESKTOP_LAYOUT_QUERY).matches) {
+      return;
+    }
+
+    setIsEmailHovered(true);
+  }, []);
+
+  useEffect(() => {
+    const media = window.matchMedia(DESKTOP_LAYOUT_QUERY);
+    const clearHoverOnNarrowScreens = () => {
+      if (media.matches) {
+        return;
+      }
+
+      setIsEmailHovered(false);
+      dismissCopyFeedback();
+    };
+
+    media.addEventListener("change", clearHoverOnNarrowScreens);
+    return () => media.removeEventListener("change", clearHoverOnNarrowScreens);
+  }, [dismissCopyFeedback]);
+
   const dimmedClassName = cn(
     "transition-[opacity,filter] duration-150 ease-[cubic-bezier(0.2,0,0,1)] motion-reduce:transition-none",
     isEmailHovered && "opacity-60 blur-xs",
   );
 
   return (
-    <aside className="sticky top-8 flex w-72 shrink-0 flex-col items-start gap-4">
+    <aside className="flex w-72 max-w-full shrink-0 flex-col items-start gap-4 wide:sticky wide:top-8">
       <header className={cn("px-1", dimmedClassName)}>
         <Link href={WEBSITE_ROUTES.HOME} className="size-fit block">
           <div
@@ -246,9 +274,7 @@ export function MainSidebarNavigation() {
               <li
                 key={link.href}
                 className={cn("relative", !isEmail && dimmedClassName)}
-                onMouseEnter={
-                  isEmail ? () => setIsEmailHovered(true) : undefined
-                }
+                onMouseEnter={isEmail ? showEmailHover : undefined}
                 onMouseLeave={
                   isEmail
                     ? () => {
@@ -264,7 +290,7 @@ export function MainSidebarNavigation() {
                   href={link.href}
                   aria-describedby={isEmail ? emailHintId : undefined}
                   onClick={isEmail ? handleEmailClick : undefined}
-                  onFocus={isEmail ? () => setIsEmailHovered(true) : undefined}
+                  onFocus={isEmail ? showEmailHover : undefined}
                   onBlur={isEmail ? () => setIsEmailHovered(false) : undefined}
                   className={cn(
                     "font-medium text-sm tracking-tight text-muted-foreground rounded px-1 py-0.5",
@@ -310,7 +336,7 @@ export function MainSidebarNavigation() {
                   <span
                     id={emailHintId}
                     className={cn(
-                      "absolute top-full left-1 z-10 mt-3 flex w-max flex-col gap-3 text-xs text-muted-foreground",
+                      "absolute top-full left-1 z-10 mt-3 hidden w-max flex-col gap-3 text-xs text-muted-foreground wide:flex",
                       "transition-[opacity,translate] duration-200 ease-[cubic-bezier(0.2,0,0,1)] motion-reduce:transition-none",
                       isEmailHovered
                         ? "translate-y-0 opacity-100"

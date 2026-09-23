@@ -7,7 +7,7 @@ export default function Photography() {
   return (
     <div className="flex flex-col items-start gap-6">
       <h1 className="font-medium tracking-tight">Photography</h1>
-      <div className="grid grid-cols-3 gap-12 items-start w-5xl">
+      <div className="grid w-full grid-cols-1 items-start gap-12 wide:max-w-5xl wide:grid-cols-3">
         {PHOTOGRAPHY_IMAGES.map((photo, index) => {
           return (
             <div key={index} className="flex items-start flex-col gap-3">
@@ -16,7 +16,7 @@ export default function Photography() {
                 alt={photo.caption}
                 width={1000}
                 height={1000}
-                className="w-full h-auto select-none aspect-square object-cover"
+                className="aspect-auto h-auto w-full select-none wide:aspect-square wide:object-cover"
                 draggable={false}
                 priority
                 quality={100}

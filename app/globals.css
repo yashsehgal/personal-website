@@ -3,6 +3,7 @@
 @import "shadcn/tailwind.css";
 
 @custom-variant dark (@media (prefers-color-scheme: dark));
+@custom-variant wide (@media (width > 64rem));
 
 @theme inline {
   --color-background: var(--background);

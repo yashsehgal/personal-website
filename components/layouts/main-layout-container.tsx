@@ -18,16 +18,18 @@ export function MainLayoutContainer({
   return (
     <div
       className={cn(
-        "main-layout-container relative p-8",
+        "main-layout-container relative flex min-w-0 flex-col gap-8 p-8 wide:gap-0",
         isHomePage
-          ? "flex min-h-dvh flex-col justify-between"
-          : "flex items-start justify-start",
+          ? "wide:min-h-dvh wide:justify-between"
+          : "wide:flex-row wide:items-start wide:justify-start",
         className,
       )}
       {...props}
     >
       <MainSidebarNavigation />
-      <main>{layoutMainContent}</main>
+      <main className={cn("min-w-0 w-full", !isHomePage && "wide:flex-1")}>
+        {layoutMainContent}
+      </main>
     </div>
   );
 }
