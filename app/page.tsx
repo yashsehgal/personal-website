@@ -9,7 +9,7 @@ const adjacentMarkClassName =
 
 export default function Home() {
   return (
-    <div className="flex w-full min-w-0 flex-col items-start gap-6">
+    <div className="flex w-full min-w-0 flex-col items-start gap-6 px-1">
       <h1 className="font-medium tracking-tight">About</h1>
       <div className="flex w-full min-w-0 flex-col items-start gap-6 leading-relaxed text-pretty text-muted-foreground tracking-tight wide:max-w-prose">
         <p>

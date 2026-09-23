@@ -5,7 +5,7 @@ import Image from "next/image";
 
 export default function Photography() {
   return (
-    <div className="flex flex-col items-start gap-6">
+    <div className="flex flex-col items-start gap-6 px-1">
       <h1 className="font-medium tracking-tight">Photography</h1>
       <div className="grid w-full grid-cols-1 items-start gap-12 wide:max-w-5xl wide:grid-cols-3">
         {PHOTOGRAPHY_IMAGES.map((photo, index) => {
