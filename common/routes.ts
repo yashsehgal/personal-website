@@ -1,6 +1,8 @@
 export const WEBSITE_ROUTES = {
   HOME: "/",
   WRITINGS: "/writings",
+  WRITING_OPTICAL_SPACING: "/writings/optical-spacing",
+  WRITING_NAVIGATION_QUERY_STATES: "/writings/navigation-using-query-states",
   PHOTOGRAPHY: "/photography",
   ARCHIVE: "/archive",
 } as const;

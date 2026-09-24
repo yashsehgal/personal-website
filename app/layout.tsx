@@ -3,6 +3,8 @@ import { Inter, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { InterfaceSoundListener } from "@/components/interface-sound-listener";
 import { MainLayoutContainer } from "@/components/layouts/main-layout-container";
+import { NuqsAdapter } from "nuqs/adapters/next/app";
+import { Suspense } from "react";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -27,7 +29,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body className="min-h-full flex flex-col">
         <InterfaceSoundListener />
-        <MainLayoutContainer>{children}</MainLayoutContainer>
+        <Suspense>
+          <NuqsAdapter>
+            <MainLayoutContainer>{children}</MainLayoutContainer>
+          </NuqsAdapter>
+        </Suspense>
       </body>
     </html>
   );
