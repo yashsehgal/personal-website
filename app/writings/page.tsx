@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function Writings() {
   return (
-    <div className="flex w-full min-w-0 flex-col items-start gap-6 px-1">
+    <div className="flex w-full min-w-0 flex-col items-start gap-6 px-1 wide:mt-16">
       <h1 className="font-medium tracking-tight">Writings</h1>
       <ul className="-mx-1 flex w-[calc(100%+0.5rem)] min-w-0 flex-col">
         {WRITINGS.map((writing, index) => {
