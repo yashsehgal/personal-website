@@ -1,5 +1,6 @@
 import { IMAGE_PLACEHOLDERS } from "@/common/image-placeholders";
 import { WEBSITE_ROUTES } from "@/common/routes";
+import { WORK_EXPERIENCES } from "@/common/work";
 import { ProgressiveImage } from "@/components/progressive-image";
 import Link from "next/link";
 
@@ -103,6 +104,43 @@ export default function Home() {
           .
         </p>
         </div>
+        <ul className="-mx-1 mt-6 flex w-[calc(100%+0.5rem)] min-w-0 flex-col">
+          {WORK_EXPERIENCES.map((experience, index) => {
+            const showYear =
+              index === 0 ||
+              WORK_EXPERIENCES[index - 1].year !== experience.year;
+
+            return (
+              <li key={experience.id}>
+                <a
+                  href={experience.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-baseline justify-between gap-6 rounded px-1 py-0.5 text-sm tracking-tight text-muted-foreground hover:bg-muted hover:text-foreground focus-visible:bg-muted focus-visible:text-foreground"
+                >
+                  <span className="min-w-0">
+                    <span
+                      className={
+                        showYear ? "tabular-nums" : "invisible tabular-nums"
+                      }
+                      aria-hidden={showYear ? undefined : true}
+                    >
+                      {experience.year}
+                    </span>
+                    <span
+                      aria-hidden="true"
+                      className={showYear ? undefined : "invisible"}
+                    >
+                      {" / "}
+                    </span>
+                    <span className="text-foreground">{experience.company}</span>
+                  </span>
+                  <span className="shrink-0">{experience.role}</span>
+                </a>
+              </li>
+            );
+          })}
+        </ul>
         <div className="grid w-full grid-cols-2 gap-3">
           {HOME_PHOTO_COLUMNS.map((column) => (
             <div key={column[0].src} className="flex flex-col gap-3">
