@@ -1,270 +1,177 @@
-'use client';
+import { IMAGE_PLACEHOLDERS } from "@/common/image-placeholders";
+import { WEBSITE_ROUTES } from "@/common/routes";
+import { WORK_EXPERIENCES } from "@/common/work";
+import { ProgressiveImage } from "@/components/progressive-image";
+import Link from "next/link";
 
-import { POST_ITEMS } from '@/constants/post-items';
-import Link from 'next/link';
-import { motion } from 'framer-motion';
-import { WORK_EXPERIENCE } from '@/constants/work-experience';
-import { WRITING_ITEMS } from '@/constants/writing-items';
-import { cn } from '@/lib/utils';
-import Image from 'next/image';
-import { useState } from 'react';
-import { PROJECTS } from '@/constants/project-items';
+const textLinkClassName =
+  "-mx-1 whitespace-nowrap rounded px-1 py-0.5 text-foreground hover:bg-muted focus-visible:bg-muted motion-reduce:transition-none";
 
-enum TABS {
-  WORK_EXPERIENCE = 'work-experience',
-  POSTS = 'posts',
-  WRITING = 'writing',
-  PROJECTS = 'projects',
-}
+const HOME_PHOTO_COLUMNS = [
+  [
+    {
+      src: "/about/yash.jpg",
+      width: 515,
+      height: 772,
+      alt: "Yash holding a camera on a boat, with the Golden Gate Bridge behind him",
+    },
+    {
+      src: "/about/golden-gate.jpg",
+      width: 1024,
+      height: 682,
+      alt: "Golden Gate Bridge at sunset from the beach",
+    },
+  ],
+  [
+    {
+      src: "/about/marine-drive.jpg",
+      width: 1024,
+      height: 768,
+      alt: "Mumbai skyline across the water at dusk",
+    },
+    {
+      src: "/about/basketball-court.jpg",
+      width: 682,
+      height: 1024,
+      alt: "Evening basketball game with the city skyline behind the court",
+    },
+  ],
+] as const;
 
-export default function Page() {
-  const [activeTab, setActiveTab] = useState<TABS>(TABS.POSTS);
-
-  const handleTabChange = (tab: TABS) => {
-    setActiveTab(tab);
-  };
-
+export default function Home() {
   return (
-    <div className="home-page space-y-16">
-      <header className="flex items-center gap-4">
-        <h1 className="text-5xl font-medium w-2/3 text-balance leading-14 tracking-tighter font-mono max-lg:w-full max-md:text-3xl max-md:leading-10">
-          Hi, I am Yash. I help companies build clean and easy to use
-          interfaces.
-        </h1>
-      </header>
-      <div
-        aria-description="Recent-work-experience"
-        className="space-y-8 my-24">
-        <h2 className="font-semibold">Recent Work Experience</h2>
-        <p className="text-secondary leading-7 w-2/3 max-lg:w-full">
-          My most recent role was at{' '}
-          <Image
-            src="/company/stackai-logo.png"
-            alt="stackai-logo"
-            width={100}
-            height={100}
-            className="size-4 object-contain inline mb-1 ml-0.5 dark:invert"
-            priority
-          />{' '}
-          <span className="text-foreground font-medium">StackAI</span> where I
-          worked as a Founding Design Engineer. I led the redesign of the
-          product&apos;s overall experience, including the agent workflow
-          builder - a core tool that enables users to create and manage agent
-          workflows.
+    <div className="flex w-full min-w-0 flex-col items-start gap-6 px-1 wide:mt-16">
+      <h1 className="font-medium tracking-tight">About</h1>
+      <div className="flex w-full max-w-prose min-w-0 flex-col items-start gap-6">
+        <div className="flex w-full min-w-0 flex-col items-start gap-6 leading-relaxed text-pretty text-muted-foreground tracking-tight">
+        <p>
+          Most recently, I worked at{" "}
+          <Link
+            href="https://octolane.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={textLinkClassName}
+          >
+            Octolane
+          </Link>
+          , where I helped design a better AI-powered CRM and did a lot of the
+          backend alongside the design. Before that, I was at{" "}
+          <Link
+            href="https://stack.ai"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={textLinkClassName}
+          >
+            StackAI
+          </Link>
+          , where I led design engineering, joining as one of the founding team
+          members. I focused on making it easier to create AI agents (
+          <Link
+            href="https://www.stackai.com/platform/knowledge-bases"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={textLinkClassName}
+          >
+            knowledge bases
+          </Link>
+          ,{" "}
+          <Link
+            href="https://www.stackai.com/changelog/08-20-2025"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={textLinkClassName}
+          >
+            evaluators
+          </Link>
+          ,{" "}
+          <Link
+            href="https://www.stackai.com/platform/workflow"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={textLinkClassName}
+          >
+            workflow for making agents
+          </Link>
+          , and more areas within the platform)
         </p>
+        <p>
+          In my free time, I make music and play the keyboard, and I&apos;m
+          learning sound engineering and composition. I read across a lot of
+          subjects, and I love traveling and taking{" "}
+          <Link href={WEBSITE_ROUTES.PHOTOGRAPHY} className={textLinkClassName}>
+            photographs
+          </Link>
+          .
+        </p>
+        </div>
+        <ul className="-mx-1 mt-6 flex w-[calc(100%+0.5rem)] min-w-0 flex-col">
+          {WORK_EXPERIENCES.map((experience, index) => {
+            const showYear =
+              index === 0 ||
+              WORK_EXPERIENCES[index - 1].year !== experience.year;
+
+            return (
+              <li key={experience.id}>
+                <a
+                  href={experience.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-baseline justify-between gap-6 rounded px-1 py-0.5 text-sm tracking-tight text-muted-foreground hover:bg-muted hover:text-foreground focus-visible:bg-muted focus-visible:text-foreground"
+                >
+                  <span className="min-w-0">
+                    <span
+                      className={
+                        showYear ? "tabular-nums" : "invisible tabular-nums"
+                      }
+                      aria-hidden={showYear ? undefined : true}
+                    >
+                      {experience.year}
+                    </span>
+                    <span
+                      aria-hidden="true"
+                      className={showYear ? undefined : "invisible"}
+                    >
+                      {" / "}
+                    </span>
+                    <span className="text-foreground">{experience.company}</span>
+                  </span>
+                  <span className="shrink-0">{experience.role}</span>
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+        <div className="grid w-full grid-cols-2 gap-3">
+          {HOME_PHOTO_COLUMNS.map((column) => (
+            <div key={column[0].src} className="flex flex-col gap-3">
+              {column.map((photo) => {
+                const placeholder = IMAGE_PLACEHOLDERS[photo.src];
+
+                return (
+                  <ProgressiveImage
+                    key={photo.src}
+                    src={photo.src}
+                    alt={photo.alt}
+                    width={placeholder.width}
+                    height={placeholder.height}
+                    blurDataURL={placeholder.blurDataURL}
+                  />
+                );
+              })}
+            </div>
+          ))}
+        </div>
       </div>
-      <div className="flex items-center gap-8 justify-start max-md:gap-6 font-mono">
-        <button
-          className={cn(
-            'text-base font-medium cursor-pointer max-md:text-sm',
-            activeTab === TABS.POSTS
-              ? 'text-foreground'
-              : 'text-secondary/80 hover:text-secondary',
-          )}
-          onClick={() => handleTabChange(TABS.POSTS)}>
-          Posts <span className="max-sm:hidden">({POST_ITEMS.length})</span>
-        </button>
-        <button
-          className={cn(
-            'text-base font-medium cursor-pointer max-md:text-sm',
-            activeTab === TABS.WORK_EXPERIENCE
-              ? 'text-foreground'
-              : 'text-secondary/80 hover:text-secondary',
-          )}
-          onClick={() => handleTabChange(TABS.WORK_EXPERIENCE)}>
-          Work experience{' '}
-          <span className="max-sm:hidden">({WORK_EXPERIENCE.length})</span>
-        </button>
-        <button
-          className={cn(
-            'text-base font-medium cursor-pointer max-md:text-sm',
-            activeTab === TABS.WRITING
-              ? 'text-foreground'
-              : 'text-secondary/80 hover:text-secondary',
-          )}
-          onClick={() => handleTabChange(TABS.WRITING)}>
-          Writings{' '}
-          <span className="max-sm:hidden">({WRITING_ITEMS.length})</span>
-        </button>
-        <button
-          className={cn(
-            'text-base font-medium cursor-pointer max-md:text-sm',
-            activeTab === TABS.PROJECTS
-              ? 'text-foreground'
-              : 'text-secondary/80 hover:text-secondary',
-          )}
-          onClick={() => handleTabChange(TABS.PROJECTS)}>
-          Projects <span className="max-sm:hidden">({PROJECTS.length})</span>
-        </button>
-      </div>
-      {activeTab === TABS.PROJECTS ? (
-        <div aria-description="Projects" className="space-y-8">
-          <div className="grid grid-cols-1 divide-y divide-foreground/10">
-            {PROJECTS.map((project, index) => {
-              return (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, filter: 'blur(2px)' }}
-                  animate={{ opacity: 1, filter: 'blur(0px)' }}
-                  transition={{
-                    delay: 0.02 * (index + 1),
-                    type: 'spring',
-                    bounce: 0,
-                    ease: 'easeOut',
-                  }}>
-                  <Link
-                    key={index}
-                    href={project.link}
-                    target="_blank"
-                    className={cn(
-                      'block py-2 group/project-item',
-                      project.draftMode
-                        ? 'opacity-50 pointer-events-none select-none'
-                        : '',
-                    )}>
-                    <div className="flex items-center justify-between text-sm font-medium truncate gap-4">
-                      <p
-                        className={cn(
-                          'text-foreground truncate',
-                          !project.draftMode
-                            ? 'group-hover/project-item:text-foreground/50'
-                            : '',
-                        )}>
-                        {project.title}
-                      </p>
-                      <div className="flex items-center justify-end gap-2">
-                        <p className="font-mono text-foreground/40 uppercase tracking-wide shrink-0">
-                          {project.draftMode ? 'In progress' : project.year}
-                        </p>
-                      </div>
-                    </div>
-                  </Link>
-                </motion.div>
-              );
-            })}
-          </div>
-        </div>
-      ) : null}
-      {activeTab === TABS.WORK_EXPERIENCE ? (
-        <div aria-description="Work portfolio" className="space-y-8">
-          <div className="grid grid-cols-1 divide-y divide-foreground/10">
-            {WORK_EXPERIENCE.map((work, index) => {
-              return (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, filter: 'blur(2px)' }}
-                  animate={{ opacity: 1, filter: 'blur(0px)' }}
-                  transition={{
-                    delay: 0.02 * (index + 1),
-                    type: 'spring',
-                    bounce: 0,
-                    ease: 'easeOut',
-                  }}>
-                  <Link
-                    key={index}
-                    href={work.companyWebsite}
-                    target="_blank"
-                    className="block py-2 group/work-item">
-                    <div className="flex items-center justify-between text-sm font-medium truncate gap-4">
-                      <p className="text-foreground group-hover/work-item:text-foreground/50 truncate">
-                        {work.companyName}
-                      </p>
-                      <div className="flex items-center justify-end gap-2">
-                        <p className="font-mono text-foreground/40 uppercase tracking-wide shrink-0">
-                          {work.role} / {work.year}
-                        </p>
-                      </div>
-                    </div>
-                  </Link>
-                </motion.div>
-              );
-            })}
-          </div>
-        </div>
-      ) : null}
-      {activeTab === TABS.POSTS ? (
-        <main aria-description="Posts" className="space-y-8">
-          <div className="grid grid-cols-1 divide-y divide-foreground/10">
-            {POST_ITEMS.map((post, index) => {
-              return (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, filter: 'blur(2px)' }}
-                  animate={{ opacity: 1, filter: 'blur(0px)' }}
-                  transition={{
-                    delay: 0.02 * (index + 1),
-                    type: 'spring',
-                    bounce: 0,
-                    ease: 'easeOut',
-                  }}>
-                  <Link
-                    href={post.link}
-                    target={post.isInternal ? '_self' : '_blank'}
-                    className="block py-2 group/post-item">
-                    <div className="flex items-center justify-between text-sm font-medium truncate gap-4">
-                      <p className="text-foreground group-hover/post-item:text-foreground/50 truncate">
-                        {post.title}
-                      </p>
-                      <div>
-                        <p className="font-mono text-foreground/40 uppercase tracking-wide shrink-0">
-                          {post.tag} / {post.year}
-                        </p>
-                      </div>
-                    </div>
-                  </Link>
-                </motion.div>
-              );
-            })}
-          </div>
-        </main>
-      ) : null}
-      {activeTab === TABS.WRITING ? (
-        <div aria-description="Writing" className="space-y-8">
-          <div className="grid grid-cols-1 divide-y divide-foreground/10">
-            {WRITING_ITEMS.map((writing, index) => {
-              return (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, filter: 'blur(2px)' }}
-                  animate={{ opacity: 1, filter: 'blur(0px)' }}
-                  transition={{
-                    delay: 0.02 * (index + 1),
-                    type: 'spring',
-                    bounce: 0,
-                    ease: 'easeOut',
-                  }}>
-                  <Link
-                    key={index}
-                    href={writing.draftMode ? '#' : writing.path}
-                    className={cn(
-                      'block py-2 group/writing-item',
-                      writing.draftMode
-                        ? 'opacity-50 pointer-events-none select-none'
-                        : '',
-                    )}>
-                    <div className="flex items-center justify-between text-sm font-medium truncate gap-4">
-                      <p
-                        className={cn(
-                          'text-foreground truncate',
-                          !writing.draftMode
-                            ? 'group-hover/writing-item:text-foreground/50'
-                            : '',
-                        )}>
-                        {writing.title}
-                      </p>
-                      <div className="flex items-center justify-end gap-2">
-                        <p className="font-mono text-foreground/40 uppercase tracking-wide shrink-0">
-                          {writing.draftMode ? 'Draft' : writing.year}
-                        </p>
-                      </div>
-                    </div>
-                  </Link>
-                </motion.div>
-              );
-            })}
-          </div>
-        </div>
-      ) : null}
     </div>
   );
 }
+
+/**
+ * Hi, I am Yash Sehgal. As of today, I am living in Bombay, India. I work as
+      a design engineer with teams. You can read about my Recent Work Besides
+      spending a lot of time on my computer, I love listening and discussing
+      music. I sometimes play around with keyboards and sound production
+      platforms. I find time for journaling in my day, sometimes I just write a
+      single line, but I really enjoy writing about how I feel and things I am
+      planning to do. I post some of them under My Writings
+ */

@@ -1,4 +1,4 @@
-import { cn } from '@/helpers/cn';
+import { cn } from "cn";
 
 type ComponentPreviewContainerProps = React.HTMLAttributes<HTMLDivElement>;
 
@@ -9,7 +9,7 @@ export function ComponentPreviewContainer({
   return (
     <div
       className={cn(
-        'component-preview-container rounded-2xl overflow-hidden shadow-2xs min-h-4 border border-foreground/10',
+        "component-preview-container min-h-4 overflow-hidden rounded-2xl border border-foreground/10 shadow-2xs",
         className,
       )}
       {...props}
