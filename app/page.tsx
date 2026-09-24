@@ -1,5 +1,6 @@
+import { IMAGE_PLACEHOLDERS } from "@/common/image-placeholders";
 import { WEBSITE_ROUTES } from "@/common/routes";
-import Image from "next/image";
+import { ProgressiveImage } from "@/components/progressive-image";
 import Link from "next/link";
 
 const textLinkClassName =
@@ -103,23 +104,24 @@ export default function Home() {
         </p>
         </div>
         <div className="grid w-full grid-cols-2 gap-3">
-        {HOME_PHOTO_COLUMNS.map((column) => (
-          <div key={column[0].src} className="flex flex-col gap-3">
-            {column.map((photo) => (
-              <Image
-                key={photo.src}
-                src={photo.src}
-                alt={photo.alt}
-                width={photo.width}
-                height={photo.height}
-                className="h-auto w-full select-none"
-                style={{ width: "100%", height: "auto" }}
-                draggable={false}
-                unoptimized
-              />
-            ))}
-          </div>
-        ))}
+          {HOME_PHOTO_COLUMNS.map((column) => (
+            <div key={column[0].src} className="flex flex-col gap-3">
+              {column.map((photo) => {
+                const placeholder = IMAGE_PLACEHOLDERS[photo.src];
+
+                return (
+                  <ProgressiveImage
+                    key={photo.src}
+                    src={photo.src}
+                    alt={photo.alt}
+                    width={placeholder.width}
+                    height={placeholder.height}
+                    blurDataURL={placeholder.blurDataURL}
+                  />
+                );
+              })}
+            </div>
+          ))}
         </div>
       </div>
     </div>
