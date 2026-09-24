@@ -1,6 +1,13 @@
 "use client";
 
 import { WEBSITE_ROUTES } from "@/common/routes";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { playEmailCopiedSound } from "@/lib/interface-sounds";
 import { ArrowLeft, Check, Link2 } from "lucide-react";
 import { AnimatePresence, MotionConfig, motion } from "framer-motion";
 import Link from "next/link";
@@ -30,6 +37,7 @@ export function ArticleTitle({ title }: { title: string }) {
       return;
     }
 
+    playEmailCopiedSound();
     setCopied(true);
     if (copiedTimeoutRef.current) {
       window.clearTimeout(copiedTimeoutRef.current);
@@ -41,40 +49,54 @@ export function ArticleTitle({ title }: { title: string }) {
 
   return (
     <div className="flex w-full flex-col">
-      <div className="flex w-full items-center justify-between">
-        <Link
-          href={WEBSITE_ROUTES.WRITINGS}
-          aria-label="Back to writings"
-          className={iconButtonClassName}
-        >
-          <ArrowLeft aria-hidden="true" className="size-4" />
-        </Link>
-        <button
-          type="button"
-          aria-label={copied ? "Link copied" : "Copy link"}
-          className={iconButtonClassName}
-          onClick={copyLink}
-        >
-          <MotionConfig reducedMotion="user">
-            <AnimatePresence mode="popLayout" initial={false}>
-              <motion.span
-                key={copied ? "copied" : "copy"}
-                className="flex items-center justify-center"
-                initial={{ opacity: 0, scale: 0.25, filter: "blur(4px)" }}
-                animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-                exit={{ opacity: 0, scale: 0.25, filter: "blur(4px)" }}
-                transition={iconTransition}
-              >
-                {copied ? (
-                  <Check aria-hidden="true" className="size-4" />
-                ) : (
-                  <Link2 aria-hidden="true" className="size-4" />
-                )}
-              </motion.span>
-            </AnimatePresence>
-          </MotionConfig>
-        </button>
-      </div>
+      <TooltipProvider>
+        <div className="flex w-full items-center justify-between">
+          <Tooltip>
+            <TooltipTrigger
+              render={
+                <Link
+                  href={WEBSITE_ROUTES.WRITINGS}
+                  aria-label="Back to writings"
+                  className={iconButtonClassName}
+                />
+              }
+            >
+              <ArrowLeft aria-hidden="true" className="size-4" />
+            </TooltipTrigger>
+            <TooltipContent>Back to writings</TooltipContent>
+          </Tooltip>
+          <Tooltip>
+            <TooltipTrigger
+              type="button"
+              aria-label={copied ? "Link copied" : "Copy link"}
+              className={iconButtonClassName}
+              onClick={copyLink}
+            >
+              <MotionConfig reducedMotion="user">
+                <AnimatePresence mode="popLayout" initial={false}>
+                  <motion.span
+                    key={copied ? "copied" : "copy"}
+                    className="flex items-center justify-center"
+                    initial={{ opacity: 0, scale: 0.25, filter: "blur(4px)" }}
+                    animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
+                    exit={{ opacity: 0, scale: 0.25, filter: "blur(4px)" }}
+                    transition={iconTransition}
+                  >
+                    {copied ? (
+                      <Check aria-hidden="true" className="size-4" />
+                    ) : (
+                      <Link2 aria-hidden="true" className="size-4" />
+                    )}
+                  </motion.span>
+                </AnimatePresence>
+              </MotionConfig>
+            </TooltipTrigger>
+            <TooltipContent>
+              {copied ? "Link copied" : "Copy link"}
+            </TooltipContent>
+          </Tooltip>
+        </div>
+      </TooltipProvider>
       <h1 className="mt-20 font-medium tracking-tight">{title}</h1>
     </div>
   );
