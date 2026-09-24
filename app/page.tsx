@@ -1,14 +1,47 @@
 import { WEBSITE_ROUTES } from "@/common/routes";
+import Image from "next/image";
 import Link from "next/link";
 
 const textLinkClassName =
   "-mx-1 whitespace-nowrap rounded px-1 py-0.5 text-foreground hover:bg-muted focus-visible:bg-muted motion-reduce:transition-none";
 
+const HOME_PHOTO_COLUMNS = [
+  [
+    {
+      src: "/about/yash.jpg",
+      width: 515,
+      height: 772,
+      alt: "Yash holding a camera on a boat, with the Golden Gate Bridge behind him",
+    },
+    {
+      src: "/about/golden-gate.jpg",
+      width: 1024,
+      height: 682,
+      alt: "Golden Gate Bridge at sunset from the beach",
+    },
+  ],
+  [
+    {
+      src: "/about/marine-drive.jpg",
+      width: 1024,
+      height: 768,
+      alt: "Mumbai skyline across the water at dusk",
+    },
+    {
+      src: "/about/basketball-court.jpg",
+      width: 682,
+      height: 1024,
+      alt: "Evening basketball game with the city skyline behind the court",
+    },
+  ],
+] as const;
+
 export default function Home() {
   return (
     <div className="flex w-full min-w-0 flex-col items-start gap-6 px-1">
       <h1 className="font-medium tracking-tight">About</h1>
-      <div className="flex w-full min-w-0 flex-col items-start gap-6 leading-relaxed text-pretty text-muted-foreground tracking-tight wide:max-w-prose">
+      <div className="flex w-full max-w-prose min-w-0 flex-col items-start gap-6">
+        <div className="flex w-full min-w-0 flex-col items-start gap-6 leading-relaxed text-pretty text-muted-foreground tracking-tight">
         <p>
           Most recently, I worked at{" "}
           <Link
@@ -68,6 +101,26 @@ export default function Home() {
           </Link>
           .
         </p>
+        </div>
+        <div className="grid w-full grid-cols-2 gap-3">
+        {HOME_PHOTO_COLUMNS.map((column) => (
+          <div key={column[0].src} className="flex flex-col gap-3">
+            {column.map((photo) => (
+              <Image
+                key={photo.src}
+                src={photo.src}
+                alt={photo.alt}
+                width={photo.width}
+                height={photo.height}
+                className="h-auto w-full select-none"
+                style={{ width: "100%", height: "auto" }}
+                draggable={false}
+                unoptimized
+              />
+            ))}
+          </div>
+        ))}
+        </div>
       </div>
     </div>
   );
