@@ -18,9 +18,9 @@ import {
 } from "react";
 
 const NAVIGATION_ITEMS: { label: string; href: WebsiteRouteType }[] = [
-  { label: "Work", href: WEBSITE_ROUTES.WORK },
   { label: "Writings", href: WEBSITE_ROUTES.WRITINGS },
   { label: "Photography", href: WEBSITE_ROUTES.PHOTOGRAPHY },
+  { label: "Archive", href: WEBSITE_ROUTES.ARCHIVE },
 ] as const;
 
 const SOCIAL_LINKS: {

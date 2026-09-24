@@ -1,8 +1,8 @@
 export const WEBSITE_ROUTES = {
   HOME: "/",
-  WORK: "/work",
   WRITINGS: "/writings",
   PHOTOGRAPHY: "/photography",
+  ARCHIVE: "/archive",
 } as const;
 
 export type WebsiteRouteType =
