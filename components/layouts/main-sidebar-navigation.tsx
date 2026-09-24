@@ -94,6 +94,8 @@ export function MainSidebarNavigation() {
     [pathname],
   );
 
+  const isArticlePage = pathname.startsWith(`${WEBSITE_ROUTES.WRITINGS}/`);
+
   const isNavigationItemActive = useCallback(
     (href: WebsiteRouteType) => {
       return pathname === href || pathname.startsWith(`${href}/`);
@@ -209,7 +211,12 @@ export function MainSidebarNavigation() {
   );
 
   return (
-    <aside className="flex w-72 max-w-full shrink-0 flex-col items-start gap-4 wide:sticky wide:top-8">
+    <aside
+      className={cn(
+        "w-72 max-w-full shrink-0 flex-col items-start gap-4 wide:sticky wide:top-8 wide:flex",
+        isArticlePage ? "hidden" : "flex",
+      )}
+    >
       <header className={cn("px-1", dimmedClassName)}>
         <Link href={WEBSITE_ROUTES.HOME} className="group size-fit block">
           <div

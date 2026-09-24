@@ -72,7 +72,7 @@ const copyClassName =
 
 export default function BreadcrumbComponentPage() {
   return (
-    <div className="mx-auto mt-16 flex w-full min-w-0 max-w-3xl flex-col items-start gap-10 px-1">
+    <div className="mx-auto flex w-full min-w-0 max-w-3xl flex-col items-start gap-10 px-1 wide:mt-16">
       <ArticleTitle title="Navigation using query states" />
       <article className="writing-copy flex w-full min-w-0 flex-col gap-12">
       <div className="space-y-12">
