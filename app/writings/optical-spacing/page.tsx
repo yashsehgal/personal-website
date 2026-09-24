@@ -1,5 +1,6 @@
 "use client";
 
+import { ArticleTitle } from "@/components/article-title";
 import { ComponentPreviewContainer } from "@/components/component-preview-container";
 import { cn } from "cn";
 import { motion } from "framer-motion";
@@ -11,8 +12,8 @@ const copyClassName =
 
 export default function OpticalSpacingPage() {
   return (
-    <div className="flex w-full min-w-0 max-w-3xl flex-col items-start gap-6 px-1">
-      <h1 className="font-medium tracking-tight">Optical spacing</h1>
+    <div className="mx-auto mt-16 flex w-full min-w-0 max-w-3xl flex-col items-start gap-10 px-1">
+      <ArticleTitle title="Optical spacing" />
       <article className="flex w-full min-w-0 flex-col gap-12">
         <div className="space-y-12">
           <p className={copyClassName}>

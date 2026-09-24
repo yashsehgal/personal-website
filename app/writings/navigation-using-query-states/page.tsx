@@ -1,5 +1,6 @@
 'use client';
 import { DIRECTORY } from '@/app/writings/navigation-using-query-states/constants';
+import { ArticleTitle } from '@/components/article-title';
 import { ComponentPreviewContainer } from '@/components/component-preview-container';
 import {
   DropdownMenu,
@@ -71,10 +72,8 @@ const copyClassName =
 
 export default function BreadcrumbComponentPage() {
   return (
-    <div className="flex w-full min-w-0 max-w-3xl flex-col items-start gap-6 px-1">
-      <h1 className="font-medium tracking-tight">
-        Navigation using query states
-      </h1>
+    <div className="mx-auto mt-16 flex w-full min-w-0 max-w-3xl flex-col items-start gap-10 px-1">
+      <ArticleTitle title="Navigation using query states" />
       <article className="writing-copy flex w-full min-w-0 flex-col gap-12">
       <div className="space-y-12">
         <p className={copyClassName}>
