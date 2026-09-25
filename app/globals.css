@@ -4,6 +4,7 @@
 
 @custom-variant dark (@media (prefers-color-scheme: dark));
 @custom-variant wide (@media (width > 64rem));
+@custom-variant touch (@media (hover: none) and (pointer: coarse));
 
 @theme inline {
   --color-background: var(--background);

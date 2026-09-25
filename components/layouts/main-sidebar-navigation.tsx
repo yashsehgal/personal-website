@@ -339,7 +339,7 @@ export function MainSidebarNavigation() {
             const groupListId = `${navigationGroupId}-${item.label}`;
 
             return (
-              <li key={item.label}>
+              <li key={item.label} className="touch:hidden">
                 <button
                   type="button"
                   aria-expanded={isExpanded}

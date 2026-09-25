@@ -1,4 +1,4 @@
-import { MUSIC_TRACK_ITEMS, type MusicTrack } from "@/common/music";
+import { MUSIC_TRACKS, type MusicTrack } from "@/common/music";
 
 const LOOKUP_URL = "https://itunes.apple.com/lookup";
 const REVALIDATE_SECONDS = 86400;
@@ -19,7 +19,7 @@ export async function getMusicTracks(): Promise<MusicTrack[]> {
   const url = new URL(LOOKUP_URL);
   url.searchParams.set(
     "id",
-    MUSIC_TRACK_ITEMS.map((track) => track.appleMusicId).join(","),
+    MUSIC_TRACKS.map((track) => track.appleMusicId).join(","),
   );
   url.searchParams.set("entity", "song");
 
@@ -39,7 +39,7 @@ export async function getMusicTracks(): Promise<MusicTrack[]> {
       .map((result) => [String(result.trackId), result]),
   );
 
-  return MUSIC_TRACK_ITEMS.flatMap((track) => {
+  return MUSIC_TRACKS.flatMap((track) => {
     const result = catalog.get(track.appleMusicId);
 
     if (!result?.previewUrl || !result.artworkUrl100) {
