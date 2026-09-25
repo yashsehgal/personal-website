@@ -4,6 +4,7 @@
 
 @custom-variant dark (@media (prefers-color-scheme: dark));
 @custom-variant wide (@media (width > 64rem));
+@custom-variant touch (@media (hover: none) and (pointer: coarse));
 
 @theme inline {
   --color-background: var(--background);
@@ -47,6 +48,40 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+@theme {
+  --animate-music-icon-sway: music-icon-sway 1.6s ease-in-out infinite;
+  --animate-music-note-float: music-note-float 3.2s cubic-bezier(0.2, 0, 0, 1)
+    infinite backwards;
+
+  @keyframes music-icon-sway {
+    0%,
+    100% {
+      rotate: -8deg;
+    }
+    50% {
+      rotate: 8deg;
+    }
+  }
+
+  @keyframes music-note-float {
+    0% {
+      opacity: 0;
+      translate: 0 0;
+      scale: 0.4;
+      rotate: 0deg;
+    }
+    20% {
+      opacity: 0.7;
+    }
+    100% {
+      opacity: 0;
+      translate: var(--note-x) var(--note-y);
+      scale: 1;
+      rotate: var(--note-rotate);
+    }
+  }
 }
 
 body {
@@ -126,6 +161,24 @@ body {
   }
 }
 
+.surface-inverted {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --surface-muted-foreground: oklch(0.708 0 0);
+  --surface-edge:
+    inset 0 0 0 1px oklch(1 0 0 / 0.08), inset 0 1px 0 oklch(1 0 0 / 0.06);
+}
+
+@media (prefers-color-scheme: dark) {
+  .surface-inverted {
+    --background: oklch(1 0 0);
+    --foreground: oklch(0.145 0 0);
+    --surface-muted-foreground: oklch(0.5 0 0);
+    --surface-edge:
+      inset 0 0 0 1px oklch(0 0 0 / 0.06), inset 0 1px 0 oklch(1 0 0 / 0.6);
+  }
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -140,6 +193,145 @@ body {
   html {
     @apply font-sans;
   }
+
+  @media (hover: hover) and (pointer: fine) {
+    html {
+      scrollbar-width: none;
+    }
+
+    html::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}
+
+@property --artwork-glow-1 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@property --artwork-glow-2 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@property --artwork-glow-3 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@property --artwork-beam-angle {
+  syntax: "<angle>";
+  inherits: true;
+  initial-value: 0deg;
+}
+
+.artwork-glow {
+  --artwork-beam: conic-gradient(
+    from var(--artwork-beam-angle),
+    var(--artwork-glow-1) 0deg,
+    transparent 60deg,
+    var(--artwork-glow-2) 120deg,
+    transparent 180deg,
+    var(--artwork-glow-3) 240deg,
+    transparent 300deg,
+    var(--artwork-glow-1) 360deg
+  );
+
+  transition-property: --artwork-glow-1, --artwork-glow-2, --artwork-glow-3,
+    opacity;
+  transition-duration: 700ms;
+  transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  animation: artwork-beam-spin 10s linear infinite;
+}
+
+.artwork-glow[data-playing="false"] {
+  animation-play-state: paused;
+}
+
+.artwork-beam-field {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--artwork-beam);
+  filter: blur(10px);
+  opacity: 0.4;
+  mask-image:
+    linear-gradient(to bottom, #000, transparent 38%, transparent 62%, #000),
+    linear-gradient(to right, #000, transparent 30%, transparent 70%, #000);
+  mask-composite: add;
+}
+
+.artwork-beam-ring {
+  position: absolute;
+  inset: 0;
+  padding: 1px;
+  border-radius: inherit;
+  background: var(--artwork-beam);
+  opacity: 0.8;
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  -webkit-mask-composite: xor;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .artwork-glow {
+    animation: none;
+  }
+}
+
+@keyframes artwork-beam-spin {
+  to {
+    --artwork-beam-angle: 360deg;
+  }
+}
+
+.volume-slider {
+  --volume-slider-track: linear-gradient(
+    to right,
+    var(--foreground) var(--volume),
+    color-mix(in oklab, var(--foreground) 15%, transparent) var(--volume)
+  );
+
+  appearance: none;
+  height: 1.5rem;
+  background: transparent;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.volume-slider::-webkit-slider-runnable-track {
+  height: 0.1875rem;
+  border-radius: 9999px;
+  background: var(--volume-slider-track);
+}
+
+.volume-slider::-moz-range-track {
+  height: 0.1875rem;
+  border-radius: 9999px;
+  background: var(--volume-slider-track);
+}
+
+.volume-slider::-webkit-slider-thumb {
+  appearance: none;
+  margin-top: -0.28125rem;
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 9999px;
+  background: var(--foreground);
+}
+
+.volume-slider::-moz-range-thumb {
+  width: 0.75rem;
+  height: 0.75rem;
+  border: 0;
+  border-radius: 9999px;
+  background: var(--foreground);
 }
 
 .optical-spacing-demo {

@@ -3,6 +3,7 @@ import { Inter, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { InterfaceSoundListener } from "@/components/interface-sound-listener";
 import { MainLayoutContainer } from "@/components/layouts/main-layout-container";
+import { PageScrollbar } from "@/components/page-scrollbar";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { Suspense } from "react";
 
@@ -29,6 +30,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     >
       <body className="min-h-full flex flex-col">
         <InterfaceSoundListener />
+        <PageScrollbar />
         <Suspense>
           <NuqsAdapter>
             <MainLayoutContainer>{children}</MainLayoutContainer>

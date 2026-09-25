@@ -1,7 +1,11 @@
 "use client";
 
 import { WEBSITE_ROUTES, WebsiteRouteType } from "@/common/routes";
+import { playInternalLinkSound } from "@/lib/interface-sounds";
+import { useMusicPlayer } from "@/lib/music-player";
 import { cn } from "cn";
+import { MusicNavigationIcon } from "@/components/music-navigation-icon";
+import { ImageIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -13,13 +17,39 @@ import {
   useRef,
   useState,
   useSyncExternalStore,
+  type ComponentType,
   type MouseEvent,
   type TransitionEvent,
 } from "react";
 
-const NAVIGATION_ITEMS: { label: string; href: WebsiteRouteType }[] = [
+type NavigationLink = {
+  label: string;
+  href: WebsiteRouteType;
+  icon?: ComponentType<{ className?: string }>;
+  hiddenOnTouch?: boolean;
+};
+type NavigationGroup = { label: string; items: NavigationLink[] };
+
+const APPS_GROUP_LABEL = "Apps";
+
+const NAVIGATION_ITEMS: (NavigationLink | NavigationGroup)[] = [
   { label: "Writings", href: WEBSITE_ROUTES.WRITINGS },
-  { label: "Photography", href: WEBSITE_ROUTES.PHOTOGRAPHY },
+  {
+    label: APPS_GROUP_LABEL,
+    items: [
+      {
+        label: "Music",
+        href: WEBSITE_ROUTES.APPS_MUSIC,
+        icon: MusicNavigationIcon,
+        hiddenOnTouch: true,
+      },
+      {
+        label: "Gallery",
+        href: WEBSITE_ROUTES.APPS_GALLERY,
+        icon: ImageIcon,
+      },
+    ],
+  },
   { label: "Archive", href: WEBSITE_ROUTES.ARCHIVE },
 ] as const;
 
@@ -81,7 +111,9 @@ function KeyCap({ children }: { children: string }) {
 export function MainSidebarNavigation() {
   const pathname = usePathname();
   const emailHintId = useId();
+  const navigationGroupId = useId();
   const isMac = useIsMac();
+  const { isPlaying: isMusicPlaying } = useMusicPlayer();
   const [isEmailHovered, setIsEmailHovered] = useState(false);
   const [copyFeedbackPhase, setCopyFeedbackPhase] =
     useState<CopyFeedbackPhase>("idle");
@@ -102,6 +134,31 @@ export function MainSidebarNavigation() {
     },
     [pathname],
   );
+
+  const activeGroupLabel =
+    NAVIGATION_ITEMS.find(
+      (item) =>
+        "items" in item &&
+        item.items.some((link) => isNavigationItemActive(link.href)),
+    )?.label ?? null;
+  const defaultExpandedGroupLabel = activeGroupLabel;
+  const [expandedGroupLabel, setExpandedGroupLabel] = useState(
+    defaultExpandedGroupLabel,
+  );
+  const [previousPathname, setPreviousPathname] = useState(pathname);
+  const [
+    previousDefaultExpandedGroupLabel,
+    setPreviousDefaultExpandedGroupLabel,
+  ] = useState(defaultExpandedGroupLabel);
+
+  if (
+    pathname !== previousPathname ||
+    defaultExpandedGroupLabel !== previousDefaultExpandedGroupLabel
+  ) {
+    setPreviousPathname(pathname);
+    setPreviousDefaultExpandedGroupLabel(defaultExpandedGroupLabel);
+    setExpandedGroupLabel(defaultExpandedGroupLabel);
+  }
 
   const clearCopyFeedbackTimer = useCallback(() => {
     if (copyFeedbackTimerRef.current === null) {
@@ -205,6 +262,25 @@ export function MainSidebarNavigation() {
     return () => media.removeEventListener("change", clearHoverOnNarrowScreens);
   }, [dismissCopyFeedback]);
 
+  const renderNavigationLink = (link: NavigationLink) => (
+    <li key={link.href} className={cn(link.hiddenOnTouch && "touch:hidden")}>
+      <Link
+        href={link.href}
+        className={cn(
+          "text-sm tracking-tight font-medium select-none rounded px-1 py-0.5",
+          isNavigationItemActive(link.href)
+            ? "text-foreground bg-muted"
+            : "text-muted-foreground hover:bg-muted",
+        )}
+      >
+        {link.icon ? (
+          <link.icon className="mr-1 inline-block size-3.5 align-[-0.125em]" />
+        ) : null}
+        {link.label}
+      </Link>
+    </li>
+  );
+
   const dimmedClassName = cn(
     "transition-[opacity,filter] duration-150 ease-[cubic-bezier(0.2,0,0,1)] motion-reduce:transition-none",
     isEmailHovered && "opacity-60 blur-xs",
@@ -260,21 +336,64 @@ export function MainSidebarNavigation() {
       </header>
       <nav className={dimmedClassName}>
         <ul>
-          {NAVIGATION_ITEMS.map((item) => (
-            <li key={item.href}>
-              <Link
-                href={item.href}
-                className={cn(
-                  "text-sm tracking-tight font-medium select-none rounded px-1 py-0.5",
-                  isNavigationItemActive(item.href)
-                    ? "text-foreground bg-muted"
-                    : "text-muted-foreground hover:bg-muted",
-                )}
-              >
-                {item.label}
-              </Link>
-            </li>
-          ))}
+          {NAVIGATION_ITEMS.map((item) => {
+            if (!("items" in item)) {
+              return renderNavigationLink(item);
+            }
+
+            const isExpanded = expandedGroupLabel === item.label;
+            const groupListId = `${navigationGroupId}-${item.label}`;
+            const nowPlayingLink =
+              !isExpanded && isMusicPlaying
+                ? item.items.find(
+                    (link) => link.href === WEBSITE_ROUTES.APPS_MUSIC,
+                  )
+                : undefined;
+
+            return (
+              <li key={item.label}>
+                <button
+                  type="button"
+                  aria-expanded={isExpanded}
+                  aria-controls={groupListId}
+                  onClick={() => {
+                    playInternalLinkSound();
+                    setExpandedGroupLabel(isExpanded ? null : item.label);
+                  }}
+                  className={cn(
+                    "-my-0.5 text-sm tracking-tight font-medium select-none rounded px-1 py-0.5 hover:bg-muted",
+                    activeGroupLabel === item.label
+                      ? "text-foreground"
+                      : "text-muted-foreground",
+                  )}
+                >
+                  {nowPlayingLink ? (
+                    <>
+                      {nowPlayingLink.icon ? (
+                        <nowPlayingLink.icon className="mr-1 inline-block size-3.5 align-[-0.125em]" />
+                      ) : null}
+                      {item.label}
+                      <span
+                        aria-hidden="true"
+                        className="text-muted-foreground/60"
+                      >
+                        /
+                      </span>
+                      <span className="sr-only"> </span>
+                      {nowPlayingLink.label}
+                    </>
+                  ) : (
+                    item.label
+                  )}
+                </button>
+                {isExpanded ? (
+                  <ul id={groupListId} className="pl-3">
+                    {item.items.map(renderNavigationLink)}
+                  </ul>
+                ) : null}
+              </li>
+            );
+          })}
         </ul>
       </nav>
       <footer>

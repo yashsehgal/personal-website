@@ -3,7 +3,8 @@ export const WEBSITE_ROUTES = {
   WRITINGS: "/writings",
   WRITING_OPTICAL_SPACING: "/writings/optical-spacing",
   WRITING_NAVIGATION_QUERY_STATES: "/writings/navigation-using-query-states",
-  PHOTOGRAPHY: "/photography",
+  APPS_MUSIC: "/apps/music",
+  APPS_GALLERY: "/apps/gallery",
   ARCHIVE: "/archive",
 } as const;
 

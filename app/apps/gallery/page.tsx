@@ -2,10 +2,10 @@ import { IMAGE_PLACEHOLDERS } from "@/common/image-placeholders";
 import { PHOTOGRAPHY_IMAGES } from "@/common/photography";
 import { ProgressiveImage } from "@/components/progressive-image";
 
-export default function Photography() {
+export default function Gallery() {
   return (
     <div className="flex flex-col items-start gap-6 px-1 wide:mt-16">
-      <h1 className="font-medium tracking-tight">Photography</h1>
+      <h1 className="font-medium tracking-tight">Gallery</h1>
       <div className="grid w-full grid-cols-1 items-start gap-12 wide:max-w-5xl wide:grid-cols-3">
         {PHOTOGRAPHY_IMAGES.map((photo) => {
           const placeholder = IMAGE_PLACEHOLDERS[photo.path];
