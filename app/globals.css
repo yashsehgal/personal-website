@@ -193,6 +193,16 @@ body {
   html {
     @apply font-sans;
   }
+
+  @media (hover: hover) and (pointer: fine) {
+    html {
+      scrollbar-width: none;
+    }
+
+    html::-webkit-scrollbar {
+      display: none;
+    }
+  }
 }
 
 @property --artwork-glow-1 {
