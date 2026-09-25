@@ -21,6 +21,7 @@ import {
   Volume2,
 } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 
@@ -33,6 +34,9 @@ const WAVEFORM_BARS = [
   { restingScale: 0.8, duration: "0.8s", delay: "-0.6s" },
   { restingScale: 0.5, duration: "0.95s", delay: "-0.3s" },
 ] as const;
+
+const TRACK_DETAILS_CLASS_NAME =
+  "flex min-w-0 flex-1 items-center gap-3 select-none";
 
 const CONTROL_BUTTON_CLASS_NAME =
   "inline-grid place-items-center rounded-full text-foreground transition-[scale,background-color] duration-150 ease-out hover:bg-foreground/8 active:scale-[0.96] disabled:pointer-events-none disabled:opacity-40";
@@ -178,6 +182,34 @@ export function MusicNowPlaying() {
   const isExpanded = usePathname() === WEBSITE_ROUTES.APPS_MUSIC;
   const volumePercent = Math.round(volume * 100);
 
+  const trackDetails = currentTrack ? (
+    <>
+      <Image
+        src={currentTrack.largeArtworkUrl}
+        alt=""
+        width={48}
+        height={48}
+        unoptimized
+        draggable={false}
+        className="size-12 shrink-0 rounded-md bg-muted outline outline-white/10 -outline-offset-1 dark:outline-black/10"
+      />
+      <span className="flex min-w-0 flex-1 flex-col">
+        <span
+          title={currentTrack.title}
+          className="truncate text-sm font-medium tracking-tight"
+        >
+          {currentTrack.title}
+        </span>
+        <span
+          title={currentTrack.artist}
+          className="truncate text-sm tracking-tight text-(--surface-muted-foreground)"
+        >
+          {currentTrack.artist}
+        </span>
+      </span>
+    </>
+  ) : null;
+
   return (
     <MotionConfig reducedMotion="user">
       <p role="status" className="sr-only">
@@ -197,29 +229,20 @@ export function MusicNowPlaying() {
             className="surface-inverted sticky bottom-8 z-20 flex w-64 max-w-full flex-col self-start rounded-[20px] bg-background/90 p-3 text-foreground shadow-(--surface-edge) backdrop-blur-xl backdrop-saturate-150 wide:fixed wide:left-8"
           >
             <div className="flex items-center gap-3">
-              <Image
-                src={currentTrack.largeArtworkUrl}
-                alt=""
-                width={48}
-                height={48}
-                unoptimized
-                draggable={false}
-                className="size-12 shrink-0 rounded-md bg-muted outline outline-white/10 -outline-offset-1 dark:outline-black/10"
-              />
-              <div className="flex min-w-0 flex-1 flex-col">
-                <p
-                  title={currentTrack.title}
-                  className="truncate text-sm font-medium tracking-tight"
+              {isExpanded ? (
+                <div className={TRACK_DETAILS_CLASS_NAME}>{trackDetails}</div>
+              ) : (
+                <Link
+                  href={WEBSITE_ROUTES.APPS_MUSIC}
+                  className={cn(
+                    TRACK_DETAILS_CLASS_NAME,
+                    "after:absolute after:inset-0 after:rounded-[20px]",
+                  )}
                 >
-                  {currentTrack.title}
-                </p>
-                <p
-                  title={currentTrack.artist}
-                  className="truncate text-sm tracking-tight text-(--surface-muted-foreground)"
-                >
-                  {currentTrack.artist}
-                </p>
-              </div>
+                  <span className="sr-only">Open Music: </span>
+                  {trackDetails}
+                </Link>
+              )}
               <AnimatePresence mode="popLayout" initial={false}>
                 <motion.span
                   key={isExpanded ? "waveform" : "play-pause"}
@@ -229,7 +252,10 @@ export function MusicNowPlaying() {
                   {isExpanded ? (
                     <Waveform isPlaying={isPlaying} />
                   ) : (
-                    <PlayPauseButton isPlaying={isPlaying} className="size-10" />
+                    <PlayPauseButton
+                      isPlaying={isPlaying}
+                      className="relative z-10 size-10"
+                    />
                   )}
                 </motion.span>
               </AnimatePresence>
@@ -237,7 +263,7 @@ export function MusicNowPlaying() {
             <div
               inert={!isExpanded}
               className={cn(
-                "grid transition-[grid-template-rows,opacity] duration-300 ease-[cubic-bezier(0.2,0,0,1)] motion-reduce:transition-none",
+                "grid transition-[grid-template-rows,opacity] duration-350 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
                 isExpanded
                   ? "grid-rows-[1fr] opacity-100"
                   : "grid-rows-[0fr] opacity-0",
