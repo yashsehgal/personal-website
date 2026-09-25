@@ -35,6 +35,8 @@ const WAVEFORM_BARS = [
   { restingScale: 0.5, duration: "0.95s", delay: "-0.3s" },
 ] as const;
 
+const VOLUME_TOOLTIP_DURATION_MS = 1000;
+
 const TRACK_DETAILS_CLASS_NAME =
   "flex min-w-0 flex-1 items-center gap-3 select-none";
 
@@ -181,6 +183,30 @@ export function MusicNowPlaying() {
   const { currentTrack, hasNextTrack, isPlaying, volume } = useMusicPlayer();
   const isExpanded = usePathname() === WEBSITE_ROUTES.APPS_MUSIC;
   const volumePercent = Math.round(volume * 100);
+  const [isAdjustingVolume, setIsAdjustingVolume] = useState(false);
+  const volumeTooltipTimerRef = useRef<number | null>(null);
+
+  const showVolumeTooltip = () => {
+    setIsAdjustingVolume(true);
+
+    if (volumeTooltipTimerRef.current !== null) {
+      window.clearTimeout(volumeTooltipTimerRef.current);
+    }
+
+    volumeTooltipTimerRef.current = window.setTimeout(() => {
+      setIsAdjustingVolume(false);
+      volumeTooltipTimerRef.current = null;
+    }, VOLUME_TOOLTIP_DURATION_MS);
+  };
+
+  useEffect(
+    () => () => {
+      if (volumeTooltipTimerRef.current !== null) {
+        window.clearTimeout(volumeTooltipTimerRef.current);
+      }
+    },
+    [],
+  );
 
   const trackDetails = currentTrack ? (
     <>
@@ -300,22 +326,41 @@ export function MusicNowPlaying() {
                   </div>
                   <div className="flex items-center gap-2 text-(--surface-muted-foreground)">
                     <Volume aria-hidden="true" className="size-4 shrink-0" />
-                    <input
-                      type="range"
-                      min={0}
-                      max={100}
-                      step={1}
-                      value={volumePercent}
-                      aria-label="Volume"
-                      aria-valuetext={`${volumePercent}%`}
-                      onChange={(event) =>
-                        setMusicVolume(Number(event.currentTarget.value) / 100)
-                      }
-                      className="volume-slider min-w-0 flex-1"
-                      style={
-                        { "--volume": `${volumePercent}%` } as CSSProperties
-                      }
-                    />
+                    <span className="group relative flex min-w-0 flex-1">
+                      <input
+                        type="range"
+                        min={0}
+                        max={100}
+                        step={1}
+                        value={volumePercent}
+                        aria-label="Volume"
+                        aria-valuetext={`${volumePercent}%`}
+                        onChange={(event) => {
+                          setMusicVolume(
+                            Number(event.currentTarget.value) / 100,
+                          );
+                          showVolumeTooltip();
+                        }}
+                        className="volume-slider min-w-0 flex-1"
+                        style={
+                          { "--volume": `${volumePercent}%` } as CSSProperties
+                        }
+                      />
+                      <span
+                        aria-hidden="true"
+                        className={cn(
+                          "pointer-events-none absolute bottom-full mb-0.5 origin-bottom -translate-x-1/2 rounded-md bg-foreground px-1.5 py-0.5 text-xs font-medium tracking-tight text-background tabular-nums transition-[opacity,scale] duration-150 ease-out select-none",
+                          isAdjustingVolume
+                            ? "scale-100 opacity-100"
+                            : "scale-[0.96] opacity-0 group-hover:scale-100 group-hover:opacity-100 group-active:scale-100 group-active:opacity-100 group-has-[:focus-visible]:scale-100 group-has-[:focus-visible]:opacity-100",
+                        )}
+                        style={{
+                          left: `calc(0.375rem + (100% - 0.75rem) * ${volume})`,
+                        }}
+                      >
+                        {volumePercent}%
+                      </span>
+                    </span>
                     <Volume2 aria-hidden="true" className="size-4 shrink-0" />
                   </div>
                 </div>
