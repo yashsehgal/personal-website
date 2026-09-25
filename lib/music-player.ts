@@ -100,6 +100,10 @@ function skipTrack(offset: 1 | -1) {
   return true;
 }
 
+export function setMusicQueue(tracks: readonly MusicTrack[]) {
+  queue = tracks;
+}
+
 export function toggleTrack(track: MusicTrack, tracks: readonly MusicTrack[]) {
   queue = tracks;
 
