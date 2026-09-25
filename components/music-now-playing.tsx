@@ -39,14 +39,6 @@ import {
 
 const iconTransition = { type: "spring" as const, duration: 0.3, bounce: 0 };
 
-const WAVEFORM_BARS = [
-  { restingScale: 0.55, duration: "0.9s", delay: "-0.2s" },
-  { restingScale: 1, duration: "0.7s", delay: "-0.5s" },
-  { restingScale: 0.4, duration: "1s", delay: "-0.1s" },
-  { restingScale: 0.8, duration: "0.8s", delay: "-0.6s" },
-  { restingScale: 0.5, duration: "0.95s", delay: "-0.3s" },
-] as const;
-
 const VOLUME_TOOLTIP_DURATION_MS = 1000;
 const CONTROL_TOOLTIP_DELAY_MS = 700;
 
@@ -126,32 +118,6 @@ function formatTime(seconds: number) {
   return `${minutes}:${String(wholeSeconds % 60).padStart(2, "0")}`;
 }
 
-function Waveform({ isPlaying }: { isPlaying: boolean }) {
-  return (
-    <span
-      aria-hidden="true"
-      className="flex h-4 shrink-0 items-center gap-0.5 text-foreground"
-    >
-      {WAVEFORM_BARS.map((bar, index) => (
-        <span
-          key={index}
-          className={cn(
-            "h-full w-0.5 rounded-full bg-current transition-[scale] duration-300 ease-out",
-            isPlaying && "animate-music-wave motion-reduce:animate-none",
-          )}
-          style={
-            {
-              scale: `1 ${isPlaying ? bar.restingScale : 0.2}`,
-              animationDuration: bar.duration,
-              animationDelay: bar.delay,
-            } as CSSProperties
-          }
-        />
-      ))}
-    </span>
-  );
-}
-
 function PlaybackProgress({ isPlaying }: { isPlaying: boolean }) {
   const barRef = useRef<HTMLSpanElement>(null);
   const [time, setTime] = useState({ elapsed: 0, duration: 0 });
@@ -171,7 +137,6 @@ function PlaybackProgress({ isPlaying }: { isPlaying: boolean }) {
           ? previous
           : { elapsed, duration: total },
       );
-
     };
 
     const tick = () => {
@@ -306,20 +271,18 @@ export function MusicNowPlaying() {
                   </Link>
                 )}
                 <AnimatePresence mode="popLayout" initial={false}>
-                  <motion.span
-                    key={isExpanded ? "waveform" : "play-pause"}
-                    className="flex shrink-0 items-center justify-center"
-                    {...SWAP_ANIMATION}
-                  >
-                    {isExpanded ? (
-                      <Waveform isPlaying={isPlaying} />
-                    ) : (
+                  {isExpanded ? null : (
+                    <motion.span
+                      key="play-pause"
+                      className="flex shrink-0 items-center justify-center"
+                      {...SWAP_ANIMATION}
+                    >
                       <PlayPauseButton
                         isPlaying={isPlaying}
                         className="relative z-10 size-10"
                       />
-                    )}
-                  </motion.span>
+                    </motion.span>
+                  )}
                 </AnimatePresence>
               </div>
               <div
@@ -345,7 +308,10 @@ export function MusicNowPlaying() {
                           className="size-5 fill-current"
                         />
                       </ControlButton>
-                      <PlayPauseButton isPlaying={isPlaying} className="size-11" />
+                      <PlayPauseButton
+                        isPlaying={isPlaying}
+                        className="size-11"
+                      />
                       <ControlButton
                         label="Next track"
                         onClick={playNextTrack}

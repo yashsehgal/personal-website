@@ -54,17 +54,6 @@
   --animate-music-icon-sway: music-icon-sway 1.6s ease-in-out infinite;
   --animate-music-note-float: music-note-float 3.2s cubic-bezier(0.2, 0, 0, 1)
     infinite backwards;
-  --animate-music-wave: music-wave 0.9s ease-in-out infinite;
-
-  @keyframes music-wave {
-    0%,
-    100% {
-      scale: 1 0.3;
-    }
-    50% {
-      scale: 1 1;
-    }
-  }
 
   @keyframes music-icon-sway {
     0%,
