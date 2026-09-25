@@ -1,5 +1,5 @@
 import { AppsDeviceGuard } from "@/components/apps-device-guard";
 
-export default function AppsLayout({ children }: LayoutProps<"/apps">) {
+export default function MusicLayout({ children }: LayoutProps<"/apps/music">) {
   return <AppsDeviceGuard>{children}</AppsDeviceGuard>;
 }

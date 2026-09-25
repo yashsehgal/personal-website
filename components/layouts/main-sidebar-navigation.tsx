@@ -5,6 +5,7 @@ import { playInternalLinkSound } from "@/lib/interface-sounds";
 import { useMusicPlayer } from "@/lib/music-player";
 import { cn } from "cn";
 import { MusicNavigationIcon } from "@/components/music-navigation-icon";
+import { ImageIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -25,6 +26,7 @@ type NavigationLink = {
   label: string;
   href: WebsiteRouteType;
   icon?: ComponentType<{ className?: string }>;
+  hiddenOnTouch?: boolean;
 };
 type NavigationGroup = { label: string; items: NavigationLink[] };
 
@@ -32,7 +34,6 @@ const APPS_GROUP_LABEL = "Apps";
 
 const NAVIGATION_ITEMS: (NavigationLink | NavigationGroup)[] = [
   { label: "Writings", href: WEBSITE_ROUTES.WRITINGS },
-  { label: "Photography", href: WEBSITE_ROUTES.PHOTOGRAPHY },
   {
     label: APPS_GROUP_LABEL,
     items: [
@@ -40,6 +41,12 @@ const NAVIGATION_ITEMS: (NavigationLink | NavigationGroup)[] = [
         label: "Music",
         href: WEBSITE_ROUTES.APPS_MUSIC,
         icon: MusicNavigationIcon,
+        hiddenOnTouch: true,
+      },
+      {
+        label: "Gallery",
+        href: WEBSITE_ROUTES.APPS_GALLERY,
+        icon: ImageIcon,
       },
     ],
   },
@@ -256,7 +263,7 @@ export function MainSidebarNavigation() {
   }, [dismissCopyFeedback]);
 
   const renderNavigationLink = (link: NavigationLink) => (
-    <li key={link.href}>
+    <li key={link.href} className={cn(link.hiddenOnTouch && "touch:hidden")}>
       <Link
         href={link.href}
         className={cn(
@@ -344,7 +351,7 @@ export function MainSidebarNavigation() {
                 : undefined;
 
             return (
-              <li key={item.label} className="touch:hidden">
+              <li key={item.label}>
                 <button
                   type="button"
                   aria-expanded={isExpanded}

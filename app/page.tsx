@@ -99,7 +99,7 @@ export default function Home() {
           In my free time, I make music and play the keyboard, and I&apos;m
           learning sound engineering and composition. I read across a lot of
           subjects, and I love traveling and taking{" "}
-          <Link href={WEBSITE_ROUTES.PHOTOGRAPHY} className={textLinkInsetClassName}>
+          <Link href={WEBSITE_ROUTES.APPS_GALLERY} className={textLinkInsetClassName}>
             photographs
           </Link>
           .
