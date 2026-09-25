@@ -134,8 +134,7 @@ export function MainSidebarNavigation() {
         "items" in item &&
         item.items.some((link) => isNavigationItemActive(link.href)),
     )?.label ?? null;
-  const defaultExpandedGroupLabel =
-    activeGroupLabel ?? (isMusicPlaying ? APPS_GROUP_LABEL : null);
+  const defaultExpandedGroupLabel = activeGroupLabel;
   const [expandedGroupLabel, setExpandedGroupLabel] = useState(
     defaultExpandedGroupLabel,
   );
@@ -337,6 +336,12 @@ export function MainSidebarNavigation() {
 
             const isExpanded = expandedGroupLabel === item.label;
             const groupListId = `${navigationGroupId}-${item.label}`;
+            const nowPlayingLink =
+              !isExpanded && isMusicPlaying
+                ? item.items.find(
+                    (link) => link.href === WEBSITE_ROUTES.APPS_MUSIC,
+                  )
+                : undefined;
 
             return (
               <li key={item.label} className="touch:hidden">
@@ -355,7 +360,24 @@ export function MainSidebarNavigation() {
                       : "text-muted-foreground",
                   )}
                 >
-                  {item.label}
+                  {nowPlayingLink ? (
+                    <>
+                      {nowPlayingLink.icon ? (
+                        <nowPlayingLink.icon className="mr-1 inline-block size-3.5 align-[-0.125em]" />
+                      ) : null}
+                      {item.label}
+                      <span
+                        aria-hidden="true"
+                        className="text-muted-foreground/60"
+                      >
+                        /
+                      </span>
+                      <span className="sr-only"> </span>
+                      {nowPlayingLink.label}
+                    </>
+                  ) : (
+                    item.label
+                  )}
                 </button>
                 {isExpanded ? (
                   <ul id={groupListId} className="pl-3">
