@@ -1,0 +1,303 @@
+"use client";
+
+import { WEBSITE_ROUTES } from "@/common/routes";
+import {
+  getPlaybackProgress,
+  playNextTrack,
+  playPreviousTrack,
+  setMusicVolume,
+  subscribeToPlaybackProgress,
+  togglePlayback,
+  useMusicPlayer,
+} from "@/lib/music-player";
+import { cn } from "cn";
+import { AnimatePresence, MotionConfig, motion } from "framer-motion";
+import {
+  Pause,
+  Play,
+  SkipBack,
+  SkipForward,
+  Volume,
+  Volume2,
+} from "lucide-react";
+import Image from "next/image";
+import { usePathname } from "next/navigation";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
+
+const iconTransition = { type: "spring" as const, duration: 0.3, bounce: 0 };
+
+const WAVEFORM_BARS = [
+  { restingScale: 0.55, duration: "0.9s", delay: "-0.2s" },
+  { restingScale: 1, duration: "0.7s", delay: "-0.5s" },
+  { restingScale: 0.4, duration: "1s", delay: "-0.1s" },
+  { restingScale: 0.8, duration: "0.8s", delay: "-0.6s" },
+  { restingScale: 0.5, duration: "0.95s", delay: "-0.3s" },
+] as const;
+
+const CONTROL_BUTTON_CLASS_NAME =
+  "inline-grid place-items-center rounded-full text-foreground transition-[scale,background-color] duration-150 ease-out hover:bg-foreground/8 active:scale-[0.96] disabled:pointer-events-none disabled:opacity-40";
+
+const SWAP_ANIMATION = {
+  initial: { opacity: 0, scale: 0.25, filter: "blur(4px)" },
+  animate: { opacity: 1, scale: 1, filter: "blur(0px)" },
+  exit: { opacity: 0, scale: 0.25, filter: "blur(4px)" },
+  transition: iconTransition,
+};
+
+function PlayPauseButton({
+  isPlaying,
+  className,
+}: {
+  isPlaying: boolean;
+  className?: string;
+}) {
+  return (
+    <button
+      type="button"
+      aria-label={isPlaying ? "Pause" : "Play"}
+      onClick={togglePlayback}
+      className={cn(CONTROL_BUTTON_CLASS_NAME, className)}
+    >
+      <AnimatePresence mode="popLayout" initial={false}>
+        <motion.span
+          key={isPlaying ? "pause" : "play"}
+          className="flex items-center justify-center"
+          {...SWAP_ANIMATION}
+        >
+          {isPlaying ? (
+            <Pause aria-hidden="true" className="size-6 fill-current" />
+          ) : (
+            <Play
+              aria-hidden="true"
+              className="size-6 translate-x-px fill-current"
+            />
+          )}
+        </motion.span>
+      </AnimatePresence>
+    </button>
+  );
+}
+
+function formatTime(seconds: number) {
+  const wholeSeconds = Math.max(0, Math.floor(seconds));
+  const minutes = Math.floor(wholeSeconds / 60);
+
+  return `${minutes}:${String(wholeSeconds % 60).padStart(2, "0")}`;
+}
+
+function Waveform({ isPlaying }: { isPlaying: boolean }) {
+  return (
+    <span
+      aria-hidden="true"
+      className="flex h-4 shrink-0 items-center gap-0.5 text-foreground"
+    >
+      {WAVEFORM_BARS.map((bar, index) => (
+        <span
+          key={index}
+          className={cn(
+            "h-full w-0.5 rounded-full bg-current transition-[scale] duration-300 ease-out",
+            isPlaying && "animate-music-wave motion-reduce:animate-none",
+          )}
+          style={
+            {
+              scale: `1 ${isPlaying ? bar.restingScale : 0.2}`,
+              animationDuration: bar.duration,
+              animationDelay: bar.delay,
+            } as CSSProperties
+          }
+        />
+      ))}
+    </span>
+  );
+}
+
+function PlaybackProgress({ isPlaying }: { isPlaying: boolean }) {
+  const barRef = useRef<HTMLSpanElement>(null);
+  const [time, setTime] = useState({ elapsed: 0, duration: 0 });
+
+  useEffect(() => {
+    let frame = 0;
+
+    const update = () => {
+      const { currentTime, duration } = getPlaybackProgress();
+      const progress = duration > 0 ? Math.min(currentTime / duration, 1) : 0;
+      const elapsed = Math.floor(currentTime);
+      const total = Math.floor(duration);
+
+      barRef.current?.style.setProperty("scale", `${progress} 1`);
+      setTime((previous) =>
+        previous.elapsed === elapsed && previous.duration === total
+          ? previous
+          : { elapsed, duration: total },
+      );
+
+    };
+
+    const tick = () => {
+      update();
+      frame = requestAnimationFrame(tick);
+    };
+
+    const unsubscribe = subscribeToPlaybackProgress(update);
+    frame = requestAnimationFrame(isPlaying ? tick : update);
+
+    return () => {
+      cancelAnimationFrame(frame);
+      unsubscribe();
+    };
+  }, [isPlaying]);
+
+  return (
+    <div className="flex flex-col gap-1.5">
+      <span
+        aria-hidden="true"
+        className="block h-0.75 overflow-hidden rounded-full bg-foreground/15"
+      >
+        <span
+          ref={barRef}
+          className="block h-full origin-left rounded-full bg-foreground"
+          style={{ scale: "0 1" }}
+        />
+      </span>
+      <div className="flex justify-between text-xs tracking-tight text-(--surface-muted-foreground) tabular-nums">
+        <span>
+          <span className="sr-only">Elapsed </span>
+          {formatTime(time.elapsed)}
+        </span>
+        <span>
+          <span className="sr-only">Duration </span>
+          {formatTime(time.duration)}
+        </span>
+      </div>
+    </div>
+  );
+}
+
+export function MusicNowPlaying() {
+  const { currentTrack, hasNextTrack, isPlaying, volume } = useMusicPlayer();
+  const isExpanded = usePathname() === WEBSITE_ROUTES.APPS_MUSIC;
+  const volumePercent = Math.round(volume * 100);
+
+  return (
+    <MotionConfig reducedMotion="user">
+      <p role="status" className="sr-only">
+        {currentTrack
+          ? `Now playing ${currentTrack.title} by ${currentTrack.artist}`
+          : ""}
+      </p>
+      <AnimatePresence>
+        {currentTrack ? (
+          <motion.section
+            key="now-playing"
+            aria-label="Now playing"
+            initial={{ opacity: 0, y: 12, filter: "blur(4px)" }}
+            animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+            exit={{ opacity: 0, y: 12, filter: "blur(4px)" }}
+            transition={{ duration: 0.3, ease: [0.2, 0, 0, 1] }}
+            className="surface-inverted sticky bottom-8 z-20 flex w-64 max-w-full flex-col self-start rounded-[20px] bg-background/90 p-3 text-foreground shadow-(--surface-edge) backdrop-blur-xl backdrop-saturate-150 wide:fixed wide:left-8"
+          >
+            <div className="flex items-center gap-3">
+              <Image
+                src={currentTrack.largeArtworkUrl}
+                alt=""
+                width={48}
+                height={48}
+                unoptimized
+                draggable={false}
+                className="size-12 shrink-0 rounded-md bg-muted outline outline-white/10 -outline-offset-1 dark:outline-black/10"
+              />
+              <div className="flex min-w-0 flex-1 flex-col">
+                <p
+                  title={currentTrack.title}
+                  className="truncate text-sm font-medium tracking-tight"
+                >
+                  {currentTrack.title}
+                </p>
+                <p
+                  title={currentTrack.artist}
+                  className="truncate text-sm tracking-tight text-(--surface-muted-foreground)"
+                >
+                  {currentTrack.artist}
+                </p>
+              </div>
+              <AnimatePresence mode="popLayout" initial={false}>
+                <motion.span
+                  key={isExpanded ? "waveform" : "play-pause"}
+                  className="flex shrink-0 items-center justify-center"
+                  {...SWAP_ANIMATION}
+                >
+                  {isExpanded ? (
+                    <Waveform isPlaying={isPlaying} />
+                  ) : (
+                    <PlayPauseButton isPlaying={isPlaying} className="size-10" />
+                  )}
+                </motion.span>
+              </AnimatePresence>
+            </div>
+            <div
+              inert={!isExpanded}
+              className={cn(
+                "grid transition-[grid-template-rows,opacity] duration-300 ease-[cubic-bezier(0.2,0,0,1)] motion-reduce:transition-none",
+                isExpanded
+                  ? "grid-rows-[1fr] opacity-100"
+                  : "grid-rows-[0fr] opacity-0",
+              )}
+            >
+              <div className="min-h-0 overflow-hidden">
+                <div className="flex flex-col gap-3 pt-3">
+                  <PlaybackProgress isPlaying={isPlaying} />
+                  <div className="flex items-center justify-evenly">
+                    <button
+                      type="button"
+                      aria-label="Previous track"
+                      onClick={playPreviousTrack}
+                      className={cn(CONTROL_BUTTON_CLASS_NAME, "size-10")}
+                    >
+                      <SkipBack
+                        aria-hidden="true"
+                        className="size-5 fill-current"
+                      />
+                    </button>
+                    <PlayPauseButton isPlaying={isPlaying} className="size-11" />
+                    <button
+                      type="button"
+                      aria-label="Next track"
+                      onClick={playNextTrack}
+                      disabled={!hasNextTrack}
+                      className={cn(CONTROL_BUTTON_CLASS_NAME, "size-10")}
+                    >
+                      <SkipForward
+                        aria-hidden="true"
+                        className="size-5 fill-current"
+                      />
+                    </button>
+                  </div>
+                  <div className="flex items-center gap-2 text-(--surface-muted-foreground)">
+                    <Volume aria-hidden="true" className="size-4 shrink-0" />
+                    <input
+                      type="range"
+                      min={0}
+                      max={100}
+                      step={1}
+                      value={volumePercent}
+                      aria-label="Volume"
+                      aria-valuetext={`${volumePercent}%`}
+                      onChange={(event) =>
+                        setMusicVolume(Number(event.currentTarget.value) / 100)
+                      }
+                      className="volume-slider min-w-0 flex-1"
+                      style={
+                        { "--volume": `${volumePercent}%` } as CSSProperties
+                      }
+                    />
+                    <Volume2 aria-hidden="true" className="size-4 shrink-0" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </motion.section>
+        ) : null}
+      </AnimatePresence>
+    </MotionConfig>
+  );
+}

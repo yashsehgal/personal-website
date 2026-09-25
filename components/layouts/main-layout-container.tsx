@@ -1,4 +1,5 @@
 import { MainSidebarNavigation } from "@/components/layouts/main-sidebar-navigation";
+import { MusicNowPlaying } from "@/components/music-now-playing";
 import { cn } from "cn";
 
 type MainLayoutContainerProps = React.HTMLAttributes<HTMLDivElement>;
@@ -18,6 +19,7 @@ export function MainLayoutContainer({
     >
       <MainSidebarNavigation />
       <main className="min-w-0 w-full wide:flex-1">{layoutMainContent}</main>
+      <MusicNowPlaying />
     </div>
   );
 }

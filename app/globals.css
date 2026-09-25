@@ -54,6 +54,17 @@
   --animate-music-icon-sway: music-icon-sway 1.6s ease-in-out infinite;
   --animate-music-note-float: music-note-float 3.2s cubic-bezier(0.2, 0, 0, 1)
     infinite backwards;
+  --animate-music-wave: music-wave 0.9s ease-in-out infinite;
+
+  @keyframes music-wave {
+    0%,
+    100% {
+      scale: 1 0.3;
+    }
+    50% {
+      scale: 1 1;
+    }
+  }
 
   @keyframes music-icon-sway {
     0%,
@@ -161,6 +172,24 @@ body {
   }
 }
 
+.surface-inverted {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --surface-muted-foreground: oklch(0.708 0 0);
+  --surface-edge:
+    inset 0 0 0 1px oklch(1 0 0 / 0.08), inset 0 1px 0 oklch(1 0 0 / 0.06);
+}
+
+@media (prefers-color-scheme: dark) {
+  .surface-inverted {
+    --background: oklch(1 0 0);
+    --foreground: oklch(0.145 0 0);
+    --surface-muted-foreground: oklch(0.5 0 0);
+    --surface-edge:
+      inset 0 0 0 1px oklch(0 0 0 / 0.06), inset 0 1px 0 oklch(1 0 0 / 0.6);
+  }
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -175,6 +204,49 @@ body {
   html {
     @apply font-sans;
   }
+}
+
+.volume-slider {
+  --volume-slider-track: linear-gradient(
+    to right,
+    var(--foreground) var(--volume),
+    color-mix(in oklab, var(--foreground) 15%, transparent) var(--volume)
+  );
+
+  appearance: none;
+  height: 1.5rem;
+  background: transparent;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+
+.volume-slider::-webkit-slider-runnable-track {
+  height: 0.1875rem;
+  border-radius: 9999px;
+  background: var(--volume-slider-track);
+}
+
+.volume-slider::-moz-range-track {
+  height: 0.1875rem;
+  border-radius: 9999px;
+  background: var(--volume-slider-track);
+}
+
+.volume-slider::-webkit-slider-thumb {
+  appearance: none;
+  margin-top: -0.28125rem;
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 9999px;
+  background: var(--foreground);
+}
+
+.volume-slider::-moz-range-thumb {
+  width: 0.75rem;
+  height: 0.75rem;
+  border: 0;
+  border-radius: 9999px;
+  background: var(--foreground);
 }
 
 .optical-spacing-demo {

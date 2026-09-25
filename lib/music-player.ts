@@ -2,14 +2,20 @@ import type { MusicTrack } from "@/common/music";
 import { useSyncExternalStore } from "react";
 
 type MusicPlayerState = {
-  currentTrackId: string | null;
+  currentTrack: MusicTrack | null;
+  hasNextTrack: boolean;
   isPlaying: boolean;
+  volume: number;
 };
 
 const INITIAL_STATE: MusicPlayerState = {
-  currentTrackId: null,
+  currentTrack: null,
+  hasNextTrack: false,
   isPlaying: false,
+  volume: 0.5,
 };
+
+const RESTART_THRESHOLD_SECONDS = 3;
 
 let state = INITIAL_STATE;
 let audio: HTMLAudioElement | null = null;
@@ -26,6 +32,19 @@ function subscribe(listener: () => void) {
   return () => listeners.delete(listener);
 }
 
+function getQueueIndex() {
+  return queue.findIndex((track) => track.id === state.currentTrack?.id);
+}
+
+function syncHasNextTrack() {
+  const index = getQueueIndex();
+  const hasNextTrack = index !== -1 && index < queue.length - 1;
+
+  if (hasNextTrack !== state.hasNextTrack) {
+    setState({ hasNextTrack });
+  }
+}
+
 function getAudio() {
   if (audio) {
     return audio;
@@ -33,6 +52,7 @@ function getAudio() {
 
   audio = new Audio();
   audio.preload = "auto";
+  audio.volume = state.volume;
   audio.addEventListener("play", () => setState({ isPlaying: true }));
   audio.addEventListener("pause", () => {
     if (!audio?.ended) {
@@ -49,9 +69,10 @@ function getAudio() {
   if ("mediaSession" in navigator) {
     navigator.mediaSession.setActionHandler("play", () => resume());
     navigator.mediaSession.setActionHandler("pause", () => audio?.pause());
-    navigator.mediaSession.setActionHandler("nexttrack", () => skipTrack(1));
-    navigator.mediaSession.setActionHandler("previoustrack", () =>
-      skipTrack(-1),
+    navigator.mediaSession.setActionHandler("nexttrack", playNextTrack);
+    navigator.mediaSession.setActionHandler(
+      "previoustrack",
+      playPreviousTrack,
     );
   }
 
@@ -73,7 +94,8 @@ function resume() {
 
 function playTrack(track: MusicTrack) {
   getAudio().src = track.previewUrl;
-  setState({ currentTrackId: track.id });
+  setState({ currentTrack: track });
+  syncHasNextTrack();
 
   if ("mediaSession" in navigator) {
     navigator.mediaSession.metadata = new MediaMetadata({
@@ -89,7 +111,7 @@ function playTrack(track: MusicTrack) {
 }
 
 function skipTrack(offset: 1 | -1) {
-  const index = queue.findIndex((track) => track.id === state.currentTrackId);
+  const index = getQueueIndex();
   const nextTrack = index === -1 ? undefined : queue[index + offset];
 
   if (!nextTrack) {
@@ -102,13 +124,22 @@ function skipTrack(offset: 1 | -1) {
 
 export function setMusicQueue(tracks: readonly MusicTrack[]) {
   queue = tracks;
+  syncHasNextTrack();
 }
 
 export function toggleTrack(track: MusicTrack, tracks: readonly MusicTrack[]) {
   queue = tracks;
 
-  if (state.currentTrackId !== track.id) {
+  if (state.currentTrack?.id !== track.id) {
     playTrack(track);
+    return;
+  }
+
+  togglePlayback();
+}
+
+export function togglePlayback() {
+  if (!state.currentTrack) {
     return;
   }
 
@@ -118,6 +149,50 @@ export function toggleTrack(track: MusicTrack, tracks: readonly MusicTrack[]) {
   }
 
   resume();
+}
+
+export function playNextTrack() {
+  skipTrack(1);
+}
+
+export function playPreviousTrack() {
+  const player = getAudio();
+
+  if (player.currentTime > RESTART_THRESHOLD_SECONDS || !skipTrack(-1)) {
+    player.currentTime = 0;
+  }
+}
+
+export function setMusicVolume(volume: number) {
+  setState({ volume });
+
+  if (audio) {
+    audio.volume = volume;
+  }
+}
+
+const PROGRESS_EVENTS = [
+  "timeupdate",
+  "seeked",
+  "durationchange",
+  "emptied",
+] as const;
+
+export function subscribeToPlaybackProgress(listener: () => void) {
+  const player = getAudio();
+
+  PROGRESS_EVENTS.forEach((event) => player.addEventListener(event, listener));
+  return () =>
+    PROGRESS_EVENTS.forEach((event) =>
+      player.removeEventListener(event, listener),
+    );
+}
+
+export function getPlaybackProgress() {
+  return {
+    currentTime: audio?.currentTime ?? 0,
+    duration: audio && Number.isFinite(audio.duration) ? audio.duration : 0,
+  };
 }
 
 export function useMusicPlayer() {

@@ -22,7 +22,7 @@ type MusicTrackListProps = {
 };
 
 export function MusicTrackList({ tracks }: MusicTrackListProps) {
-  const { currentTrackId, isPlaying } = useMusicPlayer();
+  const { currentTrack, isPlaying } = useMusicPlayer();
   const sortLabelId = useId();
   const [sortBy, setSortBy] = useQueryState(
     "sort",
@@ -83,7 +83,7 @@ export function MusicTrackList({ tracks }: MusicTrackListProps) {
       </div>
       <ul className="-mx-1 flex w-[calc(100%+0.5rem)] min-w-0 flex-col">
         {sortedTracks.map((track) => {
-          const isTrackPlaying = isPlaying && currentTrackId === track.id;
+          const isTrackPlaying = isPlaying && currentTrack?.id === track.id;
 
           return (
             <li key={track.id}>
