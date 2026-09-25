@@ -7,6 +7,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { getArtworkPalette } from "@/lib/artwork-palette";
 import {
   getPlaybackProgress,
   playNextTrack,
@@ -111,6 +112,32 @@ function PlayPauseButton({
   );
 }
 
+function useArtworkPalette(artworkUrl: string | undefined) {
+  const [palette, setPalette] = useState<string[] | null>(null);
+
+  useEffect(() => {
+    if (!artworkUrl) {
+      return;
+    }
+
+    let isCancelled = false;
+
+    getArtworkPalette(artworkUrl)
+      .then((colors) => {
+        if (!isCancelled && colors.length > 0) {
+          setPalette(colors);
+        }
+      })
+      .catch(() => {});
+
+    return () => {
+      isCancelled = true;
+    };
+  }, [artworkUrl]);
+
+  return palette;
+}
+
 function formatTime(seconds: number) {
   const wholeSeconds = Math.max(0, Math.floor(seconds));
   const minutes = Math.floor(wholeSeconds / 60);
@@ -182,6 +209,7 @@ function PlaybackProgress({ isPlaying }: { isPlaying: boolean }) {
 export function MusicNowPlaying() {
   const { currentTrack, hasNextTrack, isPlaying, volume } = useMusicPlayer();
   const isExpanded = usePathname() === WEBSITE_ROUTES.APPS_MUSIC;
+  const artworkPalette = useArtworkPalette(currentTrack?.artworkUrl);
   const volumePercent = Math.round(volume * 100);
   const [isAdjustingVolume, setIsAdjustingVolume] = useState(false);
   const volumeTooltipTimerRef = useRef<number | null>(null);
@@ -255,6 +283,26 @@ export function MusicNowPlaying() {
               transition={{ duration: 0.3, ease: [0.2, 0, 0, 1] }}
               className="surface-inverted sticky bottom-8 z-20 flex w-64 max-w-full flex-col self-start rounded-[20px] bg-background/90 p-3 text-foreground shadow-(--surface-edge) backdrop-blur-xl backdrop-saturate-150 wide:fixed wide:left-8"
             >
+              <span
+                aria-hidden="true"
+                data-playing={isPlaying}
+                className={cn(
+                  "artwork-glow pointer-events-none absolute inset-0 -z-10 overflow-hidden rounded-[inherit]",
+                  isPlaying && artworkPalette ? "opacity-100" : "opacity-0",
+                )}
+                style={
+                  artworkPalette
+                    ? ({
+                        "--artwork-glow-1": `rgb(${artworkPalette[0]})`,
+                        "--artwork-glow-2": `rgb(${artworkPalette[1] ?? artworkPalette[0]})`,
+                        "--artwork-glow-3": `rgb(${artworkPalette[2] ?? artworkPalette[0]})`,
+                      } as CSSProperties)
+                    : undefined
+                }
+              >
+                <span className="artwork-beam-field" />
+                <span className="artwork-beam-ring" />
+              </span>
               <div className="flex items-center gap-3">
                 {isExpanded ? (
                   <div className={TRACK_DETAILS_CLASS_NAME}>{trackDetails}</div>

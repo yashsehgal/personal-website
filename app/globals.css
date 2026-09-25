@@ -195,6 +195,92 @@ body {
   }
 }
 
+@property --artwork-glow-1 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@property --artwork-glow-2 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@property --artwork-glow-3 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: transparent;
+}
+
+@property --artwork-beam-angle {
+  syntax: "<angle>";
+  inherits: true;
+  initial-value: 0deg;
+}
+
+.artwork-glow {
+  --artwork-beam: conic-gradient(
+    from var(--artwork-beam-angle),
+    var(--artwork-glow-1) 0deg,
+    transparent 60deg,
+    var(--artwork-glow-2) 120deg,
+    transparent 180deg,
+    var(--artwork-glow-3) 240deg,
+    transparent 300deg,
+    var(--artwork-glow-1) 360deg
+  );
+
+  transition-property: --artwork-glow-1, --artwork-glow-2, --artwork-glow-3,
+    opacity;
+  transition-duration: 700ms;
+  transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  animation: artwork-beam-spin 10s linear infinite;
+}
+
+.artwork-glow[data-playing="false"] {
+  animation-play-state: paused;
+}
+
+.artwork-beam-field {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: var(--artwork-beam);
+  filter: blur(10px);
+  opacity: 0.4;
+  mask-image:
+    linear-gradient(to bottom, #000, transparent 38%, transparent 62%, #000),
+    linear-gradient(to right, #000, transparent 30%, transparent 70%, #000);
+  mask-composite: add;
+}
+
+.artwork-beam-ring {
+  position: absolute;
+  inset: 0;
+  padding: 1px;
+  border-radius: inherit;
+  background: var(--artwork-beam);
+  opacity: 0.8;
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  -webkit-mask-composite: xor;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .artwork-glow {
+    animation: none;
+  }
+}
+
+@keyframes artwork-beam-spin {
+  to {
+    --artwork-beam-angle: 360deg;
+  }
+}
+
 .volume-slider {
   --volume-slider-track: linear-gradient(
     to right,
