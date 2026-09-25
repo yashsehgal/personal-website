@@ -46,7 +46,7 @@ export default function Home() {
       <div className="flex w-full max-w-prose min-w-0 flex-col items-start gap-6">
         <div className="flex w-full min-w-0 flex-col items-start gap-6 leading-relaxed text-pretty text-muted-foreground tracking-tight">
         <p>
-          Most recently, I worked at{" "}
+          Currently, I am working at{" "}
           <Link
             href="https://octolane.com"
             target="_blank"
@@ -55,8 +55,8 @@ export default function Home() {
           >
             Octolane
           </Link>
-          , where I helped design a better AI-powered CRM and did a lot of the
-          backend alongside the design. Before that, I was at{" "}
+          , where I help design a better AI-powered CRM and do a lot of the
+          backend alongside the design. Previously, I was at{" "}
           <Link
             href="https://stack.ai"
             target="_blank"
