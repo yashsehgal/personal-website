@@ -5,7 +5,8 @@ import { ProgressiveImage } from "@/components/progressive-image";
 import Link from "next/link";
 
 const textLinkClassName =
-  "-mx-1 whitespace-nowrap rounded px-1 py-0.5 text-foreground hover:bg-muted focus-visible:bg-muted motion-reduce:transition-none";
+  "whitespace-nowrap rounded py-0.5 text-foreground hover:bg-muted focus-visible:bg-muted motion-reduce:transition-none";
+const textLinkInsetClassName = `${textLinkClassName} -mx-1 px-1`;
 
 const HOME_PHOTO_COLUMNS = [
   [
@@ -50,7 +51,7 @@ export default function Home() {
             href="https://octolane.com"
             target="_blank"
             rel="noopener noreferrer"
-            className={textLinkClassName}
+            className={textLinkInsetClassName}
           >
             Octolane
           </Link>
@@ -60,7 +61,7 @@ export default function Home() {
             href="https://stack.ai"
             target="_blank"
             rel="noopener noreferrer"
-            className={textLinkClassName}
+            className={textLinkInsetClassName}
           >
             StackAI
           </Link>
@@ -70,7 +71,7 @@ export default function Home() {
             href="https://www.stackai.com/platform/knowledge-bases"
             target="_blank"
             rel="noopener noreferrer"
-            className={textLinkClassName}
+            className={`${textLinkClassName} -mr-1 pr-1`}
           >
             knowledge bases
           </Link>
@@ -79,7 +80,7 @@ export default function Home() {
             href="https://www.stackai.com/changelog/08-20-2025"
             target="_blank"
             rel="noopener noreferrer"
-            className={textLinkClassName}
+            className={textLinkInsetClassName}
           >
             evaluators
           </Link>
@@ -88,7 +89,7 @@ export default function Home() {
             href="https://www.stackai.com/platform/workflow"
             target="_blank"
             rel="noopener noreferrer"
-            className={textLinkClassName}
+            className={textLinkInsetClassName}
           >
             workflow for making agents
           </Link>
@@ -98,7 +99,7 @@ export default function Home() {
           In my free time, I make music and play the keyboard, and I&apos;m
           learning sound engineering and composition. I read across a lot of
           subjects, and I love traveling and taking{" "}
-          <Link href={WEBSITE_ROUTES.PHOTOGRAPHY} className={textLinkClassName}>
+          <Link href={WEBSITE_ROUTES.PHOTOGRAPHY} className={textLinkInsetClassName}>
             photographs
           </Link>
           .
