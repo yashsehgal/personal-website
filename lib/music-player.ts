@@ -34,8 +34,16 @@ function getAudio() {
   audio = new Audio();
   audio.preload = "auto";
   audio.addEventListener("play", () => setState({ isPlaying: true }));
-  audio.addEventListener("pause", () => setState({ isPlaying: false }));
-  audio.addEventListener("ended", () => skipTrack(1));
+  audio.addEventListener("pause", () => {
+    if (!audio?.ended) {
+      setState({ isPlaying: false });
+    }
+  });
+  audio.addEventListener("ended", () => {
+    if (!skipTrack(1)) {
+      setState({ isPlaying: false });
+    }
+  });
   audio.addEventListener("error", () => setState({ isPlaying: false }));
 
   if ("mediaSession" in navigator) {
@@ -84,9 +92,12 @@ function skipTrack(offset: 1 | -1) {
   const index = queue.findIndex((track) => track.id === state.currentTrackId);
   const nextTrack = index === -1 ? undefined : queue[index + offset];
 
-  if (nextTrack) {
-    playTrack(nextTrack);
+  if (!nextTrack) {
+    return false;
   }
+
+  playTrack(nextTrack);
+  return true;
 }
 
 export function toggleTrack(track: MusicTrack, tracks: readonly MusicTrack[]) {

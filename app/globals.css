@@ -49,6 +49,40 @@
   --radius-4xl: calc(var(--radius) * 2.6);
 }
 
+@theme {
+  --animate-music-icon-sway: music-icon-sway 1.6s ease-in-out infinite;
+  --animate-music-note-float: music-note-float 3.2s cubic-bezier(0.2, 0, 0, 1)
+    infinite backwards;
+
+  @keyframes music-icon-sway {
+    0%,
+    100% {
+      rotate: -8deg;
+    }
+    50% {
+      rotate: 8deg;
+    }
+  }
+
+  @keyframes music-note-float {
+    0% {
+      opacity: 0;
+      translate: 0 0;
+      scale: 0.4;
+      rotate: 0deg;
+    }
+    20% {
+      opacity: 0.7;
+    }
+    100% {
+      opacity: 0;
+      translate: var(--note-x) var(--note-y);
+      scale: 1;
+      rotate: var(--note-rotate);
+    }
+  }
+}
+
 body {
   font-family: var(--font-sans);
 }

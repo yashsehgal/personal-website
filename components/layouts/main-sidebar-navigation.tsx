@@ -2,7 +2,9 @@
 
 import { WEBSITE_ROUTES, WebsiteRouteType } from "@/common/routes";
 import { playInternalLinkSound } from "@/lib/interface-sounds";
+import { useMusicPlayer } from "@/lib/music-player";
 import { cn } from "cn";
+import { MusicNavigationIcon } from "@/components/music-navigation-icon";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -14,19 +16,32 @@ import {
   useRef,
   useState,
   useSyncExternalStore,
+  type ComponentType,
   type MouseEvent,
   type TransitionEvent,
 } from "react";
 
-type NavigationLink = { label: string; href: WebsiteRouteType };
+type NavigationLink = {
+  label: string;
+  href: WebsiteRouteType;
+  icon?: ComponentType<{ className?: string }>;
+};
 type NavigationGroup = { label: string; items: NavigationLink[] };
+
+const APPS_GROUP_LABEL = "Apps";
 
 const NAVIGATION_ITEMS: (NavigationLink | NavigationGroup)[] = [
   { label: "Writings", href: WEBSITE_ROUTES.WRITINGS },
   { label: "Photography", href: WEBSITE_ROUTES.PHOTOGRAPHY },
   {
-    label: "Apps",
-    items: [{ label: "Music", href: WEBSITE_ROUTES.APPS_MUSIC }],
+    label: APPS_GROUP_LABEL,
+    items: [
+      {
+        label: "Music",
+        href: WEBSITE_ROUTES.APPS_MUSIC,
+        icon: MusicNavigationIcon,
+      },
+    ],
   },
   { label: "Archive", href: WEBSITE_ROUTES.ARCHIVE },
 ] as const;
@@ -91,6 +106,7 @@ export function MainSidebarNavigation() {
   const emailHintId = useId();
   const navigationGroupId = useId();
   const isMac = useIsMac();
+  const { isPlaying: isMusicPlaying } = useMusicPlayer();
   const [isEmailHovered, setIsEmailHovered] = useState(false);
   const [copyFeedbackPhase, setCopyFeedbackPhase] =
     useState<CopyFeedbackPhase>("idle");
@@ -118,18 +134,24 @@ export function MainSidebarNavigation() {
         "items" in item &&
         item.items.some((link) => isNavigationItemActive(link.href)),
     )?.label ?? null;
+  const defaultExpandedGroupLabel =
+    activeGroupLabel ?? (isMusicPlaying ? APPS_GROUP_LABEL : null);
   const [expandedGroupLabel, setExpandedGroupLabel] = useState(
-    activeGroupLabel,
+    defaultExpandedGroupLabel,
   );
-  const [previousActiveGroupLabel, setPreviousActiveGroupLabel] =
-    useState(activeGroupLabel);
+  const [previousPathname, setPreviousPathname] = useState(pathname);
+  const [
+    previousDefaultExpandedGroupLabel,
+    setPreviousDefaultExpandedGroupLabel,
+  ] = useState(defaultExpandedGroupLabel);
 
-  if (activeGroupLabel !== previousActiveGroupLabel) {
-    setPreviousActiveGroupLabel(activeGroupLabel);
-
-    if (activeGroupLabel) {
-      setExpandedGroupLabel(activeGroupLabel);
-    }
+  if (
+    pathname !== previousPathname ||
+    defaultExpandedGroupLabel !== previousDefaultExpandedGroupLabel
+  ) {
+    setPreviousPathname(pathname);
+    setPreviousDefaultExpandedGroupLabel(defaultExpandedGroupLabel);
+    setExpandedGroupLabel(defaultExpandedGroupLabel);
   }
 
   const clearCopyFeedbackTimer = useCallback(() => {
@@ -245,6 +267,9 @@ export function MainSidebarNavigation() {
             : "text-muted-foreground hover:bg-muted",
         )}
       >
+        {link.icon ? (
+          <link.icon className="mr-1 inline-block size-3.5 align-[-0.125em]" />
+        ) : null}
         {link.label}
       </Link>
     </li>
