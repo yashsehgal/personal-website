@@ -92,10 +92,10 @@ export function MusicTrackList({ tracks }: MusicTrackListProps) {
                 aria-pressed={isTrackPlaying}
                 onClick={() => toggleTrack(track, sortedTracks)}
                 className={cn(
-                  "flex w-full items-center justify-between gap-6 rounded px-1 py-0.5 text-left text-sm tracking-tight select-none hover:bg-muted hover:text-foreground focus-visible:bg-muted focus-visible:text-foreground",
+                  "flex w-full items-center justify-between gap-6 rounded px-1 py-0.5 text-left text-sm tracking-tight select-none",
                   isTrackPlaying
-                    ? "bg-muted text-foreground"
-                    : "text-muted-foreground",
+                    ? "bg-rose-600 text-white"
+                    : "text-muted-foreground hover:bg-muted hover:text-foreground focus-visible:bg-muted focus-visible:text-foreground",
                 )}
               >
                 <span className="flex min-w-0 items-center gap-2">
@@ -108,7 +108,12 @@ export function MusicTrackList({ tracks }: MusicTrackListProps) {
                     draggable={false}
                     className="size-5 shrink-0 rounded-xs bg-muted outline outline-foreground/10 -outline-offset-1"
                   />
-                  <span className="truncate text-foreground">
+                  <span
+                    className={cn(
+                      "truncate",
+                      isTrackPlaying ? "text-white" : "text-foreground",
+                    )}
+                  >
                     {track.title}
                   </span>
                 </span>
