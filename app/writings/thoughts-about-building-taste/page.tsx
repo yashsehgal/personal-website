@@ -1,5 +1,7 @@
 import { ArticleTitle } from "@/components/article-title";
 import {
+  ArticlePhoto,
+  articlePhotos,
   BrandingCollage,
   GoldenGooseCollage,
   JobsCollage,
@@ -151,95 +153,199 @@ export default function ThoughtsAboutBuildingTastePage() {
           </div>
         </section>
 
-        <section className="flex w-full min-w-0 flex-col gap-8">
-          <WatchesCollage />
-          <div className="space-y-6">
+        <section className="flex w-full min-w-0 flex-col gap-12">
+          <div className="space-y-4">
             <p className={copyClassName}>
               Another thing I want to keep working on is making products feel
               more natural.
             </p>
             <p className={copyClassName}>
               Onboarding is a big part of it. Imagine walking into a store to
-              buy a high-end watch. The way the sales associate treats you, and
-              the conversation you have, matter. Are they willing to share a
-              direct way to reach them, so the next purchase and the next visit
-              can go through that same person? A demo can do some of this too.
-              Give people a version they can actually use, with content that
-              looks like their day, so they get a feel for the product. Then
-              make the onboarding fast and a little playful, so they keep
-              thinking about it and share it.
+              buy a high-end watch. The way the sales associate treats you
+              matters.
             </p>
             <p className={copyClassName}>
-              I keep looking at the dial. A Reverso, a Tudor, a Seiko. The
-              thickness of the dial, the thickness of the numbers, Roman
-              numerals or plain indices, and how much space sits around them.
-              And the room around the object. When you walk in, does it
-              intimidate you, or does it leave you better than you came in?
-              Even if you can&apos;t buy it right now, you should leave
-              motivated to come back when you can.
+              Are they willing to share a direct way to reach them, so the next
+              visit goes through that same person?
             </p>
             <p className={copyClassName}>
-              Some products are intimidating. Rolex won&apos;t push you toward
-              a high-end watch until they understand whether it&apos;s your
-              first time buying one, or whether you&apos;ve bought from them
-              before. That conversation is part of their branding. I don&apos;t
-              personally prefer that approach. The watch is well engineered and
-              well designed, the brand is already known, and the associates are
-              trained to be courteous, which is why it needs so little
-              marketing. Omega, Jaeger-LeCoultre, and brands in that range put
-              more emphasis on the engineering and the design. I especially
-              like the Reverso from JLC. When I visited a JLC store in Mumbai,
-              I wasn&apos;t there to buy anything. The person there talked with
-              me anyway, and I left with a strong impression of the brand. If I
-              had visited a Rolex store, they would have explained the history,
-              the categories, and the engineering in detail. These are the
-              things you decide, and then work hard to carry out. It&apos;s a
-              collaborative effort.
+              A demo can do some of this too. Give people a version they can
+              actually use, with a day that looks like theirs. Then make it
+              fast, and a little playful.
             </p>
+          </div>
+
+          <div className="flex w-full min-w-0 flex-col gap-5">
+            <WatchesCollage />
+            <div className="space-y-4">
+              <p className={copyClassName}>
+                I keep looking at the dial. A Reverso, a Tudor, a Seiko. The
+                thickness of the numbers, Roman numerals or plain indices, and
+                how much space sits around them.
+              </p>
+              <p className={copyClassName}>
+                And the room around the object. Does it intimidate you, or
+                leave you better than you came in? Even if you can&apos;t buy
+                it right now, you should leave wanting to come back.
+              </p>
+            </div>
+          </div>
+
+          <div className="flex w-full min-w-0 flex-col gap-5">
+            <ArticlePhoto {...articlePhotos.watchBlueprint} />
+            <p className={copyClassName}>
+              The drawing shows the same care. Case size, thickness, bracelet
+              width. You can read the object before it is on a wrist.
+            </p>
+          </div>
+
+          <div className="flex w-full min-w-0 flex-col gap-5">
+            <ArticlePhoto {...articlePhotos.watchRolexCaliber} />
+            <div className="space-y-4">
+              <p className={copyClassName}>
+                Some products are intimidating. Rolex won&apos;t push a
+                high-end watch until they know whether it&apos;s your first.
+                That conversation is part of the branding. I don&apos;t prefer
+                that approach.
+              </p>
+              <p className={copyClassName}>
+                What I do like is the engineering, shown in pieces. Gears,
+                screws, a thin dial and a thick dial. The brand is already known,
+                which is why it needs so little marketing.
+              </p>
+            </div>
+          </div>
+
+          <div className="flex w-full min-w-0 flex-col gap-5">
+            <ArticlePhoto {...articlePhotos.watchSpecs} />
+            <div className="space-y-4">
+              <p className={copyClassName}>
+                Omega, Jaeger-LeCoultre, and brands in that range put the
+                weight on the parts. Material, grade, each piece on its own.
+              </p>
+              <p className={copyClassName}>
+                I especially like the Reverso from JLC. At a store in Mumbai, I
+                wasn&apos;t there to buy anything. The person talked with me
+                anyway, and I left with a strong impression of the brand.
+              </p>
+              <p className={copyClassName}>
+                These are the things you decide, and then work hard to carry
+                out. It&apos;s a collaborative effort.
+              </p>
+            </div>
           </div>
         </section>
 
-        <section className="flex w-full min-w-0 flex-col gap-8">
-          <TypographyCollage />
-          <div className="space-y-6">
+        <section className="flex w-full min-w-0 flex-col gap-12">
+          <div className="flex w-full min-w-0 flex-col gap-5">
+            <TypographyCollage />
             <p className={copyClassName}>
               Away from the dial, I spend the same kind of time on type. The
-              weight, from a thin stamp to a heavy grotesque. The spacing
-              between letters. How much copy they use, and the specific words
-              they choose.
+              weight, from a thin stamp to a heavy grotesque.
+            </p>
+          </div>
+
+          <div className="flex w-full min-w-0 flex-col gap-5">
+            <ArticlePhoto {...articlePhotos.typeBlob} />
+            <p className={copyClassName}>
+              Some letters are almost soft. Thick, uneven, more drawing than a
+              system. You feel the weight before you read the word.
+            </p>
+          </div>
+
+          <div className="flex w-full min-w-0 flex-col gap-5">
+            <ArticlePhoto {...articlePhotos.typeFtFont} />
+            <p className={copyClassName}>
+              Then the spacing becomes the idea. Uneven heights, cut edges, one
+              flat color behind them.
+            </p>
+          </div>
+
+          <div className="flex w-full min-w-0 flex-col gap-5">
+            <ArticlePhoto {...articlePhotos.typeAllover} />
+            <p className={copyClassName}>
+              How much copy they use, and the specific words they choose. Names
+              and dates can stack until the type is the picture.
             </p>
           </div>
         </section>
 
-        <section className="flex w-full min-w-0 flex-col gap-8">
-          <BrandingCollage />
-          <div className="space-y-6">
+        <section className="flex w-full min-w-0 flex-col gap-12">
+          <div className="flex w-full min-w-0 flex-col gap-5">
+            <BrandingCollage />
             <p className={copyClassName}>
               Sometimes the whole vibe is a few words on cloth, or a mountain
-              and a place name. Nike goes the other direction. The brand
-              invests heavily in sport, and the feeling is specific: the music,
-              the graphics, something sporty and hyped. Either way, the product
-              still has to be high quality. The vibe is what you build around
-              that. As more of the code and the stable features get shaped with
-              AI, these are the choices that keep a product from feeling like
+              and a place name.
+            </p>
+          </div>
+
+          <div className="flex w-full min-w-0 flex-col gap-5">
+            <ArticlePhoto {...articlePhotos.nikeV5} />
+            <p className={copyClassName}>
+              Nike goes the other direction. The graphics are sporty and
+              specific. A shoe, a short story, a feeling built around the
+              product.
+            </p>
+          </div>
+
+          <div className="flex w-full min-w-0 flex-col gap-5">
+            <ArticlePhoto {...articlePhotos.nikeSwoosh} />
+            <p className={copyClassName}>
+              Sometimes the mark is the whole layout. One shape, one sentence.
+              Loud, and simple.
+            </p>
+          </div>
+
+          <div className="flex w-full min-w-0 flex-col gap-5">
+            <ArticlePhoto {...articlePhotos.nikeTravis} />
+            <p className={copyClassName}>
+              The same shoe can carry a person. A drawing, a name, a story
+              written around the product.
+            </p>
+          </div>
+
+          <div className="flex w-full min-w-0 flex-col gap-5">
+            <ArticlePhoto {...articlePhotos.nikeCortez} />
+            <p className={copyClassName}>
+              Or it is culture, said outright. A stage, a line of type, the
+              shoe at the bottom. The brand invests in sport, and in the people
+              who wear it.
+            </p>
+          </div>
+
+          <div className="space-y-4">
+            <p className={copyClassName}>
+              Either way, the product still has to be high quality. The vibe is
+              what you build around that.
+            </p>
+            <p className={copyClassName}>
+              As more of the code and the stable features get shaped with AI,
+              these are the choices that keep a product from feeling like
               anyone could have shipped it.
             </p>
             <p className={copyClassName}>
               A lot of the marketing is falling to designers now, too. Design
               engineers already have the tools for it, screen recorders and
               utilities that generate video from code, and they know what is
-              worth showing a customer. The person closest to the work can
-              often make the more useful material.
+              worth showing a customer.
+            </p>
+            <p className={copyClassName}>
+              The person closest to the work can often make the more useful
+              material.
             </p>
             <p className={copyClassName}>
               Design follows the same principles. The product should feel
-              snappy. Loading should be quick. If you have an AI chat, the
-              choreography should be clear and simple. It shouldn&apos;t feel
-              like the model is wandering and confusing the person using it.
+              snappy. Loading should be quick.
+            </p>
+            <p className={copyClassName}>
+              If you have an AI chat, the choreography should be clear and
+              simple. It shouldn&apos;t feel like the model is wandering.
+            </p>
+            <p className={copyClassName}>
               Study how luxury brands treat someone in a physical store, and
               apply that to the digital product. Look at how other designers
-              and brands build an experience. As you learn, put your own DNA
-              into the work.
+              build an experience. As you learn, put your own DNA into the
+              work.
             </p>
           </div>
         </section>

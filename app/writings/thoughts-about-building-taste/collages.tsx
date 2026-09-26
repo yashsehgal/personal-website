@@ -15,6 +15,16 @@ import seiko from "./images/seiko.png";
 import tudorOyster from "./images/tudor-oyster.jpg";
 import typeCalifornia from "./images/type-california.png";
 import typeStamp from "./images/type-stamp.png";
+import typeBlob from "./images/type-blob.png";
+import typeFtFont from "./images/type-ftfont.png";
+import typeAllover from "./images/type-allover.png";
+import watchBlueprint from "./images/watch-blueprint.png";
+import watchRolexCaliber from "./images/watch-rolex-caliber.jpg";
+import watchSpecs from "./images/watch-specs.png";
+import nikeV5 from "./images/nike-v5.jpg";
+import nikeSwoosh from "./images/nike-swoosh.jpg";
+import nikeTravis from "./images/nike-travis.png";
+import nikeCortez from "./images/nike-cortez.jpg";
 
 const frameClassName =
   "overflow-hidden rounded-lg bg-background shadow-md ring-1 ring-foreground/10";
@@ -64,6 +74,71 @@ function Print({
 }
 
 const halfSizes = "(min-width: 64rem) 22rem, 46vw";
+const plateSizes = "(min-width: 64rem) 48rem, 100vw";
+
+export function ArticlePhoto({
+  src,
+  alt,
+}: {
+  src: StaticImageData;
+  alt: string;
+}) {
+  return (
+    <figure className="px-1">
+      <div className={cn(frameClassName, "w-fit max-w-full")}>
+        <Image
+          src={src}
+          alt={alt}
+          sizes={plateSizes}
+          className="h-auto max-h-[40rem] w-auto max-w-full"
+        />
+      </div>
+    </figure>
+  );
+}
+
+export const articlePhotos = {
+  typeBlob: {
+    src: typeBlob,
+    alt: "A specimen of soft, uneven display letters, with the alphabet, numbers, and punctuation",
+  },
+  typeFtFont: {
+    src: typeFtFont,
+    alt: "White display capitals with uneven heights and cut edges, set on a deep blue field",
+  },
+  typeAllover: {
+    src: typeAllover,
+    alt: "Overlapping exhibition posters where names, dates, and Korean type stack into a dense field",
+  },
+  watchBlueprint: {
+    src: watchBlueprint,
+    alt: "A watch engineering drawing with case, side, caseback, and bracelet dimensions",
+  },
+  watchRolexCaliber: {
+    src: watchRolexCaliber,
+    alt: "An exploded drawing of a Rolex caliber, with gears, screws, and the dial",
+  },
+  watchSpecs: {
+    src: watchSpecs,
+    alt: "A spec sheet of watch parts, each with weight, material, and grade beside a rendering",
+  },
+  nikeV5: {
+    src: nikeV5,
+    alt: "An illustrated Nike poster of a chunky runner, with a short story about the shoe beside it",
+  },
+  nikeSwoosh: {
+    src: nikeSwoosh,
+    alt: "An orange poster built around one large Swoosh and the line It only goes one way",
+  },
+  nikeTravis: {
+    src: nikeTravis,
+    alt: "An ink drawing of a Travis Scott Jordan, with notes, a shoe box, and the soles around it",
+  },
+  nikeCortez: {
+    src: nikeCortez,
+    alt: "A Nike Cortez poster with a performer on stage and the line I do this for the culture",
+  },
+} as const;
 
 export function JobsCollage() {
   return (
