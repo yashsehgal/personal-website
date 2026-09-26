@@ -85,6 +85,10 @@ export function GooeySurface({
     positionsRef.current = new Float32Array(body.cols * body.rows * 2);
 
     const applyAppearance = () => {
+      if (root.hasAttribute("data-gooey-live") || root.hasAttribute("data-gooey-handoff")) {
+        return;
+      }
+
       colorRef.current = readSurfaceColor(root);
       renderer.setAppearance(colorRef.current, 20, 1);
     };
@@ -197,6 +201,14 @@ export function GooeySurface({
   const startLive = () => {
     if (liveRef.current) {
       return;
+    }
+
+    const root = rootRef.current;
+    const renderer = rendererRef.current;
+
+    if (root) {
+      colorRef.current = readSurfaceColor(root);
+      renderer?.setAppearance(colorRef.current, 20, 1);
     }
 
     liveRef.current = true;

@@ -87,44 +87,62 @@ void main() {
 }
 `;
 
-function parseCssRgb(color: string): [number, number, number, number] {
-  const match = color.match(/rgba?\(([^)]+)\)/);
+function samplePixel(
+  context: CanvasRenderingContext2D,
+): [number, number, number] {
+  const pixel = context.getImageData(0, 0, 1, 1).data;
 
-  if (!match?.[1]) {
-    return [0.145, 0.145, 0.145, 0.94];
-  }
-
-  const parts = match[1].split(/[\s,/]+/).filter(Boolean);
-  const red = Number(parts[0] ?? 37) / 255;
-  const green = Number(parts[1] ?? 37) / 255;
-  const blue = Number(parts[2] ?? 37) / 255;
-  const alpha = parts[3] === undefined ? 0.94 : Number(parts[3]);
-
-  return [red, green, blue, Number.isFinite(alpha) ? alpha : 0.94];
+  return [
+    (pixel[0] ?? 37) / 255,
+    (pixel[1] ?? 37) / 255,
+    (pixel[2] ?? 37) / 255,
+  ];
 }
 
 export function readSurfaceColor(element: HTMLElement): [number, number, number] {
-  const view = element.ownerDocument.defaultView;
+  const document = element.ownerDocument;
+  const view = document.defaultView;
 
   if (!view) {
     return [0.145, 0.145, 0.145];
   }
 
-  const painted = parseCssRgb(view.getComputedStyle(element).backgroundColor);
+  const canvas = document.createElement("canvas");
+  canvas.width = 1;
+  canvas.height = 1;
+  const context = canvas.getContext("2d", { willReadFrequently: true });
 
-  if (painted[3] > 0.05) {
-    return [painted[0], painted[1], painted[2]];
+  if (!context) {
+    return [0.145, 0.145, 0.145];
   }
 
-  const token = view.getComputedStyle(element).getPropertyValue("--background").trim();
-  const probe = element.ownerDocument.createElement("span");
-  probe.style.backgroundColor = token || "canvas";
-  element.ownerDocument.body.append(probe);
-  const computed = view.getComputedStyle(probe).backgroundColor;
-  probe.remove();
+  const card = view.getComputedStyle(element);
+  const page = view.getComputedStyle(document.body);
+  const pageColor = page.backgroundColor || "canvas";
+  const painted = card.backgroundColor;
+  const token = card.getPropertyValue("--background").trim();
 
-  const [red, green, blue] = parseCssRgb(computed);
-  return [red, green, blue];
+  context.clearRect(0, 0, 1, 1);
+  context.fillStyle = painted;
+  context.fillRect(0, 0, 1, 1);
+  const cardAlpha = context.getImageData(0, 0, 1, 1).data[3] ?? 0;
+
+  context.globalAlpha = 1;
+  context.fillStyle = pageColor;
+  context.fillRect(0, 0, 1, 1);
+
+  if (cardAlpha > 12) {
+    context.fillStyle = painted;
+    context.fillRect(0, 0, 1, 1);
+    return samplePixel(context);
+  }
+
+  context.globalAlpha = 0.9;
+  context.fillStyle = token || painted || pageColor;
+  context.fillRect(0, 0, 1, 1);
+  context.globalAlpha = 1;
+
+  return samplePixel(context);
 }
 
 export class GooeyRenderer {
