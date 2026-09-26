@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { DynamicFavicon } from "@/components/dynamic-favicon";
 import { InterfaceSoundListener } from "@/components/interface-sound-listener";
 import { MainLayoutContainer } from "@/components/layouts/main-layout-container";
 import { PageScrollbar } from "@/components/page-scrollbar";
@@ -32,6 +33,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${inter.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
+        <DynamicFavicon />
         <InterfaceSoundListener />
         <PageScrollbar />
         <Suspense>
