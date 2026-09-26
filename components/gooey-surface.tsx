@@ -297,6 +297,7 @@ export function GooeySurface({
     <div
       ref={rootRef}
       data-gooey-live={showBlob || undefined}
+      data-gooey-handoff={isHandoff || undefined}
       data-gooey-grabbing={isGrabbing || undefined}
       onPointerDown={onPointerDown}
       onPointerMove={onPointerMove}

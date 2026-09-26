@@ -243,7 +243,7 @@ body {
 
   transition-property:
     --artwork-glow-1, --artwork-glow-2, --artwork-glow-3, opacity;
-  transition-duration: 700ms;
+  transition-duration: 700ms, 700ms, 700ms, 1.8s;
   transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
   animation: artwork-beam-spin 10s linear infinite;
 }
@@ -252,7 +252,8 @@ body {
   animation-play-state: paused;
 }
 
-[data-gooey-live] .artwork-glow {
+[data-gooey-live] .artwork-glow,
+[data-gooey-handoff] .artwork-glow {
   opacity: 0;
   transition-duration: 0ms;
 }
