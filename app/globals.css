@@ -241,8 +241,8 @@ body {
     var(--artwork-glow-1) 360deg
   );
 
-  transition-property: --artwork-glow-1, --artwork-glow-2, --artwork-glow-3,
-    opacity;
+  transition-property:
+    --artwork-glow-1, --artwork-glow-2, --artwork-glow-3, opacity;
   transition-duration: 700ms;
   transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
   animation: artwork-beam-spin 10s linear infinite;
@@ -250,6 +250,11 @@ body {
 
 .artwork-glow[data-playing="false"] {
   animation-play-state: paused;
+}
+
+[data-gooey-live] .artwork-glow {
+  opacity: 0;
+  transition-duration: 0ms;
 }
 
 .artwork-beam-field {

@@ -1,6 +1,7 @@
 "use client";
 
 import { WEBSITE_ROUTES } from "@/common/routes";
+import { GooeySurface } from "@/components/gooey-surface";
 import {
   Tooltip,
   TooltipContent,
@@ -281,8 +282,12 @@ export function MusicNowPlaying() {
               animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
               exit={{ opacity: 0, y: 12, filter: "blur(4px)" }}
               transition={{ duration: 0.3, ease: [0.2, 0, 0, 1] }}
-              className="surface-inverted sticky bottom-8 z-20 flex w-64 max-w-full flex-col self-start rounded-[20px] bg-background/90 p-3 text-foreground shadow-(--surface-edge) backdrop-blur-xl backdrop-saturate-150 wide:fixed wide:left-8"
+              className="sticky bottom-8 z-20 w-64 max-w-full self-start overflow-visible wide:fixed wide:left-8"
             >
+              <GooeySurface
+                className="surface-inverted flex flex-col rounded-[20px] bg-background/90 text-foreground shadow-(--surface-edge) backdrop-blur-xl backdrop-saturate-150"
+                contentClassName="rounded-[20px] p-3"
+              >
               <span
                 aria-hidden="true"
                 data-playing={isPlaying}
@@ -414,6 +419,7 @@ export function MusicNowPlaying() {
                   </div>
                 </div>
               </div>
+              </GooeySurface>
             </motion.section>
           ) : null}
         </AnimatePresence>
