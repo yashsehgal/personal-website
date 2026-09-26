@@ -20,7 +20,6 @@ const LIGHT_CYCLE = [
   FAVICON_COLORS.orange,
   FAVICON_COLORS.pink,
   FAVICON_COLORS.yellow,
-  FAVICON_COLORS.white,
 ] as const;
 
 const DARK_CYCLE = [
@@ -29,7 +28,6 @@ const DARK_CYCLE = [
   FAVICON_COLORS.orange,
   FAVICON_COLORS.pink,
   FAVICON_COLORS.yellow,
-  FAVICON_COLORS.black,
 ] as const;
 
 let initialsSvg: Promise<string> | null = null;
