@@ -285,14 +285,14 @@ export function MusicNowPlaying() {
               className="sticky bottom-8 z-20 w-64 max-w-full self-start overflow-visible wide:fixed wide:left-8"
             >
               <GooeySurface
-                className="surface-inverted flex flex-col rounded-[20px] bg-background/90 text-foreground shadow-(--surface-edge) backdrop-blur-xl backdrop-saturate-150"
-                contentClassName="rounded-[20px] p-3"
+                className="flex flex-col rounded-[20px] bg-foreground text-background shadow-[inset_0_0_0_1px_oklch(1_0_0/0.08),inset_0_1px_0_oklch(1_0_0/0.06)] dark:shadow-[inset_0_0_0_1px_oklch(0_0_0/0.06),inset_0_1px_0_oklch(1_0_0/0.6)]"
+                contentClassName="surface-inverted rounded-[20px] p-3"
               >
               <span
                 aria-hidden="true"
                 data-playing={isPlaying}
                 className={cn(
-                  "artwork-glow pointer-events-none absolute inset-0 -z-10 overflow-hidden rounded-[inherit]",
+                  "artwork-glow pointer-events-none absolute inset-0 z-0 overflow-hidden rounded-[inherit]",
                   isPlaying && artworkPalette ? "opacity-100" : "opacity-0",
                 )}
                 style={
@@ -308,7 +308,7 @@ export function MusicNowPlaying() {
                 <span className="artwork-beam-field" />
                 <span className="artwork-beam-ring" />
               </span>
-              <div className="flex items-center gap-3">
+              <div className="relative z-10 flex items-center gap-3">
                 {isExpanded ? (
                   <div className={TRACK_DETAILS_CLASS_NAME}>{trackDetails}</div>
                 ) : (
@@ -341,7 +341,7 @@ export function MusicNowPlaying() {
               <div
                 inert={!isExpanded}
                 className={cn(
-                  "grid transition-[grid-template-rows,opacity] duration-350 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
+                  "relative z-10 grid transition-[grid-template-rows,opacity] duration-350 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
                   isExpanded
                     ? "grid-rows-[1fr] opacity-100"
                     : "grid-rows-[0fr] opacity-0",

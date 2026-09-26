@@ -328,9 +328,9 @@ export function GooeySurface({
       onPointerCancel={endPointer}
       onClickCapture={onClickCapture}
       className={cn(
-        "relative touch-none select-none transition-[background-color,box-shadow,backdrop-filter] duration-350 ease-[cubic-bezier(0.2,0,0,1)]",
+        "relative touch-none select-none transition-[background-color,box-shadow] duration-350 ease-[cubic-bezier(0.2,0,0,1)]",
         isGrabbing ? "cursor-grabbing" : "cursor-grab",
-        "data-gooey-live:bg-transparent data-gooey-live:shadow-none data-gooey-live:backdrop-blur-none data-gooey-live:duration-0",
+        "data-gooey-live:bg-transparent data-gooey-live:shadow-none data-gooey-live:duration-0",
         className,
       )}
     >

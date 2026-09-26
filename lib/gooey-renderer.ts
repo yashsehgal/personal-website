@@ -137,7 +137,7 @@ export function readSurfaceColor(element: HTMLElement): [number, number, number]
     return samplePixel(context);
   }
 
-  context.globalAlpha = 0.9;
+  context.globalAlpha = 1;
   context.fillStyle = token || painted || pageColor;
   context.fillRect(0, 0, 1, 1);
   context.globalAlpha = 1;
