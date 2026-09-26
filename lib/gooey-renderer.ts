@@ -99,6 +99,22 @@ function samplePixel(
   ];
 }
 
+function resolveCssColor(document: Document, color: string) {
+  const view = document.defaultView;
+
+  if (!view || !color) {
+    return color;
+  }
+
+  const probe = document.createElement("span");
+  probe.style.color = color;
+  document.body.append(probe);
+  const resolved = view.getComputedStyle(probe).color;
+  probe.remove();
+
+  return resolved || color;
+}
+
 export function readSurfaceColor(element: HTMLElement): [number, number, number] {
   const document = element.ownerDocument;
   const view = document.defaultView;
@@ -118,16 +134,20 @@ export function readSurfaceColor(element: HTMLElement): [number, number, number]
 
   const card = view.getComputedStyle(element);
   const page = view.getComputedStyle(document.body);
-  const pageColor = page.backgroundColor || "canvas";
-  const painted = card.backgroundColor;
-  const token = card.getPropertyValue("--background").trim();
+  const pageColor = resolveCssColor(document, page.backgroundColor || "canvas");
+  const painted = resolveCssColor(document, card.backgroundColor);
+  const token = resolveCssColor(
+    document,
+    card.getPropertyValue("--foreground").trim() ||
+      card.getPropertyValue("--background").trim() ||
+      painted,
+  );
 
   context.clearRect(0, 0, 1, 1);
   context.fillStyle = painted;
   context.fillRect(0, 0, 1, 1);
   const cardAlpha = context.getImageData(0, 0, 1, 1).data[3] ?? 0;
 
-  context.globalAlpha = 1;
   context.fillStyle = pageColor;
   context.fillRect(0, 0, 1, 1);
 
@@ -137,10 +157,8 @@ export function readSurfaceColor(element: HTMLElement): [number, number, number]
     return samplePixel(context);
   }
 
-  context.globalAlpha = 1;
-  context.fillStyle = token || painted || pageColor;
+  context.fillStyle = token;
   context.fillRect(0, 0, 1, 1);
-  context.globalAlpha = 1;
 
   return samplePixel(context);
 }

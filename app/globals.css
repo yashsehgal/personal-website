@@ -252,9 +252,11 @@ body {
   animation-play-state: paused;
 }
 
-[data-gooey-live] .artwork-glow,
-[data-gooey-handoff] .artwork-glow {
+[data-gooey-live] .artwork-glow {
   opacity: 0;
+}
+
+[data-gooey-live]:not([data-gooey-easing]) .artwork-glow {
   transition-duration: 0ms;
 }
 
