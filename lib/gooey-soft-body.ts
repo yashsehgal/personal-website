@@ -4,12 +4,13 @@ const COLS = 16;
 const ROWS = 11;
 const MAX_STRETCH = 148;
 const SOLVER_ITERATIONS = 8;
-const SETTLE_SPEED = 0.055;
-const GRAB_FADE_PER_SECOND = 2.4;
-const RECOIL_STIFFNESS = 260;
-const RECOIL_DAMPING = 9.5;
-const SETTLE_STIFFNESS = 80;
-const SETTLE_DAMPING = 16;
+const SETTLE_SPEED = 0.04;
+const SETTLE_DRIFT = 0.55;
+const RECOIL_STIFFNESS = 240;
+const RECOIL_DAMPING = 9.2;
+const SETTLE_STIFFNESS = 62;
+const SETTLE_DAMPING = 11.5;
+const GRAB_BLEND_DECAY = 1.15;
 
 type Particle = {
   x: number;
@@ -206,13 +207,17 @@ export class GooeySoftBody {
 
   step(dt: number) {
     const clampedDt = Math.min(dt, 1 / 30);
-    const viscosity = this.grabbing ? 9.5 : this.releasePhase === "recoil" ? 2.8 : 5.4;
+    const viscosity = this.grabbing
+      ? 9.5
+      : this.releasePhase === "recoil"
+        ? 2.6
+        : mix(4.2, 2.8, this.grabBlend);
     const damping = Math.exp(-viscosity * clampedDt);
     const restStiffness = this.grabbing
-      ? 0.04
-      : mix(0.22, 0.03, this.grabBlend);
-    const distanceStiffness = this.grabbing ? 0.42 : mix(0.58, 0.38, this.grabBlend);
-    const areaStiffness = this.grabbing ? 0.18 : mix(0.4, 0.22, this.grabBlend);
+      ? 0.035
+      : mix(0.05, 0.024, this.grabBlend);
+    const distanceStiffness = this.grabbing ? 0.42 : mix(0.5, 0.36, this.grabBlend);
+    const areaStiffness = this.grabbing ? 0.18 : mix(0.28, 0.2, this.grabBlend);
 
     this.sampleTipVelocity(clampedDt);
     this.stepTip(clampedDt);
@@ -288,6 +293,27 @@ export class GooeySoftBody {
     return ROWS;
   }
 
+  get deformation() {
+    if (this.grabbing) {
+      return 1;
+    }
+
+    return Math.min(1, Math.max(this.grabBlend, this.maxDrift() / 14));
+  }
+
+  maxDrift() {
+    let drift = 0;
+
+    for (const particle of this.particles) {
+      drift = Math.max(
+        drift,
+        Math.hypot(particle.x - particle.restX, particle.y - particle.restY),
+      );
+    }
+
+    return drift;
+  }
+
   private resetTip() {
     this.grabbing = false;
     this.releasing = false;
@@ -336,14 +362,15 @@ export class GooeySoftBody {
     const distance = Math.hypot(offsetX, offsetY);
     const speed = Math.hypot(this.tipVx, this.tipVy);
 
-    if (this.releasePhase === "recoil" && (side < -6 || (distance < 10 && speed < 90))) {
+    if (this.releasePhase === "recoil" && (side < -6 || (distance < 14 && speed < 70))) {
       this.releasePhase = "settle";
     }
 
-    if (this.releasePhase === "settle") {
-      this.grabBlend = Math.max(0, this.grabBlend - dt * GRAB_FADE_PER_SECOND);
+    if (this.releasePhase === "settle" && distance < 22 && speed < 160) {
+      this.grabBlend *= Math.exp(-GRAB_BLEND_DECAY * dt);
 
-      if (this.grabBlend === 0) {
+      if (this.grabBlend < 0.018) {
+        this.grabBlend = 0;
         this.releasing = false;
       }
     }
@@ -461,7 +488,7 @@ export class GooeySoftBody {
         particle.y - particle.restY,
       );
 
-      if (speed > SETTLE_SPEED || drift > 0.35) {
+      if (speed > SETTLE_SPEED || drift > SETTLE_DRIFT) {
         return true;
       }
     }

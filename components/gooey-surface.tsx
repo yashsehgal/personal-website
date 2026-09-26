@@ -15,6 +15,7 @@ import {
 const CANVAS_PAD = 176;
 const DRAG_THRESHOLD = 5;
 const CONTROL_DRAG_THRESHOLD = 9;
+const HANDOFF_MS = 380;
 const REDUCED_MOTION_QUERY = "(prefers-reduced-motion: reduce)";
 const STEAL_SELECTOR = "input, textarea, select, [data-no-gooey]";
 
@@ -48,9 +49,14 @@ export function GooeySurface({
   const bodyRef = useRef<GooeySoftBody | null>(null);
   const rendererRef = useRef<GooeyRenderer | null>(null);
   const positionsRef = useRef(new Float32Array(0));
+  const colorRef = useRef<[number, number, number]>([0.145, 0.145, 0.145]);
   const frameRef = useRef(0);
   const lastTimeRef = useRef(0);
   const liveRef = useRef(false);
+  const handoffRef = useRef<{ started: boolean; endsAt: number }>({
+    started: false,
+    endsAt: 0,
+  });
   const suppressClickRef = useRef(false);
   const pointerRef = useRef<{
     id: number;
@@ -60,7 +66,9 @@ export function GooeySurface({
     locked: boolean;
   } | null>(null);
   const [isLive, setIsLive] = useState(false);
+  const [isHandoff, setIsHandoff] = useState(false);
   const [isGrabbing, setIsGrabbing] = useState(false);
+  const showBlob = isLive && !isHandoff;
 
   useEffect(() => {
     const root = rootRef.current;
@@ -77,7 +85,8 @@ export function GooeySurface({
     positionsRef.current = new Float32Array(body.cols * body.rows * 2);
 
     const applyAppearance = () => {
-      renderer.setAppearance(readSurfaceColor(root), 20, 2.6);
+      colorRef.current = readSurfaceColor(root);
+      renderer.setAppearance(colorRef.current, 20, 1);
     };
 
     const syncSize = () => {
@@ -114,10 +123,12 @@ export function GooeySurface({
         content.style.transform = "none";
       }
 
+      handoffRef.current = { started: false, endsAt: 0 };
       return;
     }
 
     lastTimeRef.current = performance.now();
+    handoffRef.current = { started: false, endsAt: 0 };
 
     const tick = (now: number) => {
       const body = bodyRef.current;
@@ -128,9 +139,15 @@ export function GooeySurface({
         return;
       }
 
+      if (body.grabbing && handoffRef.current.started) {
+        handoffRef.current = { started: false, endsAt: 0 };
+        setIsHandoff(false);
+      }
+
       const moving = body.step((now - lastTimeRef.current) / 1000);
       lastTimeRef.current = now;
       body.writePositions(positionsRef.current);
+      renderer.setAppearance(colorRef.current, 20, body.deformation);
       renderer.updateVertices(positionsRef.current);
       renderer.render();
 
@@ -149,9 +166,27 @@ export function GooeySurface({
         return;
       }
 
+      if (!handoffRef.current.started) {
+        renderer.setAppearance(colorRef.current, 20, 0);
+        renderer.render();
+        content.style.transform = "none";
+        handoffRef.current = {
+          started: true,
+          endsAt: now + HANDOFF_MS,
+        };
+        setIsHandoff(true);
+        frameRef.current = requestAnimationFrame(tick);
+        return;
+      }
+
+      if (now < handoffRef.current.endsAt) {
+        frameRef.current = requestAnimationFrame(tick);
+        return;
+      }
+
       liveRef.current = false;
       setIsLive(false);
-      content.style.transform = "none";
+      setIsHandoff(false);
     };
 
     frameRef.current = requestAnimationFrame(tick);
@@ -165,6 +200,8 @@ export function GooeySurface({
     }
 
     liveRef.current = true;
+    handoffRef.current = { started: false, endsAt: 0 };
+    setIsHandoff(false);
     setIsLive(true);
   };
 
@@ -259,7 +296,7 @@ export function GooeySurface({
   return (
     <div
       ref={rootRef}
-      data-gooey-live={isLive || undefined}
+      data-gooey-live={showBlob || undefined}
       data-gooey-grabbing={isGrabbing || undefined}
       onPointerDown={onPointerDown}
       onPointerMove={onPointerMove}
@@ -267,9 +304,9 @@ export function GooeySurface({
       onPointerCancel={endPointer}
       onClickCapture={onClickCapture}
       className={cn(
-        "relative touch-none select-none",
+        "relative touch-none select-none transition-[background-color,box-shadow,backdrop-filter] duration-350 ease-[cubic-bezier(0.2,0,0,1)]",
         isGrabbing ? "cursor-grabbing" : "cursor-grab",
-        "data-gooey-live:bg-transparent data-gooey-live:shadow-none data-gooey-live:backdrop-blur-none",
+        "data-gooey-live:bg-transparent data-gooey-live:shadow-none data-gooey-live:backdrop-blur-none data-gooey-live:duration-0",
         className,
       )}
     >
@@ -277,8 +314,8 @@ export function GooeySurface({
         ref={canvasRef}
         aria-hidden="true"
         className={cn(
-          "pointer-events-none absolute max-w-none",
-          isLive ? "opacity-100" : "opacity-0",
+          "pointer-events-none absolute max-w-none transition-opacity duration-350 ease-[cubic-bezier(0.2,0,0,1)]",
+          showBlob ? "opacity-100 duration-0" : "opacity-0",
         )}
       />
       <div

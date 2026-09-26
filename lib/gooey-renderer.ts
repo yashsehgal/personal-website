@@ -74,6 +74,7 @@ uniform vec3 uColor;
 uniform vec3 uHighlight;
 uniform float uThreshold;
 uniform float uSoftness;
+uniform float uRim;
 
 void main() {
   float field = texture2D(uMap, vUv).a;
@@ -81,7 +82,7 @@ void main() {
   float rim = smoothstep(uThreshold - 0.04, uThreshold + 0.1, field)
     - smoothstep(uThreshold + 0.08, uThreshold + 0.42, field);
   float sheen = smoothstep(0.72, 0.18, vUv.y) * 0.045 * alpha;
-  vec3 color = uColor + uHighlight * (rim * 0.18 + sheen);
+  vec3 color = uColor + uHighlight * ((rim * 0.18 + sheen) * uRim);
   gl_FragColor = vec4(color * alpha, alpha);
 }
 `;
@@ -107,6 +108,12 @@ export function readSurfaceColor(element: HTMLElement): [number, number, number]
 
   if (!view) {
     return [0.145, 0.145, 0.145];
+  }
+
+  const painted = parseCssRgb(view.getComputedStyle(element).backgroundColor);
+
+  if (painted[3] > 0.05) {
+    return [painted[0], painted[1], painted[2]];
   }
 
   const token = view.getComputedStyle(element).getPropertyValue("--background").trim();
@@ -141,6 +148,7 @@ export class GooeyRenderer {
   private playerWidth = 1;
   private playerHeight = 1;
   private pixelRatio = 1;
+  private blurAmount = 2.4;
   private disposed = false;
 
   constructor(canvas: HTMLCanvasElement, cols: number, rows: number, pad: number) {
@@ -209,6 +217,7 @@ export class GooeyRenderer {
         uHighlight: { value: new Color().setRGB(1, 1, 1, SRGBColorSpace) },
         uThreshold: { value: 0.42 },
         uSoftness: { value: 0.12 },
+        uRim: { value: 1 },
       },
       vertexShader: VERTEX,
       fragmentShader: COMPOSITE_FRAGMENT,
@@ -253,13 +262,19 @@ export class GooeyRenderer {
     this.effectMesh.scale.set(width, height, 1);
   }
 
-  setAppearance(color: [number, number, number], radius: number, inflate: number) {
+  setAppearance(
+    color: [number, number, number],
+    radius: number,
+    gooey = 1,
+  ) {
+    const amount = Math.min(1, Math.max(0, gooey));
+
     if (this.blobMaterial.uniforms.uRadius) {
       this.blobMaterial.uniforms.uRadius.value = radius;
     }
 
     if (this.blobMaterial.uniforms.uInflate) {
-      this.blobMaterial.uniforms.uInflate.value = inflate;
+      this.blobMaterial.uniforms.uInflate.value = 0.2 + 2.4 * amount;
     }
 
     this.compositeMaterial.uniforms.uColor?.value.setRGB(
@@ -268,6 +283,16 @@ export class GooeyRenderer {
       color[2],
       SRGBColorSpace,
     );
+
+    if (this.compositeMaterial.uniforms.uSoftness) {
+      this.compositeMaterial.uniforms.uSoftness.value = 0.035 + 0.085 * amount;
+    }
+
+    if (this.compositeMaterial.uniforms.uRim) {
+      this.compositeMaterial.uniforms.uRim.value = amount;
+    }
+
+    this.blurAmount = 0.2 + 2.2 * amount;
   }
 
   updateVertices(positions: Float32Array) {
@@ -312,7 +337,7 @@ export class GooeyRenderer {
     this.blurMaterial.uniforms.uDirection?.value.set(texelX, 0);
 
     if (this.blurMaterial.uniforms.uRadius) {
-      this.blurMaterial.uniforms.uRadius.value = 2.4;
+      this.blurMaterial.uniforms.uRadius.value = this.blurAmount;
     }
 
     this.renderer.setRenderTarget(this.targetB);
