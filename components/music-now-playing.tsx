@@ -278,10 +278,10 @@ export function MusicNowPlaying() {
             <motion.section
               key="now-playing"
               aria-label="Now playing"
-              initial={{ opacity: 0, y: 12, filter: "blur(4px)" }}
-              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
               exit={{ opacity: 0, y: 12, filter: "blur(4px)" }}
-              transition={{ duration: 0.3, ease: [0.2, 0, 0, 1] }}
+              transition={{ duration: 0.22, ease: [0.2, 0, 0, 1] }}
               className="sticky bottom-8 z-20 w-64 max-w-full self-start overflow-visible wide:fixed wide:left-8"
             >
               <GooeySurface

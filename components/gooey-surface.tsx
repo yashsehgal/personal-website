@@ -6,6 +6,7 @@ import { GooeySoftBody } from "@/lib/gooey-soft-body";
 import { cn } from "cn";
 import {
   useEffect,
+  useLayoutEffect,
   useRef,
   useState,
   type PointerEvent as ReactPointerEvent,
@@ -70,7 +71,7 @@ export function GooeySurface({
   const [isGrabbing, setIsGrabbing] = useState(false);
   const showBlob = isLive && !isHandoff;
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const root = rootRef.current;
     const canvas = canvasRef.current;
 
@@ -102,6 +103,16 @@ export function GooeySurface({
     };
 
     syncSize();
+    colorRef.current = readSurfaceColor(root);
+    renderer.setAppearance(colorRef.current, 20, 1);
+    body.intro();
+    body.writePositions(positionsRef.current);
+    renderer.updateVertices(positionsRef.current);
+    renderer.render();
+    liveRef.current = true;
+    handoffRef.current = { started: false, endsAt: 0 };
+    setIsHandoff(false);
+    setIsLive(true);
 
     const observer = new ResizeObserver(syncSize);
     observer.observe(root);

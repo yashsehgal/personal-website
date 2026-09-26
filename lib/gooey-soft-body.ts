@@ -170,6 +170,44 @@ export class GooeySoftBody {
     this.pointerY = this.grabRestY + offset.y;
   }
 
+  intro() {
+    if (this.particles.length === 0) {
+      return;
+    }
+
+    const drop = Math.min(84, 40 + this.height * 0.48);
+    const originX = this.width / 2;
+    const originY = this.height * 0.94;
+
+    this.grabRestX = originX;
+    this.grabRestY = originY;
+    this.pointerX = originX;
+    this.pointerY = originY + drop;
+    this.lastTipX = this.pointerX;
+    this.lastTipY = this.pointerY;
+    this.hasTipSample = false;
+    this.grabbing = false;
+    this.releasing = true;
+    this.releasePhase = "recoil";
+    this.grabBlend = 1;
+    this.stretchDirX = 0;
+    this.stretchDirY = 1;
+    this.tipVx = 0;
+    this.tipVy = -(580 + drop * 6);
+
+    const centerX = this.width / 2;
+
+    for (const particle of this.particles) {
+      const along = this.height > 0 ? particle.restY / this.height : 1;
+      const pull = drop * (0.22 + 0.78 * along * along);
+      const spread = 1 + 0.11 * along;
+      particle.x = centerX + (particle.restX - centerX) * spread;
+      particle.y = particle.restY + pull;
+      particle.px = particle.x;
+      particle.py = particle.y + 14 + along * 16;
+    }
+  }
+
   release() {
     if (!this.grabbing) {
       return;
