@@ -79,7 +79,7 @@ const MUSIC_TRACK_ITEMS = [
   },
   {
     id: "MUSIC_TRACK_FACE_IN_THE_PHOTOGRAPH",
-    appleMusicId: "268527144",
+    appleMusicId: "298545847",
     title: "Face in the Photograph",
     artist: "Yanni",
   },
@@ -211,20 +211,50 @@ const MUSIC_TRACK_ITEMS = [
   },
   {
     id: "MUSIC_TRACK_MARCHING_SEASON",
-    appleMusicId: "327379583",
+    appleMusicId: "255943794",
     title: "Marching Season",
-    artist: "Yanni",
-  },
-  {
-    id: "MUSIC_TRACK_DESIRE",
-    appleMusicId: "298545853",
-    title: "Desire",
     artist: "Yanni",
   },
   {
     id: "MUSIC_TRACK_INTO_THE_DEEP_BLUE",
     appleMusicId: "1488800267",
     title: "Into the Deep Blue",
+    artist: "Yanni",
+  },
+  {
+    id: "MUSIC_TRACK_RENEGADE",
+    appleMusicId: "1439509518",
+    title: "Renegade",
+    artist: "Yanni",
+  },
+  {
+    id: "MUSIC_TRACK_KEYS_TO_IMAGINATION",
+    appleMusicId: "327379708",
+    title: "Keys to Imagination",
+    artist: "Yanni",
+  },
+  {
+    id: "MUSIC_TRACK_A_LOVE_FOR_LIFE",
+    appleMusicId: "298545826",
+    title: "A Love for Life",
+    artist: "Yanni",
+  },
+  {
+    id: "MUSIC_TRACK_ONCE_UPON_A_TIME",
+    appleMusicId: "298545820",
+    title: "Once Upon a Time",
+    artist: "Yanni",
+  },
+  {
+    id: "MUSIC_TRACK_YOU_ONLY_LIVE_ONCE",
+    appleMusicId: "298545837",
+    title: "You Only Live Once",
+    artist: "Yanni",
+  },
+  {
+    id: "MUSIC_TRACK_NINE",
+    appleMusicId: "428493384",
+    title: "Nine",
     artist: "Yanni",
   },
   {
@@ -490,6 +520,60 @@ const MUSIC_TRACK_ITEMS = [
     appleMusicId: "575998831",
     title: "Highway to Hell",
     artist: "AC/DC",
+  },
+  {
+    id: "MUSIC_TRACK_ANNIHILATE",
+    appleMusicId: "1690685343",
+    title: "Annihilate (Spider-Man: Across the Spider-Verse)",
+    artist: "Metro Boomin, Swae Lee, Lil Wayne & Offset",
+  },
+  {
+    id: "MUSIC_TRACK_AM_I_DREAMING",
+    appleMusicId: "1690685353",
+    title: "Am I Dreaming",
+    artist: "Metro Boomin, A$AP Rocky & Roisee",
+  },
+  {
+    id: "MUSIC_TRACK_CALLING",
+    appleMusicId: "1690685617",
+    title: "Calling (feat. A Boogie wit da Hoodie)",
+    artist: "Metro Boomin, Swae Lee & NAV",
+  },
+  {
+    id: "MUSIC_TRACK_SILK_AND_COLOGNE",
+    appleMusicId: "1690685740",
+    title: "Silk and Cologne (Spider-Verse Remix)",
+    artist: "EI8HT & Offset",
+  },
+  {
+    id: "MUSIC_TRACK_SELF_LOVE",
+    appleMusicId: "1690685844",
+    title: "Self Love (Spider-Man: Across the Spider-Verse)",
+    artist: "Metro Boomin & Coi Leray",
+  },
+  {
+    id: "MUSIC_TRACK_LINK_UP",
+    appleMusicId: "1690685836",
+    title: "Link Up (feat. Beam & Toian) [Spider-Verse Remix]",
+    artist: "Metro Boomin, Don Toliver & Wizkid",
+  },
+  {
+    id: "MUSIC_TRACK_AROUND_ME",
+    appleMusicId: "1657584156",
+    title: "Around Me (feat. Don Toliver)",
+    artist: "Metro Boomin",
+  },
+  {
+    id: "MUSIC_TRACK_ALL_THE_STARS",
+    appleMusicId: "1440903307",
+    title: "All The Stars",
+    artist: "Kendrick Lamar, SZA",
+  },
+  {
+    id: "MUSIC_TRACK_TOO_MANY_NIGHTS",
+    appleMusicId: "1657583940",
+    title: "Too Many Nights (feat. Don Toliver)",
+    artist: "Metro Boomin & Future",
   },
 ] as const;
 
