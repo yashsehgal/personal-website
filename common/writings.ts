@@ -15,6 +15,13 @@ const WRITING_ITEMS = [
     year: 2026,
     type: "Navigation",
   },
+  {
+    id: "WRITING_THOUGHTS_ABOUT_BUILDING_TASTE",
+    title: "Thoughts about building taste #1",
+    href: WEBSITE_ROUTES.WRITING_THOUGHTS_ABOUT_BUILDING_TASTE,
+    year: 2026,
+    type: "Essay",
+  },
 ] as const;
 
 export const WRITINGS = [...WRITING_ITEMS].sort((a, b) => {
