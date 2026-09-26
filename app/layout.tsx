@@ -18,7 +18,10 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "YS",
+  title: {
+    default: "Yash Sehgal",
+    template: "Yash Sehgal - %s",
+  },
   description: "Yash Sehgal (YS) is a design engineer",
 };
 

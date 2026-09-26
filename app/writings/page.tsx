@@ -1,5 +1,10 @@
 import { WRITINGS } from "@/common/writings";
+import type { Metadata } from "next";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  title: "Writings",
+};
 
 export default function Writings() {
   return (

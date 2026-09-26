@@ -1,5 +1,10 @@
 import { MusicTrackList } from "@/components/music-track-list";
 import { getMusicTracks } from "@/lib/apple-music";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Music",
+};
 
 export default async function Music() {
   const tracks = await getMusicTracks();

@@ -1,6 +1,11 @@
 import { IMAGE_PLACEHOLDERS } from "@/common/image-placeholders";
 import { PHOTOGRAPHY_IMAGES } from "@/common/photography";
 import { ProgressiveImage } from "@/components/progressive-image";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Gallery",
+};
 
 export default function Gallery() {
   return (
