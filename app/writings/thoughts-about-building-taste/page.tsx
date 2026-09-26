@@ -10,6 +10,39 @@ import {
 const copyClassName =
   "text-pretty tracking-tight leading-relaxed text-muted-foreground";
 
+const ARTICLE_LINKS = [
+  {
+    href: "https://performance.dev/how-is-linear-so-fast-a-technical-breakdown",
+    description:
+      "Linear feels instant because the data the screen reads lives in the browser, and a change shows up before the server has answered. The speed is a long list of small decisions, not a single trick.",
+  },
+  {
+    href: "https://linear.app/now/output-isn-t-design",
+    description:
+      "Making an interface is not the same as designing one. The hard part is knowing what should exist at all, and a polished screen can still be a poor fit for the problem.",
+  },
+  {
+    href: "https://zocodesign.com/blog/ux-design-create-successful-products",
+    description:
+      "A product stands out when it does the job and makes doing it pleasant. Form and function stay together, and the choices start from the person using it.",
+  },
+  {
+    href: "https://www.fibre2fashion.com/industry-article/10327/hermes-the-legacy-of-luxury-and-timeless-style",
+    description:
+      "Hermès began as a small Paris workshop making saddles, and stayed a luxury house by treating the handwork as the product. The scarves, the bags, and the later experiments all sit on that same craft.",
+  },
+  {
+    href: "https://designmc.org/insights/premium-by-design-six-visual-principles-that-elevate-a-brand/",
+    description:
+      "What reads as premium is built from restraint: space, type, a tight palette, graphics that repeat on purpose, and photographs that look edited. If the experience itself is clumsy, that feeling falls apart.",
+  },
+  {
+    href: "https://www.superside.com/blog/principles-of-design-guide",
+    description:
+      "The elements are the materials you place, and the principles are how you arrange them so the eye knows where to go. Naming which principle is failing turns a vague sense that something looks wrong into a decision.",
+  },
+] as const;
+
 export default function ThoughtsAboutBuildingTastePage() {
   return (
     <div className="mx-auto flex w-full min-w-0 max-w-3xl flex-col items-start gap-10 px-1 wide:mt-16">
@@ -211,6 +244,33 @@ export default function ThoughtsAboutBuildingTastePage() {
           </div>
         </section>
       </article>
+      <div className="flex w-full flex-col gap-12 pt-6">
+        <div aria-hidden="true" className="h-px w-8 bg-foreground/20" />
+        <ol className="flex list-none flex-col gap-3 p-0">
+          {ARTICLE_LINKS.map((article, index) => (
+            <li
+              key={article.href}
+              className="grid grid-cols-[1rem_minmax(0,1fr)] gap-x-1 text-sm tracking-tight text-muted-foreground"
+            >
+              <sup
+                aria-hidden="true"
+                className="pt-0.5 text-[0.7em] leading-none font-normal"
+              >
+                {index + 1}
+              </sup>
+              <a
+                href={article.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                data-scrub-sound=""
+                className="-mx-1 rounded px-1 py-0.5 text-pretty leading-relaxed hover:bg-muted hover:text-foreground focus-visible:bg-muted focus-visible:text-foreground"
+              >
+                {article.description}
+              </a>
+            </li>
+          ))}
+        </ol>
+      </div>
     </div>
   );
 }
