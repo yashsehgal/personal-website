@@ -5,7 +5,7 @@ import { playInternalLinkSound } from "@/lib/interface-sounds";
 import { useMusicPlayer } from "@/lib/music-player";
 import { cn } from "cn";
 import { MusicNavigationIcon } from "@/components/music-navigation-icon";
-import { ImageIcon } from "lucide-react";
+import { ImageIcon, MessagesSquare } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -47,6 +47,11 @@ const NAVIGATION_ITEMS: (NavigationLink | NavigationGroup)[] = [
         label: "Gallery",
         href: WEBSITE_ROUTES.APPS_GALLERY,
         icon: ImageIcon,
+      },
+      {
+        label: "Discussions",
+        href: WEBSITE_ROUTES.APPS_DISCUSSIONS,
+        icon: MessagesSquare,
       },
     ],
   },
@@ -126,7 +131,10 @@ export function MainSidebarNavigation() {
     [pathname],
   );
 
-  const isArticlePage = pathname.startsWith(`${WEBSITE_ROUTES.WRITINGS}/`);
+  const isArticlePage =
+    pathname.startsWith(`${WEBSITE_ROUTES.WRITINGS}/`) ||
+    (pathname.startsWith(`${WEBSITE_ROUTES.APPS_DISCUSSIONS}/`) &&
+      pathname !== WEBSITE_ROUTES.APPS_DISCUSSIONS);
 
   const isNavigationItemActive = useCallback(
     (href: WebsiteRouteType) => {

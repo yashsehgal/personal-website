@@ -1,0 +1,2 @@
+-- Local-only seed data. This file is never applied to production.
+-- Keep it empty (or add fake rows) so localhost discussions stay off the hosted project.

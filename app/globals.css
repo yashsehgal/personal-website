@@ -505,3 +505,77 @@ pre {
     var(--background) 8px
   );
 }
+
+.discussion-rich-text {
+  overflow-wrap: break-word;
+  @apply text-pretty tracking-tight text-foreground;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.625;
+  white-space: pre-wrap;
+}
+
+.discussion-rich-text-editor {
+  min-height: 5.5rem;
+  outline: none;
+}
+
+.discussion-rich-text p {
+  margin: 0;
+}
+
+.discussion-rich-text p + p {
+  margin-top: 0.75em;
+}
+
+.discussion-rich-text ul {
+  list-style-type: disc;
+  margin-block: 0.5em;
+  padding-inline-start: 1.25rem;
+}
+
+.discussion-rich-text ol {
+  list-style-type: decimal;
+  margin-block: 0.5em;
+  padding-inline-start: 1.25rem;
+}
+
+.discussion-rich-text li {
+  margin-block: 0.125em;
+}
+
+.discussion-rich-text li p {
+  margin: 0;
+}
+
+.discussion-rich-text blockquote {
+  margin-block: 0.5em;
+  border-inline-start: 2px solid var(--border);
+  padding-inline-start: 0.75rem;
+  color: var(--muted-foreground);
+}
+
+.discussion-rich-text strong {
+  font-weight: 600;
+}
+
+.discussion-rich-text em {
+  font-style: italic;
+}
+
+.discussion-rich-text code {
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+  font-weight: 400;
+  border-radius: 0.25rem;
+  background: var(--muted);
+  padding: 0.1em 0.3em;
+}
+
+.discussion-rich-text p.is-editor-empty:first-child::before {
+  color: var(--muted-foreground);
+  content: attr(data-placeholder);
+  float: left;
+  height: 0;
+  pointer-events: none;
+}
