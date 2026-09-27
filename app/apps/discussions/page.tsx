@@ -1,4 +1,4 @@
-import { DiscussionsList } from "@/components/discussions-list";
+import { DiscussionRows, DiscussionsList } from "@/components/discussions-list";
 import { listDiscussions } from "@/lib/discussions/queries";
 import type { Metadata } from "next";
 
@@ -8,12 +8,17 @@ export const metadata: Metadata = {
   title: "Discussions",
 };
 
-export default async function DiscussionsPage() {
-  const discussions = await listDiscussions();
-
+export default function DiscussionsPage() {
   return (
-    <div className="flex w-full min-w-0 flex-col items-start gap-6 px-1 wide:mt-16">
-      <DiscussionsList discussions={discussions} />
+    <div className="flex w-full min-w-0 flex-col items-start px-1 wide:mt-16">
+      <DiscussionsList>
+        <DiscussionsLoader />
+      </DiscussionsList>
     </div>
   );
+}
+
+async function DiscussionsLoader() {
+  const discussions = await listDiscussions();
+  return <DiscussionRows discussions={discussions} />;
 }

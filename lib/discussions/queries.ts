@@ -1,5 +1,6 @@
 import "server-only";
 
+import { cache } from "react";
 import {
   isDiscussionId,
   type DiscussionContent,
@@ -41,7 +42,7 @@ function mapMessage(row: MessageRow): DiscussionMessage {
   };
 }
 
-export async function listDiscussions(): Promise<DiscussionSummary[]> {
+export const listDiscussions = cache(async function listDiscussions(): Promise<DiscussionSummary[]> {
   const supabase = getSupabaseServerClient();
   const { data, error } = await supabase
     .from("discussions")
@@ -53,9 +54,9 @@ export async function listDiscussions(): Promise<DiscussionSummary[]> {
   }
 
   return (data as DiscussionRow[] | null)?.map(mapSummary) ?? [];
-}
+});
 
-export async function getDiscussionThread(
+export const getDiscussionThread = cache(async function getDiscussionThread(
   id: string,
 ): Promise<DiscussionThread | null> {
   if (!isDiscussionId(id)) {
@@ -93,4 +94,4 @@ export async function getDiscussionThread(
     createdAt: discussion.created_at,
     messages: ((messages as MessageRow[] | null) ?? []).map(mapMessage),
   };
-}
+});
