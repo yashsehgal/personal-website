@@ -7,6 +7,7 @@ export const WEBSITE_ROUTES = {
     "/writings/thoughts-about-building-taste",
   APPS_MUSIC: "/apps/music",
   APPS_GALLERY: "/apps/gallery",
+  APPS_DISCUSSIONS: "/apps/discussions",
   ARCHIVE: "/archive",
 } as const;
 
