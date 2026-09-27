@@ -5,6 +5,7 @@ import { DynamicFavicon } from "@/components/dynamic-favicon";
 import { InterfaceSoundListener } from "@/components/interface-sound-listener";
 import { MainLayoutContainer } from "@/components/layouts/main-layout-container";
 import { PageScrollbar } from "@/components/page-scrollbar";
+import { QueryProvider } from "@/components/query-provider";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { Suspense } from "react";
 
@@ -36,11 +37,13 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <DynamicFavicon />
         <InterfaceSoundListener />
         <PageScrollbar />
-        <Suspense>
-          <NuqsAdapter>
-            <MainLayoutContainer>{children}</MainLayoutContainer>
-          </NuqsAdapter>
-        </Suspense>
+        <QueryProvider>
+          <Suspense>
+            <NuqsAdapter>
+              <MainLayoutContainer>{children}</MainLayoutContainer>
+            </NuqsAdapter>
+          </Suspense>
+        </QueryProvider>
       </body>
     </html>
   );

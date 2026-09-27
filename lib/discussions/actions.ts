@@ -1,6 +1,5 @@
 "use server";
 
-import { WEBSITE_ROUTES } from "@/common/routes";
 import {
   DISCUSSION_TITLE_MAX_LENGTH,
   isDiscussionId,
@@ -9,9 +8,13 @@ import {
   type DiscussionContent,
   type DiscussionMessage,
   type DiscussionSummary,
+  type DiscussionThread,
 } from "@/lib/discussions/content";
+import {
+  getDiscussionThread,
+  listDiscussions,
+} from "@/lib/discussions/queries";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
-import { revalidatePath } from "next/cache";
 
 export type ActionResult<T> =
   | { ok: true; data: T }
@@ -43,9 +46,6 @@ export async function createDiscussionAction(
   if (error || !data) {
     return { ok: false, error: "Unable to start discussion. Try again." };
   }
-
-  revalidatePath(WEBSITE_ROUTES.APPS_DISCUSSIONS);
-  revalidatePath(`${WEBSITE_ROUTES.APPS_DISCUSSIONS}/${data.id}`);
 
   return {
     ok: true,
@@ -83,9 +83,6 @@ export async function createDiscussionMessageAction(
     return { ok: false, error: "Unable to send reply. Try again." };
   }
 
-  revalidatePath(`${WEBSITE_ROUTES.APPS_DISCUSSIONS}/${discussionId}`);
-  revalidatePath(WEBSITE_ROUTES.APPS_DISCUSSIONS);
-
   return {
     ok: true,
     data: {
@@ -97,32 +94,23 @@ export async function createDiscussionMessageAction(
   };
 }
 
-export async function listDiscussionMessagesAction(
-  discussionId: string,
-): Promise<ActionResult<DiscussionMessage[]>> {
-  if (!isDiscussionId(discussionId)) {
-    return { ok: false, error: "Discussion not found." };
+export async function listDiscussionsAction(): Promise<
+  ActionResult<DiscussionSummary[]>
+> {
+  try {
+    return { ok: true, data: await listDiscussions() };
+  } catch {
+    return { ok: false, error: "Unable to load discussions." };
   }
-
-  const supabase = getSupabaseServerClient();
-  const { data, error } = await supabase
-    .from("discussion_messages")
-    .select("id, discussion_id, body, created_at")
-    .eq("discussion_id", discussionId)
-    .order("created_at", { ascending: true });
-
-  if (error) {
-    return { ok: false, error: "Unable to load replies." };
-  }
-
-  return {
-    ok: true,
-    data:
-      data?.map((row) => ({
-        id: row.id,
-        discussionId: row.discussion_id,
-        body: row.body as DiscussionContent,
-        createdAt: row.created_at,
-      })) ?? [],
-  };
 }
+
+export async function getDiscussionThreadAction(
+  id: string,
+): Promise<ActionResult<DiscussionThread | null>> {
+  try {
+    return { ok: true, data: await getDiscussionThread(id) };
+  } catch {
+    return { ok: false, error: "Unable to load discussion." };
+  }
+}
+
