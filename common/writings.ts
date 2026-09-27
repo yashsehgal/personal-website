@@ -26,5 +26,5 @@ const WRITING_ITEMS = [
 
 export const WRITINGS = [...WRITING_ITEMS].sort((a, b) => {
   if (a.year !== b.year) return b.year - a.year;
-  return a.title.localeCompare(b.title, "en", { sensitivity: "base" });
+  return b.title.localeCompare(a.title, "en", { sensitivity: "base" });
 });

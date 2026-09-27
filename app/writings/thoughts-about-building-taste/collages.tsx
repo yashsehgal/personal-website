@@ -76,15 +76,36 @@ function Print({
 const halfSizes = "(min-width: 64rem) 22rem, 46vw";
 const plateSizes = "(min-width: 64rem) 48rem, 100vw";
 
+function FigureCaption({
+  children,
+  className,
+}: {
+  children: string;
+  className?: string;
+}) {
+  return (
+    <figcaption
+      className={cn(
+        "col-span-2 mt-3 w-full text-center font-serif text-sm italic leading-normal text-pretty text-muted-foreground",
+        className,
+      )}
+    >
+      {children}
+    </figcaption>
+  );
+}
+
 export function ArticlePhoto({
   src,
   alt,
+  caption,
 }: {
   src: StaticImageData;
   alt: string;
+  caption: string;
 }) {
   return (
-    <figure className="px-1">
+    <figure className="flex w-full flex-col items-center px-1">
       <div className={cn(frameClassName, "w-fit max-w-full")}>
         <Image
           src={src}
@@ -93,6 +114,7 @@ export function ArticlePhoto({
           className="h-auto max-h-[40rem] w-auto max-w-full"
         />
       </div>
+      <FigureCaption>{caption}</FigureCaption>
     </figure>
   );
 }
@@ -101,42 +123,52 @@ export const articlePhotos = {
   typeBlob: {
     src: typeBlob,
     alt: "A specimen of soft, uneven display letters, with the alphabet, numbers, and punctuation",
+    caption: "A soft, uneven display alphabet.",
   },
   typeFtFont: {
     src: typeFtFont,
     alt: "White display capitals with uneven heights and cut edges, set on a deep blue field",
+    caption: "Cut-edge capitals on a flat blue field.",
   },
   typeAllover: {
     src: typeAllover,
     alt: "Overlapping exhibition posters where names, dates, and Korean type stack into a dense field",
+    caption: "Names and dates stacked until the type is the picture.",
   },
   watchBlueprint: {
     src: watchBlueprint,
     alt: "A watch engineering drawing with case, side, caseback, and bracelet dimensions",
+    caption: "Case, side, and bracelet, drawn to size.",
   },
   watchRolexCaliber: {
     src: watchRolexCaliber,
     alt: "An exploded drawing of a Rolex caliber, with gears, screws, and the dial",
+    caption: "A Rolex caliber taken apart, down to the dial.",
   },
   watchSpecs: {
     src: watchSpecs,
     alt: "A spec sheet of watch parts, each with weight, material, and grade beside a rendering",
+    caption: "Each part, with its weight, material, and grade.",
   },
   nikeV5: {
     src: nikeV5,
     alt: "An illustrated Nike poster of a chunky runner, with a short story about the shoe beside it",
+    caption: "A Nike runner, drawn with a short story beside it.",
   },
   nikeSwoosh: {
     src: nikeSwoosh,
     alt: "An orange poster built around one large Swoosh and the line It only goes one way",
+    caption: "One Swoosh, and one sentence.",
   },
   nikeTravis: {
     src: nikeTravis,
     alt: "An ink drawing of a Travis Scott Jordan, with notes, a shoe box, and the soles around it",
+    caption: "A Travis Scott Jordan, drawn with the box and the soles.",
   },
   nikeCortez: {
     src: nikeCortez,
     alt: "A Nike Cortez poster with a performer on stage and the line I do this for the culture",
+    caption: "A stage, a line of type, and the Cortez.",
   },
 } as const;
 
@@ -164,6 +196,7 @@ export function JobsCollage() {
           className="w-[58%] -rotate-1"
         />
       </div>
+      <FigureCaption>Jobs, a Dylan cover, and an Apple Music demo.</FigureCaption>
     </figure>
   );
 }
@@ -198,6 +231,9 @@ export function GoldenGooseCollage() {
         imageClassName="object-[center_58%]"
         className="z-20 -mt-12 aspect-3/4 w-full justify-self-end -rotate-1 sm:-mt-16"
       />
+      <FigureCaption className="mt-8 sm:mt-10">
+        The store, the shoes, the work table, and the dust bag.
+      </FigureCaption>
     </figure>
   );
 }
@@ -231,44 +267,53 @@ export function WatchesCollage() {
         imageClassName="object-[center_42%]"
         className="-mt-10 aspect-4/5 w-[92%] justify-self-end -rotate-1 sm:-mt-14"
       />
+      <FigureCaption className="mt-8 sm:mt-10">
+        A Reverso, a Tudor, and a Seiko.
+      </FigureCaption>
     </figure>
   );
 }
 
 export function TypographyCollage() {
   return (
-    <figure className="flex w-full items-start px-1">
-      <Print
-        src={typeCalifornia}
-        alt="A type specimen of the word California, set in six weights from black to light"
-        sizes="(min-width: 64rem) 26rem, 58vw"
-        className="w-[58%] -rotate-1"
-      />
-      <Print
-        src={typeStamp}
-        alt="A rubber-stamp type specimen showing an alphabet and weights from thin to heavy"
-        sizes="(min-width: 64rem) 22rem, 50vw"
-        className="z-10 mt-[14%] ml-[-8%] w-[50%] rotate-1"
-      />
+    <figure className="flex w-full flex-col px-1">
+      <div className="flex items-start">
+        <Print
+          src={typeCalifornia}
+          alt="A type specimen of the word California, set in six weights from black to light"
+          sizes="(min-width: 64rem) 26rem, 58vw"
+          className="w-[58%] -rotate-1"
+        />
+        <Print
+          src={typeStamp}
+          alt="A rubber-stamp type specimen showing an alphabet and weights from thin to heavy"
+          sizes="(min-width: 64rem) 22rem, 50vw"
+          className="z-10 mt-[14%] ml-[-8%] w-[50%] rotate-1"
+        />
+      </div>
+      <FigureCaption>California, from a heavy weight down to a thin stamp.</FigureCaption>
     </figure>
   );
 }
 
 export function BrandingCollage() {
   return (
-    <figure className="relative w-full px-1 pb-[38%] sm:pb-[34%]">
-      <Print
-        src={brandNewArchive}
-        alt="White type on blue cloth reading New Archive, Brooklyn, New York, 2018"
-        sizes="(min-width: 64rem) 40rem, 86vw"
-        className="w-[86%] -rotate-1"
-      />
-      <Print
-        src={brandTacoma}
-        alt="A Tacoma sticker with a mountain illustration and a serif wordmark"
-        sizes="(min-width: 64rem) 18rem, 42vw"
-        className="absolute right-1 bottom-0 z-10 w-[44%] rotate-2 sm:w-[40%]"
-      />
+    <figure className="w-full px-1">
+      <div className="relative pb-[38%] sm:pb-[34%]">
+        <Print
+          src={brandNewArchive}
+          alt="White type on blue cloth reading New Archive, Brooklyn, New York, 2018"
+          sizes="(min-width: 64rem) 40rem, 86vw"
+          className="w-[86%] -rotate-1"
+        />
+        <Print
+          src={brandTacoma}
+          alt="A Tacoma sticker with a mountain illustration and a serif wordmark"
+          sizes="(min-width: 64rem) 18rem, 42vw"
+          className="absolute right-1 bottom-0 z-10 w-[44%] rotate-2 sm:w-[40%]"
+        />
+      </div>
+      <FigureCaption>New Archive on cloth, and a Tacoma mountain.</FigureCaption>
     </figure>
   );
 }
