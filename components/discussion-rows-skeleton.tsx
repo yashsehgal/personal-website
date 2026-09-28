@@ -38,16 +38,10 @@ export function DiscussionRowsSkeleton({
         <p className="sr-only">Loading discussions</p>
         <ul
           aria-hidden="true"
-          className={`${discussionListClassName} animate-pulse motion-reduce:animate-none`}
+          className="flex w-full min-w-0 flex-col gap-1.5 animate-pulse motion-reduce:animate-none"
         >
-          {Array.from({ length: 3 }, (_, index) => (
-            <li
-              key={index}
-              className="flex items-center justify-between gap-6 px-1 py-0.5"
-            >
-              <div className="h-5 w-48 max-w-[60%] rounded-md bg-muted" />
-              <div className="h-5 w-28 shrink-0 rounded-md bg-muted" />
-            </li>
+          {Array.from({ length: 5 }, (_, index) => (
+            <li key={index} className="h-5 w-full rounded-md bg-muted" />
           ))}
         </ul>
       </div>
