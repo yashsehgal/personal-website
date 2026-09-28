@@ -24,7 +24,7 @@ const WRITING_ITEMS = [
   },
   {
     id: "WRITING_ADDING_COMPANIES_FROM_A_SPREADSHEET",
-    title: "CSV imports for adding accounts in Octolane",
+    title: "Bulk CSV Handling",
     href: WEBSITE_ROUTES.WRITING_ADDING_COMPANIES_FROM_A_SPREADSHEET,
     year: 2026,
     type: "Engineering",

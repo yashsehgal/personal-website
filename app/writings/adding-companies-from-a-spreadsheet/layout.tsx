@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "CSV imports for adding accounts in Octolane",
+  title: "Bulk CSV Handling",
 };
 
 export default function AddingCompaniesFromASpreadsheetLayout({

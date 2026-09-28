@@ -33,7 +33,7 @@ const headingClassName = "text-pretty font-medium tracking-tight text-foreground
 export default function AddingCompaniesFromASpreadsheetPage() {
   return (
     <div className="mx-auto flex w-full min-w-0 max-w-3xl flex-col items-start gap-10 px-1 wide:mt-16">
-      <ArticleTitle title="CSV imports for adding accounts in Octolane" />
+      <ArticleTitle title="Bulk CSV Handling" />
       <article className="flex w-full min-w-0 flex-col gap-12">
         <section className="flex flex-col gap-6">
           <h2 className={headingClassName}>The job</h2>
