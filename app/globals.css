@@ -422,6 +422,34 @@ pre {
   @apply rounded-xl border border-foreground/10 shadow-2xs;
 }
 
+.code-sample pre {
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 1.25rem 1.5rem;
+  background-color: #ffffff;
+}
+
+.code-sample pre,
+.code-sample code {
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.8125rem;
+  line-height: 1.7;
+  font-variant-ligatures: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  .code-sample pre.shiki,
+  .code-sample pre.shiki span {
+    color: var(--shiki-dark) !important;
+    background-color: #0c0e11 !important;
+    font-style: var(--shiki-dark-font-style) !important;
+    font-weight: var(--shiki-dark-font-weight) !important;
+    text-decoration: var(--shiki-dark-text-decoration) !important;
+  }
+}
+
 /* scroll-mask utilities (https://twilson.net/scroll-mask) */
 
 @property --scroll-mask-t-from {
