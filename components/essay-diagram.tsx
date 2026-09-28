@@ -11,13 +11,13 @@ export function EssayFigure({
   children: ReactNode;
 }) {
   return (
-    <figure className="flex w-full min-w-0 flex-col items-center gap-4">
-      <figcaption className="max-w-full rounded-md bg-muted px-3 py-1 text-center text-sm leading-relaxed tracking-tight text-muted-foreground">
-        <span className="italic">fig {n}.</span> {caption}
-      </figcaption>
+    <figure className="flex w-full min-w-0 flex-col items-center">
       <div className="w-full min-w-0 overflow-x-auto rounded-lg border border-border bg-background px-4 py-8">
         {children}
       </div>
+      <figcaption className="mt-3 w-full text-center font-serif text-sm italic leading-normal text-pretty text-muted-foreground">
+        fig {n}. {caption}
+      </figcaption>
     </figure>
   );
 }
