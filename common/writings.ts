@@ -22,6 +22,13 @@ const WRITING_ITEMS = [
     year: 2026,
     type: "Essay",
   },
+  {
+    id: "WRITING_ADDING_COMPANIES_FROM_A_SPREADSHEET",
+    title: "Bulk CSV Handling",
+    href: WEBSITE_ROUTES.WRITING_ADDING_COMPANIES_FROM_A_SPREADSHEET,
+    year: 2026,
+    type: "Engineering",
+  },
 ] as const;
 
 export const WRITINGS = [...WRITING_ITEMS].sort((a, b) => {

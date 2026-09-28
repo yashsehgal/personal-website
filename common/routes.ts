@@ -5,6 +5,8 @@ export const WEBSITE_ROUTES = {
   WRITING_NAVIGATION_QUERY_STATES: "/writings/navigation-using-query-states",
   WRITING_THOUGHTS_ABOUT_BUILDING_TASTE:
     "/writings/thoughts-about-building-taste",
+  WRITING_ADDING_COMPANIES_FROM_A_SPREADSHEET:
+    "/writings/adding-companies-from-a-spreadsheet",
   APPS_MUSIC: "/apps/music",
   APPS_GALLERY: "/apps/gallery",
   APPS_DISCUSSIONS: "/apps/discussions",
