@@ -3,6 +3,10 @@
 import { WEBSITE_ROUTES } from "@/common/routes";
 import { GooeySurface } from "@/components/gooey-surface";
 import {
+  MUSIC_ICON_SWAP,
+  MusicPlayPauseIcon,
+} from "@/components/music-play-pause-icon";
+import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
@@ -20,14 +24,7 @@ import {
 } from "@/lib/music-player";
 import { cn } from "cn";
 import { AnimatePresence, MotionConfig, motion } from "framer-motion";
-import {
-  Pause,
-  Play,
-  SkipBack,
-  SkipForward,
-  Volume,
-  Volume2,
-} from "lucide-react";
+import { SkipBack, SkipForward, Volume, Volume2 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -39,8 +36,6 @@ import {
   type CSSProperties,
 } from "react";
 
-const iconTransition = { type: "spring" as const, duration: 0.3, bounce: 0 };
-
 const VOLUME_TOOLTIP_DURATION_MS = 1000;
 const CONTROL_TOOLTIP_DELAY_MS = 700;
 
@@ -49,13 +44,6 @@ const TRACK_DETAILS_CLASS_NAME =
 
 const CONTROL_BUTTON_CLASS_NAME =
   "inline-grid place-items-center rounded-full text-foreground transition-[scale,background-color] duration-150 ease-out hover:bg-foreground/8 active:scale-[0.96] disabled:pointer-events-none disabled:opacity-40";
-
-const SWAP_ANIMATION = {
-  initial: { opacity: 0, scale: 0.25, filter: "blur(4px)" },
-  animate: { opacity: 1, scale: 1, filter: "blur(0px)" },
-  exit: { opacity: 0, scale: 0.25, filter: "blur(4px)" },
-  transition: iconTransition,
-};
 
 function ControlButton({
   label,
@@ -93,22 +81,7 @@ function PlayPauseButton({
       onClick={togglePlayback}
       className={className}
     >
-      <AnimatePresence mode="popLayout" initial={false}>
-        <motion.span
-          key={isPlaying ? "pause" : "play"}
-          className="flex items-center justify-center"
-          {...SWAP_ANIMATION}
-        >
-          {isPlaying ? (
-            <Pause aria-hidden="true" className="size-6 fill-current" />
-          ) : (
-            <Play
-              aria-hidden="true"
-              className="size-6 translate-x-px fill-current"
-            />
-          )}
-        </motion.span>
-      </AnimatePresence>
+      <MusicPlayPauseIcon isPlaying={isPlaying} iconClassName="size-6" />
     </ControlButton>
   );
 }
@@ -328,7 +301,7 @@ export function MusicNowPlaying() {
                     <motion.span
                       key="play-pause"
                       className="flex shrink-0 items-center justify-center"
-                      {...SWAP_ANIMATION}
+                      {...MUSIC_ICON_SWAP}
                     >
                       <PlayPauseButton
                         isPlaying={isPlaying}
