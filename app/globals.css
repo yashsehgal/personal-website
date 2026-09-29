@@ -182,6 +182,79 @@ body {
   }
 }
 
+.email-shortcut-hint {
+  background-color: oklch(1 0 0 / 0.82);
+  border: 1px solid oklch(0 0 0 / 0.08);
+  -webkit-backdrop-filter: blur(16px) saturate(1.6);
+  backdrop-filter: blur(16px) saturate(1.6);
+  box-shadow:
+    inset 0 1px 0 oklch(1 0 0 / 0.72),
+    0 1px 1px oklch(0 0 0 / 0.04),
+    0 8px 24px -8px oklch(0 0 0 / 0.18);
+  transition:
+    opacity 150ms cubic-bezier(0.2, 0, 0, 1),
+    translate 150ms cubic-bezier(0.2, 0, 0, 1),
+    scale 150ms cubic-bezier(0.2, 0, 0, 1);
+}
+
+.email-shortcut-hint[data-open="false"] {
+  opacity: 0;
+  pointer-events: none;
+  translate: 0 0.25rem;
+  scale: 0.96;
+}
+
+@media (prefers-color-scheme: dark) {
+  .email-shortcut-hint {
+    background-color: oklch(0.24 0 0 / 0.78);
+    border-color: oklch(1 0 0 / 0.1);
+    box-shadow:
+      inset 0 1px 0 oklch(1 0 0 / 0.14),
+      0 1px 1px oklch(0 0 0 / 0.24),
+      0 10px 28px -8px oklch(0 0 0 / 0.55);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .email-shortcut-hint {
+    transition: opacity 150ms ease;
+  }
+
+  .email-shortcut-hint[data-open="false"] {
+    translate: none;
+    scale: none;
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .email-shortcut-hint {
+    background-color: var(--popover);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}
+
+@media (prefers-contrast: more) {
+  .email-shortcut-hint {
+    background-color: var(--popover);
+    border-color: var(--foreground);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    box-shadow: none;
+  }
+}
+
+@media (forced-colors: active) {
+  .email-shortcut-hint {
+    background: Canvas;
+    color: CanvasText;
+    border: 1px solid CanvasText;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    box-shadow: none;
+  }
+}
+
 @media (prefers-color-scheme: dark) {
   .surface-inverted {
     --background: oklch(1 0 0);

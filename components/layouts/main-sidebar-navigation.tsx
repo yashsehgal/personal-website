@@ -17,6 +17,7 @@ import {
   useState,
   useSyncExternalStore,
   type ComponentType,
+  type KeyboardEvent,
   type MouseEvent,
   type TransitionEvent,
 } from "react";
@@ -91,6 +92,8 @@ const SOCIAL_LINKS: {
 
 const EMAIL_ADDRESS = "hi@yashsehgal.com";
 const DESKTOP_LAYOUT_QUERY = "(width > 64rem)";
+const EMAIL_HINT_QUERY =
+  "(width > 64rem) and (hover: hover) and (pointer: fine)";
 const COPY_FEEDBACK_LABEL = "Email copied";
 const COPY_FEEDBACK_DURATION_MS = 2000;
 
@@ -106,9 +109,54 @@ function useIsMac() {
 
 function KeyCap({ children }: { children: string }) {
   return (
-    <kbd className="inline-flex h-4 min-w-4 items-center justify-center rounded-sm bg-foreground/8 px-1 font-mono text-[11px] leading-none text-muted-foreground uppercase shadow-[inset_0_-1px_0_oklch(0_0_0/0.12)] ring-1 ring-foreground/10 dark:bg-white/14 dark:shadow-[inset_0_1px_0_oklch(1_0_0/0.16)] dark:ring-white/10">
+    <kbd className="inline-flex h-5 min-w-5 items-center justify-center rounded-sm bg-foreground/6 px-1 text-[11px] font-medium leading-none text-foreground shadow-[inset_0_-1px_0_oklch(0_0_0/0.1)] ring-1 ring-foreground/10 dark:bg-white/10 dark:shadow-[inset_0_1px_0_oklch(1_0_0/0.16)] dark:ring-white/10">
       {children}
     </kbd>
+  );
+}
+
+function EmailShortcutHint({
+  id,
+  open,
+  isMac,
+}: {
+  id: string;
+  open: boolean;
+  isMac: boolean;
+}) {
+  const modifier = isMac ? "⌘" : "Ctrl";
+  const modifierName = isMac ? "Command" : "Control";
+
+  return (
+    <span
+      className={cn(
+        "absolute top-full left-0 z-10 hidden pt-2 wide:block",
+        !open && "pointer-events-none",
+      )}
+    >
+      <span
+        id={id}
+        data-open={open}
+        className="email-shortcut-hint flex w-max origin-top-left flex-col rounded-lg p-1 text-xs text-foreground"
+      >
+        <span className="sr-only">
+          {`Click to open mail. ${modifierName}-click, or press ${modifierName}-C, to copy the email.`}
+        </span>
+        <span aria-hidden="true" className="flex flex-col">
+          <span className="flex items-center justify-between gap-5 px-2 py-1">
+            <span className="font-medium">Open mail</span>
+            <KeyCap>Click</KeyCap>
+          </span>
+          <span className="flex items-center justify-between gap-5 px-2 py-1">
+            <span className="font-medium">Copy email</span>
+            <span className="inline-flex items-center gap-1">
+              <KeyCap>{modifier}</KeyCap>
+              <KeyCap>Click</KeyCap>
+            </span>
+          </span>
+        </span>
+      </span>
+    </span>
   );
 }
 
@@ -124,6 +172,7 @@ export function MainSidebarNavigation() {
   const [skipCopyFeedbackTransition, setSkipCopyFeedbackTransition] =
     useState(false);
   const copyFeedbackTimerRef = useRef<number | null>(null);
+  const emailFocusedRef = useRef(false);
 
   const isHomePageActive = useMemo(
     () => pathname === WEBSITE_ROUTES.HOME,
@@ -228,6 +277,12 @@ export function MainSidebarNavigation() {
 
   useEffect(() => clearCopyFeedbackTimer, [clearCopyFeedbackTimer]);
 
+  const copyEmailAddress = useCallback(() => {
+    void navigator.clipboard.writeText(EMAIL_ADDRESS).then(() => {
+      showCopyFeedback();
+    });
+  }, [showCopyFeedback]);
+
   const handleEmailClick = useCallback(
     (event: MouseEvent<HTMLAnchorElement>) => {
       if (!window.matchMedia(DESKTOP_LAYOUT_QUERY).matches) {
@@ -239,23 +294,46 @@ export function MainSidebarNavigation() {
       }
 
       event.preventDefault();
-      void navigator.clipboard.writeText(EMAIL_ADDRESS).then(() => {
-        showCopyFeedback();
-      });
+      copyEmailAddress();
     },
-    [showCopyFeedback],
+    [copyEmailAddress],
+  );
+
+  const handleEmailKeyDown = useCallback(
+    (event: KeyboardEvent<HTMLAnchorElement>) => {
+      if (event.key.toLowerCase() !== "c" || event.altKey || event.shiftKey) {
+        return;
+      }
+
+      if (!event.metaKey && !event.ctrlKey) {
+        return;
+      }
+
+      event.preventDefault();
+      copyEmailAddress();
+    },
+    [copyEmailAddress],
   );
 
   const showEmailHover = useCallback(() => {
-    if (!window.matchMedia(DESKTOP_LAYOUT_QUERY).matches) {
+    if (!window.matchMedia(EMAIL_HINT_QUERY).matches) {
       return;
     }
 
     setIsEmailHovered(true);
   }, []);
 
+  const hideEmailHover = useCallback(() => {
+    if (emailFocusedRef.current) {
+      return;
+    }
+
+    setIsEmailHovered(false);
+    dismissCopyFeedback();
+  }, [dismissCopyFeedback]);
+
   useEffect(() => {
-    const media = window.matchMedia(DESKTOP_LAYOUT_QUERY);
+    const media = window.matchMedia(EMAIL_HINT_QUERY);
     const clearHoverOnNarrowScreens = () => {
       if (media.matches) {
         return;
@@ -412,14 +490,7 @@ export function MainSidebarNavigation() {
                 key={link.href}
                 className={cn("relative", !isEmail && dimmedClassName)}
                 onMouseEnter={isEmail ? showEmailHover : undefined}
-                onMouseLeave={
-                  isEmail
-                    ? () => {
-                        setIsEmailHovered(false);
-                        dismissCopyFeedback();
-                      }
-                    : undefined
-                }
+                onMouseLeave={isEmail ? hideEmailHover : undefined}
               >
                 <Link
                   target="_blank"
@@ -427,8 +498,23 @@ export function MainSidebarNavigation() {
                   href={link.href}
                   aria-describedby={isEmail ? emailHintId : undefined}
                   onClick={isEmail ? handleEmailClick : undefined}
-                  onFocus={isEmail ? showEmailHover : undefined}
-                  onBlur={isEmail ? () => setIsEmailHovered(false) : undefined}
+                  onKeyDown={isEmail ? handleEmailKeyDown : undefined}
+                  onFocus={
+                    isEmail
+                      ? () => {
+                          emailFocusedRef.current = true;
+                          showEmailHover();
+                        }
+                      : undefined
+                  }
+                  onBlur={
+                    isEmail
+                      ? () => {
+                          emailFocusedRef.current = false;
+                          setIsEmailHovered(false);
+                        }
+                      : undefined
+                  }
                   className={cn(
                     "font-medium text-sm tracking-tight text-muted-foreground rounded px-1 py-0.5",
                     link.overrideHoverClassname,
@@ -470,33 +556,11 @@ export function MainSidebarNavigation() {
                   )}
                 </Link>
                 {isEmail ? (
-                  <span
+                  <EmailShortcutHint
                     id={emailHintId}
-                    className={cn(
-                      "absolute top-full left-1 z-10 mt-3 hidden w-max flex-col gap-3 text-xs text-muted-foreground wide:flex",
-                      "transition-[opacity,translate] duration-200 ease-[cubic-bezier(0.2,0,0,1)] motion-reduce:transition-none",
-                      isEmailHovered
-                        ? "translate-y-0 opacity-100"
-                        : "pointer-events-none translate-y-1 opacity-0",
-                    )}
-                  >
-                    <span>
-                      <KeyCap>Click</KeyCap> to open mail
-                    </span>
-                    <span className="inline-flex items-center gap-1">
-                      <span className="sr-only">
-                        {isMac ? "Command-click" : "Control-click"}
-                      </span>
-                      <span
-                        aria-hidden="true"
-                        className="inline-flex items-center gap-1"
-                      >
-                        <KeyCap>{isMac ? "⌘" : "Ctrl"}</KeyCap>
-                        <KeyCap>Click</KeyCap>
-                      </span>
-                      to copy the email
-                    </span>
-                  </span>
+                    open={isEmailHovered}
+                    isMac={isMac}
+                  />
                 ) : null}
               </li>
             );
