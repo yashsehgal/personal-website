@@ -251,10 +251,10 @@ export function MusicNowPlaying() {
             <motion.section
               key="now-playing"
               aria-label="Now playing"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0, y: 12, filter: "blur(4px)" }}
-              transition={{ duration: 0.22, ease: [0.2, 0, 0, 1] }}
+              initial={{ opacity: 0, transform: "translateY(8px)" }}
+              animate={{ opacity: 1, transform: "translateY(0px)" }}
+              exit={{ opacity: 0, transform: "translateY(8px)" }}
+              transition={{ duration: 0.2, ease: [0.23, 1, 0.32, 1] }}
               className="sticky bottom-8 z-20 w-64 max-w-full self-start overflow-visible wide:fixed wide:left-8"
             >
               <GooeySurface
@@ -314,7 +314,7 @@ export function MusicNowPlaying() {
               <div
                 inert={!isExpanded}
                 className={cn(
-                  "relative z-10 grid transition-[grid-template-rows,opacity] duration-350 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
+                  "relative z-10 grid transition-[grid-template-rows,opacity] duration-250 ease-out motion-reduce:transition-none",
                   isExpanded
                     ? "grid-rows-[1fr] opacity-100"
                     : "grid-rows-[0fr] opacity-0",

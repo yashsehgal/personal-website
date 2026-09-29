@@ -290,8 +290,8 @@ export function MainSidebarNavigation() {
   );
 
   const dimmedClassName = cn(
-    "transition-[opacity,filter] duration-150 ease-[cubic-bezier(0.2,0,0,1)] motion-reduce:transition-none",
-    isEmailHovered && "opacity-60 blur-xs",
+    "transition-opacity duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] motion-reduce:transition-none",
+    isEmailHovered && "opacity-60",
   );
 
   return (
@@ -322,7 +322,7 @@ export function MainSidebarNavigation() {
                 "size-10 select-none dark:invert transition-opacity duration-150 ease-[cubic-bezier(0.2,0,0,1)] motion-reduce:transition-none",
                 isHomePageActive
                   ? "opacity-100"
-                  : "opacity-70 group-hover:opacity-100 group-focus-visible:opacity-100",
+                  : "opacity-70 [@media(hover:hover)_and_(pointer:fine)]:group-hover:opacity-100 group-focus-visible:opacity-100",
               )}
               draggable={false}
               priority
@@ -450,7 +450,7 @@ export function MainSidebarNavigation() {
                           className={cn(
                             "flex flex-col",
                             !skipCopyFeedbackTransition &&
-                              "transition-[translate] duration-300 ease-[cubic-bezier(0.2,0,0,1)] motion-reduce:transition-none",
+                              "transition-[translate] duration-200 ease-[cubic-bezier(0.23,1,0.32,1)] motion-reduce:transition-none",
                             copyFeedbackPhase === "copied" && "-translate-y-5",
                             copyFeedbackPhase === "done" && "-translate-y-10",
                           )}

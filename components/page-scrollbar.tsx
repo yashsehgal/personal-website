@@ -125,9 +125,9 @@ export function PageScrollbar() {
     >
       <div
         className={cn(
-          "h-full w-1.5 rounded-full transition-[background-color,width] duration-150 ease-out group-hover:w-2",
+          "h-full w-1.5 origin-center rounded-full transition-[background-color,transform] duration-150 ease-out group-hover:scale-x-[1.333]",
           isDragging
-            ? "w-2 bg-foreground/40"
+            ? "scale-x-[1.333] bg-foreground/40"
             : "bg-foreground/20 group-hover:bg-foreground/35",
         )}
       />

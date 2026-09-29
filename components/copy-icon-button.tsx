@@ -11,7 +11,7 @@ import { AnimatePresence, MotionConfig, motion } from "framer-motion";
 import { Check, type LucideIcon } from "lucide-react";
 import { useEffect, useRef, useState, type ComponentType } from "react";
 
-const iconTransition = { type: "spring" as const, duration: 0.3, bounce: 0 };
+const iconTransition = { duration: 0.16, ease: [0.23, 1, 0.32, 1] as const };
 
 export const copyIconButtonClassName =
   "inline-flex size-9 shrink-0 items-center justify-center rounded-full bg-muted text-muted-foreground transition-transform duration-150 ease-out hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:outline-none active:scale-[0.96]";
@@ -73,9 +73,9 @@ export function CopyIconButton({
             <motion.span
               key={copied ? "copied" : "copy"}
               className="flex items-center justify-center"
-              initial={{ opacity: 0, scale: 0.25, filter: "blur(4px)" }}
-              animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-              exit={{ opacity: 0, scale: 0.25, filter: "blur(4px)" }}
+              initial={{ opacity: 0, transform: "scale(0.95)" }}
+              animate={{ opacity: 1, transform: "scale(1)" }}
+              exit={{ opacity: 0, transform: "scale(0.95)" }}
               transition={iconTransition}
             >
               {copied ? (

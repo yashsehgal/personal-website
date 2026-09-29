@@ -361,7 +361,7 @@ function BacktrackingPreviewComponent() {
       },
       [BACKTRACKING_PREVIEW_STATE.ZOOM_SEGMENTS]: {
         initial: {},
-        animate: { opacity: 0, scale: 0.4 },
+        animate: { opacity: 0, transform: 'scale(0.95)' },
       },
 
       [BACKTRACKING_PREVIEW_STATE.SHOW_FOLDER_TREE_NODE]: {
@@ -376,31 +376,29 @@ function BacktrackingPreviewComponent() {
     'show-folder': {
       [BACKTRACKING_PREVIEW_STATE.SHOW_URL_IN_BROWSER]: {
         initial: {},
-        animate: { opacity: 0, scale: 0.3, y: 56 },
+        animate: { opacity: 0, transform: 'translateY(8px) scale(0.95)' },
       },
       [BACKTRACKING_PREVIEW_STATE.HIGHLIGHT_SEGMENTS]: {
         initial: {},
-        animate: { opacity: 0, scale: 0.3, y: 56 },
+        animate: { opacity: 0, transform: 'translateY(8px) scale(0.95)' },
       },
       [BACKTRACKING_PREVIEW_STATE.ZOOM_SEGMENTS]: {
         initial: {},
-        animate: { opacity: 0, scale: 0.3, y: 56 },
+        animate: { opacity: 0, transform: 'translateY(8px) scale(0.95)' },
       },
 
       [BACKTRACKING_PREVIEW_STATE.SHOW_FOLDER_TREE_NODE]: {
         initial: {},
         animate: {
           opacity: 1,
-          scale: 1.2,
-          y: 0,
+          transform: 'translateY(0px) scale(1.2)',
         },
       },
       [BACKTRACKING_PREVIEW_STATE.END_SCENE]: {
         initial: {},
         animate: {
           opacity: 1,
-          scale: 1.2,
-          y: 0,
+          transform: 'translateY(0px) scale(1.2)',
         },
       },
     },
@@ -439,7 +437,7 @@ function BacktrackingPreviewComponent() {
   const isUndefined: boolean = typeof scene === 'undefined';
 
   return (
-    <MotionConfig transition={{ type: 'spring', bounce: 0 }}>
+    <MotionConfig transition={{ type: 'spring', duration: 0.5, bounce: 0 }}>
       <ComponentPreviewContainer className="h-[420px] relative select-none cursor-default max-lg:hidden">
         {!isUndefined && (
           <>
@@ -459,7 +457,7 @@ function BacktrackingPreviewComponent() {
                 <motion.div
                   key="segments-container"
                   className={cn(
-                    'transition-[padding] w-fit flex items-center',
+                    'w-fit flex items-center',
                     !validateActiveScene(
                       BACKTRACKING_PREVIEW_STATE.SHOW_URL_IN_BROWSER,
                     ) &&
@@ -472,7 +470,7 @@ function BacktrackingPreviewComponent() {
             <motion.div
               key="folder-container"
               className="border border-foreground/10 absolute bottom-0 left-1/2 -translate-x-1/2 rounded-3xl p-2 bg-foreground/2"
-              initial={{ opacity: 0, scale: 0.3, y: 56 }}
+              initial={{ opacity: 0, transform: 'translateY(8px) scale(0.95)' }}
               animate={SCENE_ANIMATIONS['show-folder'][scene]?.animate}>
               <div className="px-5 py-2 border border-foreground/12 rounded-t-xl h-64 w-64 bg-background">
                 <div className="h-8 flex items-center justify-start gap-2">
@@ -794,10 +792,10 @@ function DashboardSidebarTreeNodeContainerComponent({
             <motion.div
               key={node.id}
               className="dashboard-sidebar-tree-node-children-items-container overflow-hidden"
-              initial={{ height: 0 }}
-              animate={{ height: 'fit-content' }}
-              exit={{ height: 0 }}
-              transition={{ duration: 0.5, type: 'spring', bounce: 0 }}>
+              initial={{ opacity: 0, transform: 'translateY(-4px)' }}
+              animate={{ opacity: 1, transform: 'translateY(0px)' }}
+              exit={{ opacity: 0, transform: 'translateY(-4px)' }}
+              transition={{ duration: 0.2, ease: [0.23, 1, 0.32, 1] }}>
               {node.children?.map((childNode) => {
                 return (
                   <DashboardSidebarTreeNodeContainerComponent
@@ -855,7 +853,7 @@ function DashboardSidebarNodeComponent(
           <IconChevronRight
             size={DASHBOARD_SIDEBAR_TREE_NODE_ICON}
             className={cn(
-              'text-foreground/50 shrink-0 transition-all group-hover/tree-node:text-foreground',
+              'text-foreground/50 shrink-0 transition-[color,transform] duration-150 ease-[cubic-bezier(0.23,1,0.32,1)] motion-reduce:transition-none group-hover/tree-node:text-foreground',
               node.isFolderOpen ? 'rotate-90' : 'rotate-0',
             )}
           />

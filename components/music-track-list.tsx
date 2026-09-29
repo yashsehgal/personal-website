@@ -434,7 +434,7 @@ export function MusicTrackList({ tracks }: MusicTrackListProps) {
                   className={cn(
                     "group flex w-full min-w-0 flex-col gap-1.5 rounded-[1rem] p-1.5 text-left select-none transition-[background-color,opacity] duration-150 ease-out focus-visible:outline-none forced-colors:focus-visible:outline-2 forced-colors:focus-visible:-outline-offset-2 forced-colors:focus-visible:outline-[Highlight]",
                     isTrackPlaying && playingColor
-                      ? "track-tile-live hover:opacity-90 focus-visible:opacity-90"
+                      ? "track-tile-live [@media(hover:hover)_and_(pointer:fine)]:hover:opacity-90 focus-visible:opacity-90"
                       : "hover:bg-muted focus-visible:bg-muted",
                   )}
                   style={

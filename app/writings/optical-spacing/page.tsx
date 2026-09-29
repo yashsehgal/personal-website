@@ -143,11 +143,11 @@ function HeroSectionSpacingGuidelinesDemo({
           key="hero-section-buttons-container"
           className="flex items-center justify-start gap-4"
           animate={{
-            scale: reduceOpacity ? 1.5 : undefined,
-            y: reduceOpacity ? -80 : undefined,
-            x: reduceOpacity ? 210 : undefined,
+            transform: reduceOpacity
+              ? "translate3d(210px, -80px, 0) scale(1.5)"
+              : "translate3d(0px, 0px, 0) scale(1)",
           }}
-          transition={{ bounce: 0.2, type: "spring", ease: "easeInOut" }}
+          transition={{ type: "spring", duration: 0.5, bounce: 0.2 }}
         >
           <button className="rounded-full bg-foreground p-4 py-2 text-sm font-medium text-background">
             Get started
@@ -160,32 +160,32 @@ function HeroSectionSpacingGuidelinesDemo({
       {showGuidelines && !showSpacingBetweenButtons && (
         <>
           <motion.div
-            className="guideline-block-horizontal absolute top-[132px] h-6 max-sm:top-[116px]"
-            initial={{ width: 0 }}
-            animate={{ width: "100%" }}
-            transition={{ ease: "easeIn" }}
+            className="guideline-block-horizontal absolute top-[132px] h-6 origin-left max-sm:top-[116px]"
+            initial={{ transform: "scaleX(0)" }}
+            animate={{ transform: "scaleX(1)" }}
+            transition={{ duration: 0.25, ease: [0.23, 1, 0.32, 1] }}
           />
           <motion.div
             key="badge-between-title-description"
             className="absolute top-[131px] right-24 w-fit scale-90 rounded-lg border border-red-400 bg-red-50 px-1.5 py-1 font-mono text-xs font-medium text-red-500 max-sm:top-[116px] dark:border-red-900 dark:bg-red-950 dark:text-red-200"
-            initial={{ opacity: 0, scale: 0 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.5 }}
+            initial={{ opacity: 0, transform: "scale(0.95)" }}
+            animate={{ opacity: 1, transform: "scale(1)" }}
+            transition={{ duration: 0.2, ease: [0.23, 1, 0.32, 1], delay: 0.2 }}
           >
             16px
           </motion.div>
           <motion.div
-            className="guideline-block-horizontal absolute top-[195px] h-[38px] max-sm:top-[171px]"
-            initial={{ width: 0 }}
-            animate={{ width: "100%" }}
-            transition={{ ease: "easeIn", delay: 0.3 }}
+            className="guideline-block-horizontal absolute top-[195px] h-[38px] origin-left max-sm:top-[171px]"
+            initial={{ transform: "scaleX(0)" }}
+            animate={{ transform: "scaleX(1)" }}
+            transition={{ duration: 0.25, ease: [0.23, 1, 0.32, 1] }}
           />
           <motion.div
             key="badge-between-content-button"
             className="absolute top-[201px] right-24 w-fit scale-90 rounded-lg border border-blue-400 bg-blue-50 px-1.5 py-1 font-mono text-xs font-medium text-blue-500 max-sm:top-[177px] dark:border-blue-900 dark:bg-blue-950 dark:text-blue-200"
-            initial={{ opacity: 0, scale: 0 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.8 }}
+            initial={{ opacity: 0, transform: "scale(0.95)" }}
+            animate={{ opacity: 1, transform: "scale(1)" }}
+            transition={{ duration: 0.2, ease: [0.23, 1, 0.32, 1], delay: 0.28 }}
           >
             24px
           </motion.div>
@@ -195,17 +195,17 @@ function HeroSectionSpacingGuidelinesDemo({
         <>
           <motion.div
             key="show-button-guideline"
-            className="guideline-block-vertical absolute top-0 left-[370px] z-0 w-[24px]"
-            initial={{ height: 0 }}
-            animate={{ height: "360px" }}
-            transition={{ ease: "easeIn" }}
+            className="guideline-block-vertical absolute top-0 left-[370px] z-0 w-[24px] origin-top"
+            initial={{ transform: "scaleY(0)" }}
+            animate={{ transform: "scaleY(1)" }}
+            transition={{ duration: 0.25, ease: [0.23, 1, 0.32, 1] }}
           />
           <motion.div
             key="badge-between-buttons-container"
             className="absolute bottom-[140px] left-[360px] w-fit rounded-lg border border-red-400 bg-red-50 px-1.5 py-1 font-mono text-xs font-medium text-red-500 dark:border-red-900 dark:bg-red-950 dark:text-red-200"
-            initial={{ opacity: 0, scale: 0 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.4 }}
+            initial={{ opacity: 0, transform: "scale(0.95)" }}
+            animate={{ opacity: 1, transform: "scale(1)" }}
+            transition={{ duration: 0.2, ease: [0.23, 1, 0.32, 1], delay: 0.16 }}
           >
             16px
           </motion.div>

@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "cn";
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 
 type ProgressiveImageProps = {
   src: string;
@@ -14,7 +14,7 @@ type ProgressiveImageProps = {
 
 const SHARP_CLASS_NAME =
   "scale-100 opacity-100 blur-none motion-reduce:transition-none";
-const BLURRED_CLASS_NAME = "scale-110 opacity-0 blur-[20px]";
+const BLURRED_CLASS_NAME = "scale-[1.02] opacity-0 blur-[2px]";
 
 export function ProgressiveImage({
   src,
@@ -24,14 +24,22 @@ export function ProgressiveImage({
   blurDataURL,
   className,
 }: ProgressiveImageProps) {
-  const imageRef = useRef<HTMLImageElement>(null);
   const [isLoaded, setIsLoaded] = useState(false);
 
-  useEffect(() => {
-    if (imageRef.current?.complete) {
-      setIsLoaded(true);
+  const markLoadedIfReady = (image: HTMLImageElement | null) => {
+    if (!image) return;
+
+    const markLoaded = () => setIsLoaded(true);
+    if (image.complete && image.naturalWidth > 0) {
+      markLoaded();
+      return;
     }
-  }, [src]);
+
+    image.addEventListener("load", markLoaded, { once: true });
+    queueMicrotask(() => {
+      if (image.complete && image.naturalWidth > 0) markLoaded();
+    });
+  };
 
   return (
     <div
@@ -48,7 +56,7 @@ export function ProgressiveImage({
         draggable={false}
       />
       <img
-        ref={imageRef}
+        ref={markLoadedIfReady}
         src={src}
         alt={alt}
         width={width}
@@ -57,7 +65,7 @@ export function ProgressiveImage({
         decoding="async"
         onLoad={() => setIsLoaded(true)}
         className={cn(
-          "absolute inset-0 size-full object-cover select-none transition-[filter,opacity,scale] duration-700 ease-[cubic-bezier(0.2,0,0,1)] motion-reduce:transition-none motion-reduce:scale-100 motion-reduce:opacity-100 motion-reduce:blur-none",
+          "absolute inset-0 size-full object-cover select-none transition-[filter,opacity,scale] duration-300 ease-out motion-reduce:transition-none motion-reduce:scale-100 motion-reduce:opacity-100 motion-reduce:blur-none",
           isLoaded ? SHARP_CLASS_NAME : BLURRED_CLASS_NAME,
         )}
         draggable={false}

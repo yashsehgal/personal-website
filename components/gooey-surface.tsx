@@ -349,9 +349,9 @@ export function GooeySurface({
       onPointerCancel={endPointer}
       onClickCapture={onClickCapture}
       className={cn(
-        "relative touch-none select-none transition-[background-color,box-shadow] duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]",
+        "relative touch-none select-none transition-[background-color,box-shadow] duration-300 ease-out",
         isGrabbing ? "cursor-grabbing" : "cursor-grab",
-        "data-gooey-live:bg-transparent data-gooey-live:shadow-none data-gooey-live:duration-0 data-gooey-easing:duration-700",
+        "data-gooey-live:bg-transparent data-gooey-live:shadow-none data-gooey-live:duration-0 data-gooey-easing:duration-300",
         className,
       )}
     >
@@ -359,9 +359,9 @@ export function GooeySurface({
         ref={canvasRef}
         aria-hidden="true"
         className={cn(
-          "pointer-events-none absolute max-w-none transition-opacity duration-700 ease-[cubic-bezier(0.22,1,0.36,1)]",
+          "pointer-events-none absolute max-w-none transition-opacity duration-300 ease-out",
           showBlob ? "opacity-100 duration-0" : "opacity-0",
-          isEasing && "duration-700",
+          isEasing && "duration-300",
         )}
       />
       <div
