@@ -26,7 +26,7 @@ import {
 } from "./snippets";
 
 const copyClassName =
-  "text-pretty tracking-tight leading-relaxed text-muted-foreground";
+  "text-pretty leading-relaxed text-muted-foreground";
 
 const headingClassName = "text-pretty font-medium tracking-tight text-foreground";
 
@@ -326,7 +326,7 @@ export default function AddingCompaniesFromASpreadsheetPage() {
             <BadCell />
           </EssayFigure>
           <CodeSample code={writeWindow} />
-          <ul className="flex list-disc flex-col gap-3 pl-5 text-pretty tracking-tight leading-relaxed text-muted-foreground">
+          <ul className={`flex list-disc flex-col gap-3 pl-5 ${copyClassName}`}>
             <li>
               One bad cell is counted as failed. The rest of the batch continues.
             </li>

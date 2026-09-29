@@ -8,7 +8,7 @@ import Image from "next/image";
 import { useState } from "react";
 
 const copyClassName =
-  "text-pretty tracking-tight leading-relaxed text-muted-foreground";
+  "text-pretty leading-relaxed text-muted-foreground";
 
 export default function OpticalSpacingPage() {
   return (

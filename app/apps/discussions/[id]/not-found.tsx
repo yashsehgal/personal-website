@@ -5,7 +5,7 @@ export default function DiscussionNotFound() {
   return (
     <div className="mx-auto flex w-full min-w-0 max-w-3xl flex-col items-start gap-6 px-1 wide:mt-16">
       <h1 className="font-medium tracking-tight">Discussion not found</h1>
-      <p className="tracking-tight text-pretty text-muted-foreground">
+      <p className="text-pretty leading-relaxed text-muted-foreground">
         This discussion does not exist.
       </p>
       <Link

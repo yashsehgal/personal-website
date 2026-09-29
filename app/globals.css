@@ -169,6 +169,19 @@ body {
     inset 0 0 0 1px oklch(1 0 0 / 0.08), inset 0 1px 0 oklch(1 0 0 / 0.06);
 }
 
+.now-playing-card {
+  -webkit-backdrop-filter: blur(24px) saturate(1.6);
+  backdrop-filter: blur(24px) saturate(1.6);
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .now-playing-card {
+    background-color: var(--foreground);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}
+
 @media (prefers-color-scheme: dark) {
   .surface-inverted {
     --background: oklch(1 0 0);
@@ -576,7 +589,7 @@ pre {
 
 .discussion-rich-text {
   overflow-wrap: break-word;
-  @apply text-pretty tracking-tight text-foreground;
+  @apply text-pretty leading-relaxed text-foreground;
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.625;

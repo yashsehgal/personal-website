@@ -1,7 +1,6 @@
 "use client";
 
 import { WEBSITE_ROUTES, WebsiteRouteType } from "@/common/routes";
-import { playInternalLinkSound } from "@/lib/interface-sounds";
 import { useMusicPlayer } from "@/lib/music-player";
 import { cn } from "cn";
 import { MusicNavigationIcon } from "@/components/music-navigation-icon";
@@ -66,27 +65,27 @@ const SOCIAL_LINKS: {
   {
     label: "X (Twitter)",
     href: "https://x.com/yashsehgaldev",
-    overrideHoverClassname: "hover:bg-foreground hover:text-background",
+    overrideHoverClassname: "hover:bg-muted hover:text-foreground",
   },
   {
     label: "GitHub",
     href: "https://github.com/yashsehgal",
-    overrideHoverClassname: "hover:bg-foreground hover:text-background",
+    overrideHoverClassname: "hover:bg-muted hover:text-foreground",
   },
   {
     label: "Instagram",
     href: "https://www.instagram.com/sehgalyash_/",
-    overrideHoverClassname: "hover:bg-pink-500 hover:text-white",
+    overrideHoverClassname: "hover:bg-muted hover:text-foreground",
   },
   {
     label: "LinkedIn",
     href: "https://www.linkedin.com/in/sehgalyash/",
-    overrideHoverClassname: "hover:bg-sky-600 hover:text-white",
+    overrideHoverClassname: "hover:bg-muted hover:text-foreground",
   },
   {
     label: "hi@yashsehgal.com",
     href: "mailto:hi@yashsehgal.com",
-    overrideHoverClassname: "wide:hover:bg-rose-500 wide:hover:text-white",
+    overrideHoverClassname: "wide:hover:bg-muted wide:hover:text-foreground",
   },
 ] as const;
 
@@ -365,7 +364,6 @@ export function MainSidebarNavigation() {
                   aria-expanded={isExpanded}
                   aria-controls={groupListId}
                   onClick={() => {
-                    playInternalLinkSound();
                     setExpandedGroupLabel(isExpanded ? null : item.label);
                   }}
                   className={cn(

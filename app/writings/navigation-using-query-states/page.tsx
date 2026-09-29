@@ -68,7 +68,7 @@ function computeExpandedNodes(selectedNodeId: string | null): Set<string> {
 }
 
 const copyClassName =
-  "text-pretty tracking-tight leading-relaxed text-muted-foreground";
+  "text-pretty leading-relaxed text-muted-foreground";
 
 export default function BreadcrumbComponentPage() {
   return (

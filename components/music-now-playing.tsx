@@ -258,7 +258,7 @@ export function MusicNowPlaying() {
               className="sticky bottom-8 z-20 w-64 max-w-full self-start overflow-visible wide:fixed wide:left-8"
             >
               <GooeySurface
-                className="flex flex-col rounded-[20px] bg-foreground text-background shadow-[inset_0_0_0_1px_oklch(1_0_0/0.08),inset_0_1px_0_oklch(1_0_0/0.06)] dark:shadow-[inset_0_0_0_1px_oklch(0_0_0/0.06),inset_0_1px_0_oklch(1_0_0/0.6)]"
+                className="now-playing-card flex flex-col rounded-[20px] bg-foreground/80 text-background shadow-[inset_0_0_0_1px_oklch(1_0_0/0.08),inset_0_1px_0_oklch(1_0_0/0.06)] backdrop-blur-2xl backdrop-saturate-150 dark:shadow-[inset_0_0_0_1px_oklch(0_0_0/0.06),inset_0_1px_0_oklch(1_0_0/0.6)]"
                 contentClassName="surface-inverted rounded-[20px] p-3"
               >
               <span
@@ -311,16 +311,16 @@ export function MusicNowPlaying() {
                   )}
                 </AnimatePresence>
               </div>
-              <div
-                inert={!isExpanded}
-                className={cn(
-                  "relative z-10 grid transition-[grid-template-rows,opacity] duration-250 ease-out motion-reduce:transition-none",
-                  isExpanded
-                    ? "grid-rows-[1fr] opacity-100"
-                    : "grid-rows-[0fr] opacity-0",
-                )}
-              >
-                <div className="min-h-0 overflow-hidden">
+              <AnimatePresence initial={false}>
+                {isExpanded ? (
+                  <motion.div
+                    key="player-controls"
+                    initial={{ opacity: 0, transform: "translateY(-4px)" }}
+                    animate={{ opacity: 1, transform: "translateY(0px)" }}
+                    exit={{ opacity: 0, transform: "translateY(-4px)" }}
+                    transition={{ duration: 0.2, ease: [0.23, 1, 0.32, 1] }}
+                    className="relative z-10 overflow-hidden"
+                  >
                   <div className="flex flex-col gap-3 pt-3">
                     <PlaybackProgress isPlaying={isPlaying} />
                     <div className="flex items-center justify-evenly">
@@ -390,8 +390,9 @@ export function MusicNowPlaying() {
                       <Volume2 aria-hidden="true" className="size-4 shrink-0" />
                     </div>
                   </div>
-                </div>
-              </div>
+                  </motion.div>
+                ) : null}
+              </AnimatePresence>
               </GooeySurface>
             </motion.section>
           ) : null}
