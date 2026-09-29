@@ -30,7 +30,7 @@ export const WORK_EXPERIENCES = [
   {
     id: "WORK_ECONOMIZE",
     company: "Economize",
-    role: "Frontend Software Engineer",
+    role: "Engineering Intern",
     href: "https://www.linkedin.com/company/economize",
     year: 2021,
   },
