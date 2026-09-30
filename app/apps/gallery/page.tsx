@@ -11,12 +11,15 @@ export default function Gallery() {
   return (
     <div className="flex flex-col items-start gap-6 px-1 wide:mt-16">
       <h1 className="font-medium tracking-tight">Gallery</h1>
-      <div className="grid w-full grid-cols-1 items-start gap-12 wide:max-w-5xl wide:grid-cols-3">
+      <div className="flex w-full flex-wrap items-start gap-12">
         {PHOTOGRAPHY_IMAGES.map((photo) => {
           const placeholder = IMAGE_PLACEHOLDERS[photo.path];
 
           return (
-            <div key={photo.path} className="flex items-start flex-col gap-3">
+            <div
+              key={photo.path}
+              className="flex w-full min-w-0 flex-col items-start gap-3 wide:w-auto wide:max-w-sm wide:min-w-64 wide:flex-[1_1_16rem]"
+            >
               <ProgressiveImage
                 src={photo.path}
                 alt={photo.caption}
