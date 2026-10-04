@@ -14,6 +14,8 @@ import {
   getDiscussionThread,
   listDiscussions,
 } from "@/lib/discussions/queries";
+import { AnalyticsEvent } from "@/lib/analytics/events";
+import { trackServer, trackServerException } from "@/lib/analytics/server";
 import { getSupabaseServerClient } from "@/lib/supabase/server";
 
 export type ActionResult<T> =
@@ -44,8 +46,18 @@ export async function createDiscussionAction(
     .single();
 
   if (error || !data) {
+    await trackServerException(
+      error ?? new Error("Unable to start discussion."),
+      { action: "create_discussion" },
+    );
+    await trackServer(AnalyticsEvent.DISCUSSIONS_CREATE_FAILED);
     return { ok: false, error: "Unable to start discussion. Try again." };
   }
+
+  await trackServer(AnalyticsEvent.DISCUSSIONS_CREATED, {
+    discussion_id: data.id,
+    title_length: title.length,
+  });
 
   return {
     ok: true,
@@ -80,8 +92,20 @@ export async function createDiscussionMessageAction(
     .single();
 
   if (error || !data) {
+    await trackServerException(error ?? new Error("Unable to send reply."), {
+      action: "create_discussion_reply",
+      discussion_id: discussionId,
+    });
+    await trackServer(AnalyticsEvent.DISCUSSIONS_REPLY_FAILED, {
+      discussion_id: discussionId,
+    });
     return { ok: false, error: "Unable to send reply. Try again." };
   }
+
+  await trackServer(AnalyticsEvent.DISCUSSIONS_REPLY_CREATED, {
+    discussion_id: discussionId,
+    message_id: data.id,
+  });
 
   return {
     ok: true,
@@ -99,7 +123,8 @@ export async function listDiscussionsAction(): Promise<
 > {
   try {
     return { ok: true, data: await listDiscussions() };
-  } catch {
+  } catch (error) {
+    await trackServerException(error, { action: "list_discussions" });
     return { ok: false, error: "Unable to load discussions." };
   }
 }
@@ -109,7 +134,11 @@ export async function getDiscussionThreadAction(
 ): Promise<ActionResult<DiscussionThread | null>> {
   try {
     return { ok: true, data: await getDiscussionThread(id) };
-  } catch {
+  } catch (error) {
+    await trackServerException(error, {
+      action: "get_discussion",
+      discussion_id: id,
+    });
     return { ok: false, error: "Unable to load discussion." };
   }
 }

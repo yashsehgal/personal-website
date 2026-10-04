@@ -2,7 +2,8 @@ import { IMAGE_PLACEHOLDERS } from "@/common/image-placeholders";
 import { WEBSITE_ROUTES } from "@/common/routes";
 import { WORK_EXPERIENCES } from "@/common/work";
 import { ProgressiveImage } from "@/components/progressive-image";
-import Link from "next/link";
+import { TrackedAnchor, TrackedLink } from "@/components/tracked-link";
+import { AnalyticsEvent, workClickEvent } from "@/lib/analytics/events";
 
 const textLinkClassName =
   "whitespace-nowrap rounded py-0.5 text-foreground hover:bg-muted focus-visible:bg-muted motion-reduce:transition-none";
@@ -47,61 +48,70 @@ export default function Home() {
         <div className="flex w-full min-w-0 flex-col items-start gap-6 leading-relaxed text-pretty text-muted-foreground">
         <p>
           Currently, I am working at{" "}
-          <Link
+          <TrackedAnchor
             href="https://octolane.com"
             target="_blank"
             rel="noopener noreferrer"
+            event={AnalyticsEvent.HOME_OCTOLANE_CLICK}
             className={textLinkInsetClassName}
           >
             Octolane
-          </Link>
+          </TrackedAnchor>
           , where I help design a better AI-powered CRM and do a lot of the
           backend alongside the design. Previously, I was at{" "}
-          <Link
+          <TrackedAnchor
             href="https://stack.ai"
             target="_blank"
             rel="noopener noreferrer"
+            event={AnalyticsEvent.HOME_STACKAI_CLICK}
             className={textLinkInsetClassName}
           >
             StackAI
-          </Link>
+          </TrackedAnchor>
           , where I led design engineering, joining as one of the founding team
           members. I focused on making it easier to create AI agents (
-          <Link
+          <TrackedAnchor
             href="https://www.stackai.com/platform/knowledge-bases"
             target="_blank"
             rel="noopener noreferrer"
+            event={AnalyticsEvent.HOME_STACKAI_KNOWLEDGE_BASES_CLICK}
             className={`${textLinkClassName} -mr-1 pr-1`}
           >
             knowledge bases
-          </Link>
+          </TrackedAnchor>
           ,{" "}
-          <Link
+          <TrackedAnchor
             href="https://www.stackai.com/changelog/08-20-2025"
             target="_blank"
             rel="noopener noreferrer"
+            event={AnalyticsEvent.HOME_STACKAI_EVALUATORS_CLICK}
             className={textLinkInsetClassName}
           >
             evaluators
-          </Link>
+          </TrackedAnchor>
           ,{" "}
-          <Link
+          <TrackedAnchor
             href="https://www.stackai.com/platform/workflow"
             target="_blank"
             rel="noopener noreferrer"
+            event={AnalyticsEvent.HOME_STACKAI_WORKFLOW_CLICK}
             className={textLinkInsetClassName}
           >
             workflow for making agents
-          </Link>
+          </TrackedAnchor>
           , and more areas within the platform)
         </p>
         <p>
           In my free time, I make music and play the keyboard, and I&apos;m
           learning sound engineering and composition. I read across a lot of
           subjects, and I love traveling and taking{" "}
-          <Link href={WEBSITE_ROUTES.APPS_GALLERY} className={textLinkInsetClassName}>
+          <TrackedLink
+            href={WEBSITE_ROUTES.APPS_GALLERY}
+            event={AnalyticsEvent.HOME_PHOTOGRAPHS_CLICK}
+            className={textLinkInsetClassName}
+          >
             photographs
-          </Link>
+          </TrackedLink>
           .
         </p>
         </div>
@@ -113,11 +123,12 @@ export default function Home() {
 
             return (
               <li key={experience.id}>
-                <a
+                <TrackedAnchor
                   href={experience.href}
                   target="_blank"
                   rel="noopener noreferrer"
                   data-scrub-sound=""
+                  event={workClickEvent[experience.id]}
                   className="flex items-baseline justify-between gap-6 rounded px-1 py-0.5 text-sm tracking-tight text-muted-foreground hover:bg-muted hover:text-foreground focus-visible:bg-muted focus-visible:text-foreground"
                 >
                   <span className="min-w-0">
@@ -138,7 +149,7 @@ export default function Home() {
                     <span className="text-foreground">{experience.company}</span>
                   </span>
                   <span className="shrink-0">{experience.role}</span>
-                </a>
+                </TrackedAnchor>
               </li>
             );
           })}

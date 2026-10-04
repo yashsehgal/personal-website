@@ -5,6 +5,8 @@ import {
   MUSIC_ICON_SWAP,
   MusicPlayPauseIcon,
 } from "@/components/music-play-pause-icon";
+import { track } from "@/lib/analytics/client";
+import { AnalyticsEvent } from "@/lib/analytics/events";
 import { getArtworkPalette } from "@/lib/artwork-palette";
 import { setMusicQueue, toggleTrack, useMusicPlayer } from "@/lib/music-player";
 import { cn } from "cn";
@@ -384,6 +386,23 @@ export function MusicTrackList({ tracks }: MusicTrackListProps) {
     trackButtons.current.delete(trackId);
   };
 
+  const selectTrack = (trackItem: MusicTrack) => {
+    const playingThis = isPlaying && currentTrack?.id === trackItem.id;
+
+    track(
+      playingThis
+        ? AnalyticsEvent.MUSIC_TRACK_PAUSE
+        : AnalyticsEvent.MUSIC_TRACK_PLAY,
+      {
+        track_id: trackItem.id,
+        track_title: trackItem.title,
+        track_artist: trackItem.artist,
+        view,
+      },
+    );
+    toggleTrack(trackItem, sortedTracks);
+  };
+
   return (
     <MotionConfig reducedMotion="user">
       <div className="flex w-full flex-wrap items-baseline justify-between gap-x-6 gap-y-2">
@@ -393,13 +412,33 @@ export function MusicTrackList({ tracks }: MusicTrackListProps) {
             label="View"
             value={view}
             options={VIEW_OPTIONS}
-            onChange={(next) => void setView(next)}
+            onChange={(next) => {
+              if (next !== view) {
+                track(
+                  next === "list"
+                    ? AnalyticsEvent.MUSIC_VIEW_LIST_CLICK
+                    : AnalyticsEvent.MUSIC_VIEW_TILES_CLICK,
+                );
+              }
+
+              void setView(next);
+            }}
           />
           <OptionGroup<SortKey>
             label="Sort by"
             value={sortBy}
             options={SORT_OPTIONS}
-            onChange={(next) => void setSortBy(next)}
+            onChange={(next) => {
+              if (next !== sortBy) {
+                track(
+                  next === "title"
+                    ? AnalyticsEvent.MUSIC_SORT_TITLE_CLICK
+                    : AnalyticsEvent.MUSIC_SORT_ARTIST_CLICK,
+                );
+              }
+
+              void setSortBy(next);
+            }}
           />
         </div>
       </div>
@@ -430,7 +469,7 @@ export function MusicTrackList({ tracks }: MusicTrackListProps) {
                       hoveredId === track.id ? null : hoveredId,
                     )
                   }
-                  onClick={() => toggleTrack(track, sortedTracks)}
+                  onClick={() => selectTrack(track)}
                   className={cn(
                     "group flex w-full min-w-0 flex-col gap-1.5 rounded-[1rem] p-1.5 text-left select-none transition-[background-color,opacity] duration-150 ease-out focus-visible:outline-none forced-colors:focus-visible:outline-2 forced-colors:focus-visible:-outline-offset-2 forced-colors:focus-visible:outline-[Highlight]",
                     isTrackPlaying && playingColor
@@ -525,7 +564,7 @@ export function MusicTrackList({ tracks }: MusicTrackListProps) {
                       hoveredId === track.id ? null : hoveredId,
                     )
                   }
-                  onClick={() => toggleTrack(track, sortedTracks)}
+                  onClick={() => selectTrack(track)}
                   className={cn(
                     "flex w-full items-center justify-between gap-6 rounded px-1 py-0.5 text-left text-sm tracking-tight select-none",
                     isTrackPlaying

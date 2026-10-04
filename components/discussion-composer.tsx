@@ -8,6 +8,8 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { track } from "@/lib/analytics/client";
+import { AnalyticsEvent } from "@/lib/analytics/events";
 import {
   discussionEditorExtensions,
   emptyDiscussionDoc,
@@ -147,7 +149,12 @@ export function DiscussionComposer({
                 label="Bold"
                 pressed={editorState?.isBold}
                 disabled={!editor || disabled}
-                onClick={() => editor?.chain().focus().toggleBold().run()}
+                onClick={() => {
+                  track(AnalyticsEvent.DISCUSSIONS_FORMAT_BOLD_CLICK, {
+                    active: !(editorState?.isBold ?? false),
+                  });
+                  editor?.chain().focus().toggleBold().run();
+                }}
               >
                 <Bold aria-hidden="true" className="size-3.5" />
               </FormatButton>
@@ -155,7 +162,12 @@ export function DiscussionComposer({
                 label="Italic"
                 pressed={editorState?.isItalic}
                 disabled={!editor || disabled}
-                onClick={() => editor?.chain().focus().toggleItalic().run()}
+                onClick={() => {
+                  track(AnalyticsEvent.DISCUSSIONS_FORMAT_ITALIC_CLICK, {
+                    active: !(editorState?.isItalic ?? false),
+                  });
+                  editor?.chain().focus().toggleItalic().run();
+                }}
               >
                 <Italic aria-hidden="true" className="size-3.5" />
               </FormatButton>
@@ -163,7 +175,12 @@ export function DiscussionComposer({
                 label="Bulleted list"
                 pressed={editorState?.isBulletList}
                 disabled={!editor || disabled}
-                onClick={() => editor?.chain().focus().toggleBulletList().run()}
+                onClick={() => {
+                  track(AnalyticsEvent.DISCUSSIONS_FORMAT_BULLET_LIST_CLICK, {
+                    active: !(editorState?.isBulletList ?? false),
+                  });
+                  editor?.chain().focus().toggleBulletList().run();
+                }}
               >
                 <List aria-hidden="true" className="size-3.5" />
               </FormatButton>
@@ -171,7 +188,12 @@ export function DiscussionComposer({
                 label="Numbered list"
                 pressed={editorState?.isOrderedList}
                 disabled={!editor || disabled}
-                onClick={() => editor?.chain().focus().toggleOrderedList().run()}
+                onClick={() => {
+                  track(AnalyticsEvent.DISCUSSIONS_FORMAT_NUMBERED_LIST_CLICK, {
+                    active: !(editorState?.isOrderedList ?? false),
+                  });
+                  editor?.chain().focus().toggleOrderedList().run();
+                }}
               >
                 <ListOrdered aria-hidden="true" className="size-3.5" />
               </FormatButton>

@@ -1,4 +1,6 @@
 import { ArticleTitle } from "@/components/article-title";
+import { TrackedAnchor } from "@/components/tracked-link";
+import { AnalyticsEvent } from "@/lib/analytics/events";
 import { CodeSample } from "@/components/code-sample";
 import { EssayFigure, EssayFlow } from "@/components/essay-diagram";
 import {
@@ -33,11 +35,13 @@ const headingClassName = "text-pretty font-medium tracking-tight text-foreground
 const ARTICLE_LINKS = [
   {
     href: "https://aws.amazon.com/what-is/batch-processing/",
+    event: AnalyticsEvent.ESSAY_CSV_AWS_BATCH_CLICK,
     description:
       "A large file is cut into batches and those batches run on a queue, so the write does not have to finish the whole sheet at once.",
   },
   {
     href: "https://sheetjs.com/",
+    event: AnalyticsEvent.ESSAY_CSV_SHEETJS_CLICK,
     description:
       "The spreadsheet is read into rows first, so a domain, an email, or a note can be taken from the cells before anything is written.",
   },
@@ -388,15 +392,16 @@ export default function AddingCompaniesFromASpreadsheetPage() {
               >
                 {index + 1}
               </sup>
-              <a
+              <TrackedAnchor
                 href={article.href}
                 target="_blank"
                 rel="noopener noreferrer"
                 data-scrub-sound=""
+                event={article.event}
                 className="-mx-1 rounded px-1 py-0.5 text-pretty leading-relaxed hover:bg-muted hover:text-foreground focus-visible:bg-muted focus-visible:text-foreground"
               >
                 {article.description}
-              </a>
+              </TrackedAnchor>
             </li>
           ))}
         </ol>

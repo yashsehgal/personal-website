@@ -2,6 +2,8 @@
 
 import { ArticleTitle } from "@/components/article-title";
 import { ComponentPreviewContainer } from "@/components/component-preview-container";
+import { track } from "@/lib/analytics/client";
+import { AnalyticsEvent } from "@/lib/analytics/events";
 import { cn } from "cn";
 import { motion } from "framer-motion";
 import Image from "next/image";
@@ -104,8 +106,17 @@ function HeroSectionSpacingGuidelinesDemo({
   showSpacingBetweenButtons?: boolean;
 }) {
   const [showGuidelines, setShowGuidelines] = useState<boolean>(false);
+  const demo = showSpacingBetweenButtons ? "button_spacing" : "title_spacing";
 
-  const toggleGuidelinesVisibility = () => setShowGuidelines((show) => !show);
+  const toggleGuidelinesVisibility = () => {
+    track(
+      showGuidelines
+        ? AnalyticsEvent.ESSAY_OPTICAL_SPACING_GUIDELINES_HIDE
+        : AnalyticsEvent.ESSAY_OPTICAL_SPACING_GUIDELINES_SHOW,
+      { demo },
+    );
+    setShowGuidelines((show) => !show);
+  };
 
   const OPACITY: number = 0 as const;
   const reduceOpacity: boolean = showSpacingBetweenButtons && showGuidelines;
@@ -149,10 +160,26 @@ function HeroSectionSpacingGuidelinesDemo({
           }}
           transition={{ type: "spring", duration: 0.5, bounce: 0.2 }}
         >
-          <button className="rounded-full bg-foreground p-4 py-2 text-sm font-medium text-background">
+          <button
+            type="button"
+            onClick={() =>
+              track(AnalyticsEvent.ESSAY_OPTICAL_SPACING_GET_STARTED_CLICK, {
+                demo,
+              })
+            }
+            className="rounded-full bg-foreground p-4 py-2 text-sm font-medium text-background"
+          >
             Get started
           </button>
-          <button className="rounded-full border border-foreground/10 p-4 py-2 text-sm font-medium text-foreground shadow-2xs">
+          <button
+            type="button"
+            onClick={() =>
+              track(AnalyticsEvent.ESSAY_OPTICAL_SPACING_LEARN_MORE_CLICK, {
+                demo,
+              })
+            }
+            className="rounded-full border border-foreground/10 p-4 py-2 text-sm font-medium text-foreground shadow-2xs"
+          >
             Learn more
           </button>
         </motion.div>

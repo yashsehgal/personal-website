@@ -2,6 +2,8 @@
 import { DIRECTORY } from '@/app/writings/navigation-using-query-states/constants';
 import { ArticleTitle } from '@/components/article-title';
 import { ComponentPreviewContainer } from '@/components/component-preview-container';
+import { track } from '@/lib/analytics/client';
+import { AnalyticsEvent } from '@/lib/analytics/events';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -214,6 +216,10 @@ function BreadcrumbPreviewComponent() {
     useState<boolean>(false);
 
   const handleMiddleSegmentsDropdownOpenStateChange = (open: boolean) => {
+    if (open) {
+      track(AnalyticsEvent.ESSAY_NAVIGATION_BREADCRUMB_PREVIEW_MENU_OPEN);
+    }
+
     setMiddleSegmentsDropdownOpen(open);
   };
 
@@ -248,7 +254,12 @@ function BreadcrumbPreviewComponent() {
             alignOffset={-24}>
             <DropdownMenuItem
               className="first:rounded-t-lg last:rounded-b-lg cursor-pointer font-medium pr-8"
-              style={{ paddingLeft: '12px' }}>
+              style={{ paddingLeft: '12px' }}
+              onSelect={() =>
+                track(
+                  AnalyticsEvent.ESSAY_NAVIGATION_BREADCRUMB_PREVIEW_SETUP_CLICK,
+                )
+              }>
               <IconCornerDownRight
                 size={DASHBOARD_SIDEBAR_TREE_NODE_ICON}
                 className="text-foreground/40"
@@ -257,7 +268,12 @@ function BreadcrumbPreviewComponent() {
             </DropdownMenuItem>
             <DropdownMenuItem
               className="first:rounded-t-lg last:rounded-b-lg cursor-pointer font-medium pr-8"
-              style={{ paddingLeft: '24px' }}>
+              style={{ paddingLeft: '24px' }}
+              onSelect={() =>
+                track(
+                  AnalyticsEvent.ESSAY_NAVIGATION_BREADCRUMB_PREVIEW_CONFIGURATION_CLICK,
+                )
+              }>
               <IconCornerDownRight
                 size={DASHBOARD_SIDEBAR_TREE_NODE_ICON}
                 className="text-foreground/40"
@@ -266,7 +282,12 @@ function BreadcrumbPreviewComponent() {
             </DropdownMenuItem>
             <DropdownMenuItem
               className="first:rounded-t-lg last:rounded-b-lg cursor-pointer font-medium pr-8"
-              style={{ paddingLeft: '36px' }}>
+              style={{ paddingLeft: '36px' }}
+              onSelect={() =>
+                track(
+                  AnalyticsEvent.ESSAY_NAVIGATION_BREADCRUMB_PREVIEW_RBAC_CLICK,
+                )
+              }>
               <IconCornerDownRight
                 size={DASHBOARD_SIDEBAR_TREE_NODE_ICON}
                 className="text-foreground/40"
@@ -409,6 +430,7 @@ function BacktrackingPreviewComponent() {
   }, [scene]);
 
   const startAnimation = () => {
+    track(AnalyticsEvent.ESSAY_NAVIGATION_ANIMATE_CLICK);
     if (intervalRef.current) {
       clearInterval(intervalRef.current);
       intervalRef.current = null;
@@ -569,10 +591,17 @@ function DashboardBreadcrumbComponent() {
     useState<boolean>(false);
 
   const handleMiddleSegmentsDropdownOpenStateChange = (open: boolean) => {
+    if (open) {
+      track(AnalyticsEvent.ESSAY_NAVIGATION_BREADCRUMB_MENU_OPEN);
+    }
+
     setMiddleSegmentsDropdownOpen(open);
   };
 
   const handleMiddleSegmentClick = (segmentId: string) => {
+    track(AnalyticsEvent.ESSAY_NAVIGATION_BREADCRUMB_SEGMENT_CLICK, {
+      node_id: segmentId,
+    });
     setSelectedFileNodeId(segmentId);
     setMiddleSegmentsDropdownOpen(false);
   };
@@ -769,10 +798,20 @@ function DashboardSidebarTreeNodeContainerComponent({
   const isNodeExpanded: boolean = expandedNodes.has(node.id);
 
   const handleOpenFolderNode = () => {
+    track(
+      isNodeExpanded
+        ? AnalyticsEvent.ESSAY_NAVIGATION_FOLDER_COLLAPSE
+        : AnalyticsEvent.ESSAY_NAVIGATION_FOLDER_EXPAND,
+      { node_id: node.id, node_name: node.name },
+    );
     onToggleExpansion(node.id);
   };
 
   const handleSelectedFileNode = (id: string) => {
+    track(AnalyticsEvent.ESSAY_NAVIGATION_FILE_SELECT, {
+      node_id: id,
+      node_name: node.name,
+    });
     setSelectedFileNodeId(id);
   };
 

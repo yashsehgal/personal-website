@@ -5,6 +5,8 @@ import {
   CopyIconButton,
   copyIconButtonClassName,
 } from "@/components/copy-icon-button";
+import { track } from "@/lib/analytics/client";
+import { AnalyticsEvent } from "@/lib/analytics/events";
 import {
   Tooltip,
   TooltipContent,
@@ -31,6 +33,11 @@ export function ArticleToolbar({
                 href={backHref}
                 aria-label={backLabel}
                 className={copyIconButtonClassName}
+                onClick={() =>
+                  track(AnalyticsEvent.ARTICLE_BACK_CLICK, {
+                    destination: backHref,
+                  })
+                }
               />
             }
           >
@@ -42,6 +49,7 @@ export function ArticleToolbar({
           label="Copy link"
           copiedLabel="Link copied"
           icon={Link2}
+          event={AnalyticsEvent.ARTICLE_LINK_COPY}
           getValue={() => window.location.href}
         />
       </div>

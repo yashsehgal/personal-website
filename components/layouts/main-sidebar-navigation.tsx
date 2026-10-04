@@ -1,6 +1,8 @@
 "use client";
 
 import { WEBSITE_ROUTES, WebsiteRouteType } from "@/common/routes";
+import { track } from "@/lib/analytics/client";
+import { AnalyticsEvent } from "@/lib/analytics/events";
 import { useMusicPlayer } from "@/lib/music-player";
 import { cn } from "cn";
 import { MusicNavigationIcon } from "@/components/music-navigation-icon";
@@ -89,6 +91,24 @@ const SOCIAL_LINKS: {
     overrideHoverClassname: "wide:hover:bg-muted wide:hover:text-foreground",
   },
 ] as const;
+
+const SIDEBAR_ROUTE_EVENTS = {
+  [WEBSITE_ROUTES.WRITINGS]: AnalyticsEvent.SIDEBAR_WRITINGS_CLICK,
+  [WEBSITE_ROUTES.APPS_MUSIC]: AnalyticsEvent.SIDEBAR_APPS_MUSIC_CLICK,
+  [WEBSITE_ROUTES.APPS_GALLERY]: AnalyticsEvent.SIDEBAR_APPS_GALLERY_CLICK,
+  [WEBSITE_ROUTES.APPS_DISCUSSIONS]:
+    AnalyticsEvent.SIDEBAR_APPS_DISCUSSIONS_CLICK,
+  [WEBSITE_ROUTES.ARCHIVE]: AnalyticsEvent.SIDEBAR_ARCHIVE_CLICK,
+} as const;
+
+const SIDEBAR_SOCIAL_EVENTS = {
+  "https://x.com/yashsehgaldev": AnalyticsEvent.SIDEBAR_SOCIAL_X_CLICK,
+  "https://github.com/yashsehgal": AnalyticsEvent.SIDEBAR_SOCIAL_GITHUB_CLICK,
+  "https://www.instagram.com/sehgalyash_/":
+    AnalyticsEvent.SIDEBAR_SOCIAL_INSTAGRAM_CLICK,
+  "https://www.linkedin.com/in/sehgalyash/":
+    AnalyticsEvent.SIDEBAR_SOCIAL_LINKEDIN_CLICK,
+} as const;
 
 const EMAIL_ADDRESS = "hi@yashsehgal.com";
 const DESKTOP_LAYOUT_QUERY = "(width > 64rem)";
@@ -279,6 +299,7 @@ export function MainSidebarNavigation() {
 
   const copyEmailAddress = useCallback(() => {
     void navigator.clipboard.writeText(EMAIL_ADDRESS).then(() => {
+      track(AnalyticsEvent.SIDEBAR_EMAIL_COPY);
       showCopyFeedback();
     });
   }, [showCopyFeedback]);
@@ -351,6 +372,16 @@ export function MainSidebarNavigation() {
     <li key={link.href} className={cn(link.hiddenOnTouch && "touch:hidden")}>
       <Link
         href={link.href}
+        onClick={() => {
+          const event =
+            SIDEBAR_ROUTE_EVENTS[
+              link.href as keyof typeof SIDEBAR_ROUTE_EVENTS
+            ];
+
+          if (event) {
+            track(event);
+          }
+        }}
         className={cn(
           "text-sm tracking-tight font-medium select-none rounded px-1 py-0.5",
           isNavigationItemActive(link.href)
@@ -379,7 +410,11 @@ export function MainSidebarNavigation() {
       )}
     >
       <header className={cn("px-1", dimmedClassName)}>
-        <Link href={WEBSITE_ROUTES.HOME} className="group size-fit block">
+        <Link
+          href={WEBSITE_ROUTES.HOME}
+          onClick={() => track(AnalyticsEvent.SIDEBAR_IDENTITY_CLICK)}
+          className="group size-fit block"
+        >
           <div
             className={cn(
               "flex flex-col gap-3 size-fit",
@@ -442,6 +477,11 @@ export function MainSidebarNavigation() {
                   aria-expanded={isExpanded}
                   aria-controls={groupListId}
                   onClick={() => {
+                    track(
+                      isExpanded
+                        ? AnalyticsEvent.SIDEBAR_APPS_COLLAPSE_CLICK
+                        : AnalyticsEvent.SIDEBAR_APPS_EXPAND_CLICK,
+                    );
                     setExpandedGroupLabel(isExpanded ? null : item.label);
                   }}
                   className={cn(
@@ -497,7 +537,30 @@ export function MainSidebarNavigation() {
                   rel="noopener noreferrer"
                   href={link.href}
                   aria-describedby={isEmail ? emailHintId : undefined}
-                  onClick={isEmail ? handleEmailClick : undefined}
+                  onClick={
+                    isEmail
+                      ? (event) => {
+                          const copying =
+                            window.matchMedia(DESKTOP_LAYOUT_QUERY).matches &&
+                            (event.metaKey || event.ctrlKey);
+
+                          if (!copying) {
+                            track(AnalyticsEvent.SIDEBAR_EMAIL_OPEN);
+                          }
+
+                          handleEmailClick(event);
+                        }
+                      : () => {
+                          const event =
+                            SIDEBAR_SOCIAL_EVENTS[
+                              link.href as keyof typeof SIDEBAR_SOCIAL_EVENTS
+                            ];
+
+                          if (event) {
+                            track(event);
+                          }
+                        }
+                  }
                   onKeyDown={isEmail ? handleEmailKeyDown : undefined}
                   onFocus={
                     isEmail

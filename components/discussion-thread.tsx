@@ -3,6 +3,8 @@
 import { DiscussionComposer } from "@/components/discussion-composer";
 import { DiscussionMessageCard } from "@/components/discussion-message-card";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { track } from "@/lib/analytics/client";
+import { AnalyticsEvent } from "@/lib/analytics/events";
 import { sanitizeDiscussionBody } from "@/lib/discussions/content";
 import { useDiscussionThread, useSendDiscussionMessage } from "@/lib/discussions/hooks";
 import type { JSONContent } from "@tiptap/react";
@@ -17,10 +19,16 @@ export function DiscussionThread({ discussionId }: { discussionId: string }) {
     const body = sanitizeDiscussionBody(bodyInput);
 
     if (!body) {
+      track(AnalyticsEvent.DISCUSSIONS_REPLY_EMPTY, {
+        discussion_id: discussionId,
+      });
       setError("Write a reply before sending.");
       return;
     }
 
+    track(AnalyticsEvent.DISCUSSIONS_REPLY_SUBMIT, {
+      discussion_id: discussionId,
+    });
     setError(null);
     sendReply.mutate(body, {
       onError: (mutationError) => {

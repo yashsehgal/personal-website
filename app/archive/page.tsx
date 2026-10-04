@@ -1,4 +1,6 @@
 import { ARCHIVE_LINKS } from "@/common/archive";
+import { TrackedAnchor } from "@/components/tracked-link";
+import { archiveClickEvent } from "@/lib/analytics/events";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -16,11 +18,12 @@ export default function Archive() {
 
           return (
             <li key={archiveLink.id}>
-              <a
+              <TrackedAnchor
                 href={archiveLink.href}
                 target="_blank"
                 rel="noopener noreferrer"
                 data-scrub-sound=""
+                event={archiveClickEvent[archiveLink.id]}
                 className="flex items-baseline justify-between gap-6 rounded px-1 py-0.5 text-sm tracking-tight text-muted-foreground hover:bg-muted hover:text-foreground focus-visible:bg-muted focus-visible:text-foreground"
               >
                 <span className="min-w-0">
@@ -39,7 +42,7 @@ export default function Archive() {
                   <span className="text-foreground">{archiveLink.title}</span>
                 </span>
                 <span className="shrink-0">{archiveLink.type}</span>
-              </a>
+              </TrackedAnchor>
             </li>
           );
         })}

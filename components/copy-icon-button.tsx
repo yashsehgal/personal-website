@@ -5,6 +5,11 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import { track } from "@/lib/analytics/client";
+import type {
+  AnalyticsEventName,
+  AnalyticsProperties,
+} from "@/lib/analytics/events";
 import { playEmailCopiedSound } from "@/lib/interface-sounds";
 import { cn } from "cn";
 import { AnimatePresence, MotionConfig, motion } from "framer-motion";
@@ -21,6 +26,8 @@ type CopyIconButtonProps = {
   copiedLabel: string;
   getValue: () => string | Promise<string>;
   icon: LucideIcon | ComponentType<{ className?: string }>;
+  event: AnalyticsEventName;
+  eventProperties?: AnalyticsProperties;
   className?: string;
 };
 
@@ -29,6 +36,8 @@ export function CopyIconButton({
   copiedLabel,
   getValue,
   icon: Icon,
+  event,
+  eventProperties,
   className,
 }: CopyIconButtonProps) {
   const [copied, setCopied] = useState(false);
@@ -49,6 +58,8 @@ export function CopyIconButton({
     } catch {
       return;
     }
+
+    track(event, eventProperties);
 
     playEmailCopiedSound();
     setCopied(true);

@@ -1,6 +1,7 @@
 "use client";
 
 import { CopyIconButton } from "@/components/copy-icon-button";
+import { AnalyticsEvent } from "@/lib/analytics/events";
 import { DiscussionRichText } from "@/components/discussion-rich-text";
 import { LocalDate } from "@/components/local-date";
 import {
@@ -36,6 +37,8 @@ export function DiscussionMessageCard({
         label="Copy reply"
         copiedLabel="Reply copied"
         icon={Copy}
+        event={AnalyticsEvent.DISCUSSIONS_REPLY_COPY}
+        eventProperties={{ message_id: message.id }}
         getValue={() => getDiscussionPlainText(message.body).trim()}
       />
     </article>

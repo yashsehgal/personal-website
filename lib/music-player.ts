@@ -1,4 +1,6 @@
 import type { MusicTrack } from "@/common/music";
+import { track, trackException } from "@/lib/analytics/client";
+import { AnalyticsEvent } from "@/lib/analytics/events";
 import { useSyncExternalStore } from "react";
 
 type MusicPlayerState = {
@@ -45,6 +47,20 @@ function syncHasNextTrack() {
   }
 }
 
+function playbackProperties() {
+  const trackItem = state.currentTrack;
+
+  if (!trackItem) {
+    return undefined;
+  }
+
+  return {
+    track_id: trackItem.id,
+    track_title: trackItem.title,
+    track_artist: trackItem.artist,
+  };
+}
+
 function getAudio() {
   if (audio) {
     return audio;
@@ -60,20 +76,46 @@ function getAudio() {
     }
   });
   audio.addEventListener("ended", () => {
-    if (!skipTrack(1)) {
-      setState({ isPlaying: false });
+    const properties = playbackProperties();
+
+    if (skipTrack(1)) {
+      track(AnalyticsEvent.MUSIC_QUEUE_ADVANCE, properties);
+      return;
     }
+
+    track(AnalyticsEvent.MUSIC_PLAYBACK_ENDED, properties);
+    setState({ isPlaying: false });
   });
-  audio.addEventListener("error", () => setState({ isPlaying: false }));
+  audio.addEventListener("error", () => {
+    const code = audio?.error?.code;
+    trackException(
+      new Error(
+        code === undefined
+          ? "Music playback failed"
+          : `Music playback failed (${code})`,
+      ),
+      playbackProperties(),
+    );
+    setState({ isPlaying: false });
+  });
 
   if ("mediaSession" in navigator) {
-    navigator.mediaSession.setActionHandler("play", () => resume());
-    navigator.mediaSession.setActionHandler("pause", () => audio?.pause());
-    navigator.mediaSession.setActionHandler("nexttrack", playNextTrack);
-    navigator.mediaSession.setActionHandler(
-      "previoustrack",
-      playPreviousTrack,
-    );
+    navigator.mediaSession.setActionHandler("play", () => {
+      track(AnalyticsEvent.MUSIC_MEDIA_PLAY, playbackProperties());
+      resume();
+    });
+    navigator.mediaSession.setActionHandler("pause", () => {
+      track(AnalyticsEvent.MUSIC_MEDIA_PAUSE, playbackProperties());
+      audio?.pause();
+    });
+    navigator.mediaSession.setActionHandler("nexttrack", () => {
+      track(AnalyticsEvent.MUSIC_MEDIA_NEXT, playbackProperties());
+      playNextTrack();
+    });
+    navigator.mediaSession.setActionHandler("previoustrack", () => {
+      track(AnalyticsEvent.MUSIC_MEDIA_PREVIOUS, playbackProperties());
+      playPreviousTrack();
+    });
   }
 
   return audio;

@@ -1,6 +1,8 @@
 "use client";
 
 import { WEBSITE_ROUTES } from "@/common/routes";
+import { track } from "@/lib/analytics/client";
+import { AnalyticsEvent } from "@/lib/analytics/events";
 import { GooeySurface } from "@/components/gooey-surface";
 import {
   MUSIC_ICON_SWAP,
@@ -71,14 +73,28 @@ function ControlButton({
 function PlayPauseButton({
   isPlaying,
   className,
+  trackTitle,
+  trackArtist,
 }: {
   isPlaying: boolean;
   className?: string;
+  trackTitle?: string;
+  trackArtist?: string;
 }) {
   return (
     <ControlButton
       label={isPlaying ? "Pause" : "Play"}
-      onClick={togglePlayback}
+      onClick={() => {
+        track(
+          isPlaying
+            ? AnalyticsEvent.NOW_PLAYING_PAUSE_CLICK
+            : AnalyticsEvent.NOW_PLAYING_PLAY_CLICK,
+          trackTitle && trackArtist
+            ? { track_title: trackTitle, track_artist: trackArtist }
+            : undefined,
+        );
+        togglePlayback();
+      }}
       className={className}
     >
       <MusicPlayPauseIcon isPlaying={isPlaying} iconClassName="size-6" />
@@ -210,6 +226,12 @@ export function MusicNowPlaying() {
     [],
   );
 
+  const commitVolume = (volumePercent: number) => {
+    track(AnalyticsEvent.NOW_PLAYING_VOLUME_SET, {
+      volume_percent: volumePercent,
+    });
+  };
+
   const trackDetails = currentTrack ? (
     <>
       <Image
@@ -287,6 +309,12 @@ export function MusicNowPlaying() {
                 ) : (
                   <Link
                     href={WEBSITE_ROUTES.APPS_MUSIC}
+                    onClick={() =>
+                      track(AnalyticsEvent.NOW_PLAYING_OPEN_CLICK, {
+                        track_title: currentTrack.title,
+                        track_artist: currentTrack.artist,
+                      })
+                    }
                     className={cn(
                       TRACK_DETAILS_CLASS_NAME,
                       "after:absolute after:inset-0 after:rounded-[20px]",
@@ -305,6 +333,8 @@ export function MusicNowPlaying() {
                     >
                       <PlayPauseButton
                         isPlaying={isPlaying}
+                        trackTitle={currentTrack.title}
+                        trackArtist={currentTrack.artist}
                         className="relative z-10 size-10"
                       />
                     </motion.span>
@@ -326,7 +356,13 @@ export function MusicNowPlaying() {
                     <div className="flex items-center justify-evenly">
                       <ControlButton
                         label="Previous track"
-                        onClick={playPreviousTrack}
+                        onClick={() => {
+                          track(AnalyticsEvent.NOW_PLAYING_PREVIOUS_CLICK, {
+                            track_title: currentTrack.title,
+                            track_artist: currentTrack.artist,
+                          });
+                          playPreviousTrack();
+                        }}
                         className="size-10"
                       >
                         <SkipBack
@@ -336,11 +372,19 @@ export function MusicNowPlaying() {
                       </ControlButton>
                       <PlayPauseButton
                         isPlaying={isPlaying}
+                        trackTitle={currentTrack.title}
+                        trackArtist={currentTrack.artist}
                         className="size-11"
                       />
                       <ControlButton
                         label="Next track"
-                        onClick={playNextTrack}
+                        onClick={() => {
+                          track(AnalyticsEvent.NOW_PLAYING_NEXT_CLICK, {
+                            track_title: currentTrack.title,
+                            track_artist: currentTrack.artist,
+                          });
+                          playNextTrack();
+                        }}
                         disabled={!hasNextTrack}
                         className="size-10"
                       >
@@ -366,6 +410,23 @@ export function MusicNowPlaying() {
                               Number(event.currentTarget.value) / 100,
                             );
                             showVolumeTooltip();
+                          }}
+                          onPointerUp={(event) => {
+                            commitVolume(Number(event.currentTarget.value));
+                          }}
+                          onKeyUp={(event) => {
+                            if (
+                              event.key !== "ArrowLeft" &&
+                              event.key !== "ArrowRight" &&
+                              event.key !== "ArrowUp" &&
+                              event.key !== "ArrowDown" &&
+                              event.key !== "Home" &&
+                              event.key !== "End"
+                            ) {
+                              return;
+                            }
+
+                            commitVolume(Number(event.currentTarget.value));
                           }}
                           className="volume-slider min-w-0 flex-1"
                           style={

@@ -1,6 +1,7 @@
 import { WRITINGS } from "@/common/writings";
+import { TrackedLink } from "@/components/tracked-link";
+import { writingClickEvent } from "@/lib/analytics/events";
 import type { Metadata } from "next";
-import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Writings",
@@ -17,9 +18,10 @@ export default function Writings() {
 
           return (
             <li key={writing.id}>
-              <Link
+              <TrackedLink
                 href={writing.href}
                 data-scrub-sound=""
+                event={writingClickEvent[writing.id]}
                 className="flex items-baseline justify-between gap-6 rounded px-1 py-0.5 text-sm tracking-tight text-muted-foreground hover:bg-muted hover:text-foreground focus-visible:bg-muted focus-visible:text-foreground"
               >
                 <span className="min-w-0">
@@ -40,7 +42,7 @@ export default function Writings() {
                   <span className="text-foreground">{writing.title}</span>
                 </span>
                 <span className="shrink-0">{writing.type}</span>
-              </Link>
+              </TrackedLink>
             </li>
           );
         })}

@@ -1,5 +1,6 @@
 import { WEBSITE_ROUTES } from "@/common/routes";
-import Link from "next/link";
+import { TrackedLink } from "@/components/tracked-link";
+import { AnalyticsEvent } from "@/lib/analytics/events";
 
 export default function DiscussionNotFound() {
   return (
@@ -8,12 +9,13 @@ export default function DiscussionNotFound() {
       <p className="text-pretty leading-relaxed text-muted-foreground">
         This discussion does not exist.
       </p>
-      <Link
+      <TrackedLink
         href={WEBSITE_ROUTES.APPS_DISCUSSIONS}
+        event={AnalyticsEvent.DISCUSSIONS_NOT_FOUND_BACK_CLICK}
         className="rounded px-1 py-0.5 text-sm font-medium tracking-tight text-foreground hover:bg-muted focus-visible:bg-muted"
       >
         Back to discussions
-      </Link>
+      </TrackedLink>
     </div>
   );
 }
