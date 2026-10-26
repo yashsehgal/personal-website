@@ -31,6 +31,8 @@ const work = [
   },
 ] as const;
 
+const underlinedLinkClassName = "hover:bg-foreground hover:text-background";
+
 export default function Page() {
   return (
     <div className="max-w-[360px]">
@@ -45,6 +47,7 @@ export default function Page() {
             href="https://octolane.com"
             target="_blank"
             rel="noopener noreferrer"
+            className={underlinedLinkClassName}
           >
             Octolane
           </a>
@@ -53,7 +56,12 @@ export default function Page() {
         </p>
         <p className="mb-4">
           Previously, I was at{" "}
-          <a href="https://stack.ai" target="_blank" rel="noopener noreferrer">
+          <a
+            href="https://stack.ai"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={underlinedLinkClassName}
+          >
             StackAI
           </a>
           , where I led design engineering, joining as one of the founding team
@@ -62,6 +70,7 @@ export default function Page() {
             href="https://www.stackai.com/platform/knowledge-bases"
             target="_blank"
             rel="noopener noreferrer"
+            className={underlinedLinkClassName}
           >
             knowledge bases
           </a>
@@ -70,6 +79,7 @@ export default function Page() {
             href="https://www.stackai.com/changelog/08-20-2025"
             target="_blank"
             rel="noopener noreferrer"
+            className={underlinedLinkClassName}
           >
             evaluators
           </a>
@@ -78,6 +88,7 @@ export default function Page() {
             href="https://www.stackai.com/platform/workflow"
             target="_blank"
             rel="noopener noreferrer"
+            className={underlinedLinkClassName}
           >
             workflow for making agents
           </a>
@@ -112,6 +123,7 @@ export default function Page() {
             href="https://x.com/yashsehgaldev"
             target="_blank"
             rel="noopener noreferrer"
+            className={underlinedLinkClassName}
           >
             X
           </a>
@@ -120,6 +132,7 @@ export default function Page() {
             href="https://github.com/yashsehgal"
             target="_blank"
             rel="noopener noreferrer"
+            className={underlinedLinkClassName}
           >
             GitHub
           </a>
@@ -128,6 +141,7 @@ export default function Page() {
             href="https://www.instagram.com/sehgalyash_/"
             target="_blank"
             rel="noopener noreferrer"
+            className={underlinedLinkClassName}
           >
             Instagram
           </a>
@@ -136,11 +150,15 @@ export default function Page() {
             href="https://www.linkedin.com/in/sehgalyash/"
             target="_blank"
             rel="noopener noreferrer"
+            className={underlinedLinkClassName}
           >
             LinkedIn
           </a>
           , or reach me via{" "}
-          <a href="mailto:hi@yashsehgal.com">email</a>.
+          <a href="mailto:hi@yashsehgal.com" className={underlinedLinkClassName}>
+            email
+          </a>
+          .
         </p>
       </main>
     </div>

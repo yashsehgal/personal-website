@@ -1,26 +1,10 @@
-import { Inter } from "next/font/google";
+import { Nanum_Myeongjo } from "next/font/google";
 
-const arialSeries = [
-  "Arial",
-  "Arial Narrow",
-  "Arial Rounded MT Bold",
-  "Arial Unicode MS",
-  "sans-serif",
-] as const;
-
-function fontFamilyName(name: string) {
-  return name.includes(" ") ? `"${name}"` : name;
-}
-
-export const inter = Inter({
+export const nanumMyeongjo = Nanum_Myeongjo({
+  weight: "400",
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-inter",
+  variable: "--font-nanum-myeongjo",
 });
 
-/** Helvetica, then Inter, then the Arial sans-serif series. */
-export const sansFontFamily = [
-  "Helvetica",
-  "Inter",
-  ...arialSeries.map(fontFamilyName),
-].join(", ");
+export const siteFontFamily = "var(--font-nanum-myeongjo), serif";

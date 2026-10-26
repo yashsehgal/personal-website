@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { inter, sansFontFamily } from "@/lib/fonts";
+import { nanumMyeongjo, siteFontFamily } from "@/lib/fonts";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -11,8 +11,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={inter.variable}
-      style={{ "--font-sans": sansFontFamily }}
+      className={nanumMyeongjo.variable}
+      style={{ "--font-sans": siteFontFamily }}
     >
       <body className="min-h-svh bg-white p-8 font-sans text-sm leading-normal font-normal tracking-normal text-pretty text-black">
         {children}
