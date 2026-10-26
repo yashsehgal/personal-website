@@ -1,190 +1,148 @@
-import { IMAGE_PLACEHOLDERS } from "@/common/image-placeholders";
-import { WEBSITE_ROUTES } from "@/common/routes";
-import { WORK_EXPERIENCES } from "@/common/work";
-import { ProgressiveImage } from "@/components/progressive-image";
-import { TrackedAnchor, TrackedLink } from "@/components/tracked-link";
-import { AnalyticsEvent, workClickEvent } from "@/lib/analytics/events";
-
-const textLinkClassName =
-  "whitespace-nowrap rounded py-0.5 text-foreground hover:bg-muted focus-visible:bg-muted motion-reduce:transition-none";
-const textLinkInsetClassName = `${textLinkClassName} -mx-1 px-1`;
-
-const HOME_PHOTO_COLUMNS = [
-  [
-    {
-      src: "/about/yash.jpg",
-      width: 515,
-      height: 772,
-      alt: "Yash holding a camera on a boat, with the Golden Gate Bridge behind him",
-    },
-    {
-      src: "/about/golden-gate.jpg",
-      width: 1024,
-      height: 682,
-      alt: "Golden Gate Bridge at sunset from the beach",
-    },
-  ],
-  [
-    {
-      src: "/about/marine-drive.jpg",
-      width: 1024,
-      height: 768,
-      alt: "Mumbai skyline across the water at dusk",
-    },
-    {
-      src: "/about/basketball-court.jpg",
-      width: 682,
-      height: 1024,
-      alt: "Evening basketball game with the city skyline behind the court",
-    },
-  ],
+const work = [
+  {
+    year: "2026",
+    company: "Octolane",
+    role: "Design Engineer",
+    href: "https://octolane.com",
+  },
+  {
+    year: "2025",
+    company: "StackAI",
+    role: "Founding Design Engineer",
+    href: "https://stack.ai",
+  },
+  {
+    year: "2024",
+    company: "Rocketium",
+    role: "Design Engineer",
+    href: "https://rocketium.com",
+  },
+  {
+    year: "2023",
+    company: "GitHub",
+    role: "Engineering Intern",
+    href: "https://github.com",
+  },
+  {
+    year: "2021",
+    company: "Economize",
+    role: "Engineering Intern",
+    href: "https://www.linkedin.com/company/economize",
+  },
 ] as const;
 
-export default function Home() {
+export default function Page() {
   return (
-    <div className="flex w-full min-w-0 flex-col items-start gap-6 px-1 wide:mt-16">
-      <h1 className="font-medium tracking-tight">About</h1>
-      <div className="flex w-full max-w-prose min-w-0 flex-col items-start gap-6">
-        <div className="flex w-full min-w-0 flex-col items-start gap-6 leading-relaxed text-pretty text-muted-foreground">
-        <p>
+    <div className="max-w-[360px]">
+      <header className="mb-8 flex flex-col gap-0.5">
+        <h1>Yash Sehgal</h1>
+        <p className="text-[#888]">Design Engineer</p>
+      </header>
+      <main>
+        <p className="mb-4">
           Currently, I am working at{" "}
-          <TrackedAnchor
+          <a
             href="https://octolane.com"
             target="_blank"
             rel="noopener noreferrer"
-            event={AnalyticsEvent.HOME_OCTOLANE_CLICK}
-            className={textLinkInsetClassName}
           >
             Octolane
-          </TrackedAnchor>
+          </a>
           , where I help design a better AI-powered CRM and do a lot of the
-          backend alongside the design. Previously, I was at{" "}
-          <TrackedAnchor
-            href="https://stack.ai"
-            target="_blank"
-            rel="noopener noreferrer"
-            event={AnalyticsEvent.HOME_STACKAI_CLICK}
-            className={textLinkInsetClassName}
-          >
+          backend alongside the design.
+        </p>
+        <p className="mb-4">
+          Previously, I was at{" "}
+          <a href="https://stack.ai" target="_blank" rel="noopener noreferrer">
             StackAI
-          </TrackedAnchor>
+          </a>
           , where I led design engineering, joining as one of the founding team
           members. I focused on making it easier to create AI agents (
-          <TrackedAnchor
+          <a
             href="https://www.stackai.com/platform/knowledge-bases"
             target="_blank"
             rel="noopener noreferrer"
-            event={AnalyticsEvent.HOME_STACKAI_KNOWLEDGE_BASES_CLICK}
-            className={`${textLinkClassName} -mr-1 pr-1`}
           >
             knowledge bases
-          </TrackedAnchor>
+          </a>
           ,{" "}
-          <TrackedAnchor
+          <a
             href="https://www.stackai.com/changelog/08-20-2025"
             target="_blank"
             rel="noopener noreferrer"
-            event={AnalyticsEvent.HOME_STACKAI_EVALUATORS_CLICK}
-            className={textLinkInsetClassName}
           >
             evaluators
-          </TrackedAnchor>
+          </a>
           ,{" "}
-          <TrackedAnchor
+          <a
             href="https://www.stackai.com/platform/workflow"
             target="_blank"
             rel="noopener noreferrer"
-            event={AnalyticsEvent.HOME_STACKAI_WORKFLOW_CLICK}
-            className={textLinkInsetClassName}
           >
             workflow for making agents
-          </TrackedAnchor>
+          </a>
           , and more areas within the platform)
         </p>
-        <p>
+        <p className="mb-4">
           In my free time, I make music and play the keyboard, and I&apos;m
           learning sound engineering and composition. I read across a lot of
-          subjects, and I love traveling and taking{" "}
-          <TrackedLink
-            href={WEBSITE_ROUTES.APPS_GALLERY}
-            event={AnalyticsEvent.HOME_PHOTOGRAPHS_CLICK}
-            className={textLinkInsetClassName}
-          >
-            photographs
-          </TrackedLink>
-          .
+          subjects, and I love traveling and taking photographs.
         </p>
-        </div>
-        <ul className="-mx-1 mt-6 flex w-[calc(100%+0.5rem)] min-w-0 flex-col">
-          {WORK_EXPERIENCES.map((experience, index) => {
-            const showYear =
-              index === 0 ||
-              WORK_EXPERIENCES[index - 1].year !== experience.year;
-
-            return (
-              <li key={experience.id}>
-                <TrackedAnchor
+        <ul className="mb-4">
+          {work.map((experience) => (
+            <li key={experience.company} className="flex justify-between gap-4">
+              <span>
+                <span className="text-[#888]">{experience.year} / </span>
+                <a
                   href={experience.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  data-scrub-sound=""
-                  event={workClickEvent[experience.id]}
-                  className="flex items-baseline justify-between gap-6 rounded px-1 py-0.5 text-sm tracking-tight text-muted-foreground hover:bg-muted hover:text-foreground focus-visible:bg-muted focus-visible:text-foreground"
+                  className="plain-link"
                 >
-                  <span className="min-w-0">
-                    <span
-                      className={
-                        showYear ? "tabular-nums" : "invisible tabular-nums"
-                      }
-                      aria-hidden={showYear ? undefined : true}
-                    >
-                      {experience.year}
-                    </span>
-                    <span
-                      aria-hidden="true"
-                      className={showYear ? undefined : "invisible"}
-                    >
-                      {" / "}
-                    </span>
-                    <span className="text-foreground">{experience.company}</span>
-                  </span>
-                  <span className="shrink-0">{experience.role}</span>
-                </TrackedAnchor>
-              </li>
-            );
-          })}
-        </ul>
-        <div className="grid w-full grid-cols-2 gap-3">
-          {HOME_PHOTO_COLUMNS.map((column) => (
-            <div key={column[0].src} className="flex flex-col gap-3">
-              {column.map((photo) => {
-                const placeholder = IMAGE_PLACEHOLDERS[photo.src];
-
-                return (
-                  <ProgressiveImage
-                    key={photo.src}
-                    src={photo.src}
-                    alt={photo.alt}
-                    width={placeholder.width}
-                    height={placeholder.height}
-                    blurDataURL={placeholder.blurDataURL}
-                  />
-                );
-              })}
-            </div>
+                  {experience.company}
+                </a>
+              </span>
+              <span className="shrink-0">{experience.role}</span>
+            </li>
           ))}
-        </div>
-      </div>
+        </ul>
+        <p>
+          You can find me on{" "}
+          <a
+            href="https://x.com/yashsehgaldev"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            X
+          </a>
+          ,{" "}
+          <a
+            href="https://github.com/yashsehgal"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            GitHub
+          </a>
+          ,{" "}
+          <a
+            href="https://www.instagram.com/sehgalyash_/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Instagram
+          </a>
+          , or{" "}
+          <a
+            href="https://www.linkedin.com/in/sehgalyash/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            LinkedIn
+          </a>
+          , or reach me via{" "}
+          <a href="mailto:hi@yashsehgal.com">email</a>.
+        </p>
+      </main>
     </div>
   );
 }
-
-/**
- * Hi, I am Yash Sehgal. As of today, I am living in Bombay, India. I work as
-      a design engineer with teams. You can read about my Recent Work Besides
-      spending a lot of time on my computer, I love listening and discussing
-      music. I sometimes play around with keyboards and sound production
-      platforms. I find time for journaling in my day, sometimes I just write a
-      single line, but I really enjoy writing about how I feel and things I am
-      planning to do. I post some of them under My Writings
- */
