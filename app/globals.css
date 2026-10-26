@@ -1,10 +1,5 @@
 @import "tailwindcss";
 
-@theme {
-  --color-background: #fff;
-  --color-foreground: #000;
-}
-
 html {
   color-scheme: light;
   background: #fff;
@@ -19,13 +14,141 @@ html {
 
 a.plain-link {
   text-decoration: none;
+  --mark-rotate: -2.4deg;
+  --mark-top: -0.08em;
+  --mark-height: 1.15em;
+  --mark-left: -0.14em;
+  --mark-bleed: 0.42em;
+  --mark-weight: 15px;
+  --mark-duration: 200ms;
 }
 
-a.plain-link:hover {
-  text-decoration-line: underline;
+a.plain-link .company {
+  position: relative;
+  isolation: isolate;
+}
+
+a.plain-link .company svg {
+  position: absolute;
+  z-index: -1;
+  overflow: visible;
+  pointer-events: none;
+  top: var(--mark-top);
+  left: var(--mark-left);
+  width: calc(100% + var(--mark-bleed));
+  height: var(--mark-height);
+  transform: rotate(var(--mark-rotate)) scaleX(0.18);
+  transform-origin: left center;
+  opacity: 0;
+  transition-property: transform, opacity;
+  transition-duration: var(--mark-duration), 90ms;
+  transition-timing-function: cubic-bezier(0.23, 1, 0.32, 1), ease;
+}
+
+a.plain-link .company svg path {
+  fill: none;
+  stroke: #ffe14d;
+  stroke-width: var(--mark-weight);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+  opacity: 0.86;
+}
+
+ul li:nth-child(2) a.plain-link {
+  --mark-rotate: 1.8deg;
+  --mark-top: 0.08em;
+  --mark-height: 1.28em;
+  --mark-left: -0.26em;
+  --mark-bleed: 0.18em;
+  --mark-weight: 13px;
+  --mark-duration: 230ms;
+}
+
+ul li:nth-child(3) a.plain-link {
+  --mark-rotate: -0.7deg;
+  --mark-top: -0.16em;
+  --mark-height: 1.05em;
+  --mark-left: -0.04em;
+  --mark-bleed: 0.5em;
+  --mark-weight: 16px;
+  --mark-duration: 180ms;
+}
+
+ul li:nth-child(4) a.plain-link {
+  --mark-rotate: 2.6deg;
+  --mark-top: 0.12em;
+  --mark-height: 1.22em;
+  --mark-left: -0.2em;
+  --mark-bleed: 0.12em;
+  --mark-weight: 12px;
+  --mark-duration: 210ms;
+}
+
+ul li:nth-child(5) a.plain-link {
+  --mark-rotate: -1.7deg;
+  --mark-top: -0.02em;
+  --mark-height: 1em;
+  --mark-left: -0.18em;
+  --mark-bleed: 0.36em;
+  --mark-weight: 14px;
+  --mark-duration: 190ms;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  a.plain-link:hover .company svg {
+    opacity: 1;
+    transform: rotate(var(--mark-rotate)) scaleX(1);
+  }
+}
+
+a.plain-link:focus-visible .company svg {
+  opacity: 1;
+  transform: rotate(var(--mark-rotate)) scaleX(1);
+}
+
+a.content-link {
+  margin-inline: calc(var(--mark-pad) * -1);
+  padding-inline: var(--mark-pad);
+  background-image: var(--mark-image);
+  background-repeat: no-repeat;
+  background-position: left var(--mark-y);
+  background-size: 0% var(--mark-h);
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  transition-property: background-size;
+  transition-duration: var(--mark-duration);
+  transition-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  a.content-link:hover {
+    background-size: 100% var(--mark-h);
+  }
+}
+
+a.content-link:focus-visible {
+  background-size: 100% var(--mark-h);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  a.plain-link .company svg,
+  a.plain-link:hover .company svg,
+  a.plain-link:focus-visible .company svg {
+    transform: rotate(var(--mark-rotate));
+    transition-property: opacity;
+    transition-duration: 120ms;
+  }
+
+  a.content-link,
+  a.content-link:hover,
+  a.content-link:focus-visible {
+    transition-property: none;
+  }
 }
 
 :focus-visible {
   outline: 2px solid currentColor;
   outline-offset: 3px;
 }
+
