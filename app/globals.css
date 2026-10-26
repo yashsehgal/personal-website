@@ -37,12 +37,13 @@ html {
   --page-fg: #000;
   --page-muted: #757575;
   --page-mark: #ffe14d;
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   color-scheme: light;
   background: var(--page-bg);
   color: var(--page-fg);
   transition-property: --page-bg, --page-fg, --page-muted, --page-mark;
   transition-duration: 280ms;
-  transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  transition-timing-function: var(--ease-out);
 }
 
 body {
@@ -116,102 +117,8 @@ button.theme-shuffle:not(:disabled):active {
   }
 }
 
-a.plain-link {
-  text-decoration: none;
-  --mark-rotate: -2.4deg;
-  --mark-top: -0.08em;
-  --mark-height: 1.15em;
-  --mark-left: -0.14em;
-  --mark-bleed: 0.42em;
-  --mark-weight: 15px;
-  --mark-duration: 200ms;
-}
-
-a.plain-link .company {
-  position: relative;
-  isolation: isolate;
-}
-
-a.plain-link .company svg {
-  position: absolute;
-  z-index: -1;
-  overflow: visible;
-  pointer-events: none;
-  top: var(--mark-top);
-  left: var(--mark-left);
-  width: calc(100% + var(--mark-bleed));
-  height: var(--mark-height);
-  transform: rotate(var(--mark-rotate)) scaleX(0.18);
-  transform-origin: left center;
-  opacity: 0;
-  transition-property: transform, opacity;
-  transition-duration: var(--mark-duration), 90ms;
-  transition-timing-function: cubic-bezier(0.23, 1, 0.32, 1), ease;
-}
-
-a.plain-link .company svg path {
-  fill: none;
-  stroke: var(--page-mark);
-  stroke-width: var(--mark-weight);
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  vector-effect: non-scaling-stroke;
-  opacity: 0.86;
-}
-
-ul li:nth-child(2) a.plain-link {
-  --mark-rotate: 1.8deg;
-  --mark-top: 0.08em;
-  --mark-height: 1.28em;
-  --mark-left: -0.26em;
-  --mark-bleed: 0.18em;
-  --mark-weight: 13px;
-  --mark-duration: 230ms;
-}
-
-ul li:nth-child(3) a.plain-link {
-  --mark-rotate: -0.7deg;
-  --mark-top: -0.16em;
-  --mark-height: 1.05em;
-  --mark-left: -0.04em;
-  --mark-bleed: 0.5em;
-  --mark-weight: 16px;
-  --mark-duration: 180ms;
-}
-
-ul li:nth-child(4) a.plain-link {
-  --mark-rotate: 2.6deg;
-  --mark-top: 0.12em;
-  --mark-height: 1.22em;
-  --mark-left: -0.2em;
-  --mark-bleed: 0.12em;
-  --mark-weight: 12px;
-  --mark-duration: 210ms;
-}
-
-ul li:nth-child(5) a.plain-link {
-  --mark-rotate: -1.7deg;
-  --mark-top: -0.02em;
-  --mark-height: 1em;
-  --mark-left: -0.18em;
-  --mark-bleed: 0.36em;
-  --mark-weight: 14px;
-  --mark-duration: 190ms;
-}
-
-@media (hover: hover) and (pointer: fine) {
-  a.plain-link:hover .company svg {
-    opacity: 1;
-    transform: rotate(var(--mark-rotate)) scaleX(1);
-  }
-}
-
-a.plain-link:focus-visible .company svg {
-  opacity: 1;
-  transform: rotate(var(--mark-rotate)) scaleX(1);
-}
-
-a.content-link {
+a.content-link,
+.content-link {
   color: inherit;
   margin-inline: calc(var(--mark-pad) * -1);
   padding-inline: var(--mark-pad);
@@ -230,7 +137,7 @@ a.content-link {
   -webkit-box-decoration-break: clone;
   transition-property: background-color;
   transition-duration: var(--mark-duration);
-  transition-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
+  transition-timing-function: var(--ease-out);
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -256,16 +163,16 @@ a.content-link:focus-visible {
   background-color: color-mix(in srgb, var(--page-fg) 17%, var(--page-bg));
 }
 
-html[data-theme]:not([data-theme="0"]) a.content-link {
+html[data-theme]:not([data-theme="0"]) .content-link {
   background-color: color-mix(in srgb, var(--page-fg) 24%, var(--page-bg));
 }
 
-html[data-theme="3"]:not([data-theme="0"]) a.content-link,
-html[data-theme="5"]:not([data-theme="0"]) a.content-link {
+html[data-theme="3"]:not([data-theme="0"]) .content-link,
+html[data-theme="5"]:not([data-theme="0"]) .content-link {
   background-color: color-mix(in srgb, var(--page-fg) 10%, var(--page-bg));
 }
 
-html[data-theme="4"]:not([data-theme="0"]) a.content-link {
+html[data-theme="4"]:not([data-theme="0"]) .content-link {
   background-color: color-mix(in srgb, var(--page-fg) 6%, var(--page-bg));
 }
 
@@ -283,14 +190,6 @@ html[data-theme="4"]:not([data-theme="0"]) a.content-link:focus-visible {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  a.plain-link .company svg,
-  a.plain-link:hover .company svg,
-  a.plain-link:focus-visible .company svg {
-    transform: rotate(var(--mark-rotate));
-    transition-property: opacity;
-    transition-duration: 120ms;
-  }
-
   a.content-link,
   a.content-link:hover,
   a.content-link:focus-visible {

@@ -4,35 +4,35 @@ const work = [
     company: "Octolane",
     role: "Design Engineer",
     href: "https://octolane.com",
-    mark: "M0 15 C 14 6, 24 19, 40 11 C 54 4, 66 17, 82 9 C 91 5, 96 14, 100 8",
+    mark: 0,
   },
   {
     year: "2025",
     company: "StackAI",
     role: "Founding Design Engineer",
     href: "https://stack.ai",
-    mark: "M0 8 C 12 16, 26 5, 42 13 C 58 21, 70 7, 86 15 C 93 18, 97 11, 100 14",
+    mark: 1,
   },
   {
     year: "2024",
     company: "Rocketium",
     role: "Design Engineer",
     href: "https://rocketium.com",
-    mark: "M0 12 C 16 13, 28 7, 46 14 C 62 20, 74 8, 88 13 C 94 16, 98 10, 100 12",
+    mark: 2,
   },
   {
     year: "2023",
     company: "GitHub",
     role: "Engineering Intern",
     href: "https://github.com",
-    mark: "M0 17 C 11 7, 24 19, 41 8 C 56 1, 69 17, 84 11 C 92 8, 97 15, 100 6",
+    mark: 3,
   },
   {
     year: "2021",
     company: "Economize",
     role: "Engineering Intern",
     href: "https://www.linkedin.com/company/economize",
-    mark: "M0 10 C 18 18, 32 5, 50 14 C 66 22, 78 8, 90 13 C 95 16, 98 9, 100 12",
+    mark: 4,
   },
 ] as const;
 
@@ -124,6 +124,18 @@ function markImage(d: string, opacity: number) {
   return `url("data:image/svg+xml,${encodeURIComponent(svg)}")`;
 }
 
+function markStyle(mark: number) {
+  const stroke = contentMarks[mark];
+
+  return {
+    "--mark-image": markImage(stroke.d, stroke.opacity),
+    "--mark-y": stroke.y,
+    "--mark-h": stroke.h,
+    "--mark-pad": stroke.pad,
+    "--mark-duration": stroke.duration,
+  };
+}
+
 function ContentLink({
   href,
   children,
@@ -135,19 +147,11 @@ function ContentLink({
   mark: number;
   external?: boolean;
 }) {
-  const stroke = contentMarks[mark];
-
   return (
     <a
       href={href}
       className="content-link"
-      style={{
-        "--mark-image": markImage(stroke.d, stroke.opacity),
-        "--mark-y": stroke.y,
-        "--mark-h": stroke.h,
-        "--mark-pad": stroke.pad,
-        "--mark-duration": stroke.duration,
-      }}
+      style={markStyle(mark)}
       {...(external
         ? { target: "_blank", rel: "noopener noreferrer" }
         : undefined)}
@@ -206,30 +210,16 @@ export default function Page() {
         </p>
         <ul className="mb-4">
           {work.map((experience) => (
-            <li key={experience.company}>
-              <a
-                href={experience.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="plain-link flex justify-between gap-4"
-              >
-                <span>
-                  <span className="text-muted tabular-nums">
-                    {experience.year} /{" "}
-                  </span>
-                  <span className="company">
-                    <svg
-                      viewBox="0 0 100 24"
-                      preserveAspectRatio="none"
-                      aria-hidden="true"
-                    >
-                      <path d={experience.mark} />
-                    </svg>
-                    {experience.company}
-                  </span>
+            <li key={experience.company} className="flex justify-between gap-4">
+              <span>
+                <span className="text-muted tabular-nums">
+                  {experience.year} /{" "}
                 </span>
-                <span className="shrink-0">{experience.role}</span>
-              </a>
+                <ContentLink href={experience.href} mark={experience.mark}>
+                  {experience.company}
+                </ContentLink>
+              </span>
+              <span className="shrink-0">{experience.role}</span>
             </li>
           ))}
         </ul>
