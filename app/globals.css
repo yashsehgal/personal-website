@@ -1,8 +1,85 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@theme inline {
+  --color-background: var(--page-bg);
+  --color-foreground: var(--page-fg);
+}
+
+@property --page-bg {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #fff;
+}
+
+@property --page-fg {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #000;
+}
+
+@property --page-muted {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #757575;
+}
 
 html {
+  --page-bg: #fff;
+  --page-fg: #000;
+  --page-muted: #757575;
   color-scheme: light;
-  background: #fff;
+  background: var(--page-bg);
+  color: var(--page-fg);
+  transition-property: --page-bg, --page-fg, --page-muted;
+  transition-duration: 280ms;
+  transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+body {
+  background: var(--page-bg);
+  color: var(--page-fg);
+}
+
+.text-muted {
+  color: var(--page-muted);
+}
+
+@media (max-width: 26rem) {
+  .page-header {
+    padding-inline-end: 2.75rem;
+  }
+}
+
+button.theme-shuffle {
+  position: fixed;
+  inset-block-start: 2rem;
+  inset-inline-end: 2rem;
+  z-index: 20;
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+  border: 0;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--page-fg) 6%, var(--page-bg));
+  color: var(--page-fg);
+  cursor: pointer;
+  transition: none;
+}
+
+button.theme-shuffle svg {
+  display: block;
+  width: 1rem;
+  height: 1rem;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  button.theme-shuffle:hover {
+    background: color-mix(in srgb, var(--page-fg) 14%, var(--page-bg));
+  }
 }
 
 @layer base {
@@ -108,10 +185,10 @@ a.plain-link:focus-visible .company svg {
 }
 
 a.content-link {
-  color: #000;
+  color: inherit;
   margin-inline: calc(var(--mark-pad) * -1);
   padding-inline: var(--mark-pad);
-  background-color: #f0f0f0;
+  background-color: color-mix(in srgb, var(--page-fg) 6%, var(--page-bg));
   -webkit-mask-image: var(--mark-image);
   mask-image: var(--mark-image);
   -webkit-mask-mode: alpha;
@@ -131,12 +208,24 @@ a.content-link {
 
 @media (hover: hover) and (pointer: fine) {
   a.content-link:hover {
-    background-color: #d4d4d4;
+    background-color: color-mix(in srgb, var(--page-fg) 17%, var(--page-bg));
+  }
+
+  html[data-theme]:not([data-theme="0"]) a.content-link:hover {
+    background-color: color-mix(in srgb, var(--page-fg) 36%, var(--page-bg));
   }
 }
 
 a.content-link:focus-visible {
-  background-color: #d4d4d4;
+  background-color: color-mix(in srgb, var(--page-fg) 17%, var(--page-bg));
+}
+
+html[data-theme]:not([data-theme="0"]) a.content-link {
+  background-color: color-mix(in srgb, var(--page-fg) 24%, var(--page-bg));
+}
+
+html[data-theme]:not([data-theme="0"]) a.content-link:focus-visible {
+  background-color: color-mix(in srgb, var(--page-fg) 36%, var(--page-bg));
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -151,6 +240,12 @@ a.content-link:focus-visible {
   a.content-link,
   a.content-link:hover,
   a.content-link:focus-visible {
+    transition-property: none;
+  }
+
+  html,
+  button.theme-shuffle,
+  button.theme-shuffle:hover {
     transition-property: none;
   }
 }

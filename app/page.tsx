@@ -119,12 +119,8 @@ const contentMarks = [
   },
 ] as const;
 
-function markImage(d: string, opacity: number, fill = "#e2e2e2") {
-  const paint =
-    fill === "instagram"
-      ? `<defs><linearGradient id="ig" x1="0" y1="1" x2="1" y2="0"><stop offset="0%" stop-color="#E4D4F7"/><stop offset="50%" stop-color="#F8D0E2"/><stop offset="100%" stop-color="#FFF0CC"/></linearGradient></defs><path fill="url(#ig)" fill-opacity="${opacity}" d="${d}"/>`
-      : `<path fill="${fill}" fill-opacity="${opacity}" d="${d}"/>`;
-  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 24" preserveAspectRatio="none">${paint}</svg>`;
+function markImage(d: string, opacity: number) {
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 24" preserveAspectRatio="none"><path fill="#e2e2e2" fill-opacity="${opacity}" d="${d}"/></svg>`;
   return `url("data:image/svg+xml,${encodeURIComponent(svg)}")`;
 }
 
@@ -164,9 +160,9 @@ function ContentLink({
 export default function Page() {
   return (
     <div className="max-w-[300px]">
-      <header className="mb-8 flex flex-col gap-0.5">
-        <h1>Yash Sehgal</h1>
-        <p className="text-[#888]">Design Engineer from Bombay</p>
+      <header className="page-header mb-8 flex flex-col gap-0.5">
+        <h1 className="text-base">Yash Sehgal</h1>
+        <p className="text-muted">Design Engineer from Bombay</p>
       </header>
       <main>
         <p className="mb-4">
@@ -218,7 +214,9 @@ export default function Page() {
                 className="plain-link flex justify-between gap-4"
               >
                 <span>
-                  <span className="text-[#888]">{experience.year} / </span>
+                  <span className="text-muted tabular-nums">
+                    {experience.year} /{" "}
+                  </span>
                   <span className="company">
                     <svg
                       viewBox="0 0 100 24"
