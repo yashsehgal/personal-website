@@ -5,6 +5,7 @@
 @theme inline {
   --color-background: var(--page-bg);
   --color-foreground: var(--page-fg);
+  --color-mark: var(--page-mark);
 }
 
 @property --page-bg {
@@ -25,14 +26,21 @@
   initial-value: #757575;
 }
 
+@property --page-mark {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #ffe14d;
+}
+
 html {
   --page-bg: #fff;
   --page-fg: #000;
   --page-muted: #757575;
+  --page-mark: #ffe14d;
   color-scheme: light;
   background: var(--page-bg);
   color: var(--page-fg);
-  transition-property: --page-bg, --page-fg, --page-muted;
+  transition-property: --page-bg, --page-fg, --page-muted, --page-mark;
   transition-duration: 280ms;
   transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -143,7 +151,7 @@ a.plain-link .company svg {
 
 a.plain-link .company svg path {
   fill: none;
-  stroke: #ffe14d;
+  stroke: var(--page-mark);
   stroke-width: var(--mark-weight);
   stroke-linecap: round;
   stroke-linejoin: round;
