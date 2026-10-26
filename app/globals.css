@@ -241,6 +241,15 @@ a.content-link {
   html[data-theme]:not([data-theme="0"]) a.content-link:hover {
     background-color: color-mix(in srgb, var(--page-fg) 36%, var(--page-bg));
   }
+
+  html[data-theme="3"]:not([data-theme="0"]) a.content-link:hover,
+  html[data-theme="5"]:not([data-theme="0"]) a.content-link:hover {
+    background-color: color-mix(in srgb, var(--page-fg) 20%, var(--page-bg));
+  }
+
+  html[data-theme="4"]:not([data-theme="0"]) a.content-link:hover {
+    background-color: color-mix(in srgb, var(--page-fg) 14%, var(--page-bg));
+  }
 }
 
 a.content-link:focus-visible {
@@ -251,8 +260,26 @@ html[data-theme]:not([data-theme="0"]) a.content-link {
   background-color: color-mix(in srgb, var(--page-fg) 24%, var(--page-bg));
 }
 
+html[data-theme="3"]:not([data-theme="0"]) a.content-link,
+html[data-theme="5"]:not([data-theme="0"]) a.content-link {
+  background-color: color-mix(in srgb, var(--page-fg) 10%, var(--page-bg));
+}
+
+html[data-theme="4"]:not([data-theme="0"]) a.content-link {
+  background-color: color-mix(in srgb, var(--page-fg) 6%, var(--page-bg));
+}
+
 html[data-theme]:not([data-theme="0"]) a.content-link:focus-visible {
   background-color: color-mix(in srgb, var(--page-fg) 36%, var(--page-bg));
+}
+
+html[data-theme="3"]:not([data-theme="0"]) a.content-link:focus-visible,
+html[data-theme="5"]:not([data-theme="0"]) a.content-link:focus-visible {
+  background-color: color-mix(in srgb, var(--page-fg) 20%, var(--page-bg));
+}
+
+html[data-theme="4"]:not([data-theme="0"]) a.content-link:focus-visible {
+  background-color: color-mix(in srgb, var(--page-fg) 14%, var(--page-bg));
 }
 
 @media (prefers-reduced-motion: reduce) {
