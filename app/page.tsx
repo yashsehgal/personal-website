@@ -166,7 +166,7 @@ export default function Page() {
     <div className="max-w-[300px]">
       <header className="mb-8 flex flex-col gap-0.5">
         <h1>Yash Sehgal</h1>
-        <p className="text-[#888]">Design Engineer</p>
+        <p className="text-[#888]">Design Engineer from Bombay</p>
       </header>
       <main>
         <p className="mb-4">
