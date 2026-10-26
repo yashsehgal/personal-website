@@ -8,7 +8,7 @@ html {
 @layer base {
   a {
     color: inherit;
-    text-decoration: underline;
+    text-decoration: none;
   }
 }
 
@@ -108,27 +108,35 @@ a.plain-link:focus-visible .company svg {
 }
 
 a.content-link {
+  color: #000;
   margin-inline: calc(var(--mark-pad) * -1);
   padding-inline: var(--mark-pad);
-  background-image: var(--mark-image);
-  background-repeat: no-repeat;
-  background-position: left var(--mark-y);
-  background-size: 0% var(--mark-h);
+  background-color: #f0f0f0;
+  -webkit-mask-image: var(--mark-image);
+  mask-image: var(--mark-image);
+  -webkit-mask-mode: alpha;
+  mask-mode: alpha;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: left var(--mark-y);
+  mask-position: left var(--mark-y);
+  -webkit-mask-size: 100% var(--mark-h);
+  mask-size: 100% var(--mark-h);
   box-decoration-break: clone;
   -webkit-box-decoration-break: clone;
-  transition-property: background-size;
+  transition-property: background-color;
   transition-duration: var(--mark-duration);
   transition-timing-function: cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 @media (hover: hover) and (pointer: fine) {
   a.content-link:hover {
-    background-size: 100% var(--mark-h);
+    background-color: #d4d4d4;
   }
 }
 
 a.content-link:focus-visible {
-  background-size: 100% var(--mark-h);
+  background-color: #d4d4d4;
 }
 
 @media (prefers-reduced-motion: reduce) {
