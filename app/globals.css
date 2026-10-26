@@ -67,6 +67,7 @@ button.theme-shuffle {
   background: color-mix(in srgb, var(--page-fg) 6%, var(--page-bg));
   color: var(--page-fg);
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
   transition: none;
 }
 
@@ -74,12 +75,30 @@ button.theme-shuffle svg {
   display: block;
   width: 1rem;
   height: 1rem;
+  transform-origin: center;
+  transition-property: opacity;
+  transition-duration: 150ms;
+  transition-timing-function: ease-out;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  button.theme-shuffle svg {
+    transition-property: scale;
+  }
+
+  button.theme-shuffle:not(:disabled):active svg {
+    scale: 0.96;
+  }
 }
 
 @media (hover: hover) and (pointer: fine) {
   button.theme-shuffle:hover {
     background: color-mix(in srgb, var(--page-fg) 14%, var(--page-bg));
   }
+}
+
+button.theme-shuffle:not(:disabled):active {
+  background: color-mix(in srgb, var(--page-fg) 18%, var(--page-bg));
 }
 
 @layer base {
@@ -243,10 +262,12 @@ html[data-theme]:not([data-theme="0"]) a.content-link:focus-visible {
     transition-property: none;
   }
 
-  html,
-  button.theme-shuffle,
-  button.theme-shuffle:hover {
+  html {
     transition-property: none;
+  }
+
+  button.theme-shuffle:not(:disabled):active svg {
+    opacity: 0.72;
   }
 }
 
