@@ -1,10 +1,10 @@
-import { Nanum_Myeongjo } from "next/font/google";
+import { Inter } from "next/font/google";
 
-export const nanumMyeongjo = Nanum_Myeongjo({
-  weight: "400",
+// Inter is a variable font, so every weight comes from one file.
+export const inter = Inter({
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-nanum-myeongjo",
+  variable: "--font-inter",
 });
 
-export const siteFontFamily = "var(--font-nanum-myeongjo), serif";
+export const siteFontFamily = "var(--font-inter), sans-serif";

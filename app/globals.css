@@ -122,6 +122,11 @@ a.content-link,
   color: inherit;
   margin-inline: calc(var(--mark-pad) * -1);
   padding-inline: var(--mark-pad);
+  /* Room above and below the text for the mark's waves to paint into.
+     Padding on an inline box doesn't move the line, it only grows the
+     painted area. */
+  --mark-room-top: 0.1em;
+  padding-block: var(--mark-room-top) 0.3em;
   background-color: color-mix(in srgb, var(--page-fg) 6%, var(--page-bg));
   -webkit-mask-image: var(--mark-image);
   mask-image: var(--mark-image);
@@ -129,8 +134,8 @@ a.content-link,
   mask-mode: alpha;
   -webkit-mask-repeat: no-repeat;
   mask-repeat: no-repeat;
-  -webkit-mask-position: left var(--mark-y);
-  mask-position: left var(--mark-y);
+  -webkit-mask-position: left calc(var(--mark-y) + var(--mark-room-top));
+  mask-position: left calc(var(--mark-y) + var(--mark-room-top));
   -webkit-mask-size: 100% var(--mark-h);
   mask-size: 100% var(--mark-h);
   box-decoration-break: clone;
@@ -211,7 +216,7 @@ html[data-theme="4"]:not([data-theme="0"]) a.content-link:focus-visible {
 }
 
 /* Commands and snippets, tinted from the page colours so every theme
-   carries them. Mono at a hair under the serif's size, so the two read
+   carries them. Mono at a hair under the body text's size, so the two read
    as one line height. */
 .code-block {
   position: relative;
