@@ -12,34 +12,83 @@ export const metadata: Metadata = {
 // ContentLink has ten hand-drawn marks; cycle through them down the page.
 const MARK_COUNT = 10;
 
-// Posts from this year on count as recent; everything before is earlier.
-const RECENT_FROM_YEAR = 2026;
+// Row rhythm, in px: each row is a 21px line plus a 4px gap, and a new year
+// starts 12px further down. Used both for styling and for balancing columns.
+const ROW_HEIGHT = 25;
+const YEAR_GAP = 12;
 
 type ArchiveItem = (typeof ARCHIVE_LINKS)[number];
 
-const recent = ARCHIVE_LINKS.filter((item) => item.year >= RECENT_FROM_YEAR);
-const earlier = ARCHIVE_LINKS.filter((item) => item.year < RECENT_FROM_YEAR);
+type Column = { items: ArchiveItem[]; markOffset: number };
 
-// markOffset carries the mark cycle on from one group to the next.
-const groups = [
-  { title: "Recent", items: recent, markOffset: 0 },
-  { title: "Earlier", items: earlier, markOffset: recent.length },
-].filter((group) => group.items.length > 0);
+function columnHeight(items: readonly ArchiveItem[]) {
+  return items.reduce(
+    (height, item, index) =>
+      height +
+      ROW_HEIGHT +
+      (index > 0 && items[index - 1].year !== item.year ? YEAR_GAP : 0),
+    0,
+  );
+}
 
-function ArchiveList({
-  items,
-  markOffset,
-}: {
-  items: readonly ArchiveItem[];
-  markOffset: number;
-}) {
+// Splits the list, in order, into `count` columns whose heights are as close
+// as possible: every way of cutting it is tried and the one with the shortest
+// tallest column wins. The list is small, so trying them all is instant.
+function balanceColumns(items: readonly ArchiveItem[], count: number) {
+  let best: number[] = [];
+  let bestHeight = Infinity;
+
+  function tryCuts(start: number, cuts: number[]) {
+    if (cuts.length === count - 1) {
+      const bounds = [0, ...cuts, items.length];
+      const tallest = Math.max(
+        ...bounds
+          .slice(1)
+          .map((end, i) => columnHeight(items.slice(bounds[i], end))),
+      );
+      if (tallest < bestHeight) {
+        bestHeight = tallest;
+        best = cuts;
+      }
+      return;
+    }
+    for (let cut = start + 1; cut < items.length; cut++) {
+      tryCuts(cut, [...cuts, cut]);
+    }
+  }
+
+  tryCuts(0, []);
+  const bounds = [0, ...best, items.length];
+
+  return bounds.slice(1).map<Column>((end, i) => ({
+    items: items.slice(bounds[i], end),
+    markOffset: bounds[i],
+  }));
+}
+
+// The same list balanced for each layout. Only one is shown at a time; the
+// others are display: none, so screen readers hear the list once.
+const layouts = [
+  { columns: balanceColumns(ARCHIVE_LINKS, 1), className: "grid lg:hidden" },
+  {
+    columns: balanceColumns(ARCHIVE_LINKS, 2),
+    className: "hidden lg:grid lg:grid-cols-2 min-[90rem]:hidden",
+  },
+  {
+    columns: balanceColumns(ARCHIVE_LINKS, 3),
+    className: "hidden min-[90rem]:grid min-[90rem]:grid-cols-3",
+  },
+];
+
+function ArchiveList({ items, markOffset }: Column) {
   return (
-    // Rows sit 4px apart so neighbouring marks don't touch. A new year starts
-    // 16px down, the same gap that separates the two lists when they stack.
+    // Rows sit 4px apart so neighbouring marks don't touch; a new year
+    // starts 12px further down.
     <ul className="flex flex-col gap-1">
       {items.map((item, index) => {
-        // Each year is printed once; later rows in the same year keep its
-        // width, invisibly, so their titles stay in one column.
+        // The year is printed at the top of each column and wherever it
+        // changes; other rows keep its width, invisibly, so their titles
+        // stay in one column.
         const showYear = index === 0 || items[index - 1].year !== item.year;
 
         return (
@@ -47,8 +96,8 @@ function ArchiveList({
             key={item.id}
             className={
               showYear && index > 0
-                ? "mt-3 flex justify-between gap-4"
-                : "flex justify-between gap-4"
+                ? "mt-3 flex justify-between gap-4 lg:gap-8"
+                : "flex justify-between gap-4 lg:gap-8"
             }
           >
             <span className="flex min-w-0">
@@ -82,7 +131,7 @@ function ArchiveList({
 
 export default function Page() {
   return (
-    <div className="max-w-[420px] lg:max-w-[880px]">
+    <div className="max-w-[420px] lg:max-w-none">
       {/* Magazine spacing around the display heading: a long drop from
           "Back" and a wide margin before the list, both scaling with the
           viewport (64px–144px above, 48px–96px below). */}
@@ -97,14 +146,27 @@ export default function Page() {
           Archives
         </h1>
       </header>
-      {/* Side by side from 1024px up, where each column gets ~400px. Below
-          that the groups stack and read as one list, the year gap marking
-          where one ends. */}
-      <main className="grid gap-x-16 gap-y-4 lg:grid-cols-2 lg:items-start">
-        {groups.map((group) => (
-          <section key={group.title} aria-label={group.title}>
-            <ArchiveList items={group.items} markOffset={group.markOffset} />
-          </section>
+      {/* From 1024px the columns share the full page width equally, with a
+          gap that grows from 48px to 80px. Three height-balanced columns from
+          90rem (1440px), where each is at least ~420px (the widest row needs
+          404px with its 32px title gap); two from 1024px; one 420px list
+          below that. The breakpoint is in rem so Tailwind orders it after lg.
+          The bottom margin mirrors the drop above the heading (64px–144px),
+          so the page ends with the same breathing room it opens with. */}
+      <main className="mb-[clamp(4rem,12vw,9rem)]">
+        {layouts.map((layout) => (
+          <div
+            key={layout.columns.length}
+            className={`${layout.className} items-start gap-x-[clamp(3rem,4vw,5rem)]`}
+          >
+            {layout.columns.map((column) => (
+              <ArchiveList
+                key={column.markOffset}
+                items={column.items}
+                markOffset={column.markOffset}
+              />
+            ))}
+          </div>
         ))}
       </main>
     </div>

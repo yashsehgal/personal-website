@@ -39,6 +39,9 @@ html {
   --page-mark: #ffe14d;
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   color-scheme: light;
+  /* Reserve the scrollbar's width up front, so moving between short and
+     long pages doesn't shift the layout sideways. */
+  scrollbar-gutter: stable;
   background: var(--page-bg);
   color: var(--page-fg);
   transition-property: --page-bg, --page-fg, --page-muted, --page-mark;
