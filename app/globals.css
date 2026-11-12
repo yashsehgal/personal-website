@@ -55,15 +55,63 @@ body {
   color: var(--page-muted);
 }
 
-@media (max-width: 26rem) {
+/* Keeps the page header clear of the nav where the two could meet: the
+   home column is 300px and the widest page column is 420px. */
+@media (max-width: 34rem) {
   .page-header {
-    padding-inline-end: 2.75rem;
+    padding-inline-end: 5.5rem;
+  }
+}
+
+/* Top right, opposite the page header. Body padding is 2rem and the header
+   name is 1rem type, so the nav's 14px line sits on the name's line. */
+.site-nav {
+  position: absolute;
+  inset-block-start: 2rem;
+  inset-inline-end: 2rem;
+  z-index: 10;
+  line-height: 1.5rem;
+}
+
+.site-nav ul {
+  display: flex;
+  gap: 1rem;
+}
+
+.site-nav a {
+  color: var(--page-muted);
+  transition-property: color;
+  transition-duration: 150ms;
+  transition-timing-function: var(--ease-out);
+}
+
+.site-nav a[aria-current="page"] {
+  color: var(--page-fg);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .site-nav a:hover {
+    color: var(--page-fg);
+  }
+}
+
+.site-nav a:focus-visible {
+  color: var(--page-fg);
+  outline-offset: 2px;
+  border-radius: 0.125rem;
+}
+
+/* On phones the fixed shuffle button would sit on the last lines of the
+   page, so leave room to scroll them clear of it. */
+@media (max-width: 26rem) {
+  body {
+    padding-block-end: 5rem;
   }
 }
 
 button.theme-shuffle {
   position: fixed;
-  inset-block-start: 2rem;
+  inset-block-end: 2rem;
   inset-inline-end: 2rem;
   z-index: 20;
   display: grid;
@@ -197,7 +245,8 @@ html[data-theme="4"]:not([data-theme="0"]) a.content-link:focus-visible {
 @media (prefers-reduced-motion: reduce) {
   a.content-link,
   a.content-link:hover,
-  a.content-link:focus-visible {
+  a.content-link:focus-visible,
+  .site-nav a {
     transition-property: none;
   }
 

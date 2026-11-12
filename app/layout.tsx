@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Script from "next/script";
+import { SiteNav } from "@/components/site-nav";
 import { ThemeShuffle } from "@/components/theme-shuffle";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { inter, siteFontFamily } from "@/lib/fonts";
@@ -24,6 +25,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           {themeBootstrapScript()}
         </Script>
         <TooltipProvider>
+          <SiteNav />
           {children}
           <ThemeShuffle />
         </TooltipProvider>

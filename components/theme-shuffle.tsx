@@ -65,7 +65,7 @@ export function ThemeShuffle() {
           </button>
         </TooltipTrigger>
         <TooltipContent
-          side="bottom"
+          side="top"
           align="end"
           aria-hidden="true"
           className="motion-reduce:animate-none motion-reduce:data-closed:animate-none motion-reduce:data-open:animate-none"
