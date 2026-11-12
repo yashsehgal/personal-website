@@ -39,9 +39,6 @@ html {
   --page-mark: #ffe14d;
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   color-scheme: light;
-  /* Reserve the scrollbar's width up front, so moving between short and
-     long pages doesn't shift the layout sideways. */
-  scrollbar-gutter: stable;
   background: var(--page-bg);
   color: var(--page-fg);
   transition-property: --page-bg, --page-fg, --page-muted, --page-mark;
@@ -52,6 +49,19 @@ html {
 body {
   background: var(--page-bg);
   color: var(--page-fg);
+}
+
+/* No visible scrollbars anywhere: no track, no thumb, no reserved gutter.
+   Everything still scrolls by wheel, trackpad, touch and keyboard.
+   scrollbar-width covers Firefox and Chromium; the pseudo-element covers
+   Safari. With no scrollbar taking up width, layouts can't shift between
+   short and long pages either. */
+* {
+  scrollbar-width: none;
+}
+
+*::-webkit-scrollbar {
+  display: none;
 }
 
 .text-muted {
