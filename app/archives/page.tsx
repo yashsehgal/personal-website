@@ -83,11 +83,19 @@ function ArchiveList({
 export default function Page() {
   return (
     <div className="max-w-[420px] lg:max-w-[880px]">
-      <header className="page-header mb-8 flex flex-col gap-0.5">
-        <Link href="/" className="mb-6 text-muted">
+      {/* Magazine spacing around the display heading: a long drop from
+          "Back" and a wide margin before the list, both scaling with the
+          viewport (64px–144px above, 48px–96px below). */}
+      <header className="page-header mb-[clamp(3rem,8vw,6rem)] flex flex-col">
+        <Link href="/" className="mb-[clamp(4rem,12vw,9rem)] text-muted">
           Back
         </Link>
-        <h1 className="text-base">Archives</h1>
+        {/* Display size: scales with the viewport between 56px and 160px,
+            set tight so the word reads as one block. The negative margin pulls
+            the A's side bearing back so its ink lines up with "Back". */}
+        <h1 className="-ml-[0.025em] text-[clamp(3.5rem,15vw,10rem)] leading-[0.85] font-medium tracking-[-0.06em]">
+          Archives
+        </h1>
       </header>
       {/* Side by side from 1024px up, where each column gets ~400px. Below
           that the groups stack and read as one list, the year gap marking
