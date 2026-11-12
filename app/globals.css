@@ -92,10 +92,21 @@ body {
 }
 
 .site-nav a {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.375rem;
   color: var(--page-muted);
   transition-property: color;
   transition-duration: 150ms;
   transition-timing-function: var(--ease-out);
+}
+
+/* Each link's small filled mark. Its size comes from components/site-nav.tsx,
+   per shape. The link aligns by baseline, and an SVG's baseline is its
+   bottom edge, so every mark sits on the text baseline. */
+.site-nav a svg {
+  display: block;
+  flex-shrink: 0;
 }
 
 .site-nav a[aria-current="page"] {
