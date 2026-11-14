@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 const sources: Record<string, string> = {
   "/": "index.md",
   "/archives": "archives.md",
+  "/writings": "writings.md",
 };
 
 // The last thing on the page, not fixed, so it can never sit over content.

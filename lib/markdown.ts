@@ -12,6 +12,7 @@ import {
   tagline,
   work,
 } from "@/lib/home";
+import { WRITINGS } from "@/lib/writings";
 
 function inline(parts: readonly Inline[]) {
   return parts
@@ -56,6 +57,24 @@ export function archivesMarkdown() {
         `## ${year}`,
         "",
         ...ARCHIVE_LINKS.filter((item) => item.year === year).map(
+          (item) => `- [${item.title}](${item.href}) — ${item.type}`,
+        ),
+      ].join("\n"),
+    ),
+  ]);
+}
+
+export function writingsMarkdown() {
+  // WRITINGS is already newest first; one section per year, like Archives.
+  const years = [...new Set(WRITINGS.map((item) => item.year))];
+
+  return document([
+    "# Writings",
+    ...years.map((year) =>
+      [
+        `## ${year}`,
+        "",
+        ...WRITINGS.filter((item) => item.year === year).map(
           (item) => `- [${item.title}](${item.href}) — ${item.type}`,
         ),
       ].join("\n"),
