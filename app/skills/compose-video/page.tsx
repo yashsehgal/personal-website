@@ -61,7 +61,7 @@ export default function Page() {
   return (
     <div className="max-w-[420px]">
       <header className="page-header mb-8 flex flex-col gap-0.5">
-        <Link href="/" className="mb-6 text-muted">
+        <Link href="/" className="mb-6 self-start text-muted">
           Back
         </Link>
         <h1 className="text-base">compose-video</h1>
