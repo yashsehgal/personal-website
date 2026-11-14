@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
   Tooltip,
   TooltipContent,
@@ -11,7 +11,7 @@ import { THEME_STORAGE_KEY, applyTheme, themes } from "@/lib/themes";
 export function ThemeShuffle() {
   const [status, setStatus] = useState("");
 
-  function shuffle() {
+  const shuffle = useCallback(() => {
     const root = document.documentElement;
     const current = root.dataset.theme ?? "0";
     let next = Number(current);
@@ -35,7 +35,39 @@ export function ThemeShuffle() {
     }
 
     setStatus(`Color theme changed to ${theme.name}.`);
-  }
+  }, []);
+
+  // Pressing S anywhere shuffles too. It stays out of the way of typing (in
+  // fields and editable text), of browser and OS shortcuts (with Cmd, Ctrl
+  // or Alt), and of a held key's auto-repeat.
+  useEffect(() => {
+    function onKeyDown(event: KeyboardEvent) {
+      if (
+        event.key.toLowerCase() !== "s" ||
+        event.repeat ||
+        event.metaKey ||
+        event.ctrlKey ||
+        event.altKey ||
+        event.defaultPrevented
+      ) {
+        return;
+      }
+
+      const target = event.target;
+      if (
+        target instanceof HTMLElement &&
+        (target.isContentEditable ||
+          target.closest("input, textarea, select") !== null)
+      ) {
+        return;
+      }
+
+      shuffle();
+    }
+
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [shuffle]);
 
   return (
     <>
@@ -45,6 +77,7 @@ export function ThemeShuffle() {
             type="button"
             className="theme-shuffle"
             aria-label="Shuffle colors"
+            aria-keyshortcuts="S"
             onClick={shuffle}
           >
             <svg
@@ -70,7 +103,7 @@ export function ThemeShuffle() {
           aria-hidden="true"
           className="motion-reduce:animate-none motion-reduce:data-closed:animate-none motion-reduce:data-open:animate-none"
         >
-          Shuffle colors
+          Shuffle colors · S
         </TooltipContent>
       </Tooltip>
       <p className="sr-only" role="status">
