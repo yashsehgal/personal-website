@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
 import Script from "next/script";
+import { CopyLink } from "@/components/copy-link";
+import { PageSource } from "@/components/page-source";
+import { SiteNav } from "@/components/site-nav";
 import { ThemeShuffle } from "@/components/theme-shuffle";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { nanumMyeongjo, siteFontFamily } from "@/lib/fonts";
+import { inter, siteFontFamily } from "@/lib/fonts";
 import { themeBootstrapScript } from "@/lib/themes";
 import "./globals.css";
 
@@ -15,16 +18,21 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={nanumMyeongjo.variable}
+      className={inter.variable}
       style={{ "--font-sans": siteFontFamily }}
       suppressHydrationWarning
     >
-      <body className="min-h-svh p-8 font-sans text-sm leading-normal font-normal tracking-normal text-pretty">
+      {/* A full-height column, so a footer with mt-auto can rest at the
+          bottom of short pages and follow the content on long ones. */}
+      <body className="flex min-h-svh flex-col p-8 font-sans text-sm leading-normal font-normal tracking-[-0.01em] text-pretty">
         <Script id="theme-init" strategy="beforeInteractive">
           {themeBootstrapScript()}
         </Script>
         <TooltipProvider>
+          <SiteNav />
           {children}
+          <PageSource />
+          <CopyLink />
           <ThemeShuffle />
         </TooltipProvider>
       </body>
