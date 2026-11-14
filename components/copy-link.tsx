@@ -1,7 +1,13 @@
 "use client";
 
 import { usePathname } from "next/navigation";
-import { useCallback, useEffect, useRef, useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
 import {
   Tooltip,
   TooltipContent,
@@ -16,6 +22,53 @@ const COPIED_MS = 1600;
 
 // How long the "Copied!" tooltip shows after a copy.
 const FLASH_MS = 1200;
+
+const IDLE_LABEL = "Copy link · L";
+const COPIED_LABEL = "Copied!";
+
+// A tooltip label that changes in place: the box eases to the new label's
+// width while the old text fades out and the new one fades in over it.
+// Every label is stacked in one grid cell; the box is clipped to the width
+// measured for the current one. The tooltip is anchored by its right edge,
+// so it grows and shrinks from the left. With reduced motion the width and
+// text change at once.
+function MorphLabel({
+  text,
+  labels,
+}: {
+  text: string;
+  labels: readonly string[];
+}) {
+  const box = useRef<HTMLSpanElement>(null);
+  const measure = useRef<HTMLSpanElement>(null);
+
+  useLayoutEffect(() => {
+    if (box.current && measure.current) {
+      box.current.style.width = `${measure.current.getBoundingClientRect().width}px`;
+    }
+  }, [text]);
+
+  return (
+    <span
+      ref={box}
+      className="relative inline-grid overflow-hidden whitespace-nowrap transition-[width] duration-200 ease-out motion-reduce:transition-none"
+    >
+      <span ref={measure} className="invisible absolute">
+        {text}
+      </span>
+      {labels.map((label) => (
+        <span
+          key={label}
+          className={`col-start-1 row-start-1 transition-opacity duration-150 ease-out motion-reduce:transition-none ${
+            label === text ? "opacity-100" : "opacity-0"
+          }`}
+        >
+          {label}
+        </span>
+      ))}
+    </span>
+  );
+}
 
 async function copyText(text: string) {
   try {
@@ -53,6 +106,24 @@ export function CopyLink() {
   const [hovered, setHovered] = useState(false);
   const [flash, setFlash] = useState(false);
   const flashTimer = useRef<number | undefined>(undefined);
+
+  // The tooltip closes itself when its button is pressed or clicked. While a
+  // press is in progress those closes are ignored, so the open hover tooltip
+  // stays the same instance and its label changes to "Copied!" in place.
+  const pressing = useRef(false);
+  function holdThroughPress() {
+    pressing.current = true;
+    // Runs once the tooltip's own handler for this event has fired.
+    queueMicrotask(() => {
+      pressing.current = false;
+    });
+  }
+  function onOpenChange(open: boolean) {
+    if (!open && pressing.current) {
+      return;
+    }
+    setHovered(open);
+  }
 
   // Stays rendered after the article closes, until its exit animation ends.
   const [rendered, setRendered] = useState(isArticle);
@@ -140,7 +211,7 @@ export function CopyLink() {
     <>
       <Tooltip
         open={!leaving && (flash || hovered)}
-        onOpenChange={setHovered}
+        onOpenChange={onOpenChange}
       >
         <TooltipTrigger asChild>
           <button
@@ -152,7 +223,11 @@ export function CopyLink() {
             tabIndex={leaving ? -1 : undefined}
             data-copied={copied ? "" : undefined}
             data-leaving={leaving ? "" : undefined}
-            onClick={copyAndConfirm}
+            onPointerDown={holdThroughPress}
+            onClick={() => {
+              holdThroughPress();
+              void copyAndConfirm();
+            }}
             onAnimationEnd={(event) => {
               // Both exits, the scale-down and the reduced-motion fade, end
               // here; then the button is removed.
@@ -195,7 +270,10 @@ export function CopyLink() {
           aria-hidden="true"
           className="motion-reduce:animate-none motion-reduce:data-closed:animate-none motion-reduce:data-open:animate-none"
         >
-          {flash || copied ? "Copied!" : "Copy link · L"}
+          <MorphLabel
+            text={flash || copied ? COPIED_LABEL : IDLE_LABEL}
+            labels={[IDLE_LABEL, COPIED_LABEL]}
+          />
         </TooltipContent>
       </Tooltip>
       <p className="sr-only" role="status">
