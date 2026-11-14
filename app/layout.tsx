@@ -21,7 +21,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       style={{ "--font-sans": siteFontFamily }}
       suppressHydrationWarning
     >
-      <body className="min-h-svh p-8 font-sans text-sm leading-normal font-normal tracking-[-0.01em] text-pretty">
+      {/* A full-height column, so a footer with mt-auto can rest at the
+          bottom of short pages and follow the content on long ones. */}
+      <body className="flex min-h-svh flex-col p-8 font-sans text-sm leading-normal font-normal tracking-[-0.01em] text-pretty">
         <Script id="theme-init" strategy="beforeInteractive">
           {themeBootstrapScript()}
         </Script>
