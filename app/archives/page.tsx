@@ -132,27 +132,19 @@ function ArchiveList({ items, markOffset }: Column) {
 export default function Page() {
   return (
     <div className="max-w-[420px] lg:max-w-none">
-      {/* Magazine spacing around the display heading: a long drop from
-          "Back" and a wide margin before the list, both scaling with the
-          viewport (64px–144px above, 48px–96px below). */}
-      <header className="page-header mb-[clamp(3rem,8vw,6rem)] flex flex-col">
-        <Link href="/" className="mb-[clamp(4rem,12vw,9rem)] text-muted">
+      <header className="page-header mb-8 flex flex-col gap-0.5">
+        <Link href="/" className="mb-6 text-muted">
           Back
         </Link>
-        {/* Display size: scales with the viewport between 56px and 160px,
-            set tight so the word reads as one block. The negative margin pulls
-            the A's side bearing back so its ink lines up with "Back". */}
-        <h1 className="-ml-[0.025em] text-[clamp(3.5rem,15vw,10rem)] leading-[0.85] font-medium tracking-[-0.06em]">
-          Archives
-        </h1>
+        <h1 className="text-base">Archives</h1>
       </header>
       {/* From 1024px the columns share the full page width equally, with a
           gap that grows from 48px to 80px. Three height-balanced columns from
           90rem (1440px), where each is at least ~420px (the widest row needs
           404px with its 32px title gap); two from 1024px; one 420px list
           below that. The breakpoint is in rem so Tailwind orders it after lg.
-          The bottom margin mirrors the drop above the heading (64px–144px),
-          so the page ends with the same breathing room it opens with. */}
+          The bottom margin (64px–144px, scaling with the viewport) leaves
+          generous room after the last row. */}
       <main className="mb-[clamp(4rem,12vw,9rem)]">
         {layouts.map((layout) => (
           <div
