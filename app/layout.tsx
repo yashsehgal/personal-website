@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Script from "next/script";
+import { PageSource } from "@/components/page-source";
 import { SiteNav } from "@/components/site-nav";
 import { ThemeShuffle } from "@/components/theme-shuffle";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -27,6 +28,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <TooltipProvider>
           <SiteNav />
           {children}
+          <PageSource />
           <ThemeShuffle />
         </TooltipProvider>
       </body>
