@@ -133,7 +133,10 @@ body {
   }
 }
 
-button.theme-shuffle {
+/* The round icon buttons in the bottom-right corner: shuffle always, and
+   copy link beside it while an article is open. */
+button.theme-shuffle,
+button.copy-link {
   position: fixed;
   inset-block-end: 2rem;
   inset-inline-end: 2rem;
@@ -173,13 +176,111 @@ button.theme-shuffle svg {
 }
 
 @media (hover: hover) and (pointer: fine) {
-  button.theme-shuffle:hover {
+  button.theme-shuffle:hover,
+  button.copy-link:hover {
     background: color-mix(in srgb, var(--page-fg) 14%, var(--page-bg));
   }
 }
 
-button.theme-shuffle:not(:disabled):active {
+button.theme-shuffle:not(:disabled):active,
+button.copy-link:not(:disabled):active {
   background: color-mix(in srgb, var(--page-fg) 18%, var(--page-bg));
+}
+
+/* Copy link sits one button and an 8px gap to the left of shuffle. The two
+   icons share one grid cell so they can crossfade in place. */
+button.copy-link {
+  inset-inline-end: 4.5rem;
+}
+
+button.copy-link svg {
+  grid-area: 1 / 1;
+  display: block;
+  width: 1rem;
+  height: 1rem;
+  transform-origin: center;
+  transition-property: opacity, scale, filter;
+  transition-duration: 220ms;
+  transition-timing-function: var(--ease-out);
+}
+
+/* At rest the link shows and the check waits small and clear. On copy they
+   trade places: the link shrinks away as the check scales up into view,
+   with a touch of blur so the hand-off reads as one smooth swap. */
+button.copy-link .copy-link-check {
+  opacity: 0;
+  scale: 0.5;
+  filter: blur(2px);
+}
+
+button.copy-link[data-copied] .copy-link-icon {
+  opacity: 0;
+  scale: 0.5;
+  filter: blur(2px);
+}
+
+button.copy-link[data-copied] .copy-link-check {
+  opacity: 1;
+  scale: 1;
+  filter: blur(0);
+}
+
+/* When an article opens, the button scales up into place and fades in. */
+@keyframes page-action-in {
+  from {
+    opacity: 0;
+    scale: 0.6;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  button.copy-link {
+    animation: page-action-in 260ms var(--ease-out);
+    transition-property: scale;
+    transition-duration: 150ms;
+    transition-timing-function: var(--ease-out);
+  }
+
+  button.copy-link:not(:disabled):active {
+    scale: 0.96;
+  }
+}
+
+/* When the article closes, the button stays just long enough to leave the
+   way it came: it scales down as it fades out, then is removed (the
+   component waits for this animation to end). While leaving it can't be
+   clicked. With reduced motion it only fades. */
+@keyframes page-action-out {
+  to {
+    opacity: 0;
+    scale: 0.6;
+  }
+}
+
+@keyframes page-action-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+button.copy-link[data-leaving] {
+  pointer-events: none;
+  animation: page-action-fade-out 150ms ease-out forwards;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  button.copy-link[data-leaving] {
+    animation: page-action-out 200ms var(--ease-out) forwards;
+  }
+}
+
+/* With reduced motion: no entrance, and the icons only fade. */
+@media (prefers-reduced-motion: reduce) {
+  button.copy-link svg {
+    transition-property: opacity;
+    scale: 1 !important;
+    filter: none !important;
+  }
 }
 
 @layer base {
